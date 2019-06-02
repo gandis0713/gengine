@@ -37,7 +37,9 @@ private:
     GLuint m_nProgramID;
     GLuint m_nMatrixID;
     GLuint m_nVertexID;
+    GLuint m_nColorID;
     GLuint m_nVerterBuffer;
+    GLuint m_mColorbuffer;
 
     glm::mat4 m_mat4PerViewModel;
 };
