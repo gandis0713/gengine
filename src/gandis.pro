@@ -32,7 +32,12 @@ SOURCES += \
     shader/coshaderloader.cpp \
     screen/qt/coglwidget.cpp \
     screen/qt/coqtscreen.cpp \
-    screen/coscreen.cpp
+    screen/coscreen.cpp \
+    data/copoint.cpp \
+    data/copolygon.cpp \
+    util/coobjreader.cpp \
+    util/costlreader.cpp \
+    util/cotexturereader.cpp
 
 HEADERS += \
     coenginedefine.h \
@@ -42,7 +47,12 @@ HEADERS += \
     shader/coshaderloader.h \
     screen/qt/coglwidget.h \
     screen/qt/coqtscreen.h \
-    screen/coscreen.h
+    screen/coscreen.h \
+    data/copoint.h \
+    data/copolygon.h \
+    util/coobjreader.h \
+    util/costlreader.h \
+    util/cotexturereader.h
 
 PRECOMPILED_HEADER += ./common/pch/precompileheader.h
 
