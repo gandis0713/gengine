@@ -1,0 +1,28 @@
+## binary
+
+*.bin
+*.obj
+*.ilk
+*.exe
+*.pdb
+*.flp
+*.iso
+*.so
+*.a
+*.o
+*.out
+*.s
+*.i
+*.elf
+*.img
+
+## qt
+*.pro.user
+.qmake.stash
+ui_*.h
+moc_*
+Makefile
+
+build/
+output/
+.vscode/

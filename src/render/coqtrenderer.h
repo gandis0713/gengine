@@ -1,16 +1,16 @@
 #ifndef GQTRENDERER_H
 #define GQTRENDERER_H
 
-#include "core/screen/qt/coglwidget.h"
-
 #include "qtheader.h"
+#include "../coenginedefine.h"
 
-#include "core/shader/coshaderloader.h"
+#include "glm.hpp"
+#include "gtc/matrix_transform.hpp"
 
-#include "/usr/include/glm/glm.hpp"
-#include "/usr/include/glm/gtc/matrix_transform.hpp"
+class CoGLWidget;
+class CoShaderLoader;
 
-class CoQtRenderer : public QObject
+class GANDISENGINE CoQtRenderer : public QObject
 {
     Q_OBJECT
 public:
