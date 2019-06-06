@@ -37,7 +37,11 @@ SOURCES += \
     data/copolygon.cpp \
     util/coobjreader.cpp \
     util/costlreader.cpp \
-    util/cotexturereader.cpp
+    util/cotexturereader.cpp \
+    shader/covertexshader.cpp \
+    shader/cofragmentshader.cpp \
+    common/util/noreader.cpp \
+    shader/coshadermanager.cpp
 
 HEADERS += \
     coenginedefine.h \
@@ -52,7 +56,13 @@ HEADERS += \
     data/copolygon.h \
     util/coobjreader.h \
     util/costlreader.h \
-    util/cotexturereader.h
+    util/cotexturereader.h \
+    shader/covertexshader.h \
+    shader/cofragmentshader.h \
+    common/util/noreader.h \
+    shader/coshadermanager.h \
+    common/datatype/dedatatype.h \
+    shader/deshader.h
 
 PRECOMPILED_HEADER += ./common/pch/precompileheader.h
 

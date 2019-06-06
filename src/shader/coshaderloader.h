@@ -9,7 +9,7 @@ public:
     CoShaderLoader(QOpenGLFunctions_2_1 *pGLFunctions);
     ~CoShaderLoader();
 
-    GLuint ReadShaderCode(const GLenum eType, const char* pShaderPath);
+    GLuint ReadCustomShader(const GLenum eType, const char* pShaderPath);
     GLboolean ShaderLinking(const GLuint nProgramID, const GLuint nShaderIDs[], const int nShaderCount);
 
 private:
