@@ -355,6 +355,7 @@ void CoQtRenderer::paintGL()
                 );
 
     m_pGLFunctions->glDrawArrays(GL_TRIANGLES, 0, 36);
+
     m_pGLFunctions->glDisableVertexAttribArray(m_nVertexID);
     m_pGLFunctions->glDisableVertexAttribArray(m_nColorID);
 

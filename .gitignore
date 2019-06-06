@@ -26,3 +26,6 @@ Makefile
 build/
 output/
 .vscode/
+
+## OS
+*.autosave

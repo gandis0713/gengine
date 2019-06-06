@@ -48,6 +48,7 @@ GLuint CoShaderLoader::ReadCustomShader(const GLenum eType, const char* pShaderP
     // 버텍스 쉐이더를 검사
     m_pGLFunctions->glGetShaderiv(nShaderID, GL_COMPILE_STATUS, &nResult);
     m_pGLFunctions->glGetShaderiv(nShaderID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
+
     if ( nInfoLogLength > 0 ){
         std::vector<char> strShaderErrorMessage(nInfoLogLength + 1);
         m_pGLFunctions->glGetShaderInfoLog(nShaderID, nInfoLogLength, NULL, &strShaderErrorMessage[0]);

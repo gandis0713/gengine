@@ -1,7 +1,7 @@
 #ifndef NOREADER_H
 #define NOREADER_H
 
-#include "../datatype/define.h"
+#include "../datatype/dedatatype.h"
 
 namespace NoReader
 {

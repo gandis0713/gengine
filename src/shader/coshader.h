@@ -18,7 +18,7 @@ protected:
 
 protected:
     CbString m_strShaderSource;
-
+    Cbuint   m_nID;
 
 
 private:
