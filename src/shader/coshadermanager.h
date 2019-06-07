@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QMap>
-#include <QOpenGLFunctions_2_1>
 
 #include "deshader.h"
 #include "coshader.h"
@@ -11,7 +10,7 @@
 class CoShaderManager
 {
 public:
-    CoShaderManager(QOpenGLFunctions_2_1 *pGLFunctions);
+    CoShaderManager();
     ~CoShaderManager();
 
 
@@ -24,7 +23,6 @@ private:
 
 private:
     QMap<EShaderType, CoShader*> m_mapShaders;
-    QOpenGLFunctions_2_1        *m_pGLFunctions;
 
 };
 

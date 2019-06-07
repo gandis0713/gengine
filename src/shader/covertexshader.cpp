@@ -2,8 +2,8 @@
 
 #include "dedefaultvertexshader.h"
 
-CoVertexShader::CoVertexShader(QOpenGLFunctions_2_1 *pGLFunctions)
-    : CoShader(pGLFunctions)
+CoVertexShader::CoVertexShader()
+    : CoShader()
 {
     initialize();
 }
@@ -20,9 +20,7 @@ bool CoVertexShader::setShaderType()
     return true;
 }
 
-bool CoVertexShader::setShaderSource()
+const GLchar* CoVertexShader::getShaderSource()
 {
-    m_pShaderSource = const_cast<CbChar*>(pDefaultVertexShader);
-
-    return true;
+    return const_cast<CbChar*>(pDefaultVertexShader);
 }

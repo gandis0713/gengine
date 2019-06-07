@@ -64,8 +64,6 @@ HEADERS += \
     shader/dedefaultvertexshader.h \
     shader/dedefaultfragmentshader.h
 
-PRECOMPILED_HEADER += ./common/pch/precompileheader.h
-
 unix
 {
 INCLUDEPATH += /usr/include/glm \
@@ -74,6 +72,13 @@ INCLUDEPATH += /usr/include/glm \
 win32
 {
 INCLUDEPATH += C:/lib/glm/0.9.9.5
+
+LIBS += -L'C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/' -lOpenGL32
+LIBS += -L'C:/Program Files (x86)/AMD APP SDK/2.9-1/lib/x86_64/' -lglew64
+LIBS += -L'C:/Program Files (x86)/AMD APP SDK/2.9-1/lib/x86_64/' -lglut64
+
+INCLUDEPATH += 'C:/Program Files (x86)/AMD APP SDK/2.9-1/include/'
+INCLUDEPATH += 'C:/Program Files (x86)/Windows Kits/8.1/Include/um/'
 }
 
 INCLUDEPATH += common/pch
@@ -83,3 +88,4 @@ unix {
     target.files = ../output/*.*
     INSTALLS += target
 }
+

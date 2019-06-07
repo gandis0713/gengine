@@ -3,6 +3,5 @@
 
 #include <QtCore>
 #include <QtGui>
-#include <QtOpenGL>
 
 #endif // PRECOMPILEHEADER_H

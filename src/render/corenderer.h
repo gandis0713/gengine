@@ -1,7 +1,7 @@
 #ifndef CORENDERER_H
 #define CORENDERER_H
 
-#include "qtheader.h"
+#include <QObject>
 
 class CoRenderer : public QObject
 {

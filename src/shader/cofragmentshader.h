@@ -6,12 +6,12 @@
 class CoFragmentShader : public CoShader
 {
 public:
-    CoFragmentShader(QOpenGLFunctions_2_1 *pGLFunctions);
+    CoFragmentShader();
     ~CoFragmentShader();
 
 protected:
     bool setShaderType() override;
-    bool setShaderSource() override;
+    const GLchar* getShaderSource() override;
 };
 
 #endif // COFRAGMENTSHADER_H

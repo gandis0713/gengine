@@ -6,12 +6,12 @@
 class CoVertexShader : public CoShader
 {
 public:
-    CoVertexShader(QOpenGLFunctions_2_1 *pGLFunctions);
+    CoVertexShader();
     ~CoVertexShader();
 
 protected:
     bool setShaderType() override;
-    bool setShaderSource() override;
+    const GLchar* getShaderSource() override;
 };
 
 #endif // COVERTEXSHADER_H

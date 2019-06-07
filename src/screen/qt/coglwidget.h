@@ -1,7 +1,7 @@
 #ifndef RMGLWIDGET_H
 #define RMGLWIDGET_H
 
-#include "qtheader.h"
+#include <QGLWidget>
 
 class CoGLWidget : public QGLWidget
 {

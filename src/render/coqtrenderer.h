@@ -1,7 +1,7 @@
 #ifndef GQTRENDERER_H
 #define GQTRENDERER_H
 
-#include "qtheader.h"
+#include <GL/glew.h>
 #include "../coenginedefine.h"
 
 #include "glm.hpp"
@@ -9,8 +9,9 @@
 #include <map>
 
 #include "shader/coshader.h"
+#include "screen/qt/coglwidget.h"
 
-class CoGLWidget;
+#include <QGridLayout>
 
 class GANDISENGINE CoQtRenderer : public QObject
 {
@@ -29,8 +30,6 @@ private:
     QWidget           *m_pParent;
     std::map<EShaderType, CoShader*> m_mapShaders;
 
-    QOpenGLFunctions_2_1    *m_pGLFunctions;
-
     GLuint m_nProgramID;
     GLuint m_nMatrixID;
     GLuint m_nVertexID;
@@ -41,7 +40,7 @@ private:
     glm::mat4 m_mat4PerViewModel;
 
 
-private slots:
+public slots:
     void initializeGL();
     void resizeGL(int nWidth, int nHeight);
     void paintGL();

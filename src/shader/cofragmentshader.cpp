@@ -2,8 +2,8 @@
 
 #include "dedefaultfragmentshader.h"
 
-CoFragmentShader::CoFragmentShader(QOpenGLFunctions_2_1 *pGLFunctions)
-    : CoShader(pGLFunctions)
+CoFragmentShader::CoFragmentShader()
+    : CoShader()
 {
     initialize();
 }
@@ -20,9 +20,7 @@ bool CoFragmentShader::setShaderType()
     return true;
 }
 
-bool CoFragmentShader::setShaderSource()
+const GLchar* CoFragmentShader::getShaderSource()
 {
-    m_pShaderSource = const_cast<CbChar*>(pDefaultFragShader);
-
-    return true;
+    return const_cast<CbChar*>(pDefaultFragShader);
 }

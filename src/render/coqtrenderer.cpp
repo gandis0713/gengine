@@ -1,6 +1,5 @@
-#include "coqtrenderer.h"
 
-#include "screen/qt/coglwidget.h"
+#include "coqtrenderer.h"
 
 #include "shader/covertexshader.h"
 #include "shader/cofragmentshader.h"
@@ -248,8 +247,7 @@ static const GLfloat g_color_buffer_data[] = {
 CoQtRenderer::CoQtRenderer(QWidget* pParent)
     : m_pParent(pParent),
       m_pLayout(NULL),
-      m_pGLWidget(NULL),
-      m_pGLFunctions(NULL)
+      m_pGLWidget(NULL)
 {
     initializeWidget();
 }
@@ -278,29 +276,27 @@ void CoQtRenderer::initializeWidget()
 void CoQtRenderer::initializeGL()
 {
     qDebug() << __FUNCTION__;
-    m_pGLFunctions = new QOpenGLFunctions_2_1;
-    m_pGLFunctions->initializeOpenGLFunctions();
-    m_pGLFunctions->glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    m_pGLFunctions->glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     // Accept fragment if it closer to the camera than the former one
-    m_pGLFunctions->glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LESS);
 
-    m_nProgramID = m_pGLFunctions->glCreateProgram();
+    glCreateProgram();
 
     createDefaultShader();
 
-    m_nMatrixID = m_pGLFunctions->glGetUniformLocation(m_nProgramID, "perViewModel");
-    m_nVertexID = m_pGLFunctions->glGetAttribLocation(m_nProgramID, "vertex");
-    m_nColorID = m_pGLFunctions->glGetAttribLocation(m_nProgramID, "color");
+    m_nMatrixID = glGetUniformLocation(m_nProgramID, "perViewModel");
+    m_nVertexID = glGetAttribLocation(m_nProgramID, "vertex");
+    m_nColorID = glGetAttribLocation(m_nProgramID, "color");
 
-    m_pGLFunctions->glGenBuffers(1, &m_nVerterBuffer);
-    m_pGLFunctions->glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
-    m_pGLFunctions->glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+    glGenBuffers(1, &m_nVerterBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
 
-    m_pGLFunctions->glGenBuffers(1, &m_mColorbuffer);
-    m_pGLFunctions->glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
-    m_pGLFunctions->glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+    glGenBuffers(1, &m_mColorbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 }
 
@@ -309,7 +305,7 @@ void CoQtRenderer::resizeGL(int nWidth, int nHeight)
     GLsizei width = nWidth;
     GLsizei height = nHeight;
 
-    m_pGLFunctions->glViewport(0, 0, width, height);
+    glViewport(0, 0, width, height);
 
     glm::mat4 mat4Projection = glm::perspective(glm::radians(45.0f), (GLfloat)width/(GLfloat)height, 0.1f, 100.0f);
     glm::mat4 mat4View = glm::lookAt(glm::vec3(4,4,3),
@@ -324,16 +320,16 @@ void CoQtRenderer::paintGL()
 {
     qDebug() << __FUNCTION__;
 
-    m_pGLFunctions->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    m_pGLFunctions->glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
 
-    m_pGLFunctions->glUseProgram(m_nProgramID);
+    glUseProgram(m_nProgramID);
 
-    m_pGLFunctions->glUniformMatrix4fv(m_nMatrixID, 1, GL_FALSE, &m_mat4PerViewModel[0][0]);
+    glUniformMatrix4fv(m_nMatrixID, 1, GL_FALSE, &m_mat4PerViewModel[0][0]);
 
-    m_pGLFunctions->glEnableVertexAttribArray(m_nVertexID);
-    m_pGLFunctions->glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
-    m_pGLFunctions->glVertexAttribPointer
+    glEnableVertexAttribArray(m_nVertexID);
+    glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
+    glVertexAttribPointer
             (
                 m_nVertexID,
                 3,
@@ -343,10 +339,10 @@ void CoQtRenderer::paintGL()
                 (void*)0
                 );
 
-    m_pGLFunctions->glEnableVertexAttribArray(m_nColorID);
-    m_pGLFunctions->glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
-//    m_pGLFunctions->glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
-    m_pGLFunctions->glVertexAttribPointer
+    glEnableVertexAttribArray(m_nColorID);
+    glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
+//    glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
+    glVertexAttribPointer
             (
                 m_nColorID,
                 3,
@@ -357,10 +353,10 @@ void CoQtRenderer::paintGL()
 //                (void*)0
                 );
 
-    m_pGLFunctions->glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 
-    m_pGLFunctions->glDisableVertexAttribArray(m_nVertexID);
-    m_pGLFunctions->glDisableVertexAttribArray(m_nColorID);
+    glDisableVertexAttribArray(m_nVertexID);
+    glDisableVertexAttribArray(m_nColorID);
 
 }
 
@@ -371,14 +367,14 @@ bool CoQtRenderer::createDefaultShader()
     auto ret = m_mapShaders.insert( { EShaderType::eVertex , nullptr } );
     if (ret.second)
     {
-        CoShader *pShader = new CoVertexShader(m_pGLFunctions);
+        CoShader *pShader = new CoVertexShader();
         ret.first->second = pShader;
     }
 
     ret = m_mapShaders.insert( { EShaderType::eFragment , nullptr } );
     if (ret.second)
     {
-        CoShader *pShader = new CoFragmentShader(m_pGLFunctions);
+        CoShader *pShader = new CoFragmentShader();
         ret.first->second = pShader;
     }
 
@@ -388,20 +384,20 @@ bool CoQtRenderer::createDefaultShader()
         CoShader *pShader = iter->second;
         if(pShader)
         {
-            m_pGLFunctions->glAttachShader(m_nProgramID, pShader->getID());
+            glAttachShader(m_nProgramID, pShader->getID());
         }
     }
 
-    m_pGLFunctions->glLinkProgram(m_nProgramID);
+    glLinkProgram(m_nProgramID);
 
     GLint nResult = GL_FALSE;
     int nInfoLogLength;
     // 프로그램 검사
-    m_pGLFunctions->glGetProgramiv(m_nProgramID, GL_LINK_STATUS, &nResult);
-    m_pGLFunctions->glGetProgramiv(m_nProgramID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
+    glGetProgramiv(m_nProgramID, GL_LINK_STATUS, &nResult);
+    glGetProgramiv(m_nProgramID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
     if ( nInfoLogLength > 0 ){
         std::vector<char> strProgramErrorMessage(nInfoLogLength + 1);
-        m_pGLFunctions->glGetProgramInfoLog(m_nProgramID, nInfoLogLength, NULL, &strProgramErrorMessage[0]);
+        glGetProgramInfoLog(m_nProgramID, nInfoLogLength, NULL, &strProgramErrorMessage[0]);
 //        std::cout << "The error message from progream : " << &strProgramErrorMessage[0] << std::endl;
         return false;
     }
@@ -411,8 +407,8 @@ bool CoQtRenderer::createDefaultShader()
         CoShader *pShader = iter->second;
         if(pShader)
         {
-            m_pGLFunctions->glDetachShader(m_nProgramID, pShader->getID());
-            m_pGLFunctions->glDeleteShader(pShader->getID());
+            glDetachShader(m_nProgramID, pShader->getID());
+            glDeleteShader(pShader->getID());
         }
     }
 

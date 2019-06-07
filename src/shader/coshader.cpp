@@ -4,8 +4,9 @@
 
 #include "../common/util/noreader.h"
 
-CoShader::CoShader(QOpenGLFunctions_2_1 *pGLFunctions)
-    : m_pGLFunctions(pGLFunctions)
+#include <GL/glew.h>
+
+CoShader::CoShader()
 {
 }
 
@@ -17,7 +18,6 @@ CoShader::~CoShader()
 bool CoShader::initialize()
 {
     setShaderType();
-    setShaderSource();
 
     if(!createShader())
     {
@@ -44,37 +44,31 @@ bool CoShader::createShader(const char* pPath)
 
 bool CoShader::createShader()
 {
-    if(!m_pGLFunctions)
-    {
-        qDebug() << __FUNCTION__ << "The OpenGL Functions is null";
-        return false;
-    }
-
-    m_nID = m_pGLFunctions->glCreateShader(getGLShaderType(m_eType));
+    m_nID = glCreateShader(getGLShaderType(m_eType));
     qDebug() << __FUNCTION__ << "The created shader ID : " << m_nID;
     if(m_nID <= 0)
     {
         return false;
     }
 
-    bool bCreateShaderSource = setShaderSource();
-    if(false == bCreateShaderSource)
-    {
-        qDebug() << __FUNCTION__ << "The shader source is not created.";
-        return false;
-    }
+    const GLchar* cShaderSource = getShaderSource();
+//    if(false == bCreateShaderSource)
+//    {
+//        qDebug() << __FUNCTION__ << "The shader source is not created.";
+//        return false;
+//    }
 
     GLint nResult = GL_FALSE;
     int nInfoLogLength;
 
-    m_pGLFunctions->glShaderSource(m_nID, 1, &m_pShaderSource , NULL);
-    m_pGLFunctions->glCompileShader(m_nID);
+    glShaderSource(m_nID, 1, &cShaderSource , NULL);
+    glCompileShader(m_nID);
 
-    m_pGLFunctions->glGetShaderiv(m_nID, GL_COMPILE_STATUS, &nResult);
-    m_pGLFunctions->glGetShaderiv(m_nID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
+    glGetShaderiv(m_nID, GL_COMPILE_STATUS, &nResult);
+    glGetShaderiv(m_nID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
     if ( nInfoLogLength > 0 ){
         std::vector<char> strErrMsg(nInfoLogLength + 1);
-        m_pGLFunctions->glGetShaderInfoLog(m_nID, nInfoLogLength, NULL, &strErrMsg[0]);
+        glGetShaderInfoLog(m_nID, nInfoLogLength, NULL, &strErrMsg[0]);
 
         qDebug() << __FUNCTION__ << "The erroe message from shader : " << &strErrMsg[0];
 

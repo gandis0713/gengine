@@ -2,15 +2,16 @@
 #define COSHADER_H
 
 #include <QString>
-#include <QOpenGLFunctions_2_1>
 
 #include "deshader.h"
 #include "../common/datatype/dedatatype.h"
 
+#include <GL/glew.h>
+
 class CoShader
 {
 public:
-    CoShader(QOpenGLFunctions_2_1 *pGLFunctions);
+    CoShader();
     ~CoShader();
 
     bool createShader(const char* pPath);
@@ -20,19 +21,15 @@ public:
 
 protected:
     virtual bool setShaderType() = 0;
-    virtual bool setShaderSource() = 0;
+    virtual const GLchar* getShaderSource() = 0;
     bool initialize();
 
 protected:
-    CbChar*                  m_pShaderSource;
     Cbuint                   m_nID;
     EShaderType              m_eType;
 
 private:
     Cbuint getGLShaderType(EShaderType eShaderType);
-
-private:
-    QOpenGLFunctions_2_1 *m_pGLFunctions;
 
 };
 

@@ -1,5 +1,7 @@
 #include "coglwidget.h"
 
+#include <QDebug>
+
 CoGLWidget::CoGLWidget(QWidget *parent) : QGLWidget(parent)
 {
     qDebug() << __FUNCTION__;
