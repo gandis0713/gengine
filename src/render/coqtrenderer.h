@@ -11,7 +11,6 @@
 #include "shader/coshader.h"
 
 class CoGLWidget;
-class CoShaderLoader;
 
 class GANDISENGINE CoQtRenderer : public QObject
 {
@@ -19,11 +18,6 @@ class GANDISENGINE CoQtRenderer : public QObject
 public:
     CoQtRenderer(QWidget *pParent);
     ~CoQtRenderer();
-
-private slots:
-    void initializeGL();
-    void resizeGL(int nWidth, int nHeight);
-    void paintGL();
 
 private:
     void initializeWidget();
@@ -33,9 +27,7 @@ private:
     CoGLWidget        *m_pGLWidget;
     QGridLayout       *m_pLayout;
     QWidget           *m_pParent;
-    CoShaderLoader    *m_pShaderLoader;
     std::map<EShaderType, CoShader*> m_mapShaders;
-//    QMap<EShaderType, CoShader*> m_mapShaders;
 
     QOpenGLFunctions_2_1    *m_pGLFunctions;
 
@@ -47,6 +39,12 @@ private:
     GLuint m_mColorbuffer;
 
     glm::mat4 m_mat4PerViewModel;
+
+
+private slots:
+    void initializeGL();
+    void resizeGL(int nWidth, int nHeight);
+    void paintGL();
 };
 
 #endif // COQTRENDERER_H

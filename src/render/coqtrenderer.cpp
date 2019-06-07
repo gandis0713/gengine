@@ -5,7 +5,7 @@
 #include "shader/covertexshader.h"
 #include "shader/cofragmentshader.h"
 
-#include <iostream>
+#include <QDebug>
 
 //static const GLfloat g_vertex_buffer_data[] = {
 //    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -303,14 +303,13 @@ void CoQtRenderer::initializeGL()
     m_pGLFunctions->glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 }
+
 void CoQtRenderer::resizeGL(int nWidth, int nHeight)
 {
-    qDebug() << __FUNCTION__;
-
     GLsizei width = nWidth;
     GLsizei height = nHeight;
 
-    glViewport(0, 0, width, height);
+    m_pGLFunctions->glViewport(0, 0, width, height);
 
     glm::mat4 mat4Projection = glm::perspective(glm::radians(45.0f), (GLfloat)width/(GLfloat)height, 0.1f, 100.0f);
     glm::mat4 mat4View = glm::lookAt(glm::vec3(4,4,3),
@@ -403,7 +402,7 @@ bool CoQtRenderer::createDefaultShader()
     if ( nInfoLogLength > 0 ){
         std::vector<char> strProgramErrorMessage(nInfoLogLength + 1);
         m_pGLFunctions->glGetProgramInfoLog(m_nProgramID, nInfoLogLength, NULL, &strProgramErrorMessage[0]);
-        std::cout << "The error message from progream : " << &strProgramErrorMessage[0] << std::endl;
+//        std::cout << "The error message from progream : " << &strProgramErrorMessage[0] << std::endl;
         return false;
     }
 

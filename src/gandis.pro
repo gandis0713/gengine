@@ -66,8 +66,17 @@ HEADERS += \
 
 PRECOMPILED_HEADER += ./common/pch/precompileheader.h
 
+unix
+{
 INCLUDEPATH += /usr/include/glm \
-    common/pch
+}
+
+win32
+{
+INCLUDEPATH += C:/lib/glm/0.9.9.5
+}
+
+INCLUDEPATH += common/pch
 
 unix {
     target.path = /home/gandis/lib

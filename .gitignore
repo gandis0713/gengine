@@ -22,10 +22,14 @@
 ui_*.h
 moc_*
 Makefile
+Makefile*
 
 build/
 output/
 .vscode/
+
+## PCH
+*.pch
 
 ## OS
 *.autosave
