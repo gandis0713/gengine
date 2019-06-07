@@ -1,7 +1,11 @@
 #include "coqtrenderer.h"
 
 #include "screen/qt/coglwidget.h"
-#include "shader/coshaderloader.h"
+
+#include "shader/covertexshader.h"
+#include "shader/cofragmentshader.h"
+
+#include <iostream>
 
 //static const GLfloat g_vertex_buffer_data[] = {
 //    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -284,7 +288,7 @@ void CoQtRenderer::initializeGL()
 
     m_nProgramID = m_pGLFunctions->glCreateProgram();
 
-    initializeShader();    
+    createDefaultShader();
 
     m_nMatrixID = m_pGLFunctions->glGetUniformLocation(m_nProgramID, "perViewModel");
     m_nVertexID = m_pGLFunctions->glGetAttribLocation(m_nProgramID, "vertex");
@@ -361,16 +365,58 @@ void CoQtRenderer::paintGL()
 
 }
 
-void CoQtRenderer::initializeShader()
+bool CoQtRenderer::createDefaultShader()
 {
-    m_pShaderLoader = new CoShaderLoader(m_pGLFunctions);
+    m_mapShaders.clear();
 
-    QString strVertexShaderPath = qApp->applicationDirPath() + "/glsl" + "/vertex.glsl";
-    QString strFragShaderPath = qApp->applicationDirPath() + "/glsl" + "/fragment.glsl";
+    auto ret = m_mapShaders.insert( { EShaderType::eVertex , nullptr } );
+    if (ret.second)
+    {
+        CoShader *pShader = new CoVertexShader(m_pGLFunctions);
+        ret.first->second = pShader;
+    }
 
-    GLuint nShaderIDs[2];
-    nShaderIDs[0] = m_pShaderLoader->ReadCustomShader(GL_VERTEX_SHADER, strVertexShaderPath.toLocal8Bit());
-    nShaderIDs[1] = m_pShaderLoader->ReadCustomShader(GL_FRAGMENT_SHADER, strFragShaderPath.toLocal8Bit());
+    ret = m_mapShaders.insert( { EShaderType::eFragment , nullptr } );
+    if (ret.second)
+    {
+        CoShader *pShader = new CoFragmentShader(m_pGLFunctions);
+        ret.first->second = pShader;
+    }
 
-    m_pShaderLoader->ShaderLinking(m_nProgramID, nShaderIDs, 2);
+    std::map<EShaderType, CoShader*>::iterator iter;
+    for(iter = m_mapShaders.begin(); iter != m_mapShaders.end(); ++iter)
+    {
+        CoShader *pShader = iter->second;
+        if(pShader)
+        {
+            m_pGLFunctions->glAttachShader(m_nProgramID, pShader->getID());
+        }
+    }
+
+    m_pGLFunctions->glLinkProgram(m_nProgramID);
+
+    GLint nResult = GL_FALSE;
+    int nInfoLogLength;
+    // 프로그램 검사
+    m_pGLFunctions->glGetProgramiv(m_nProgramID, GL_LINK_STATUS, &nResult);
+    m_pGLFunctions->glGetProgramiv(m_nProgramID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
+    if ( nInfoLogLength > 0 ){
+        std::vector<char> strProgramErrorMessage(nInfoLogLength + 1);
+        m_pGLFunctions->glGetProgramInfoLog(m_nProgramID, nInfoLogLength, NULL, &strProgramErrorMessage[0]);
+        std::cout << "The error message from progream : " << &strProgramErrorMessage[0] << std::endl;
+        return false;
+    }
+
+    for(iter = m_mapShaders.begin(); iter != m_mapShaders.end(); ++iter)
+    {
+        CoShader *pShader = iter->second;
+        if(pShader)
+        {
+            m_pGLFunctions->glDetachShader(m_nProgramID, pShader->getID());
+            m_pGLFunctions->glDeleteShader(pShader->getID());
+        }
+    }
+
+    return true;
+
 }

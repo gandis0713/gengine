@@ -29,7 +29,6 @@ SOURCES += \
     shader/coshader.cpp \
     render/coqtrenderer.cpp \
     render/corenderer.cpp \
-    shader/coshaderloader.cpp \
     screen/qt/coglwidget.cpp \
     screen/qt/coqtscreen.cpp \
     screen/coscreen.cpp \
@@ -48,7 +47,6 @@ HEADERS += \
     render/coqtrenderer.h \
     render/corenderer.h \
     shader/coshader.h \
-    shader/coshaderloader.h \
     screen/qt/coglwidget.h \
     screen/qt/coqtscreen.h \
     screen/coscreen.h \
@@ -62,7 +60,9 @@ HEADERS += \
     common/util/noreader.h \
     shader/coshadermanager.h \
     common/datatype/dedatatype.h \
-    shader/deshader.h
+    shader/deshader.h \
+    shader/dedefaultvertexshader.h \
+    shader/dedefaultfragmentshader.h
 
 PRECOMPILED_HEADER += ./common/pch/precompileheader.h
 

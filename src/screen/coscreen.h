@@ -1,11 +1,8 @@
 #ifndef COBASESCREEN_H
 #define COBASESCREEN_H
 
-#include "qtheader.h"
-
-class CoScreen : public QObject
+class CoScreen
 {
-    Q_OBJECT
 public:
     CoScreen();
 };

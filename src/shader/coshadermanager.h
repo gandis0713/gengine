@@ -2,16 +2,30 @@
 #define COSHADERMANAGER_H
 
 #include <QObject>
+#include <QMap>
+#include <QOpenGLFunctions_2_1>
 
-class CoShaderManager : public QObject
+#include "deshader.h"
+#include "coshader.h"
+
+class CoShaderManager
 {
-    Q_OBJECT
 public:
-    explicit CoShaderManager(QObject *parent = nullptr);
+    CoShaderManager(QOpenGLFunctions_2_1 *pGLFunctions);
+    ~CoShaderManager();
+
 
 signals:
 
 public slots:
+
+private:
+    bool createShaders();
+
+private:
+    QMap<EShaderType, CoShader*> m_mapShaders;
+    QOpenGLFunctions_2_1        *m_pGLFunctions;
+
 };
 
 #endif // COSHADERMANAGER_H

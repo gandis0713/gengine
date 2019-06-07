@@ -20,8 +20,8 @@ void CoGLWidget::resizeGL(int nWidth, int nHeight)
 
 void CoGLWidget::initializeGL()
 {
-    emit signalInitializeGL();
     qDebug() << __FUNCTION__;
+    emit signalInitializeGL();
 }
 
 void CoGLWidget::paintGL()

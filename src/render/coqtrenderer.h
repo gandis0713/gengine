@@ -6,6 +6,9 @@
 
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
+#include <map>
+
+#include "shader/coshader.h"
 
 class CoGLWidget;
 class CoShaderLoader;
@@ -24,13 +27,15 @@ private slots:
 
 private:
     void initializeWidget();
-    void initializeShader();
+    bool createDefaultShader();
 
 private:
     CoGLWidget        *m_pGLWidget;
     QGridLayout       *m_pLayout;
     QWidget           *m_pParent;
     CoShaderLoader    *m_pShaderLoader;
+    std::map<EShaderType, CoShader*> m_mapShaders;
+//    QMap<EShaderType, CoShader*> m_mapShaders;
 
     QOpenGLFunctions_2_1    *m_pGLFunctions;
 

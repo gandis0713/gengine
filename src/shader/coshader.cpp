@@ -1,77 +1,106 @@
 #include "coshader.h"
 
-CoShader::CoShader()
+#include <QDebug>
+
+#include "../common/util/noreader.h"
+
+CoShader::CoShader(QOpenGLFunctions_2_1 *pGLFunctions)
+    : m_pGLFunctions(pGLFunctions)
 {
-    initializeShader();
 }
 
 CoShader::~CoShader()
 {
-
+    // do nothing.
 }
 
-bool createFragmentShader(const char* pPath)
+bool CoShader::initialize()
 {
-    return true;
-}
+    setShaderType();
+    setShaderSource();
 
-bool createVertexShader(const char* pPath)
-{
-    return true;
-}
-
-bool CoShader::initializeShader()
-{
-    createVertexShader();
-    createFragmentShader();
+    if(!createShader())
+    {
+        qDebug() << __FUNCTION__ << "Failed to initialized shader.";
+        return false;
+    }
 
     return true;
 }
 
-bool CoShader::createFragmentShader()
+bool CoShader::createShader(const char* pPath)
 {
-    // 버텍스 쉐이더 코드를 파일에서 읽기
-    std::string strShaderPath(pShaderPath);
+    std::string strShaderPath(pPath);
     std::string strShaderSource;
-    bool bState = NoReader::ReadText(pShaderPath, strShaderSource);
+    bool bState = NoReader::ReadText(pPath, strShaderSource);
     if(!bState)
     {
-        cout << "The shader source code can't be opened "<< endl;
-        return 0;
+        qDebug() << __FUNCTION__ << "The shader source code can't be opened ";
+        return false;
     }
 
+    return createShader();
+}
+
+bool CoShader::createShader()
+{
     if(!m_pGLFunctions)
     {
-        cout << "The OpenGL Functions is null" << endl;
-        return 0;
+        qDebug() << __FUNCTION__ << "The OpenGL Functions is null";
+        return false;
     }
-    // 쉐이더들 생성
-    GLuint nShaderID = m_pGLFunctions->glCreateShader(eType);
-    cout << " nShaderID : " << nShaderID << endl;
+
+    m_nID = m_pGLFunctions->glCreateShader(getGLShaderType(m_eType));
+    qDebug() << __FUNCTION__ << "The created shader ID : " << m_nID;
+    if(m_nID <= 0)
+    {
+        return false;
+    }
+
+    bool bCreateShaderSource = setShaderSource();
+    if(false == bCreateShaderSource)
+    {
+        qDebug() << __FUNCTION__ << "The shader source is not created.";
+        return false;
+    }
 
     GLint nResult = GL_FALSE;
     int nInfoLogLength;
 
-    // 버텍스 쉐이더를 컴파일
-    const char* pShaderSource = strShaderSource.c_str();
-    m_pGLFunctions->glShaderSource(nShaderID, 1, &pShaderSource , NULL);
-    m_pGLFunctions->glCompileShader(nShaderID);
+    m_pGLFunctions->glShaderSource(m_nID, 1, &m_pShaderSource , NULL);
+    m_pGLFunctions->glCompileShader(m_nID);
 
-    // 버텍스 쉐이더를 검사
-    m_pGLFunctions->glGetShaderiv(nShaderID, GL_COMPILE_STATUS, &nResult);
-    m_pGLFunctions->glGetShaderiv(nShaderID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
+    m_pGLFunctions->glGetShaderiv(m_nID, GL_COMPILE_STATUS, &nResult);
+    m_pGLFunctions->glGetShaderiv(m_nID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
     if ( nInfoLogLength > 0 ){
-        std::vector<char> strShaderErrorMessage(nInfoLogLength + 1);
-        m_pGLFunctions->glGetShaderInfoLog(nShaderID, nInfoLogLength, NULL, &strShaderErrorMessage[0]);
-        cout << "shader : " << &strShaderErrorMessage[0] << endl;
-        return 0;
+        std::vector<char> strErrMsg(nInfoLogLength + 1);
+        m_pGLFunctions->glGetShaderInfoLog(m_nID, nInfoLogLength, NULL, &strErrMsg[0]);
+
+        qDebug() << __FUNCTION__ << "The erroe message from shader : " << &strErrMsg[0];
+
+        return false;
     }
 
-    return nShaderID;
     return true;
 }
 
-bool CoShader::createVertexShader()
+Cbuint CoShader::getID()
 {
-    return true;
+    return m_nID;
+}
+
+Cbuint CoShader::getGLShaderType(EShaderType eShaderType)
+{
+    Cbuint nShaderType = GL_VERTEX_SHADER;
+    switch (eShaderType)
+    {
+    case EShaderType::eFragment:
+        nShaderType = GL_FRAGMENT_SHADER;
+        break;
+    case EShaderType::eVertex:
+    default:
+        nShaderType = GL_VERTEX_SHADER;
+        break;
+    }
+    return nShaderType;
 }

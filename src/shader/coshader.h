@@ -2,6 +2,7 @@
 #define COSHADER_H
 
 #include <QString>
+#include <QOpenGLFunctions_2_1>
 
 #include "deshader.h"
 #include "../common/datatype/dedatatype.h"
@@ -9,24 +10,29 @@
 class CoShader
 {
 public:
-    CoShader();
+    CoShader(QOpenGLFunctions_2_1 *pGLFunctions);
     ~CoShader();
 
-protected:
-    bool createFragmentShader(const char* pPath);
-    bool createVertexShader(const char* pPath);
+    bool createShader(const char* pPath);
+    bool createShader();
+
+    Cbuint getID();
 
 protected:
-    CbString m_strShaderSource;
-    Cbuint   m_nID;
+    virtual bool setShaderType() = 0;
+    virtual bool setShaderSource() = 0;
+    bool initialize();
 
+protected:
+    CbChar*                  m_pShaderSource;
+    Cbuint                   m_nID;
+    EShaderType              m_eType;
 
 private:
-    bool initializeShader();
-    bool createFragmentShader();
-    bool createVertexShader();
+    Cbuint getGLShaderType(EShaderType eShaderType);
 
 private:
+    QOpenGLFunctions_2_1 *m_pGLFunctions;
 
 };
 
