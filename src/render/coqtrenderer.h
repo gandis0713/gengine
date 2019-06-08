@@ -2,14 +2,14 @@
 #define GQTRENDERER_H
 
 #include <GL/glew.h>
-#include "../coenginedefine.h"
+#include "coenginedefine.h"
 
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
 #include <map>
 
-#include "shader/coshader.h"
-#include "screen/qt/coglwidget.h"
+#include "coshader.h"
+#include "coglwidget.h"
 
 #include <QGridLayout>
 

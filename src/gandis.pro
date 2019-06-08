@@ -25,13 +25,16 @@ MOC_DIR = build
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+include(include.pri);
+include(install.pri);
+include(libglm.pri);
+include(libopengl.pri);
+
 SOURCES += \
     shader/coshader.cpp \
     render/coqtrenderer.cpp \
     render/corenderer.cpp \
-    screen/qt/coglwidget.cpp \
-    screen/qt/coqtscreen.cpp \
-    screen/coscreen.cpp \
+    window/screen/qt/coglwidget.cpp \
     data/copoint.cpp \
     data/copolygon.cpp \
     util/coobjreader.cpp \
@@ -40,16 +43,15 @@ SOURCES += \
     shader/covertexshader.cpp \
     shader/cofragmentshader.cpp \
     common/util/noreader.cpp \
-    shader/coshadermanager.cpp
+    shader/coshadermanager.cpp \
+    common/core/coobject.cpp
 
 HEADERS += \
-    coenginedefine.h \
+    common/core/coenginedefine.h \
     render/coqtrenderer.h \
     render/corenderer.h \
     shader/coshader.h \
-    screen/qt/coglwidget.h \
-    screen/qt/coqtscreen.h \
-    screen/coscreen.h \
+    window/screen/qt/coglwidget.h \
     data/copoint.h \
     data/copolygon.h \
     util/coobjreader.h \
@@ -62,30 +64,6 @@ HEADERS += \
     common/datatype/dedatatype.h \
     shader/deshader.h \
     shader/dedefaultvertexshader.h \
-    shader/dedefaultfragmentshader.h
-
-unix
-{
-INCLUDEPATH += /usr/include/glm \
-}
-
-win32
-{
-INCLUDEPATH += C:/lib/glm/0.9.9.5
-
-LIBS += -L'C:/Program Files (x86)/Windows Kits/8.1/Lib/winv6.3/um/x64/' -lOpenGL32
-LIBS += -L'C:/Program Files (x86)/AMD APP SDK/2.9-1/lib/x86_64/' -lglew64
-LIBS += -L'C:/Program Files (x86)/AMD APP SDK/2.9-1/lib/x86_64/' -lglut64
-
-INCLUDEPATH += 'C:/Program Files (x86)/AMD APP SDK/2.9-1/include/'
-INCLUDEPATH += 'C:/Program Files (x86)/Windows Kits/8.1/Include/um/'
-}
-
-INCLUDEPATH += common/pch
-
-unix {
-    target.path = /home/gandis/lib
-    target.files = ../output/*.*
-    INSTALLS += target
-}
+    shader/dedefaultfragmentshader.h \
+    common/core/coobject.h
 

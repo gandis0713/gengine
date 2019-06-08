@@ -5,6 +5,7 @@
 #include "shader/cofragmentshader.h"
 
 #include <QDebug>
+#include <iostream>
 
 //static const GLfloat g_vertex_buffer_data[] = {
 //    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -275,7 +276,7 @@ void CoQtRenderer::initializeWidget()
 
 void CoQtRenderer::initializeGL()
 {
-    qDebug() << __FUNCTION__;
+    glewInit();
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     glEnable(GL_DEPTH_TEST);
@@ -318,8 +319,6 @@ void CoQtRenderer::resizeGL(int nWidth, int nHeight)
 
 void CoQtRenderer::paintGL()
 {
-    qDebug() << __FUNCTION__;
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
@@ -340,8 +339,7 @@ void CoQtRenderer::paintGL()
                 );
 
     glEnableVertexAttribArray(m_nColorID);
-    glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
-//    glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
     glVertexAttribPointer
             (
                 m_nColorID,
@@ -349,8 +347,7 @@ void CoQtRenderer::paintGL()
                 GL_FLOAT,
                 GL_FALSE,
                 0,
-                (void*)432
-//                (void*)0
+                (void*)0
                 );
 
     glDrawArrays(GL_TRIANGLES, 0, 36);

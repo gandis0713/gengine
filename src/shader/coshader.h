@@ -4,7 +4,7 @@
 #include <QString>
 
 #include "deshader.h"
-#include "../common/datatype/dedatatype.h"
+#include "dedatatype.h"
 
 #include <GL/glew.h>
 
