@@ -24,4 +24,4 @@ namespace NoReader
 
         return true;
     }
-};
+}
