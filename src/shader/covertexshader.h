@@ -10,8 +10,7 @@ public:
     ~CoVertexShader();
 
 protected:
-    bool setShaderType() override;
-    const GLchar* getShaderSource() override;
+    CbString getDefaultSource() override;
 };
 
 #endif // COVERTEXSHADER_H

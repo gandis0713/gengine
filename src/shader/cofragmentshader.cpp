@@ -5,7 +5,6 @@
 CoFragmentShader::CoFragmentShader()
     : CoShader()
 {
-    initialize();
 }
 
 CoFragmentShader::~CoFragmentShader()
@@ -13,14 +12,7 @@ CoFragmentShader::~CoFragmentShader()
 
 }
 
-bool CoFragmentShader::setShaderType()
+CbString CoFragmentShader::getDefaultSource()
 {
-    m_eType = EShaderType::eFragment;
-
-    return true;
-}
-
-const GLchar* CoFragmentShader::getShaderSource()
-{
-    return const_cast<CbChar*>(pDefaultFragShader);
+    return strDefaultFragShader;
 }

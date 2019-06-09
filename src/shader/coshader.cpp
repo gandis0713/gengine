@@ -1,10 +1,11 @@
 #include "coshader.h"
 
-#include <QDebug>
-
-#include "../common/util/noreader.h"
+#include "noreader.h"
+#include "delog.h"
 
 #include <GL/glew.h>
+
+#include <vector>
 
 CoShader::CoShader()
 {
@@ -15,62 +16,68 @@ CoShader::~CoShader()
     // do nothing.
 }
 
-bool CoShader::initialize()
+void CoShader::setSource(const CbString& strSource)
 {
-    setShaderType();
-
-    if(!createShader())
+    if(strSource.empty())
     {
-        qDebug() << __FUNCTION__ << "Failed to initialized shader.";
-        return false;
+        m_strSource = getDefaultSource();
+        return;
     }
 
-    return true;
+    m_strSource = strSource;
+//    std::string strShaderPath(pPath);
+//    std::string strShaderSource;
+//    bool bState = NoReader::ReadText(pPath, strShaderSource);
+//    if(!bState)
+//    {
+//        tlog("The shader source code can't be opened.");
+//        return false;
+//    }
+
+//    return SetSource();
 }
 
-bool CoShader::createShader(const char* pPath)
+CbString CoShader::getSource() const
 {
-    std::string strShaderPath(pPath);
-    std::string strShaderSource;
-    bool bState = NoReader::ReadText(pPath, strShaderSource);
-    if(!bState)
-    {
-        qDebug() << __FUNCTION__ << "The shader source code can't be opened ";
-        return false;
-    }
-
-    return createShader();
+    return m_strSource;
 }
 
-bool CoShader::createShader()
+
+void CoShader::setType(const EShaderType& eShaderType)
+{
+    m_eType = eShaderType;
+}
+
+EShaderType CoShader::getType() const
+{
+    return m_eType;
+}
+
+bool CoShader::compile()
 {
     m_nID = glCreateShader(getGLShaderType(m_eType));
-    qDebug() << __FUNCTION__ << "The created shader ID : " << m_nID;
     if(m_nID <= 0)
     {
         return false;
     }
 
-    const GLchar* cShaderSource = getShaderSource();
-//    if(false == bCreateShaderSource)
-//    {
-//        qDebug() << __FUNCTION__ << "The shader source is not created.";
-//        return false;
-//    }
-
     GLint nResult = GL_FALSE;
-    int nInfoLogLength;
+    GLint nLogLength;
 
-    glShaderSource(m_nID, 1, &cShaderSource , NULL);
+    const GLchar *source = static_cast<const GLchar *>(m_strSource.c_str());
+    glShaderSource(m_nID, 1, &source, NULL);
     glCompileShader(m_nID);
 
     glGetShaderiv(m_nID, GL_COMPILE_STATUS, &nResult);
-    glGetShaderiv(m_nID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
-    if ( nInfoLogLength > 0 ){
-        std::vector<char> strErrMsg(nInfoLogLength + 1);
-        glGetShaderInfoLog(m_nID, nInfoLogLength, NULL, &strErrMsg[0]);
+    glGetShaderiv(m_nID, GL_INFO_LOG_LENGTH, &nLogLength);
 
-        qDebug() << __FUNCTION__ << "The erroe message from shader : " << &strErrMsg[0];
+    if ( nLogLength > 0 )
+    {
+        std::vector<char> strErrMsg(nLogLength + 1);
+        glGetShaderInfoLog(m_nID, nLogLength, NULL, &strErrMsg[0]);
+
+        tlog("The erroe message from shader : ");
+        tlog(&strErrMsg[0]);
 
         return false;
     }

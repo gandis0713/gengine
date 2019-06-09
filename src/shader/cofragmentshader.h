@@ -10,8 +10,7 @@ public:
     ~CoFragmentShader();
 
 protected:
-    bool setShaderType() override;
-    const GLchar* getShaderSource() override;
+    CbString getDefaultSource() override;
 };
 
 #endif // COFRAGMENTSHADER_H

@@ -1,7 +1,9 @@
 #ifndef DESHADERSOURCE_H
 #define DESHADERSOURCE_H
 
-const char* pDefaultFragShader =
+#include <string>
+
+std::string strDefaultFragShader =
 "                                                                                                                    \n\
 #version 120                                                                                                         \n\
                                                                                                                      \n\

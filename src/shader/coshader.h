@@ -1,8 +1,6 @@
 #ifndef COSHADER_H
 #define COSHADER_H
 
-#include <QString>
-
 #include "deshader.h"
 #include "dedatatype.h"
 
@@ -14,19 +12,21 @@ public:
     CoShader();
     ~CoShader();
 
-    bool createShader(const char* pPath);
-    bool createShader();
+    void setSource(const CbString& strSource = CbString());
+    CbString getSource() const;
+    void setType(const EShaderType& eShaderType);
+    EShaderType getType() const;
 
+    bool compile();
     Cbuint getID();
 
 protected:
-    virtual bool setShaderType() = 0;
-    virtual const GLchar* getShaderSource() = 0;
-    bool initialize();
+    virtual CbString getDefaultSource() = 0;
 
 protected:
     Cbuint                   m_nID;
     EShaderType              m_eType;
+    CbString                 m_strSource;
 
 private:
     Cbuint getGLShaderType(EShaderType eShaderType);

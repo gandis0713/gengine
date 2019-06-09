@@ -5,22 +5,13 @@
 CoVertexShader::CoVertexShader()
     : CoShader()
 {
-    initialize();
 }
 
 CoVertexShader::~CoVertexShader()
 {
 }
 
-
-bool CoVertexShader::setShaderType()
+CbString CoVertexShader::getDefaultSource()
 {
-    m_eType = EShaderType::eVertex;
-
-    return true;
-}
-
-const GLchar* CoVertexShader::getShaderSource()
-{
-    return const_cast<CbChar*>(pDefaultVertexShader);
+    return strDefaultVertexShader;
 }
