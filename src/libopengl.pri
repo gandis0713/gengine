@@ -1,5 +1,4 @@
-win32
-{
+win32 {
 
 INCLUDEPATH += 'C:/Program Files (x86)/AMD APP SDK/2.9-1/include/'
 

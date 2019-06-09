@@ -28,8 +28,7 @@ MOC_DIR = build
 include(include.pri);
 include(install.pri);
 
-include(libglm.pri);
-include(libopengl.pri);
+include(library.pri);
 
 SOURCES += \
     shader/coshader.cpp \
