@@ -9,9 +9,10 @@
 #include <map>
 
 #include "coshader.h"
-#include "coglwidget.h"
+#include "coqscreen.h"
 
-#include <QGridLayout>
+class CoQScreen;
+class QGridLayout;
 
 class GANDISENGINE CoQtRenderer : public QObject
 {
@@ -25,7 +26,7 @@ private:
     bool createDefaultShader();
 
 private:
-    CoGLWidget        *m_pGLWidget;
+    CoQScreen         *m_pQScreen;
     QGridLayout       *m_pLayout;
     QWidget           *m_pParent;
     std::map<EShaderType, CoShader*> m_mapShaders;

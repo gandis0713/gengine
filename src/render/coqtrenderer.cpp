@@ -4,8 +4,9 @@
 #include "shader/covertexshader.h"
 #include "shader/cofragmentshader.h"
 
-#include <QDebug>
 #include <iostream>
+
+#include <QGridLayout>
 
 //static const GLfloat g_vertex_buffer_data[] = {
 //    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
@@ -47,12 +48,12 @@
 //};
 
 static const GLfloat g_vertex_buffer_data[] = {
-    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
-    -1.0f,-1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f, // triangle 1 : end
-    1.0f, 1.0f,-1.0f, // triangle 2 : begin
     -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f,-1.0f, // triangle 2 : end
+    -1.0f,-1.0f, 1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f,-1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f,-1.0f,
     1.0f,-1.0f, 1.0f,
     -1.0f,-1.0f,-1.0f,
     1.0f,-1.0f,-1.0f,
@@ -248,7 +249,7 @@ static const GLfloat g_color_buffer_data[] = {
 CoQtRenderer::CoQtRenderer(QWidget* pParent)
     : m_pParent(pParent),
       m_pLayout(NULL),
-      m_pGLWidget(NULL)
+      m_pQScreen(NULL)
 {
     initializeWidget();
 }
@@ -256,7 +257,7 @@ CoQtRenderer::CoQtRenderer(QWidget* pParent)
 CoQtRenderer::~CoQtRenderer()
 {
     delete m_pLayout;
-    delete m_pGLWidget;
+    delete m_pQScreen;
 }
 
 
@@ -264,12 +265,12 @@ void CoQtRenderer::initializeWidget()
 {
     m_pLayout = new QGridLayout(m_pParent);
 
-    m_pGLWidget = new CoGLWidget;
-    connect(m_pGLWidget, SIGNAL(signalInitializeGL()), this, SLOT(initializeGL()));
-    connect(m_pGLWidget, SIGNAL(signalResizeGL(int, int)), this, SLOT(resizeGL(int, int)));
-    connect(m_pGLWidget, SIGNAL(signalPaintGL()), this, SLOT(paintGL()));
+    m_pQScreen = new CoQScreen;
+    connect(m_pQScreen, SIGNAL(signalInitializeGL()), this, SLOT(initializeGL()));
+    connect(m_pQScreen, SIGNAL(signalResizeGL(int, int)), this, SLOT(resizeGL(int, int)));
+    connect(m_pQScreen, SIGNAL(signalPaintGL()), this, SLOT(paintGL()));
 
-    QWidget *pWidget = dynamic_cast<QWidget*>(m_pGLWidget);
+    QWidget *pWidget = dynamic_cast<QWidget*>(m_pQScreen);
     m_pLayout->addWidget(pWidget);
 }
 

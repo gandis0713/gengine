@@ -27,6 +27,7 @@ MOC_DIR = build
 
 include(include.pri);
 include(install.pri);
+
 include(libglm.pri);
 include(libopengl.pri);
 
@@ -34,7 +35,6 @@ SOURCES += \
     shader/coshader.cpp \
     render/coqtrenderer.cpp \
     render/corenderer.cpp \
-    window/screen/qt/coglwidget.cpp \
     data/copoint.cpp \
     data/copolygon.cpp \
     util/coobjreader.cpp \
@@ -44,14 +44,19 @@ SOURCES += \
     shader/cofragmentshader.cpp \
     common/util/noreader.cpp \
     shader/coshadermanager.cpp \
-    common/core/coobject.cpp
+    common/core/coobject.cpp \
+    window/screen/qt/coqscreen.cpp \
+    render/opengl/coopenglstate.cpp \
+    render/core/cocamera.cpp \
+    common/core/comath.cpp \
+    common/math/comatrix3x3.cpp \
+    common/math/comatrix4x4.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
     render/coqtrenderer.h \
     render/corenderer.h \
     shader/coshader.h \
-    window/screen/qt/coglwidget.h \
     data/copoint.h \
     data/copolygon.h \
     util/coobjreader.h \
@@ -61,9 +66,16 @@ HEADERS += \
     shader/cofragmentshader.h \
     common/util/noreader.h \
     shader/coshadermanager.h \
-    common/datatype/dedatatype.h \
-    shader/deshader.h \
-    shader/dedefaultvertexshader.h \
-    shader/dedefaultfragmentshader.h \
-    common/core/coobject.h
+    common/core/dedatatype.h \
+    shader/core/deshader.h \
+    shader/core/dedefaultvertexshader.h \
+    shader/core/dedefaultfragmentshader.h \
+    common/core/coobject.h \
+    window/screen/qt/coqscreen.h \
+    common/util/delog.h \
+    render/opengl/coopenglstate.h \
+    render/core/cocamera.h \
+    common/core/comath.h \
+    common/math/comatrix3x3.h \
+    common/math/comatrix4x4.h
 

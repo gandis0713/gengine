@@ -1,11 +1,14 @@
 INCLUDEPATH += common \
     common/core \
-    common/datatype \
     common/util
 
 INCLUDEPATH += data
-INCLUDEPATH += render
-INCLUDEPATH += shader
+INCLUDEPATH += render \
+    render/opengl
+
+INCLUDEPATH += shader \
+    shader/core
+
 INCLUDEPATH += util
 
 INCLUDEPATH += window \
