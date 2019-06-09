@@ -1,14 +1,14 @@
-#ifndef RMGLWIDGET_H
-#define RMGLWIDGET_H
+#ifndef RMQSCREEN_H
+#define RMQSCREEN_H
 
 #include <QGLWidget>
 
-class CoGLWidget : public QGLWidget
+class CoQScreen : public QGLWidget
 {
     Q_OBJECT
 public:
-    explicit CoGLWidget(QWidget *parent = nullptr);
-    ~CoGLWidget();
+    explicit CoQScreen(QWidget *parent = nullptr);
+    ~CoQScreen();
 
     void resizeGL(int nWidth, int nHeight) override;
     void initializeGL() override;
@@ -22,4 +22,4 @@ signals:
 public slots:
 };
 
-#endif // RMGLWIDGET_H
+#endif // RMQSCREEN_H
