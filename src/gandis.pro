@@ -35,8 +35,8 @@ SOURCES += \
     shader/coshader.cpp \
     render/coqtrenderer.cpp \
     render/corenderer.cpp \
-    data/copoint.cpp \
-    data/copolygon.cpp \
+    common/core/copoint.cpp \
+    common/core/copolygon.cpp \
     util/coobjreader.cpp \
     util/costlreader.cpp \
     util/cotexturereader.cpp \
@@ -57,8 +57,8 @@ HEADERS += \
     render/coqtrenderer.h \
     render/corenderer.h \
     shader/coshader.h \
-    data/copoint.h \
-    data/copolygon.h \
+    common/core/copoint.h \
+    common/core/copolygon.h \
     util/coobjreader.h \
     util/costlreader.h \
     util/cotexturereader.h \
