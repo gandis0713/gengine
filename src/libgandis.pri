@@ -1,24 +1,21 @@
-win32 {
+G_LIB_PATH = $$(LIB_PATH)/gandis
+G_INC_PATH = $${G_LIB_PATH}/include
 
-LIBRARY_PATH = $$(LIB_PATH)/gandis
-INCLUDE_PATH = $${LIBRARY_PATH}/include
-
-INCLUDEPATH += $${INCLUDE_PATH}/ \
+INCLUDEPATH += $${G_INC_PATH}/ \
 ## common
-    $${INCLUDE_PATH}/common \
-    $${INCLUDE_PATH}/common/core \
-    $${INCLUDE_PATH}/common/math \
+    $${G_INC_PATH}/common \
+    $${G_INC_PATH}/common/core \
+    $${G_INC_PATH}/common/math \
 ## render
-    $${INCLUDE_PATH}/render \
-    $${INCLUDE_PATH}/render/core \
-    $${INCLUDE_PATH}/render/opengl \
+    $${G_INC_PATH}/render \
+    $${G_INC_PATH}/render/core \
+    $${G_INC_PATH}/render/opengl \
 ## shader
-    $${INCLUDE_PATH}/shader \
-    $${INCLUDE_PATH}/shader/core \
+    $${G_INC_PATH}/shader \
+    $${G_INC_PATH}/shader/core \
 ## window
-    $${INCLUDE_PATH}/window \
-    $${INCLUDE_PATH}/window/screen \
-    $${INCLUDE_PATH}/window/screen/qt \
-LIBS += -L$${LIBRARY_PATH}/lib -lgandis
+    $${G_INC_PATH}/window \
+    $${G_INC_PATH}/window/screen \
+    $${G_INC_PATH}/window/screen/qt \
 
-}
+LIBS += -L$${G_LIB_PATH}/lib -lgandis
