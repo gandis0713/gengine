@@ -1,16 +1,5 @@
-unix {
 
-G_INSTALL_PATH = /home/gandis/lib/gandis
-
-}
-
-win32 {
-
-G_INSTALL_PATH = C:/lib/gandis
-
-}
-
-G_INSTALL_LIB_PATH = $${G_INSTALL_PATH}/lib
+G_INSTALL_PATH = $$(LIB_PATH)/gandis
 G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
 
 ## pri
@@ -18,12 +7,8 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     pri.files = libgandis.pri
     INSTALLS += pri
 
-## lib
-    lib.path = $${G_INSTALL_LIB_PATH}
-    lib.files = ../output/*.*
-    INSTALLS += lib
-
-## common
+## include
+    ## common
     include_common_core.path = $${G_INSTALL_INC_PATH}/common/core
     include_common_core.files = common/core/*.h
     INSTALLS += include_common_core
@@ -32,7 +17,7 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_common_math.files = common/math/*.h
     INSTALLS += include_common_math
 
-## render
+    ## render
     include_render.path = $${G_INSTALL_INC_PATH}/render
     include_render.files = render/*.h
     INSTALLS += include_render
@@ -45,7 +30,7 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_render_opengl.files = render/opengl/*.h
     INSTALLS += include_render_opengl
 
-## shader
+    ## shader
     include_shader.path = $${G_INSTALL_INC_PATH}/shader
     include_shader.files = shader/*.h
     INSTALLS += include_shader
@@ -54,7 +39,7 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_shader_core.files = shader/core/*.h
     INSTALLS += include_shader_core
 
-## window
+    ## window
     include_window.path = $${G_INSTALL_INC_PATH}/window
     include_window.files = window/*.h
     INSTALLS += include_window
@@ -66,3 +51,9 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_window_screen_qt.path = $${G_INSTALL_INC_PATH}/window/screen/qt
     include_window_screen_qt.files = window/screen/qt/*.h
     INSTALLS += include_window_screen_qt
+
+
+## lib
+    library.path = $${G_INSTALL_PATH}
+    library.files = $${DESTDIR}
+    INSTALLS += library
