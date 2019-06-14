@@ -51,7 +51,9 @@ SOURCES += \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
     render/shader/noshaderhelper.cpp \
-    render/shader/coshaderprogram.cpp
+    render/shader/coshaderprogram.cpp \
+    render/object/covertexobject.cpp \
+    render/object/cobufferobject.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -80,5 +82,7 @@ HEADERS += \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
     render/shader/noshaderhelper.h \
-    render/shader/coshaderprogram.h
+    render/shader/coshaderprogram.h \
+    render/object/covertexobject.h \
+    render/object/cobufferobject.h
 
