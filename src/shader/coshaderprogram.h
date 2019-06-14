@@ -14,6 +14,7 @@ public:
 
     Cbuint getUniformLocation(CbString strName);
     Cbuint getAttribLocation(CbString strName);
+    void setUniformMatrix4fv(Cbuint nID, Cbmat4 mat4);
     void bind();
 
 private:
@@ -21,7 +22,7 @@ private:
     void createShaders();
     void createProgram();
     void link();
-    void clearShaders();
+    void Release();
     bool checkShaderProgram();
 
 private:

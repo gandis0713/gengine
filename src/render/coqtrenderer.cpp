@@ -176,10 +176,10 @@ void CoQtRenderer::paintGL()
 
     m_pShaderProgram->bind();
 
-    glUniformMatrix4fv(m_nMatrixID, 1, GL_FALSE, &m_mat4PerViewModel[0][0]);
+    m_pShaderProgram->setUniformMatrix4fv(m_nMatrixID, m_mat4PerViewModel);
 
-    glEnableVertexAttribArray(m_nVertexID);
     glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
+    glEnableVertexAttribArray(m_nVertexID);
     glVertexAttribPointer
             (
                 m_nVertexID,
@@ -190,8 +190,9 @@ void CoQtRenderer::paintGL()
                 (void*)0
                 );
 
-    glEnableVertexAttribArray(m_nColorID);
+
     glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
+    glEnableVertexAttribArray(m_nColorID);
     glVertexAttribPointer
             (
                 m_nColorID,
@@ -201,6 +202,7 @@ void CoQtRenderer::paintGL()
                 0,
                 (void*)0
                 );
+
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
 

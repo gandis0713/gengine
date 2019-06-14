@@ -25,6 +25,12 @@ Cbuint CoShaderProgram::getAttribLocation(CbString strName)
     return glGetAttribLocation(m_nProgramID, strName.c_str());
 }
 
+
+void CoShaderProgram::setUniformMatrix4fv(Cbuint nID, Cbmat4 mat4)
+{
+    glUniformMatrix4fv(nID, 1, GL_FALSE, &mat4[0][0]);
+}
+
 void CoShaderProgram::bind()
 {
     glUseProgram(m_nProgramID);
@@ -36,7 +42,6 @@ void CoShaderProgram::initializeShaders()
     createShaders();
     link();
     checkShaderProgram();
-    clearShaders();
 }
 
 void CoShaderProgram::createShaders()
@@ -88,7 +93,7 @@ void CoShaderProgram::link()
     glLinkProgram(m_nProgramID);
 }
 
-void CoShaderProgram::clearShaders()
+void CoShaderProgram::Release()
 {
     std::map<EShaderType, CoShader*>::iterator iter;
     for(iter = m_mapShaders.begin(); iter != m_mapShaders.end(); ++iter)

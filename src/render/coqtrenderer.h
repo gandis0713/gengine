@@ -4,12 +4,11 @@
 #include <GL/glew.h>
 #include "coenginedefine.h"
 
-#include "glm.hpp"
-#include "gtc/matrix_transform.hpp"
 #include <map>
 
 #include "coshaderprogram.h"
 #include "coqscreen.h"
+#include "dedatatype.h"
 
 class CoQScreen;
 class QGridLayout;
@@ -32,13 +31,13 @@ private:
 
     CoShaderProgram   *m_pShaderProgram;
 
-    GLuint m_nMatrixID;
-    GLuint m_nVertexID;
-    GLuint m_nColorID;
-    GLuint m_nVerterBuffer;
-    GLuint m_mColorbuffer;
+    Cbuint m_nMatrixID;
+    Cbuint m_nVertexID;
+    Cbuint m_nColorID;
+    Cbuint m_nVerterBuffer;
+    Cbuint m_mColorbuffer;
 
-    glm::mat4 m_mat4PerViewModel;
+    Cbmat4 m_mat4PerViewModel;
 
 
 public slots:
