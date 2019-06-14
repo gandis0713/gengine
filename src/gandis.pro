@@ -50,7 +50,8 @@ SOURCES += \
     common/core/comath.cpp \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
-    shader/noshaderhelper.cpp
+    shader/noshaderhelper.cpp \
+    shader/coshaderprogram.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -78,5 +79,6 @@ HEADERS += \
     common/core/comath.h \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
-    shader/noshaderhelper.h
+    shader/noshaderhelper.h \
+    shader/coshaderprogram.h
 

@@ -8,7 +8,7 @@
 #include "gtc/matrix_transform.hpp"
 #include <map>
 
-#include "coshader.h"
+#include "coshaderprogram.h"
 #include "coqscreen.h"
 
 class CoQScreen;
@@ -23,15 +23,15 @@ public:
 
 private:
     void initializeWidget();
-    bool createDefaultShader();
+    bool createShaderProgram();
 
 private:
     CoQScreen         *m_pQScreen;
     QGridLayout       *m_pLayout;
     QWidget           *m_pParent;
-    std::map<EShaderType, CoShader*> m_mapShaders;
 
-    GLuint m_nProgramID;
+    CoShaderProgram   *m_pShaderProgram;
+
     GLuint m_nMatrixID;
     GLuint m_nVertexID;
     GLuint m_nColorID;

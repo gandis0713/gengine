@@ -100,7 +100,8 @@ static const GLfloat g_color_buffer_data[] = {
 CoQtRenderer::CoQtRenderer(QWidget* pParent)
     : m_pParent(pParent),
       m_pLayout(NULL),
-      m_pQScreen(NULL)
+      m_pQScreen(NULL),
+      m_pShaderProgram(NULL)
 {
     initializeWidget();
 }
@@ -135,14 +136,11 @@ void CoQtRenderer::initializeGL()
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
 
-    m_nProgramID = glCreateProgram();
+    createShaderProgram();
 
-    createDefaultShader();
-
-    m_nMatrixID = glGetUniformLocation(m_nProgramID, "perViewModel");
-    m_nVertexID = glGetAttribLocation(m_nProgramID, "vertex");
-    m_nColorID = glGetAttribLocation(m_nProgramID, "color");
-
+    m_nMatrixID = m_pShaderProgram->getUniformLocation("perViewModel");
+    m_nVertexID = m_pShaderProgram->getAttribLocation("vertex");
+    m_nColorID = m_pShaderProgram->getAttribLocation("color");
 
     glGenBuffers(1, &m_nVerterBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
@@ -176,7 +174,7 @@ void CoQtRenderer::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    glUseProgram(m_nProgramID);
+    m_pShaderProgram->bind();
 
     glUniformMatrix4fv(m_nMatrixID, 1, GL_FALSE, &m_mat4PerViewModel[0][0]);
 
@@ -211,56 +209,14 @@ void CoQtRenderer::paintGL()
 
 }
 
-bool CoQtRenderer::createDefaultShader()
+bool CoQtRenderer::createShaderProgram()
 {
-    m_mapShaders.clear();
-
-    auto ret = m_mapShaders.insert( { EShaderType::eVertex , nullptr } );
-    if (ret.second)
+    if(m_pShaderProgram != NULL)
     {
-        CoShader *pShader = new CoVertexShader();
-        ret.first->second = pShader;
+        delete m_pShaderProgram;
     }
 
-    ret = m_mapShaders.insert( { EShaderType::eFragment , nullptr } );
-    if (ret.second)
-    {
-        CoShader *pShader = new CoFragmentShader();
-        ret.first->second = pShader;
-    }
-
-    std::map<EShaderType, CoShader*>::iterator iter;
-    for(iter = m_mapShaders.begin(); iter != m_mapShaders.end(); ++iter)
-    {
-        CoShader *pShader = iter->second;
-        if(pShader)
-        {
-            glAttachShader(m_nProgramID, pShader->getID());
-        }
-    }
-
-    glLinkProgram(m_nProgramID);
-
-    GLint nResult = GL_FALSE;
-    int nInfoLogLength;
-    // 프로그램 검사
-    glGetProgramiv(m_nProgramID, GL_LINK_STATUS, &nResult);
-    glGetProgramiv(m_nProgramID, GL_INFO_LOG_LENGTH, &nInfoLogLength);
-    if ( nInfoLogLength > 0 ){
-        std::vector<char> strProgramErrorMessage(nInfoLogLength + 1);
-        glGetProgramInfoLog(m_nProgramID, nInfoLogLength, NULL, &strProgramErrorMessage[0]);
-        return false;
-    }
-
-    for(iter = m_mapShaders.begin(); iter != m_mapShaders.end(); ++iter)
-    {
-        CoShader *pShader = iter->second;
-        if(pShader)
-        {
-//            glDetachShader(m_nProgramID, pShader->getID());
-//            glDeleteShader(pShader->getID());
-        }
-    }
+    m_pShaderProgram = new CoShaderProgram();
 
     return true;
 
