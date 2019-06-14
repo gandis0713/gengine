@@ -26,18 +26,13 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_render_core.files = render/core/*.h
     INSTALLS += include_render_core
 
-    include_render_opengl.path = $${G_INSTALL_INC_PATH}/render/opengl
-    include_render_opengl.files = render/opengl/*.h
-    INSTALLS += include_render_opengl
+    include_render_shader.path = $${G_INSTALL_INC_PATH}/render/shader
+    include_render_shader.files = render/shader/*.h
+    INSTALLS += include_render_shader
 
-    ## shader
-    include_shader.path = $${G_INSTALL_INC_PATH}/shader
-    include_shader.files = shader/*.h
-    INSTALLS += include_shader
-
-    include_shader_core.path = $${G_INSTALL_INC_PATH}/shader/core
-    include_shader_core.files = shader/core/*.h
-    INSTALLS += include_shader_core
+    include_render_shader_core.path = $${G_INSTALL_INC_PATH}/render/shader/core
+    include_render_shader_core.files = render/shader/core/*.h
+    INSTALLS += include_render_shader_core
 
     ## window
     include_window.path = $${G_INSTALL_INC_PATH}/window

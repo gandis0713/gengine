@@ -31,7 +31,7 @@ include(install.pri);
 include(library.pri);
 
 SOURCES += \
-    shader/coshader.cpp \
+    render/shader/coshader.cpp \
     render/coqtrenderer.cpp \
     render/corenderer.cpp \
     common/core/copoint.cpp \
@@ -39,46 +39,46 @@ SOURCES += \
     util/coobjreader.cpp \
     util/costlreader.cpp \
     util/cotexturereader.cpp \
-    shader/covertexshader.cpp \
-    shader/cofragmentshader.cpp \
+    render/shader/covertexshader.cpp \
+    render/shader/cofragmentshader.cpp \
     common/util/noreader.cpp \
-    shader/coshadermanager.cpp \
+    render/shader/coshadermanager.cpp \
     common/core/coobject.cpp \
     window/screen/qt/coqscreen.cpp \
-    render/opengl/coopenglstate.cpp \
+    render/core/coopenglstate.cpp \
     render/core/cocamera.cpp \
     common/core/comath.cpp \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
-    shader/noshaderhelper.cpp \
-    shader/coshaderprogram.cpp
+    render/shader/noshaderhelper.cpp \
+    render/shader/coshaderprogram.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
     render/coqtrenderer.h \
     render/corenderer.h \
-    shader/coshader.h \
+    render/shader/coshader.h \
     common/core/copoint.h \
     common/core/copolygon.h \
     util/coobjreader.h \
     util/costlreader.h \
     util/cotexturereader.h \
-    shader/covertexshader.h \
-    shader/cofragmentshader.h \
+    render/shader/covertexshader.h \
+    render/shader/cofragmentshader.h \
     common/util/noreader.h \
-    shader/coshadermanager.h \
+    render/shader/coshadermanager.h \
     common/core/dedatatype.h \
-    shader/core/deshader.h \
-    shader/core/dedefaultvertexshader.h \
-    shader/core/dedefaultfragmentshader.h \
+    render/shader/core/deshader.h \
+    render/shader/core/dedefaultvertexshader.h \
+    render/shader/core/dedefaultfragmentshader.h \
     common/core/coobject.h \
     window/screen/qt/coqscreen.h \
     common/util/delog.h \
-    render/opengl/coopenglstate.h \
+    render/core/coopenglstate.h \
     render/core/cocamera.h \
     common/core/comath.h \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
-    shader/noshaderhelper.h \
-    shader/coshaderprogram.h
+    render/shader/noshaderhelper.h \
+    render/shader/coshaderprogram.h
 

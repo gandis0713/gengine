@@ -4,10 +4,9 @@ INCLUDEPATH += common \
 
 INCLUDEPATH += data
 INCLUDEPATH += render \
-    render/opengl
-
-INCLUDEPATH += shader \
-    shader/core
+    render/core \
+    render/shader \
+    render/shader/core
 
 INCLUDEPATH += util
 

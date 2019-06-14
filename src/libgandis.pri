@@ -9,10 +9,8 @@ INCLUDEPATH += $${G_INC_PATH}/ \
 ## render
     $${G_INC_PATH}/render \
     $${G_INC_PATH}/render/core \
-    $${G_INC_PATH}/render/opengl \
-## shader
-    $${G_INC_PATH}/shader \
-    $${G_INC_PATH}/shader/core \
+    $${G_INC_PATH}/render/shader \
+    $${G_INC_PATH}/render/shader/core \
 ## window
     $${G_INC_PATH}/window \
     $${G_INC_PATH}/window/screen \
