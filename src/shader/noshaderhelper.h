@@ -1,0 +1,4 @@
+#ifndef NOSHADERHELPER_H
+#define NOSHADERHELPER_H
+
+#endif // NOSHADERHELPER_H
