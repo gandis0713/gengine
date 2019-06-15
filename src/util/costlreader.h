@@ -1,17 +1,10 @@
 #ifndef COSTLREADER_H
 #define COSTLREADER_H
 
-#include <QObject>
-
-class CoSTLReader : public QObject
+class CoSTLReader
 {
-    Q_OBJECT
 public:
-    explicit CoSTLReader(QObject *parent = nullptr);
-
-signals:
-
-public slots:
+    explicit CoSTLReader();
 };
 
 #endif // COSTLREADER_H

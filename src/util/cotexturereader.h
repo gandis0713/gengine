@@ -1,17 +1,10 @@
 #ifndef COTEXTUREREADER_H
 #define COTEXTUREREADER_H
 
-#include <QObject>
-
-class CoTextureReader : public QObject
+class CoTextureReader
 {
-    Q_OBJECT
 public:
-    explicit CoTextureReader(QObject *parent = nullptr);
-
-signals:
-
-public slots:
+    explicit CoTextureReader();
 };
 
 #endif // COTEXTUREREADER_H

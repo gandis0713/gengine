@@ -1,17 +1,11 @@
 #ifndef COOBJREADER_H
 #define COOBJREADER_H
 
-#include <QObject>
-
-class CoOBJReader : public QObject
+class CoOBJReader
 {
-    Q_OBJECT
 public:
-    explicit CoOBJReader(QObject *parent = nullptr);
+    explicit CoOBJReader();
 
-signals:
-
-public slots:
 };
 
 #endif // COOBJREADER_H
