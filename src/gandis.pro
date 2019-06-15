@@ -49,7 +49,8 @@ SOURCES += \
     render/core/cocamera.cpp \
     common/core/comath.cpp \
     common/math/comatrix3x3.cpp \
-    common/math/comatrix4x4.cpp
+    common/math/comatrix4x4.cpp \
+    shader/noshaderhelper.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -76,5 +77,6 @@ HEADERS += \
     render/core/cocamera.h \
     common/core/comath.h \
     common/math/comatrix3x3.h \
-    common/math/comatrix4x4.h
+    common/math/comatrix4x4.h \
+    shader/noshaderhelper.h
 

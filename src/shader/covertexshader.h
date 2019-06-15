@@ -7,10 +7,12 @@ class CoVertexShader : public CoShader
 {
 public:
     CoVertexShader();
-    ~CoVertexShader();
+    ~CoVertexShader() override;
 
 protected:
-    CbString getDefaultSource() override;
+    void initializeShader() override;
+    void initType() override;
+    void initSource() override;
 };
 
 #endif // COVERTEXSHADER_H

@@ -7,10 +7,12 @@ class CoFragmentShader : public CoShader
 {
 public:
     CoFragmentShader();
-    ~CoFragmentShader();
+    ~CoFragmentShader() override;
 
 protected:
-    CbString getDefaultSource() override;
+    void initializeShader() override;
+    void initType() override;
+    void initSource() override;
 };
 
 #endif // COFRAGMENTSHADER_H

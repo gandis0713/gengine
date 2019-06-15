@@ -1,4 +1,5 @@
 #include "coshader.h"
+#include "noshaderhelper.h"
 
 #include "noreader.h"
 #include "delog.h"
@@ -20,7 +21,6 @@ void CoShader::setSource(const CbString& strSource)
 {
     if(strSource.empty())
     {
-        m_strSource = getDefaultSource();
         return;
     }
 
@@ -53,11 +53,17 @@ EShaderType CoShader::getType() const
     return m_eType;
 }
 
+Cbuint CoShader::getID()
+{
+    return m_nID;
+}
+
 bool CoShader::compile()
 {
-    m_nID = glCreateShader(getGLShaderType(m_eType));
+    m_nID = glCreateShader(NoShaderHelper::getGLShaderType(m_eType));
     if(m_nID <= 0)
     {
+        tlog("Failed to create shader.");
         return false;
     }
 
@@ -85,23 +91,4 @@ bool CoShader::compile()
     return true;
 }
 
-Cbuint CoShader::getID()
-{
-    return m_nID;
-}
 
-Cbuint CoShader::getGLShaderType(EShaderType eShaderType)
-{
-    Cbuint nShaderType = GL_VERTEX_SHADER;
-    switch (eShaderType)
-    {
-    case EShaderType::eFragment:
-        nShaderType = GL_FRAGMENT_SHADER;
-        break;
-    case EShaderType::eVertex:
-    default:
-        nShaderType = GL_VERTEX_SHADER;
-        break;
-    }
-    return nShaderType;
-}

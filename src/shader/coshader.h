@@ -10,26 +10,25 @@ class CoShader
 {
 public:
     CoShader();
-    ~CoShader();
+    virtual ~CoShader() =0;
 
-    void setSource(const CbString& strSource = CbString());
+    void setSource(const CbString& strSource);
     CbString getSource() const;
     void setType(const EShaderType& eShaderType);
     EShaderType getType() const;
-
-    bool compile();
     Cbuint getID();
 
+    bool compile();
+
 protected:
-    virtual CbString getDefaultSource() = 0;
+    virtual void initializeShader() = 0;
+    virtual void initType() = 0;
+    virtual void initSource() = 0;
 
 protected:
     Cbuint                   m_nID;
     EShaderType              m_eType;
     CbString                 m_strSource;
-
-private:
-    Cbuint getGLShaderType(EShaderType eShaderType);
 
 };
 

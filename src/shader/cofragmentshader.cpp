@@ -5,6 +5,7 @@
 CoFragmentShader::CoFragmentShader()
     : CoShader()
 {
+    initializeShader();
 }
 
 CoFragmentShader::~CoFragmentShader()
@@ -12,7 +13,19 @@ CoFragmentShader::~CoFragmentShader()
 
 }
 
-CbString CoFragmentShader::getDefaultSource()
+void CoFragmentShader::initializeShader()
 {
-    return strDefaultFragShader;
+    initType();
+    initSource();
+    compile();
+}
+
+void CoFragmentShader::initType()
+{
+    m_eType = EShaderType::eFragment;
+}
+
+void CoFragmentShader::initSource()
+{
+    m_strSource = strDefaultFragShader;
 }
