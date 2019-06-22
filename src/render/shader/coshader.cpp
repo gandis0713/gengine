@@ -17,7 +17,7 @@ CoShader::~CoShader()
     // do nothing.
 }
 
-void CoShader::setSource(const CbString& strSource)
+void CoShader::setSource(const GString& strSource)
 {
     if(strSource.empty())
     {
@@ -37,7 +37,7 @@ void CoShader::setSource(const CbString& strSource)
 //    return SetSource();
 }
 
-CbString CoShader::getSource() const
+GString CoShader::getSource() const
 {
     return m_strSource;
 }
@@ -53,7 +53,7 @@ EShaderType CoShader::getType() const
     return m_eType;
 }
 
-Cbuint CoShader::getID()
+Guint CoShader::getID()
 {
     return m_nID;
 }

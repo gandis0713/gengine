@@ -5,7 +5,7 @@
 
 namespace NoReader
 {
-    bool ReadText(const CbString &strPath, CbString &strtext)
+    bool ReadText(const GString &strPath, GString &strtext)
     {
         std::ifstream shaderStream(strPath);
 

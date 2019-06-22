@@ -149,8 +149,6 @@ void CoQtRenderer::initializeGL()
     glGenBuffers(1, &m_mColorbuffer);
     glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
-
-
 }
 
 void CoQtRenderer::resizeGL(int nWidth, int nHeight)

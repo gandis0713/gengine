@@ -6,7 +6,7 @@
 
 namespace NoShaderHelper
 {
-Cbuint getGLShaderType(EShaderType eShaderType);
+Guint getGLShaderType(EShaderType eShaderType);
 }
 
 #endif // NOSHADERHELPER_H

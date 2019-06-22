@@ -5,7 +5,7 @@
 
 namespace NoReader
 {
-    bool ReadText(const CbString &strPath, CbString &strText);
+    bool ReadText(const GString &strPath, GString &strText);
 }
 
 #endif // NOREADER_H

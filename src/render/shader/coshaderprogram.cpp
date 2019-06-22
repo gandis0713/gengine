@@ -15,18 +15,18 @@ CoShaderProgram::~CoShaderProgram()
 }
 
 
-Cbuint CoShaderProgram::getUniformLocation(CbString strName)
+Guint CoShaderProgram::getUniformLocation(GString strName)
 {
     return glGetUniformLocation(m_nProgramID, strName.c_str());
 }
 
-Cbuint CoShaderProgram::getAttribLocation(CbString strName)
+Guint CoShaderProgram::getAttribLocation(GString strName)
 {
     return glGetAttribLocation(m_nProgramID, strName.c_str());
 }
 
 
-void CoShaderProgram::setUniformMatrix4fv(Cbuint nID, Cbmat4 mat4)
+void CoShaderProgram::setUniformMatrix4fv(Guint nID, Gmat4 mat4)
 {
     glUniformMatrix4fv(nID, 1, GL_FALSE, &mat4[0][0]);
 }

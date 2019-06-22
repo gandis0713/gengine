@@ -31,13 +31,13 @@ private:
 
     CoShaderProgram   *m_pShaderProgram;
 
-    Cbuint m_nMatrixID;
-    Cbuint m_nVertexID;
-    Cbuint m_nColorID;
-    Cbuint m_nVerterBuffer;
-    Cbuint m_mColorbuffer;
+    Guint m_nMatrixID;
+    Guint m_nVertexID;
+    Guint m_nColorID;
+    Guint m_nVerterBuffer;
+    Guint m_mColorbuffer;
 
-    Cbmat4 m_mat4PerViewModel;
+    Gmat4 m_mat4PerViewModel;
 
 
 public slots:

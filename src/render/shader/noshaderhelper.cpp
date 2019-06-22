@@ -4,9 +4,9 @@
 
 namespace NoShaderHelper
 {
-Cbuint getGLShaderType(EShaderType eShaderType)
+Guint getGLShaderType(EShaderType eShaderType)
 {
-    Cbuint nShaderType = GL_VERTEX_SHADER;
+    Guint nShaderType = GL_VERTEX_SHADER;
     switch (eShaderType)
     {
     case EShaderType::eFragment:

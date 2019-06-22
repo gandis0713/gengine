@@ -12,9 +12,9 @@ public:
     CoShaderProgram();
     ~CoShaderProgram();
 
-    Cbuint getUniformLocation(CbString strName);
-    Cbuint getAttribLocation(CbString strName);
-    void setUniformMatrix4fv(Cbuint nID, Cbmat4 mat4);
+    Guint getUniformLocation(GString strName);
+    Guint getAttribLocation(GString strName);
+    void setUniformMatrix4fv(Guint nID, Gmat4 mat4);
     void bind();
 
 private:
@@ -27,7 +27,7 @@ private:
 
 private:
     std::map<EShaderType, CoShader*>         m_mapShaders;
-    Cbuint m_nProgramID;
+    Guint m_nProgramID;
 };
 
 #endif // COSHADERPROGRAM_H
