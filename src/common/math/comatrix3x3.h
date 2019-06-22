@@ -1,8 +1,6 @@
 #ifndef COMATRIX3X3_H
 #define COMATRIX3X3_H
 
-#include "demath.h"
-
 class CoMat3x3
 {
 public:

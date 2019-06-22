@@ -2,8 +2,6 @@
 #define COVECTOR3_H
 
 #include "dedatatype.h"
-#include <cmath>
-
 
 class CoVec3
 {

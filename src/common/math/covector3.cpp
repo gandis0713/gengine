@@ -1,4 +1,5 @@
 #include "covector3.h"
+#include "demath.h"
 
 void CoVec3::set(Gfloat x, Gfloat y, Gfloat z)
 {
