@@ -1,15 +1,15 @@
 #ifndef COMATRIX3X3_H
 #define COMATRIX3X3_H
 
-#include "comath.h"
+#include "demath.h"
 
-class CoMatrix3x3
+class CoMat3x3
 {
 public:
-    CoMatrix3x3();
+    CoMat3x3();
 
 private:
-    double m_dElement[3][3];
+    float mat[9];
 };
 
 #endif // COMATRIX3X3_H

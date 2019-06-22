@@ -1,15 +1,15 @@
 #ifndef COMATRIX4X4_H
 #define COMATRIX4X4_H
 
-#include "comath.h"
+#include "demath.h"
 
-class CoMatrix4x4
+class CoMat4x4
 {
 public:
-    CoMatrix4x4();
+    CoMat4x4();
 
 private:
-    double m_dElement[4][4];
+    float mat[16];
 };
 
 #endif // COMATRIX4X4_H

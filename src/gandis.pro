@@ -47,7 +47,6 @@ SOURCES += \
     window/screen/qt/coqscreen.cpp \
     render/core/coopenglstate.cpp \
     render/core/cocamera.cpp \
-    common/core/comath.cpp \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
     render/shader/noshaderhelper.cpp \
@@ -85,7 +84,6 @@ HEADERS += \
     common/util/delog.h \
     render/core/coopenglstate.h \
     render/core/cocamera.h \
-    common/core/comath.h \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
     render/shader/noshaderhelper.h \
@@ -98,5 +96,6 @@ HEADERS += \
     common/math/comatrix2x2.h \
     common/math/covector2.h \
     common/math/covector3.h \
-    common/math/covector4.h
+    common/math/covector4.h \
+    common/core/demath.h
 
