@@ -56,7 +56,11 @@ SOURCES += \
     render/object/cobufferobject.cpp \
     window/cowindow.cpp \
     window/cowin32window.cpp \
-    window/coxwindow.cpp
+    window/coxwindow.cpp \
+    common/math/comatrix2x2.cpp \
+    common/math/covector2.cpp \
+    common/math/covector3.cpp \
+    common/math/covector4.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -90,5 +94,9 @@ HEADERS += \
     render/object/cobufferobject.h \
     window/cowindow.h \
     window/cowin32window.h \
-    window/coxwindow.h
+    window/coxwindow.h \
+    common/math/comatrix2x2.h \
+    common/math/covector2.h \
+    common/math/covector3.h \
+    common/math/covector4.h
 

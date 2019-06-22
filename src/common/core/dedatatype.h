@@ -17,6 +17,7 @@ typedef short             Gshort;
 typedef unsigned short    Gushort;
 typedef double            Gdouble;
 typedef float             Gfloat;
+typedef bool              Gbool;
 
 typedef glm::mat4         Gmat4;
 
