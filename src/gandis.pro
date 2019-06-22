@@ -53,7 +53,10 @@ SOURCES += \
     render/shader/noshaderhelper.cpp \
     render/shader/coshaderprogram.cpp \
     render/object/covertexobject.cpp \
-    render/object/cobufferobject.cpp
+    render/object/cobufferobject.cpp \
+    window/cowindow.cpp \
+    window/cowin32window.cpp \
+    window/coxwindow.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -84,5 +87,8 @@ HEADERS += \
     render/shader/noshaderhelper.h \
     render/shader/coshaderprogram.h \
     render/object/covertexobject.h \
-    render/object/cobufferobject.h
+    render/object/cobufferobject.h \
+    window/cowindow.h \
+    window/cowin32window.h \
+    window/coxwindow.h
 
