@@ -44,7 +44,7 @@ CoMat2x2& CoMat2x2::transpose()
 
 CoMat2x2& CoMat2x2::invert()
 {
-    Gfloat invertDeterminant = 1.0f / getDeterminant();
+    Gfloat invertDeterminant = 1.0f / determinant();
     Gfloat tmpMat0 = mat[0];
 
     mat[0] = invertDeterminant * mat[3];
@@ -55,12 +55,12 @@ CoMat2x2& CoMat2x2::invert()
     return *this;
 }
 
-Gfloat CoMat2x2::getDeterminant()
+Gfloat CoMat2x2::determinant()
 {
     return mat[0] * mat[3] - mat[1] * mat[2];
 }
 
-Gfloat CoMat2x2::getAngle()
+Gfloat CoMat2x2::angle()
 {
     return std::atan2f(mat[1], mat[0]) * RAD2DEG;
 }

@@ -14,8 +14,8 @@ public:
     CoMat2x2 getTranspose();
     CoMat2x2& transpose();
     CoMat2x2& invert();
-    Gfloat getDeterminant();
-    Gfloat getAngle();
+    Gfloat determinant();
+    Gfloat angle();
 
 private:
     Gfloat mat[4];

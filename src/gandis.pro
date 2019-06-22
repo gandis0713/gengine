@@ -59,7 +59,8 @@ SOURCES += \
     common/math/comatrix2x2.cpp \
     common/math/covector2.cpp \
     common/math/covector3.cpp \
-    common/math/covector4.cpp
+    common/math/covector4.cpp \
+    common/core/nomath.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -97,5 +98,6 @@ HEADERS += \
     common/math/covector2.h \
     common/math/covector3.h \
     common/math/covector4.h \
-    common/core/demath.h
+    common/core/demath.h \
+    common/core/nomath.h
 
