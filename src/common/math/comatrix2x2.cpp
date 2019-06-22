@@ -44,14 +44,7 @@ CoMat2x2& CoMat2x2::transpose()
 
 CoMat2x2& CoMat2x2::invert()
 {
-    Gfloat determinant = getDeterminant();
-    if(std::fabs(determinant) < 0.00001f)
-    {
-        return identity();
-    }
-
-    Gfloat invertDeterminant = 1.0f / determinant;
-
+    Gfloat invertDeterminant = 1.0f / getDeterminant();
     Gfloat tmpMat0 = mat[0];
 
     mat[0] = invertDeterminant * mat[3];
