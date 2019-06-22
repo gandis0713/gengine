@@ -42,7 +42,6 @@ SOURCES += \
     render/shader/covertexshader.cpp \
     render/shader/cofragmentshader.cpp \
     common/util/noreader.cpp \
-    render/shader/coshadermanager.cpp \
     common/core/coobject.cpp \
     window/screen/qt/coqscreen.cpp \
     render/core/coopenglstate.cpp \
@@ -75,7 +74,6 @@ HEADERS += \
     render/shader/covertexshader.h \
     render/shader/cofragmentshader.h \
     common/util/noreader.h \
-    render/shader/coshadermanager.h \
     common/core/dedatatype.h \
     render/shader/core/deshader.h \
     render/shader/core/dedefaultvertexshader.h \
