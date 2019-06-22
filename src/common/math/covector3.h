@@ -15,6 +15,7 @@ public:
     CoVec3 cross(const CoVec3& vec);
     Gfloat length();
     Gfloat distance(const CoVec3& vec);
+    CoVec3& normalize();
 
     CoVec3 operator-();
     CoVec3 operator+();

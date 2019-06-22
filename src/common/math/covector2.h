@@ -14,6 +14,7 @@ public:
     Gfloat dot(const CoVec2& vec);
     Gfloat length();
     Gfloat distance(const CoVec2& vec);
+    CoVec2& normalize();
 
     CoVec2 operator-();
     CoVec2 operator+();

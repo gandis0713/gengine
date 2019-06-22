@@ -27,6 +27,16 @@ Gfloat CoVec2::distance(const CoVec2& vec)
     return sqrtf((x - vec.x) * (x - vec.x) + (y - vec.y) * (y - vec.y));
 }
 
+CoVec2& CoVec2::normalize()
+{
+    Gfloat normalizeFactor = 1.0f / std::sqrtf(x * x + y * y);
+
+    x *= normalizeFactor;
+    y *= normalizeFactor;
+
+    return *this;
+}
+
 CoVec2 CoVec2::operator-()
 {
     return CoVec2(-x, -y);

@@ -32,6 +32,17 @@ Gfloat CoVec4::distance(const CoVec4& vec)
                  + (w - vec.w) * (w - vec.w));
 }
 
+CoVec4& CoVec4::normalize()
+{
+    Gfloat normalizeFactor = 1.0f / std::sqrtf(x * x + y * y + z * z);
+
+    x *= normalizeFactor;
+    y *= normalizeFactor;
+    z *= normalizeFactor;
+
+    return *this;
+}
+
 CoVec4 CoVec4::operator-()
 {
     return CoVec4(-x, -y, -z, -w);
