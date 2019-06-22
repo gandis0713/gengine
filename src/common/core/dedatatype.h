@@ -7,17 +7,21 @@
 #include "gtc/matrix_transform.hpp"
 
 
-typedef std::string       CbString;
+typedef std::string       GString;
 
-typedef char              Cbchar;
-typedef unsigned char     Cbuchar;
-typedef int               Cbint;
-typedef unsigned int      Cbuint;
-typedef short             Cbshort;
-typedef unsigned short    Cbushort;
-typedef double            Cbdouble;
-typedef float             Cbfloat;
+typedef char              Gchar;
+typedef unsigned char     Guchar;
+typedef int               Gint;
+typedef unsigned int      Guint;
+typedef short             Gshort;
+typedef unsigned short    Gushort;
+typedef double            Gdouble;
+typedef float             Gfloat;
 
-typedef glm::mat4         Cbmat4;
+typedef glm::mat4         Gmat4;
+
+#ifdef WIN32
+typedef wchar_t           Gwchar;
+#endif
 
 #endif // DEFINE_H
