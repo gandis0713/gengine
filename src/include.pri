@@ -1,5 +1,6 @@
 INCLUDEPATH += common \
     common/core \
+    common/math \
     common/util
 
 INCLUDEPATH += data
