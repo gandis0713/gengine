@@ -9,6 +9,9 @@
 #include "coshaderprogram.h"
 #include "coqscreen.h"
 #include "dedatatype.h"
+#include "comatrix4x4.h"
+#include "covector4.h"
+#include "nomath.h"
 
 class CoQScreen;
 class QGridLayout;
@@ -37,7 +40,7 @@ private:
     Guint m_nVerterBuffer;
     Guint m_mColorbuffer;
 
-    Gmat4 m_mat4PerViewModel;
+    CoMat4x4 m_mat4PerViewModel;
 
 
 public slots:

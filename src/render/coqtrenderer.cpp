@@ -6,6 +6,7 @@
 
 #include "delog.h"
 
+
 #include <QGridLayout>
 
 static const GLfloat g_vertex_buffer_data[] = {
@@ -158,11 +159,11 @@ void CoQtRenderer::resizeGL(int nWidth, int nHeight)
 
     glViewport(0, 0, width, height);
 
-    glm::mat4 mat4Projection = glm::perspective(glm::radians(45.0f), (GLfloat)width/(GLfloat)height, 0.1f, 100.0f);
-    glm::mat4 mat4View = glm::lookAt(glm::vec3(4,4,3),
-                                     glm::vec3(0,0,0),
-                                     glm::vec3(0,1,0));
-    glm::mat4 mat4Model = glm::mat4(1.0f);
+    CoMat4x4 mat4Projection = NoMath::perspective(45.0f, (Gfloat)width/(Gfloat)height, 0.1f, 100.0f);
+    CoMat4x4 mat4View = NoMath::lookAt(CoVec3(4.f, 4.f, 3.f),
+                                       CoVec3(0.f, 0.f, 0.f),
+                                       CoVec3(0.f, 1.f, 0.f));
+    CoMat4x4 mat4Model;
 
     m_mat4PerViewModel = mat4Projection * mat4View * mat4Model;
 }

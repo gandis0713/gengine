@@ -104,3 +104,14 @@ Gbool CoVec2::operator==(const CoVec2& vec)
     return (x == vec.x) &&
            (y == vec.y);
 }
+
+
+Gfloat CoVec2::operator[](Gint index) const
+{
+    return (&x)[index];
+}
+
+Gfloat& CoVec2::operator[](Gint index)
+{
+    return (&x)[index];
+}

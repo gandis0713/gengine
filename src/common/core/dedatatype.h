@@ -3,10 +3,6 @@
 
 #include <sstream>
 
-#include "glm.hpp"
-#include "gtc/matrix_transform.hpp"
-
-
 typedef std::string       GString;
 
 typedef char              Gchar;
@@ -18,8 +14,6 @@ typedef unsigned short    Gushort;
 typedef double            Gdouble;
 typedef float             Gfloat;
 typedef bool              Gbool;
-
-typedef glm::mat4         Gmat4;
 
 #ifdef WIN32
 typedef wchar_t           Gwchar;

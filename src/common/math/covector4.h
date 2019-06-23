@@ -2,6 +2,7 @@
 #define COVECTOR4_H
 
 #include "dedatatype.h"
+#include "covector3.h"
 
 class CoVec4
 {
@@ -12,6 +13,8 @@ public:
     void set(Gfloat x, Gfloat y, Gfloat z, Gfloat w);
     void set(const CoVec4& vec);
     Gfloat dot(const CoVec4& vec);
+    CoVec3 cross(const CoVec4& vec);
+
     Gfloat length();
     Gfloat distance(const CoVec4& vec);
     CoVec4& normalize();
@@ -31,6 +34,8 @@ public:
     CoVec4& operator/=(const Gfloat& value);
 
     Gbool operator==(const CoVec4& vec);
+    Gfloat operator[](Gint index) const;
+    Gfloat& operator[](Gint index);
 
 private:
     Gfloat x;

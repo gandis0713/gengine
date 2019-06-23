@@ -118,3 +118,13 @@ Gbool CoVec3::operator==(const CoVec3& vec)
             z == vec.z;
 }
 
+Gfloat CoVec3::operator[](Gint index) const
+{
+    return (&x)[index];
+}
+
+Gfloat& CoVec3::operator[](Gint index)
+{
+    return (&x)[index];
+}
+

@@ -26,9 +26,9 @@ Guint CoShaderProgram::getAttribLocation(GString strName)
 }
 
 
-void CoShaderProgram::setUniformMatrix4fv(Guint nID, Gmat4 mat4)
+void CoShaderProgram::setUniformMatrix4fv(Guint nID, CoMat4x4 mat4)
 {
-    glUniformMatrix4fv(nID, 1, GL_FALSE, &mat4[0][0]);
+    glUniformMatrix4fv(nID, 1, GL_FALSE, &mat4[0]);
 }
 
 void CoShaderProgram::bind()

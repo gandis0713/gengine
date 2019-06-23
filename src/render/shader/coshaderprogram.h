@@ -3,6 +3,7 @@
 
 #include "covertexshader.h"
 #include "cofragmentshader.h"
+#include "comatrix4x4.h"
 
 #include <map>
 
@@ -14,7 +15,7 @@ public:
 
     Guint getUniformLocation(GString strName);
     Guint getAttribLocation(GString strName);
-    void setUniformMatrix4fv(Guint nID, Gmat4 mat4);
+    void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);
     void bind();
 
 private:

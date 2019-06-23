@@ -32,6 +32,9 @@ public:
     CoVec3& operator/=(const Gfloat& value);
 
     Gbool operator==(const CoVec3& vec);
+    Gfloat operator[](Gint index) const;
+    Gfloat& operator[](Gint index);
+
 
 private:
     Gfloat x;

@@ -19,6 +19,12 @@ Gfloat CoVec4::dot(const CoVec4& vec)
     return x * vec.x + y * vec.y + z * vec.z;
 }
 
+CoVec3 CoVec4::cross(const CoVec4& vec)
+{
+    return CoVec3(y * vec.z - z * vec.y, z * vec.x - x * vec.z, x * vec.y - y * vec.x);
+}
+
+
 Gfloat CoVec4::length()
 {
     return sqrtf(x * x + y * y + z * z);
@@ -119,4 +125,14 @@ Gbool CoVec4::operator==(const CoVec4& vec)
            (y == vec.y) &&
            (z == vec.z) &&
            (w == vec.w);
+}
+
+Gfloat CoVec4::operator[](Gint index) const
+{
+    return (&x)[index];
+}
+
+Gfloat& CoVec4::operator[](Gint index)
+{
+    return (&x)[index];
 }

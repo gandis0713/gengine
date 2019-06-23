@@ -13,32 +13,40 @@ CoMat4x4::CoMat4x4(const Gfloat mat[16])
     set(mat);
 }
 
+CoMat4x4::CoMat4x4(Gfloat mat00, Gfloat mat01, Gfloat mat02, Gfloat mat03,
+                   Gfloat mat04, Gfloat mat05, Gfloat mat06, Gfloat mat07,
+                   Gfloat mat08, Gfloat mat09, Gfloat mat10, Gfloat mat11,
+                   Gfloat mat12, Gfloat mat13, Gfloat mat14, Gfloat mat15)
+{
+    set(mat00, mat01, mat02, mat03,  mat04, mat05, mat06, mat07,  mat08, mat09, mat10, mat11,  mat12, mat13, mat14, mat15);
+}
+
+
 CoMat4x4& CoMat4x4::identity()
 {
-    mat[0] = mat[4] = mat[8] = 1.0f;
-    mat[1] = mat[2] = mat[3] = mat[5] = mat[6] = mat[7] = 0.0f;
+    mat[0] = mat[5] = mat[10] = mat[15] = 1.0f;
+    mat[1] = mat[2] = mat[3] = mat[4] = mat[6] = mat[7] = mat[8] = mat[9] = mat[11] = mat[12] = mat[13] = mat[14] = 0.0f;
 
     return *this;
 }
 
 void CoMat4x4::set(const Gfloat mat[16])
 {
-    this->mat[0] = mat[0];
-    this->mat[1] = mat[1];
-    this->mat[2] = mat[2];
-    this->mat[3] = mat[3];
-    this->mat[4] = mat[4];
-    this->mat[5] = mat[5];
-    this->mat[6] = mat[6];
-    this->mat[7] = mat[7];
-    this->mat[8] = mat[8];
-    this->mat[9] = mat[9];
-    this->mat[10] = mat[10];
-    this->mat[11] = mat[11];
-    this->mat[12] = mat[12];
-    this->mat[13] = mat[13];
-    this->mat[14] = mat[14];
-    this->mat[15] = mat[15];
+    this->mat[0] = mat[0];  this->mat[1] = mat[1];  this->mat[2] = mat[2];  this->mat[3] = mat[3];
+    this->mat[4] = mat[4];  this->mat[5] = mat[5];  this->mat[6] = mat[6];  this->mat[7] = mat[7];
+    this->mat[8] = mat[8];  this->mat[9] = mat[9];  this->mat[10]= mat[10]; this->mat[11]= mat[11];
+    this->mat[12]= mat[12]; this->mat[13]= mat[13]; this->mat[14]= mat[14]; this->mat[15]= mat[15];
+}
+
+inline void CoMat4x4::set(Gfloat m00, Gfloat m01, Gfloat m02, Gfloat m03,
+                         Gfloat m04, Gfloat m05, Gfloat m06, Gfloat m07,
+                         Gfloat m08, Gfloat m09, Gfloat m10, Gfloat m11,
+                         Gfloat m12, Gfloat m13, Gfloat m14, Gfloat m15)
+{
+    this->mat[0] = m00;  this->mat[1] = m01;  this->mat[2] = m02;  this->mat[3] = m03;
+    this->mat[4] = m04;  this->mat[5] = m05;  this->mat[6] = m06;  this->mat[7] = m07;
+    this->mat[8] = m08;  this->mat[9] = m09;  this->mat[10]= m10;  this->mat[11]= m11;
+    this->mat[12]= m12;  this->mat[13]= m13;  this->mat[14]= m14;  this->mat[15]= m15;
 }
 
 CoMat4x4 CoMat4x4::getTranspose()
@@ -125,4 +133,67 @@ Gfloat CoMat4x4::determinant()
 CoVec3 CoMat4x4::angle()
 {
     return CoVec3(); // need implementation;
+}
+
+CoMat4x4 CoMat4x4::operator+(const CoMat4x4& mat)
+{
+    return CoMat4x4(this->mat[0]+mat[0],   this->mat[1]+mat[1],   this->mat[2]+mat[2],   this->mat[3]+mat[3],
+                    this->mat[4]+mat[4],   this->mat[5]+mat[5],   this->mat[6]+mat[6],   this->mat[7]+mat[7],
+                    this->mat[8]+mat[8],   this->mat[9]+mat[9],   this->mat[10]+mat[10], this->mat[11]+mat[11],
+                    this->mat[12]+mat[12], this->mat[13]+mat[13], this->mat[14]+mat[14], this->mat[15]+mat[15]);
+}
+
+
+
+CoMat4x4 CoMat4x4::operator-(const CoMat4x4& mat)
+{
+    return CoMat4x4(this->mat[0]-mat[0],   this->mat[1]-mat[1],   this->mat[2]-mat[2],   this->mat[3]-mat[3],
+                    this->mat[4]-mat[4],   this->mat[5]-mat[5],   this->mat[6]-mat[6],   this->mat[7]-mat[7],
+                    this->mat[8]-mat[8],   this->mat[9]-mat[9],   this->mat[10]-mat[10], this->mat[11]-mat[11],
+                    this->mat[12]-mat[12], this->mat[13]-mat[13], this->mat[14]-mat[14], this->mat[15]-mat[15]);
+}
+
+CoMat4x4& CoMat4x4::operator+=(const CoMat4x4& mat)
+{
+    this->mat[0] += mat[0];   this->mat[1] += mat[1];   this->mat[2] += mat[2];   this->mat[3] += mat[3];
+    this->mat[4] += mat[4];   this->mat[5] += mat[5];   this->mat[6] += mat[6];   this->mat[7] += mat[7];
+    this->mat[8] += mat[8];   this->mat[9] += mat[9];   this->mat[10]+= mat[10];  this->mat[11]+= mat[11];
+    this->mat[12]+= mat[12];  this->mat[13]+= mat[13];  this->mat[14]+= mat[14];  this->mat[15]+= mat[15];
+    return *this;
+}
+
+
+
+CoMat4x4& CoMat4x4::operator-=(const CoMat4x4& mat)
+{
+    this->mat[0] -= mat[0];   this->mat[1] -= mat[1];   this->mat[2] -= mat[2];   this->mat[3] -= mat[3];
+    this->mat[4] -= mat[4];   this->mat[5] -= mat[5];   this->mat[6] -= mat[6];   this->mat[7] -= mat[7];
+    this->mat[8] -= mat[8];   this->mat[9] -= mat[9];   this->mat[10]-= mat[10];  this->mat[11]-= mat[11];
+    this->mat[12]-= mat[12];  this->mat[13]-= mat[13];  this->mat[14]-= mat[14];  this->mat[15]-= mat[15];
+
+    return *this;
+}
+
+CoMat4x4 CoMat4x4::operator*(const CoMat4x4& mat)
+{
+    return CoMat4x4(this->mat[0]*mat[0]  + this->mat[4]*mat[1]  + this->mat[8]*mat[2]  + this->mat[12]*mat[3],   this->mat[1]*mat[0]  + this->mat[5]*mat[1]  + this->mat[9]*mat[2]  + this->mat[13]*mat[3],   this->mat[2]*mat[0]  + this->mat[6]*mat[1]  + this->mat[10]*mat[2]  + this->mat[14]*mat[3],   this->mat[3]*mat[0]  + this->mat[7]*mat[1]  + this->mat[11]*mat[2]  + this->mat[15]*mat[3],
+                    this->mat[0]*mat[4]  + this->mat[4]*mat[5]  + this->mat[8]*mat[6]  + this->mat[12]*mat[7],   this->mat[1]*mat[4]  + this->mat[5]*mat[5]  + this->mat[9]*mat[6]  + this->mat[13]*mat[7],   this->mat[2]*mat[4]  + this->mat[6]*mat[5]  + this->mat[10]*mat[6]  + this->mat[14]*mat[7],   this->mat[3]*mat[4]  + this->mat[7]*mat[5]  + this->mat[11]*mat[6]  + this->mat[15]*mat[7],
+                    this->mat[0]*mat[8]  + this->mat[4]*mat[9]  + this->mat[8]*mat[10] + this->mat[12]*mat[11],  this->mat[1]*mat[8]  + this->mat[5]*mat[9]  + this->mat[9]*mat[10] + this->mat[13]*mat[11],  this->mat[2]*mat[8]  + this->mat[6]*mat[9]  + this->mat[10]*mat[10] + this->mat[14]*mat[11],  this->mat[3]*mat[8]  + this->mat[7]*mat[9]  + this->mat[11]*mat[10] + this->mat[15]*mat[11],
+                    this->mat[0]*mat[12] + this->mat[4]*mat[13] + this->mat[8]*mat[14] + this->mat[12]*mat[15],  this->mat[1]*mat[12] + this->mat[5]*mat[13] + this->mat[9]*mat[14] + this->mat[13]*mat[15],  this->mat[2]*mat[12] + this->mat[6]*mat[13] + this->mat[10]*mat[14] + this->mat[14]*mat[15],  this->mat[3]*mat[12] + this->mat[7]*mat[13] + this->mat[11]*mat[14] + this->mat[15]*mat[15]);
+}
+
+CoMat4x4& CoMat4x4::operator*=(const CoMat4x4& mat)
+{
+    *this = *this * mat;
+    return *this;
+}
+
+Gfloat CoMat4x4::operator[](Gint index) const
+{
+    return mat[index];
+}
+
+Gfloat& CoMat4x4::operator[](Gint index)
+{
+    return mat[index];
 }
