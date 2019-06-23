@@ -7,6 +7,10 @@ namespace Ui {
 class MainWindow;
 }
 
+
+class CoQtRenderer;
+class CoPerspectiveCamera;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -25,6 +29,8 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
+    CoQtRenderer *m_pRender;
+    CoPerspectiveCamera *m_pCamera;
 };
 
 #endif // MAINWINDOW_H
