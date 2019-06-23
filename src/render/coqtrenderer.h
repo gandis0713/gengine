@@ -2,7 +2,7 @@
 #define GQTRENDERER_H
 
 #include <GL/glew.h>
-#include "coenginedefine.h"
+#include "deengine.h"
 
 #include <map>
 

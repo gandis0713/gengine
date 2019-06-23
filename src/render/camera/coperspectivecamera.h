@@ -2,7 +2,7 @@
 #define COPERSPECTIVECAMERA_H
 
 #include "cocamera.h"
-#include "coenginedefine.h"
+#include "deengine.h"
 
 class GANDISENGINE CoPerspectiveCamera : public CoCamera
 {

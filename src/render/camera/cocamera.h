@@ -3,7 +3,7 @@
 
 #include "comatrix4x4.h"
 #include "covector3.h"
-#include "coenginedefine.h"
+#include "deengine.h"
 
 #include <QObject>
 

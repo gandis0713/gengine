@@ -33,15 +33,12 @@ SOURCES += \
     render/shader/coshader.cpp \
     render/coqtrenderer.cpp \
     render/corenderer.cpp \
-    common/core/copoint.cpp \
-    common/core/copolygon.cpp \
     util/coobjreader.cpp \
     util/costlreader.cpp \
     util/cotexturereader.cpp \
     render/shader/covertexshader.cpp \
     render/shader/cofragmentshader.cpp \
     common/util/noreader.cpp \
-    common/core/coobject.cpp \
     window/screen/qt/coqscreen.cpp \
     render/core/coopenglstate.cpp \
     render/camera/cocamera.cpp \
@@ -62,12 +59,9 @@ SOURCES += \
     render/camera/coperspectivecamera.cpp
 
 HEADERS += \
-    common/core/coenginedefine.h \
     render/coqtrenderer.h \
     render/corenderer.h \
     render/shader/coshader.h \
-    common/core/copoint.h \
-    common/core/copolygon.h \
     util/coobjreader.h \
     util/costlreader.h \
     util/cotexturereader.h \
@@ -78,7 +72,6 @@ HEADERS += \
     render/shader/core/deshader.h \
     render/shader/core/dedefaultvertexshader.h \
     render/shader/core/dedefaultfragmentshader.h \
-    common/core/coobject.h \
     window/screen/qt/coqscreen.h \
     common/util/delog.h \
     render/core/coopenglstate.h \
@@ -98,5 +91,6 @@ HEADERS += \
     common/math/covector4.h \
     common/core/demath.h \
     common/core/nomath.h \
-    render/camera/coperspectivecamera.h
+    render/camera/coperspectivecamera.h \
+    common/core/deengine.h
 
