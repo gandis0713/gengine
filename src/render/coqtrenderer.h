@@ -9,12 +9,11 @@
 #include "coshaderprogram.h"
 #include "coqscreen.h"
 #include "dedatatype.h"
-#include "comatrix4x4.h"
-#include "covector4.h"
-#include "nomath.h"
 
 class CoQScreen;
 class QGridLayout;
+class CoCamera;
+class CoMat4x4;
 
 class GANDISENGINE CoQtRenderer : public QObject
 {
@@ -22,6 +21,8 @@ class GANDISENGINE CoQtRenderer : public QObject
 public:
     CoQtRenderer(QWidget *pParent);
     ~CoQtRenderer();
+
+    void setCamera(CoCamera *pCamera);
 
 private:
     void initializeWidget();
@@ -33,6 +34,7 @@ private:
     QWidget           *m_pParent;
 
     CoShaderProgram   *m_pShaderProgram;
+    CoCamera *m_pCamera;
 
     Guint m_nMatrixID;
     Guint m_nVertexID;
@@ -40,13 +42,14 @@ private:
     Guint m_nVerterBuffer;
     Guint m_mColorbuffer;
 
-    CoMat4x4 m_mat4PerViewModel;
+    CoMat4x4 m_mat4Model;
 
 
 public slots:
     void initializeGL();
     void resizeGL(int nWidth, int nHeight);
     void paintGL();
+    void slotCameraUpdated();
 };
 
 #endif // COQTRENDERER_H

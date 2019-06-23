@@ -27,7 +27,6 @@ MOC_DIR = build
 
 include(include.pri);
 include(install.pri);
-
 include(library.pri);
 
 SOURCES += \
@@ -45,7 +44,7 @@ SOURCES += \
     common/core/coobject.cpp \
     window/screen/qt/coqscreen.cpp \
     render/core/coopenglstate.cpp \
-    render/core/cocamera.cpp \
+    render/camera/cocamera.cpp \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
     render/shader/noshaderhelper.cpp \
@@ -59,7 +58,8 @@ SOURCES += \
     common/math/covector2.cpp \
     common/math/covector3.cpp \
     common/math/covector4.cpp \
-    common/core/nomath.cpp
+    common/core/nomath.cpp \
+    render/camera/coperspectivecamera.cpp
 
 HEADERS += \
     common/core/coenginedefine.h \
@@ -82,7 +82,7 @@ HEADERS += \
     window/screen/qt/coqscreen.h \
     common/util/delog.h \
     render/core/coopenglstate.h \
-    render/core/cocamera.h \
+    render/camera/cocamera.h \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
     render/shader/noshaderhelper.h \
@@ -97,5 +97,6 @@ HEADERS += \
     common/math/covector3.h \
     common/math/covector4.h \
     common/core/demath.h \
-    common/core/nomath.h
+    common/core/nomath.h \
+    render/camera/coperspectivecamera.h
 

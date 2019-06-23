@@ -1,11 +1,16 @@
 #ifndef COPERSPECTIVECAMERA_H
 #define COPERSPECTIVECAMERA_H
 
+#include "cocamera.h"
+#include "coenginedefine.h"
 
-class CoPerspectiveCamera
+class GANDISENGINE CoPerspectiveCamera : public CoCamera
 {
 public:
-    CoPerspectiveCamera();
+    explicit CoPerspectiveCamera();
+    virtual ~CoPerspectiveCamera();
+
+    void update() override;
 };
 
 #endif // COPERSPECTIVECAMERA_H

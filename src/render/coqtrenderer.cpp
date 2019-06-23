@@ -1,11 +1,14 @@
 
 #include "coqtrenderer.h"
 
-#include "shader/covertexshader.h"
-#include "shader/cofragmentshader.h"
+#include "covertexshader.h"
+#include "cofragmentshader.h"
+
+#include "comatrix4x4.h"
+#include "coperspectivecamera.h"
+#include "nomath.h"
 
 #include "delog.h"
-
 
 #include <QGridLayout>
 
@@ -102,9 +105,13 @@ CoQtRenderer::CoQtRenderer(QWidget* pParent)
     : m_pParent(pParent),
       m_pLayout(NULL),
       m_pQScreen(NULL),
-      m_pShaderProgram(NULL)
+      m_pShaderProgram(NULL),
+      m_pCamera(NULL)
 {
     initializeWidget();
+
+    m_pCamera = new CoPerspectiveCamera();
+    connect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
 }
 
 CoQtRenderer::~CoQtRenderer()
@@ -134,7 +141,6 @@ void CoQtRenderer::initializeGL()
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     glEnable(GL_DEPTH_TEST);
-    // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
 
     createShaderProgram();
@@ -159,14 +165,16 @@ void CoQtRenderer::resizeGL(int nWidth, int nHeight)
 
     glViewport(0, 0, width, height);
 
-    CoMat4x4 mat4Projection = NoMath::perspective(45.0f, (Gfloat)width/(Gfloat)height, 0.1f, 100.0f);
-    CoMat4x4 mat4View = NoMath::lookAt(CoVec3(4.f, 4.f, 3.f),
-                                       CoVec3(0.f, 0.f, 0.f),
-                                       CoVec3(0.f, 1.f, 0.f));
-    CoMat4x4 mat4Model;
 
-    m_mat4PerViewModel = mat4Projection * mat4View * mat4Model;
+//    m_mat4Projection = NoMath::perspective(-0.5f, 0.5f, -0.5f, 0.5f, 1.0f, 10.0f);
+//    m_mat4View = NoMath::lookAt(CoVec3(4.f, 4.f, 3.f),
+//                                CoVec3(0.f, 0.f, 0.f),
+//                                CoVec3(0.f, 1.f, 0.f));
+
+//    m_mat4PerViewModel = m_mat4Projection * m_mat4View * m_mat4Model;
 }
+
+#include <QDebug>
 
 void CoQtRenderer::paintGL()
 {
@@ -175,7 +183,10 @@ void CoQtRenderer::paintGL()
 
     m_pShaderProgram->bind();
 
-    m_pShaderProgram->setUniformMatrix4fv(m_nMatrixID, m_mat4PerViewModel);
+    CoMat4x4 mat = m_pCamera->getMatrix() * m_mat4Model;
+    qDebug() << __FUNCTION__;
+
+    m_pShaderProgram->setUniformMatrix4fv(m_nMatrixID, mat);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
     glEnableVertexAttribArray(m_nVertexID);
@@ -207,7 +218,11 @@ void CoQtRenderer::paintGL()
 
     glDisableVertexAttribArray(m_nVertexID);
     glDisableVertexAttribArray(m_nColorID);
+}
 
+void CoQtRenderer::slotCameraUpdated()
+{
+    m_pQScreen->updateGL();
 }
 
 bool CoQtRenderer::createShaderProgram()
@@ -221,4 +236,16 @@ bool CoQtRenderer::createShaderProgram()
 
     return true;
 
+}
+
+void CoQtRenderer::setCamera(CoCamera *pCamera)
+{
+    if(m_pCamera != NULL)
+    {
+        disconnect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
+        delete m_pCamera;
+    }
+
+    m_pCamera = pCamera;
+    connect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
 }
