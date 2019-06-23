@@ -1,5 +1,3 @@
-include(libglm.pri);
-include(libopengl.pri);
 include($$(LIB_PATH)/gandis/libgandis.pri);
 
 win32
