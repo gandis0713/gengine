@@ -1,6 +1,6 @@
+#include <GL/glew.h>
 #include "noshaderhelper.h"
 
-#include <GL/glew.h>
 
 namespace NoShaderHelper
 {

@@ -1,10 +1,10 @@
+#include <GL/glew.h>
 #include "coshader.h"
 #include "noshaderhelper.h"
 
 #include "noreader.h"
 #include "delog.h"
 
-#include <GL/glew.h>
 
 #include <vector>
 

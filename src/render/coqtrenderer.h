@@ -1,7 +1,6 @@
 #ifndef GQTRENDERER_H
 #define GQTRENDERER_H
 
-#include <GL/glew.h>
 #include "deengine.h"
 
 #include <map>

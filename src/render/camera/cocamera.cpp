@@ -2,7 +2,7 @@
 
 CoCamera::CoCamera()
     : m_vecTarget(0.f, 0.f, 0.f)
-    , m_vecPosition(5.f, 5.f, 5.f)
+    , m_vecPosition(0.f, 0.f, 5.f)
     , m_vecUp(0.f, 1.f, 0.f)
     , m_fLeft(-0.5f)
     , m_fRight(0.5f)

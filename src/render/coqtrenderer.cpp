@@ -1,4 +1,4 @@
-
+#include <GL/glew.h>
 #include "coqtrenderer.h"
 
 #include "covertexshader.h"
@@ -13,42 +13,17 @@
 #include <QGridLayout>
 
 static const GLfloat g_vertex_buffer_data[] = {
-    -1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f,-1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f, 1.0f,
-    -1.0f,-1.0f,-1.0f,
-    1.0f,-1.0f,-1.0f,
-    1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f, 1.0f,
-    -1.0f,-1.0f, 1.0f,
-    -1.0f,-1.0f,-1.0f,
-    -1.0f, 1.0f, 1.0f,
-    -1.0f,-1.0f, 1.0f,
-    1.0f,-1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    1.0f,-1.0f,-1.0f,
-    1.0f, 1.0f,-1.0f,
-    1.0f,-1.0f,-1.0f,
-    1.0f, 1.0f, 1.0f,
-    1.0f,-1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f,-1.0f,
-    -1.0f, 1.0f,-1.0f,
-    1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f,-1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f, 1.0f, 1.0f,
-    -1.0f, 1.0f, 1.0f,
-    1.0f,-1.0f, 1.0f
+    -1.0f,-1.0f, 0.0f,
+     1.0f,-1.0f, 0.0f,
+     0.0f, 1.0f, 0.0f,
+
+     1.0f,-1.0f, -2.0f,
+     3.0f,-1.0f, -2.0f,
+     2.0f, 1.0f, -2.0f,
+
+    -3.0f,-1.0f, -2.0f,
+    -1.0f,-1.0f, -2.0f,
+    -2.0f, 1.0f, -2.0f,
 };
 
 static const GLfloat g_color_buffer_data[] = {
@@ -56,49 +31,13 @@ static const GLfloat g_color_buffer_data[] = {
     1.000f,  1.000f,  1.000f,
     1.000f,  1.000f,  1.000f,
 
-    1.000f,  1.000f,  1.000f,
-    1.000f,  1.000f,  1.000f,
-    1.000f,  1.000f,  1.000f,
-
-    1.000f,  1.000f,  1.000f,
-    1.000f,  1.000f,  1.000f,
-    1.000f,  1.000f,  1.000f,
-
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-
-    0.000f,  1.000f,  0.000f,
-    0.000f,  0.000f,  1.000f,
-    1.000f,  0.000f,  0.000f,
-
-    0.000f,  1.000f,  0.000f,
-    0.000f,  1.000f,  0.000f,
-    0.000f,  1.000f,  0.000f,
-
-    0.000f,  1.000f,  0.000f,
-    0.000f,  1.000f,  0.000f,
-    0.000f,  1.000f,  0.000f,
-
     0.000f,  0.000f,  1.000f,
     0.000f,  0.000f,  1.000f,
     0.000f,  0.000f,  1.000f,
 
-    0.000f,  0.000f,  1.000f,
-    0.000f,  0.000f,  1.000f,
-    0.000f,  0.000f,  1.000f,
-
-    0.000f,  0.000f,  1.000f,
-    0.000f,  0.000f,  1.000f,
-    0.000f,  0.000f,  1.000f,
+    1.000f,  0.000f,  0.000f,
+    1.000f,  0.000f,  0.000f,
+    1.000f,  0.000f,  0.000f,
 };
 
 CoQtRenderer::CoQtRenderer(QWidget* pParent)
@@ -109,9 +48,6 @@ CoQtRenderer::CoQtRenderer(QWidget* pParent)
       m_pCamera(NULL)
 {
     initializeWidget();
-
-    m_pCamera = new CoPerspectiveCamera();
-    connect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
 }
 
 CoQtRenderer::~CoQtRenderer()
@@ -133,7 +69,6 @@ void CoQtRenderer::initializeWidget()
     QWidget *pWidget = dynamic_cast<QWidget*>(m_pQScreen);
     m_pLayout->addWidget(pWidget);
 }
-
 
 void CoQtRenderer::initializeGL()
 {
@@ -164,17 +99,7 @@ void CoQtRenderer::resizeGL(int nWidth, int nHeight)
     GLsizei height = nHeight;
 
     glViewport(0, 0, width, height);
-
-
-//    m_mat4Projection = NoMath::perspective(-0.5f, 0.5f, -0.5f, 0.5f, 1.0f, 10.0f);
-//    m_mat4View = NoMath::lookAt(CoVec3(4.f, 4.f, 3.f),
-//                                CoVec3(0.f, 0.f, 0.f),
-//                                CoVec3(0.f, 1.f, 0.f));
-
-//    m_mat4PerViewModel = m_mat4Projection * m_mat4View * m_mat4Model;
 }
-
-#include <QDebug>
 
 void CoQtRenderer::paintGL()
 {
@@ -184,7 +109,6 @@ void CoQtRenderer::paintGL()
     m_pShaderProgram->bind();
 
     CoMat4x4 mat = m_pCamera->getMatrix() * m_mat4Model;
-    qDebug() << __FUNCTION__;
 
     m_pShaderProgram->setUniformMatrix4fv(m_nMatrixID, mat);
 
@@ -214,7 +138,7 @@ void CoQtRenderer::paintGL()
                 );
 
 
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDrawArrays(GL_TRIANGLES, 0, 9);
 
     glDisableVertexAttribArray(m_nVertexID);
     glDisableVertexAttribArray(m_nColorID);
@@ -243,9 +167,8 @@ void CoQtRenderer::setCamera(CoCamera *pCamera)
     if(m_pCamera != NULL)
     {
         disconnect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
-        delete m_pCamera;
     }
 
     m_pCamera = pCamera;
-    connect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
+    connect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
 }

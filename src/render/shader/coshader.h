@@ -4,8 +4,6 @@
 #include "deshader.h"
 #include "dedatatype.h"
 
-#include <GL/glew.h>
-
 class CoShader
 {
 public:
