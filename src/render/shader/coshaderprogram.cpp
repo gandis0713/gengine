@@ -1,4 +1,4 @@
-#include "glExtension.h"
+#include "coglextension.h"
 #include "coshaderprogram.h"
 
 #include "delog.h"
@@ -14,7 +14,6 @@ CoShaderProgram::~CoShaderProgram()
 {
     // do nothing.
 }
-
 
 Guint CoShaderProgram::getUniformLocation(GString strName)
 {

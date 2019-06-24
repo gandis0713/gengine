@@ -1,4 +1,4 @@
-#include "glExtension.h"
+#include "coglextension.h"
 #include "noshaderhelper.h"
 
 
