@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "cocamera.h"
+#include "coperspectivecamera.h"
+#include "coorthographiccamera.h"
 
 namespace Ui {
 class MainWindow;
@@ -9,7 +12,6 @@ class MainWindow;
 
 
 class CoQtRenderer;
-class CoPerspectiveCamera;
 
 class MainWindow : public QMainWindow
 {
@@ -27,10 +29,22 @@ public slots:
     void SlotNearChanged(int value);
     void SlotFarChanged(int value);
 
+    void SlotPersToggle(bool checked);
+    void SlotOrthoToggle(bool checked);
+
 private:
     Ui::MainWindow *ui;
     CoQtRenderer *m_pRender;
-    CoPerspectiveCamera *m_pCamera;
+    CoCamera *m_pCamera;
+    CoOrthographicCamera *m_pOrthoCamera;
+    CoPerspectiveCamera *m_pPersCamera;
+
+    float leftvalue;
+    float rightvalue;
+    float bottomvalue;
+    float topvalue;
+    float nearvalue;
+    float farvalue;
 };
 
 #endif // MAINWINDOW_H
