@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include "glExtension.h"
 #include "coshader.h"
 #include "noshaderhelper.h"
 

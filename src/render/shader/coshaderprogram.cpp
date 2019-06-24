@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include "glExtension.h"
 #include "coshaderprogram.h"
 
 #include "delog.h"

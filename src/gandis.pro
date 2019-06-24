@@ -57,7 +57,8 @@ SOURCES += \
     common/math/covector4.cpp \
     common/core/nomath.cpp \
     render/camera/coperspectivecamera.cpp \
-    render/camera/coorthographiccamera.cpp
+    render/camera/coorthographiccamera.cpp \
+    common/core/coglextension.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -94,5 +95,7 @@ HEADERS += \
     common/core/nomath.h \
     render/camera/coperspectivecamera.h \
     common/core/deengine.h \
-    render/camera/coorthographiccamera.h
+    render/camera/coorthographiccamera.h \
+    common/core/glext.h \
+    common/core/coglextension.h
 

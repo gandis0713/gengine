@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include "coglextension.h"
 #include "coqtrenderer.h"
 
 #include "covertexshader.h"
@@ -72,7 +72,8 @@ void CoQtRenderer::initializeWidget()
 
 void CoQtRenderer::initializeGL()
 {
-    glewInit();
+    CoGLExtension::getInstance();
+
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     glEnable(GL_DEPTH_TEST);

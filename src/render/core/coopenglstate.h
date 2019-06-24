@@ -1,8 +1,6 @@
 #ifndef COOPENGLSTATE_H
 #define COOPENGLSTATE_H
 
-#include <GL/glew.h>
-
 class CoOpenglState
 {
 public:
