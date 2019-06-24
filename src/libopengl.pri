@@ -1,10 +1,3 @@
-unix {
-INCLUDEPATH += /usr/include/GL
-
-LIBS += -L/usr/lib/x86_64-linux-gnu/ -lGLEW
-}
-
-
 win32 {
 
 WINDOWS_SDK = 'C:/Program Files (x86)/Microsoft SDKs/Windows/v7.1A'
