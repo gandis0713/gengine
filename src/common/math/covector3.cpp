@@ -37,7 +37,7 @@ Gfloat CoVec3::distance(const CoVec3& vec)
 
 CoVec3& CoVec3::normalize()
 {
-    Gfloat normalizeFactor = 1.0f / std::sqrtf(x * x + y * y + z * z);
+    Gfloat normalizeFactor = 1.0f / qSqrt(x * x + y * y + z * z);
 
     x *= normalizeFactor;
     y *= normalizeFactor;

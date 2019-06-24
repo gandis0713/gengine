@@ -2,6 +2,7 @@
 #define COMATH_H
 
 #include <cmath>
+#include <qmath.h>
 
 #define PI          3.141593f
 #define DEG2RAD     PI / 180.0f

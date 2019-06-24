@@ -49,7 +49,7 @@ CoMat4x4 perspective(Gfloat left, Gfloat right, Gfloat bottom, Gfloat top, Gfloa
 
 CoMat4x4 perspective(Gfloat fovVertical, Gfloat aspectRatio, Gfloat front, Gfloat back)
 {
-    Gfloat tangent = std::tanf(fovVertical/2 * DEG2RAD);
+    Gfloat tangent = qAtan(fovVertical/2 * DEG2RAD);
     Gfloat height = front * tangent;
     Gfloat width = height * aspectRatio;
 

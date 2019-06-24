@@ -62,5 +62,5 @@ Gfloat CoMat2x2::determinant()
 
 Gfloat CoMat2x2::angle()
 {
-    return std::atan2f(mat[1], mat[0]) * RAD2DEG;
+    return qAtan2(mat[1], mat[0]) * RAD2DEG;
 }

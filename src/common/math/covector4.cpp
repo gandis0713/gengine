@@ -1,5 +1,7 @@
 #include "covector4.h"
 
+#include <qmath.h>
+
 void CoVec4::set(Gfloat x, Gfloat y, Gfloat z, Gfloat w)
 {
     x = x;
@@ -27,7 +29,7 @@ CoVec3 CoVec4::cross(const CoVec4& vec)
 
 Gfloat CoVec4::length()
 {
-    return sqrtf(x * x + y * y + z * z);
+    return qSqrt(x * x + y * y + z * z);
 }
 
 Gfloat CoVec4::distance(const CoVec4& vec)
@@ -40,7 +42,7 @@ Gfloat CoVec4::distance(const CoVec4& vec)
 
 CoVec4& CoVec4::normalize()
 {
-    Gfloat normalizeFactor = 1.0f / std::sqrtf(x * x + y * y + z * z);
+    Gfloat normalizeFactor = 1.0f / qSqrt(x * x + y * y + z * z);
 
     x *= normalizeFactor;
     y *= normalizeFactor;
