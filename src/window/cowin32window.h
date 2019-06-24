@@ -4,6 +4,7 @@
 #include "cowindow.h"
 #include "dedatatype.h"
 
+#ifdef WIN32
 #include <windows.h>
 #include <wingdi.h>
 
@@ -37,6 +38,8 @@ private:
 
     HINSTANCE instance;
 };
+
+#endif
 
 
 #endif // COWIN32WINDOW_H

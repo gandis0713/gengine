@@ -1,5 +1,6 @@
 #include "cowin32window.h"
 
+#ifdef WIN32
 #include "WinUser.h"
 
 
@@ -59,3 +60,5 @@ void CoWin32Window::createWindow()
                             instance,
                             (LPVOID)NULL);
 }
+
+#endif
