@@ -1,8 +1,7 @@
 #ifndef COSHADERPROGRAM_H
 #define COSHADERPROGRAM_H
 
-#include "covertexshader.h"
-#include "cofragmentshader.h"
+#include "coshader.h"
 #include "comatrix4x4.h"
 
 #include <map>
@@ -13,18 +12,19 @@ public:
     CoShaderProgram();
     ~CoShaderProgram();
 
-    Guint getUniformLocation(GString strName);
-    Guint getAttribLocation(GString strName);
+    Guint getUniformLocation(Gstring strName);
+    Guint getAttribLocation(Gstring strName);
     void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);
     void bind();
 
 private:
     void initializeShaders();
-    void createShaders();
+    void AddShaders(EShaderType eShaderType, const Gchar *pSource);
+    void AddShaders(EShaderType eShaderType, Gstring strFileName);
     void createProgram();
     void link();
     void Release();
-    bool checkShaderProgram();
+    bool check();
 
 private:
     std::map<EShaderType, CoShader*>         m_mapShaders;

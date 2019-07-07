@@ -447,11 +447,11 @@ CoGLExtension& CoGLExtension::getInstance()
 ///////////////////////////////////////////////////////////////////////////////
 // check if opengl extension is available
 ///////////////////////////////////////////////////////////////////////////////
-Gbool CoGLExtension::isSupported(const GString& ext)
+Gbool CoGLExtension::isSupported(const Gstring& ext)
 {
     // search corresponding extension
-    std::vector<GString>::const_iterator iter = this->extensions.begin();
-    std::vector<GString>::const_iterator endIter = this->extensions.end();
+    std::vector<Gstring>::const_iterator iter = this->extensions.begin();
+    std::vector<Gstring>::const_iterator endIter = this->extensions.end();
     while(iter != endIter)
     {
         if(toLower(ext) == toLower(*iter))
@@ -467,7 +467,7 @@ Gbool CoGLExtension::isSupported(const GString& ext)
 ///////////////////////////////////////////////////////////////////////////////
 // return array of OpenGL extension strings
 ///////////////////////////////////////////////////////////////////////////////
-const std::vector<GString>& CoGLExtension::getExtensions()
+const std::vector<Gstring>& CoGLExtension::getExtensions()
 {
     // re-try to get extensions if it is empty
     if(extensions.size() == 0)
@@ -487,9 +487,9 @@ void CoGLExtension::getExtensionStrings()
     if(!cstr) // check null ptr
         return;
 
-    GString str(cstr);
-    GString token;
-    GString::const_iterator cursor = str.begin();
+    Gstring str(cstr);
+    Gstring token;
+    Gstring::const_iterator cursor = str.begin();
     while(cursor != str.end())
     {
         if(*cursor != ' ')
@@ -512,8 +512,8 @@ void CoGLExtension::getExtensionStrings()
     if(wglGetExtensionsStringARB && hdc)
     {
         str = (const char*)wglGetExtensionsStringARB(hdc);
-        GString token;
-        GString::const_iterator cursor = str.begin();
+        Gstring token;
+        Gstring::const_iterator cursor = str.begin();
         while(cursor != str.end())
         {
             if(*cursor != ' ')
@@ -539,9 +539,9 @@ void CoGLExtension::getExtensionStrings()
 ///////////////////////////////////////////////////////////////////////////////
 // string utility
 ///////////////////////////////////////////////////////////////////////////////
-GString CoGLExtension::toLower(const GString& str)
+Gstring CoGLExtension::toLower(const Gstring& str)
 {
-    GString newStr = str;
+    Gstring newStr = str;
     std::transform(newStr.begin(), newStr.end(), newStr.begin(), ::tolower);
     return newStr;
 }
@@ -553,8 +553,8 @@ GString CoGLExtension::toLower(const GString& str)
 void CoGLExtension::getFunctionPointers()
 {
 #ifdef _WIN32
-    std::vector<GString>::const_iterator iter = this->extensions.begin();
-    std::vector<GString>::const_iterator endIter = this->extensions.end();
+    std::vector<Gstring>::const_iterator iter = this->extensions.begin();
+    std::vector<Gstring>::const_iterator endIter = this->extensions.end();
     for(int i = 0; i < (int)extensions.size(); ++i)
     {
         if(extensions[i] == "GL_ARB_framebuffer_object")

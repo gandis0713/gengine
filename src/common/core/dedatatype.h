@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-typedef std::string       GString;
+typedef std::string       Gstring;
 
 typedef char              Gchar;
 typedef unsigned char     Guchar;

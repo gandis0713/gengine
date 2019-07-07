@@ -57,17 +57,17 @@ public:
     ~CoGLExtension();
     static CoGLExtension& getInstance();                  // must be called after RC is open
 
-    Gbool isSupported(const GString& extStr);        // check if a extension is available
-    const std::vector<GString>& getExtensions();
+    Gbool isSupported(const Gstring& extStr);        // check if a extension is available
+    const std::vector<Gstring>& getExtensions();
 
 private:
     CoGLExtension();                                      // prevent calling ctor
     CoGLExtension(const CoGLExtension& rhs);                // no implementation
     void getExtensionStrings();
     void getFunctionPointers();
-    GString toLower(const GString& str);
+    Gstring toLower(const Gstring& str);
 
-    std::vector <GString> extensions;
+    std::vector <Gstring> extensions;
 };
 
 

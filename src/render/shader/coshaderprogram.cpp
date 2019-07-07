@@ -15,12 +15,12 @@ CoShaderProgram::~CoShaderProgram()
     // do nothing.
 }
 
-Guint CoShaderProgram::getUniformLocation(GString strName)
+Guint CoShaderProgram::getUniformLocation(Gstring strName)
 {
     return glGetUniformLocation(m_nProgramID, strName.c_str());
 }
 
-Guint CoShaderProgram::getAttribLocation(GString strName)
+Guint CoShaderProgram::getAttribLocation(Gstring strName)
 {
     return glGetAttribLocation(m_nProgramID, strName.c_str());
 }
@@ -39,26 +39,26 @@ void CoShaderProgram::bind()
 void CoShaderProgram::initializeShaders()
 {
     createProgram();
-    createShaders();
     link();
-    checkShaderProgram();
+    check();
 }
 
-void CoShaderProgram::createShaders()
+void CoShaderProgram::AddShaders(EShaderType eShaderType, const Gchar *pSource)
 {
-    m_mapShaders.clear();
-
-    auto ret = m_mapShaders.insert( { EShaderType::eVertex , nullptr } );
+    auto ret = m_mapShaders.insert( { eShaderType , nullptr } );
     if (ret.second)
     {
-        CoShader *pShader = new CoVertexShader();
+        CoShader *pShader = new CoShader(eShaderType);
         ret.first->second = pShader;
     }
+}
 
-    ret = m_mapShaders.insert( { EShaderType::eFragment , nullptr } );
+void CoShaderProgram::AddShaders(EShaderType eShaderType, Gstring strFileName)
+{
+    auto ret = m_mapShaders.insert( { eShaderType , nullptr } );
     if (ret.second)
     {
-        CoShader *pShader = new CoFragmentShader();
+        CoShader *pShader = new CoShader(eShaderType);
         ret.first->second = pShader;
     }
 }
@@ -107,7 +107,7 @@ void CoShaderProgram::Release()
     }
 }
 
-bool CoShaderProgram::checkShaderProgram()
+bool CoShaderProgram::check()
 {
     GLint nResult = GL_FALSE;
     int nInfoLogLength;

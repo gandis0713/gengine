@@ -36,18 +36,13 @@ SOURCES += \
     util/coobjreader.cpp \
     util/costlreader.cpp \
     util/cotexturereader.cpp \
-    render/shader/covertexshader.cpp \
-    render/shader/cofragmentshader.cpp \
     common/util/noreader.cpp \
     window/screen/qt/coqscreen.cpp \
     render/core/coopenglstate.cpp \
     render/camera/cocamera.cpp \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
-    render/shader/noshaderhelper.cpp \
     render/shader/coshaderprogram.cpp \
-    render/object/covertexobject.cpp \
-    render/object/cobufferobject.cpp \
     window/cowindow.cpp \
     window/cowin32window.cpp \
     window/coxwindow.cpp \
@@ -58,7 +53,9 @@ SOURCES += \
     common/core/nomath.cpp \
     render/camera/coperspectivecamera.cpp \
     render/camera/coorthographiccamera.cpp \
-    common/core/coglextension.cpp
+    common/core/coglextension.cpp \
+    render/object/covertexbufferobject.cpp \
+    render/object/covertexarrayobject.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -67,8 +64,6 @@ HEADERS += \
     util/coobjreader.h \
     util/costlreader.h \
     util/cotexturereader.h \
-    render/shader/covertexshader.h \
-    render/shader/cofragmentshader.h \
     common/util/noreader.h \
     common/core/dedatatype.h \
     render/shader/core/deshader.h \
@@ -80,10 +75,7 @@ HEADERS += \
     render/camera/cocamera.h \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
-    render/shader/noshaderhelper.h \
     render/shader/coshaderprogram.h \
-    render/object/covertexobject.h \
-    render/object/cobufferobject.h \
     window/cowindow.h \
     window/cowin32window.h \
     window/coxwindow.h \
@@ -97,5 +89,7 @@ HEADERS += \
     common/core/deengine.h \
     render/camera/coorthographiccamera.h \
     common/core/glext.h \
-    common/core/coglextension.h
+    common/core/coglextension.h \
+    render/object/covertexbufferobject.h \
+    render/object/covertexarrayobject.h
 

@@ -1,9 +1,6 @@
 #include "coglextension.h"
 #include "coqtrenderer.h"
 
-#include "covertexshader.h"
-#include "cofragmentshader.h"
-
 #include "comatrix4x4.h"
 #include "coperspectivecamera.h"
 #include "nomath.h"

@@ -1,6 +1,5 @@
 #include "coglextension.h"
 #include "coshader.h"
-#include "noshaderhelper.h"
 
 #include "noreader.h"
 #include "delog.h"
@@ -8,7 +7,8 @@
 
 #include <vector>
 
-CoShader::CoShader()
+CoShader::CoShader(EShaderType eShaderType)
+    : m_eType(eShaderType)
 {
 }
 
@@ -17,7 +17,7 @@ CoShader::~CoShader()
     // do nothing.
 }
 
-void CoShader::setSource(const GString& strSource)
+void CoShader::setSource(const Gstring& strSource)
 {
     if(strSource.empty())
     {
@@ -37,15 +37,9 @@ void CoShader::setSource(const GString& strSource)
 //    return SetSource();
 }
 
-GString CoShader::getSource() const
+Gstring CoShader::getSource() const
 {
     return m_strSource;
-}
-
-
-void CoShader::setType(const EShaderType& eShaderType)
-{
-    m_eType = eShaderType;
 }
 
 EShaderType CoShader::getType() const
@@ -60,7 +54,7 @@ Guint CoShader::getID()
 
 bool CoShader::compile()
 {
-    m_nID = glCreateShader(NoShaderHelper::getGLShaderType(m_eType));
+    m_nID = glCreateShader(m_eType);
     if(m_nID <= 0)
     {
         tlog("Failed to create shader.");
