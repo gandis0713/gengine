@@ -55,7 +55,13 @@ SOURCES += \
     render/camera/coorthographiccamera.cpp \
     common/core/coglextension.cpp \
     render/object/covertexbufferobject.cpp \
-    render/object/covertexarrayobject.cpp
+    render/object/covertexarrayobject.cpp \
+    render/object/coline.cpp \
+    render/object/cosylinder.cpp \
+    render/object/cosphere.cpp \
+    render/object/copolygon.cpp \
+    render/object/copoint.cpp \
+    render/object/coobject.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -91,5 +97,11 @@ HEADERS += \
     common/core/glext.h \
     common/core/coglextension.h \
     render/object/covertexbufferobject.h \
-    render/object/covertexarrayobject.h
+    render/object/covertexarrayobject.h \
+    render/object/coline.h \
+    render/object/cosylinder.h \
+    render/object/cosphere.h \
+    render/object/copolygon.h \
+    render/object/copoint.h \
+    render/object/coobject.h
 
