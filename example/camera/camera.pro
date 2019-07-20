@@ -27,7 +27,7 @@ OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 
-include(library.pri);
+include(../library.pri);
 
 SOURCES += \
         main.cpp \
