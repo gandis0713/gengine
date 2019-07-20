@@ -12,18 +12,18 @@ public:
     CoShaderProgram();
     ~CoShaderProgram();
 
+    void AddShaders(EShaderType eShaderType, Gstring strSource);
+    void bind();
+    void link();
+
     Guint getUniformLocation(Gstring strName);
     Guint getAttribLocation(Gstring strName);
     void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);
-    void bind();
 
 private:
-    void initializeShaders();
-    void AddShaders(EShaderType eShaderType, const Gchar *pSource);
-    void AddShaders(EShaderType eShaderType, Gstring strFileName);
+    void initialize();
     void createProgram();
-    void link();
-    void Release();
+    void release();
     bool check();
 
 private:

@@ -1,9 +1,9 @@
 #ifndef DESHADERSOURCE_H
 #define DESHADERSOURCE_H
 
-#include <string>
+#include "dedatatype.h"
 
-std::string strDefaultFragShader =
+Gstring strDefaultFragShader =
 "                                                                                                                    \n\
 #version 120                                                                                                         \n\
                                                                                                                      \n\

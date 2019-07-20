@@ -4,6 +4,8 @@
 #include "comatrix4x4.h"
 #include "coperspectivecamera.h"
 #include "nomath.h"
+#include "dedefaultfragmentshader.h"
+#include "dedefaultvertexshader.h"
 
 #include "delog.h"
 
@@ -155,6 +157,9 @@ bool CoQtRenderer::createShaderProgram()
     }
 
     m_pShaderProgram = new CoShaderProgram();
+    m_pShaderProgram->AddShaders(EShaderType::eFragment, strDefaultFragShader);
+    m_pShaderProgram->AddShaders(EShaderType::eVertex, strDefaultVertexShader);
+    m_pShaderProgram->link();
 
     return true;
 

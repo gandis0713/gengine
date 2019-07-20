@@ -7,7 +7,7 @@
 
 CoShaderProgram::CoShaderProgram()
 {
-    initializeShaders();
+    initialize();
 }
 
 CoShaderProgram::~CoShaderProgram()
@@ -36,29 +36,19 @@ void CoShaderProgram::bind()
     glUseProgram(m_nProgramID);
 }
 
-void CoShaderProgram::initializeShaders()
+void CoShaderProgram::initialize()
 {
     createProgram();
-    link();
-    check();
 }
 
-void CoShaderProgram::AddShaders(EShaderType eShaderType, const Gchar *pSource)
+void CoShaderProgram::AddShaders(EShaderType eShaderType, Gstring strSource)
 {
     auto ret = m_mapShaders.insert( { eShaderType , nullptr } );
     if (ret.second)
     {
         CoShader *pShader = new CoShader(eShaderType);
-        ret.first->second = pShader;
-    }
-}
-
-void CoShaderProgram::AddShaders(EShaderType eShaderType, Gstring strFileName)
-{
-    auto ret = m_mapShaders.insert( { eShaderType , nullptr } );
-    if (ret.second)
-    {
-        CoShader *pShader = new CoShader(eShaderType);
+        pShader->setSource(strSource);
+        pShader->compile();
         ret.first->second = pShader;
     }
 }
@@ -93,7 +83,7 @@ void CoShaderProgram::link()
     glLinkProgram(m_nProgramID);
 }
 
-void CoShaderProgram::Release()
+void CoShaderProgram::release()
 {
     std::map<EShaderType, CoShader*>::iterator iter;
     for(iter = m_mapShaders.begin(); iter != m_mapShaders.end(); ++iter)

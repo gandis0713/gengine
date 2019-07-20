@@ -1,9 +1,9 @@
 #ifndef DEDEFAULTVERTEXSHADER_H
 #define DEDEFAULTVERTEXSHADER_H
 
-#include <string>
+#include "dedatatype.h"
 
-std::string strDefaultVertexShader =
+Gstring strDefaultVertexShader =
 "#version 120                                                                                                        \n\
                                                                                                                      \n\
 // Input vertex data, different for all executions of this shader.                                                   \n\
