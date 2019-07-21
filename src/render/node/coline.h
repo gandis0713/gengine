@@ -2,7 +2,6 @@
 #define COLINE_H
 
 #include "conode.h"
-#include "deengine.h"
 
 class GANDISENGINE CoLine : public CoNode
 {

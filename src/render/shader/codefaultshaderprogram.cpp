@@ -1,6 +1,5 @@
 #include "coglextension.h"
 #include "codefaultshaderprogram.h"
-#include <QDebug>
 
 CoDefaultShaderProgram::CoDefaultShaderProgram()
 {

@@ -31,7 +31,7 @@ void CoDefaultNodeCore::initialize()
 
     m_pCBO->gen();
     m_pCBO->bind();
-    m_pVBO->setAllocate(&m_pNode->getColors()[0], m_pNode->getSize() * 3 * sizeof(Gfloat));
+    m_pCBO->setAllocate(&m_pNode->getColors()[0], m_pNode->getSize() * 3 * sizeof(Gfloat));
 
     m_pVAO->gen();
     m_pVAO->bind();
