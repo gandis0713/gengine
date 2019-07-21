@@ -1,37 +1,11 @@
-#ifndef COSHADERPROGRAM_H
-#define COSHADERPROGRAM_H
+#ifndef COBASESHADERPROGRAM_H
+#define COBASESHADERPROGRAM_H
 
-#include "coshader.h"
-#include "comatrix4x4.h"
 
-#include <map>
-
-class CoShaderProgram
+class CoBaseShaderProgram
 {
 public:
-    CoShaderProgram();
-    ~CoShaderProgram();
-
-    void AddShaders(EShaderType eShaderType, Gstring strSource);
-    void bind();
-    void link();
-
-    void enableAttributeArray(Guint nID);
-    void setAttributeBuffer(Guint nID, Guint nSize, Guint nOffset);
-
-    Guint getUniformLocation(Gstring strName);
-    Guint getAttribLocation(Gstring strName);
-    void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);
-
-private:
-    void initialize();
-    void createProgram();
-    void release();
-    bool check();
-
-private:
-    std::map<EShaderType, CoShader*>         m_mapShaders;
-    Guint m_nProgramID;
+    CoBaseShaderProgram();
 };
 
-#endif // COSHADERPROGRAM_H
+#endif // COBASESHADERPROGRAM_H
