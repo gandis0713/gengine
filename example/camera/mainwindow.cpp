@@ -2,8 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "coqtrenderer.h"
-#include "coperspectivecamera.h"
-#include "coorthographiccamera.h"
+#include "coline.h"
 
 #define INT2FLOAT 200
 
@@ -56,12 +55,31 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->ortho, SIGNAL(toggled(bool)), this, SLOT(SlotOrthoToggle(bool)));
 
     m_pRender = new CoQtRenderer(ui->widget);
-
     m_pOrthoCamera = new CoOrthographicCamera();
     m_pPersCamera = new CoPerspectiveCamera();
 
     m_pCamera = m_pPersCamera;
     m_pRender->setCamera(m_pCamera);
+
+    CoLine *pLine1 = new CoLine(CoVec3( -1.0f, -1.0f, 1.0f), CoVec3( 1.0f, -1.0f, 1.0f));
+    CoLine *pLine2 = new CoLine(CoVec3( 1.0f, -1.0f, 1.0f), CoVec3( 0.0f, 1.0f, 1.0f));
+    CoLine *pLine3 = new CoLine(CoVec3( 0.0f, 1.0f, 1.0f), CoVec3( -1.0f, -1.0f, 1.0f));
+    CoLine *pLine4 = new CoLine(CoVec3( -4.0f, -1.0f, -1.0f), CoVec3( -2.0f, -1.0f, -1.0f));
+    CoLine *pLine5 = new CoLine(CoVec3( -2.0f, -1.0f, -1.0f), CoVec3( -3.0f, 1.0f, -1.0f));
+    CoLine *pLine6 = new CoLine(CoVec3( -3.0f, 1.0f, -1.0f), CoVec3( -4.0f, -1.0f, -1.0f));
+    CoLine *pLine7 = new CoLine(CoVec3( 2.0f, -1.0f, -1.0f), CoVec3( 4.0f, -1.0f, -1.0f));
+    CoLine *pLine8 = new CoLine(CoVec3( 4.0f, -1.0f, -1.0f), CoVec3( 3.0f, 1.0f, -1.0f));
+    CoLine *pLine9 = new CoLine(CoVec3( 3.0f, 1.0f, -1.0f), CoVec3( 2.0f, -1.0f, -1.0f));
+
+    m_pRender->addNode(pLine1);
+    m_pRender->addNode(pLine2);
+    m_pRender->addNode(pLine3);
+    m_pRender->addNode(pLine4);
+    m_pRender->addNode(pLine5);
+    m_pRender->addNode(pLine6);
+    m_pRender->addNode(pLine7);
+    m_pRender->addNode(pLine8);
+    m_pRender->addNode(pLine9);
 }
 
 MainWindow::~MainWindow()

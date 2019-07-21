@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "cocamera.h"
 #include "coperspectivecamera.h"
 #include "coorthographiccamera.h"
 
