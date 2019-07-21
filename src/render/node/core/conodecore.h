@@ -16,6 +16,8 @@ public:
     virtual void initialize() = 0;
     virtual void paint() = 0;
 
+    void setCamera(CoCamera *pCamera);
+
 protected:
     CoNode*               m_pNode;
     CoCamera*             m_pCamera;

@@ -35,7 +35,7 @@ private:
 
     CoCamera          *m_pCamera;
 
-    std::map<CoNode*, CoNodeCore*>                     m_mapNodeObject;
+    std::map<CoNode*, CoNodeCore*>   m_mapNodeObject;
 
 public slots:
     void initializeGL();

@@ -15,3 +15,8 @@ CoNodeCore::~CoNodeCore()
 {
 
 }
+
+void CoNodeCore::setCamera(CoCamera *pCamera)
+{
+    m_pCamera = pCamera;
+}

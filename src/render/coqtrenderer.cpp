@@ -96,6 +96,15 @@ void CoQtRenderer::setCamera(CoCamera *pCamera)
     }
 
     m_pCamera = pCamera;
+
+    std::map<CoNode*, CoNodeCore*>::iterator iter;
+    for(iter = m_mapNodeObject.begin(); iter != m_mapNodeObject.end(); ++iter)
+    {
+        CoNodeCore *pNodeObject = iter->second;
+
+        pNodeObject->setCamera(m_pCamera);
+    }
+
     connect(m_pCamera, SIGNAL(signalCameraUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
 }
 
