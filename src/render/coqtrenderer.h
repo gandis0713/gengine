@@ -24,6 +24,7 @@ public:
 
     void setCamera(CoCamera* pCamera);
     void addNode(CoNode* pNode);
+    void update();
 
 private:
     void initializeWidget();

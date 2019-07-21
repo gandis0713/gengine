@@ -85,6 +85,11 @@ void CoQtRenderer::paintGL()
 
 void CoQtRenderer::slotCameraUpdated()
 {
+    update();
+}
+
+void CoQtRenderer::update()
+{
     m_pQScreen->updateGL();
 }
 
