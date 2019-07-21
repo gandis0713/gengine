@@ -5,7 +5,6 @@
 #include "coorthographiccamera.h"
 #include "coline.h"
 #include "spline3d.h"
-#include <QThread>
 
 SplineWindow::SplineWindow(QWidget *parent) :
     QMainWindow(parent),
