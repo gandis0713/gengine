@@ -15,7 +15,8 @@ CoSpline::~CoSpline()
 
 void CoSpline::draw()
 {
-    glDrawArrays(GL_LINE_STRIP, 0, getSize());
+//    glDrawArrays(GL_LINE_STRIP, 0, getSize());
+    glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, getSize());
 }
 
 void CoSpline::setPoints(const std::vector<CoVec3> vecPoints)
