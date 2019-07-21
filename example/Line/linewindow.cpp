@@ -17,8 +17,11 @@ LineWindow::LineWindow(QWidget *parent) :
     m_pRender->setCamera(m_pCamera);
 
     CoLine *pLine1 = new CoLine(CoVec3( -1.0f, -1.0f, 1.0f), CoVec3( 1.0f, -1.0f, 1.0f));
+    pLine1->setColor(CoVec3(1.0, 0.0, 0.0));
     CoLine *pLine2 = new CoLine(CoVec3( 1.0f, -1.0f, 1.0f), CoVec3( 0.0f, 1.0f, 1.0f));
+    pLine2->setColor(CoVec3(1.0, 1.0, 0.0));
     CoLine *pLine3 = new CoLine(CoVec3( 0.0f, 1.0f, 1.0f), CoVec3( -1.0f, -1.0f, 1.0f));
+    pLine2->setColor(CoVec3(0.0, 1.0, 1.0));
 
     m_pRender->addNode(pLine1);
     m_pRender->addNode(pLine2);
