@@ -9,8 +9,7 @@ public:
     CoDefaultShaderProgram();
     ~CoDefaultShaderProgram();
 
-    void setUniform() override;
-    void setAttribute() override;
+    void getUniform() override;
 };
 
 #endif // CODEFAULTSHADERPROGRAM_H

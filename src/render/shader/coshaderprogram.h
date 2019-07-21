@@ -6,6 +6,9 @@
 
 #include <map>
 
+#define VERTEX_IN_LAYOUT          0
+#define COLOR_IN_LAYOUT           1
+
 class CoShaderProgram
 {
 public:
@@ -16,8 +19,7 @@ public:
     void AddShaders(EShaderType eShaderType, QString strSource);
     void bind();
     void link();
-    virtual void setUniform() = 0;
-    virtual void setAttribute() = 0;
+    virtual void getUniform() = 0;
 
     void enableAttributeArray(Guint nID);
     void setAttributeBuffer(Guint nID, Guint nSize, Guint nOffset);
@@ -26,9 +28,7 @@ public:
     Guint getAttribLocation(Gstring strName);
     void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);
 
-    Guint m_nMatrixID;
-    Guint m_nVertexID;
-    Guint m_nColorID;
+    Guint m_nMVPID;
 
 private:
     void initialize();

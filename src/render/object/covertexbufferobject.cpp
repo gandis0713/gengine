@@ -38,7 +38,7 @@ void CoVertexBufferObject::setType(EType eType)
     m_eType = eType;
 }
 
-void CoVertexBufferObject::setAllocate(const void *pData, Guint nSize)
+void CoVertexBufferObject::allocate(const void *pData, Guint nSize)
 {
     glBufferData(m_eType, nSize, pData, m_eUsagePattern);
 }

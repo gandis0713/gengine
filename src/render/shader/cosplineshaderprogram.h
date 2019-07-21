@@ -9,8 +9,7 @@ public:
     CoSplineShaderProgram();
     ~CoSplineShaderProgram();
 
-    void setUniform() override;
-    void setAttribute() override;
+    void getUniform() override;
 };
 
 #endif // COSPLINESHADERPROGRAM_H

@@ -11,13 +11,7 @@ CoDefaultShaderProgram::~CoDefaultShaderProgram()
     // do nothing.
 }
 
-void CoDefaultShaderProgram::setUniform()
+void CoDefaultShaderProgram::getUniform()
 {
-    m_nMatrixID = getUniformLocation("perViewModel");
-}
-
-void CoDefaultShaderProgram::setAttribute()
-{
-    m_nVertexID = getAttribLocation("vertex");
-    m_nColorID = getAttribLocation("color");
+    m_nMVPID = getUniformLocation("mvp");
 }

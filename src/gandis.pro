@@ -120,3 +120,5 @@ OTHER_FILES += \
 
 RESOURCES += \
     shader.qrc
+
+DISTFILES +=

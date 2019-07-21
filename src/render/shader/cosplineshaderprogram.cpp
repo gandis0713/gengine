@@ -10,12 +10,7 @@ CoSplineShaderProgram::~CoSplineShaderProgram()
 
 }
 
-void CoSplineShaderProgram::setUniform()
+void CoSplineShaderProgram::getUniform()
 {
-    m_nMatrixID = getUniformLocation("perViewModel");
-}
-void CoSplineShaderProgram::setAttribute()
-{
-    m_nVertexID = getAttribLocation("vertex");
-    m_nColorID = getAttribLocation("color");
+    m_nMVPID = getUniformLocation("mvp");
 }
