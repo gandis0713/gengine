@@ -1,6 +1,9 @@
 <RCC>
 	<qresource prefix="/">
-		<file>resource/glsl/default.vert</file>
-		<file>resource/glsl/default.frag</file>
+		<file>resource/glsl/default_vert.glsl</file>
+		<file>resource/glsl/default_frag.glsl</file>
+		<file>resource/glsl/spline_vert.glsl</file>
+		<file>resource/glsl/spline_geom.glsl</file>
+		<file>resource/glsl/spline_frag.glsl</file>		
 	</qresource>
 </RCC>
