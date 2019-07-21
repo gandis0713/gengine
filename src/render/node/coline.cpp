@@ -3,17 +3,17 @@
 CoLine::CoLine(CoVec3 vStart, CoVec3 vEnd)
 {
     setPoint(vStart, vEnd);
-
-    m_vecColors.clear();
-    for(Gint i = 0; i < m_vecPoints.size(); i++)
-    {
-        m_vecColors.push_back(CoVec3(1.f, 1.f, 1.f));
-    }
+    setColor(CoVec3(1.0, 1.0, 1.0));
 }
 
 CoLine::~CoLine()
 {
 
+}
+
+void CoLine::draw()
+{
+    glDrawArrays(GL_LINE_STRIP, 0, getSize());
 }
 
 void CoLine::setPoint(CoVec3 vStart, CoVec3 vEnd)

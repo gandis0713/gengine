@@ -132,6 +132,7 @@ extern PFNGLBINDBUFFERPROC              pglBindBuffer;           // VBO Bind Pro
 extern PFNGLBUFFERDATAPROC              pglBufferData;           // VBO Data Loading Procedure
 extern PFNGLBUFFERSUBDATAARBPROC        pglBufferSubDataARB;        // VBO Sub Data Loading Procedure
 extern PFNGLDELETEBUFFERSARBPROC        pglDeleteBuffersARB;        // VBO Deletion Procedure
+extern PFNGLDELETEBUFFERSPROC        pglDeleteBuffers;           // VBO Deletion Procedure
 extern PFNGLGETBUFFERPARAMETERIVARBPROC pglGetBufferParameterivARB; // return various parameters of VBO
 extern PFNGLMAPBUFFERARBPROC            pglMapBufferARB;            // map VBO procedure
 extern PFNGLUNMAPBUFFERARBPROC          pglUnmapBufferARB;          // unmap VBO procedure
@@ -143,6 +144,7 @@ extern PFNGLUNMAPBUFFERARBPROC          pglUnmapBufferARB;          // unmap VBO
 #define glBufferData                    pglBufferData
 #define glBufferSubDataARB              pglBufferSubDataARB
 #define glDeleteBuffersARB              pglDeleteBuffersARB
+#define glDeleteBuffers                 pglDeleteBuffers
 #define glGetBufferParameterivARB       pglGetBufferParameterivARB
 #define glMapBufferARB                  pglMapBufferARB
 #define glUnmapBufferARB                pglUnmapBufferARB

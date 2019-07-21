@@ -6,23 +6,59 @@
 #include "deengine.h"
 #include "coqscreen.h"
 #include "dedatatype.h"
-#include "coshaderprogram.h"
+#include "corenderer.h"
+#include "conode.h"
+#include "cocamera.h"
+#include "codefaultshaderprogram.h"
+#include "cosplineshaderprogram.h"
 #include "covertexarrayobject.h"
 #include "covertexbufferobject.h"
 
 class CoQScreen;
 class QGridLayout;
 class CoCamera;
-class CoNode;
 
-struct SNodeObject
+class CoNodeCore
 {
-    CoVertexArrayObject*  vao;
-    CoVertexBufferObject* vbo;
-    CoVertexBufferObject* cbo;
+public:
+    CoNodeCore(CoNode* pNode, CoCamera *pCamera);
+    ~CoNodeCore();
+
+    virtual void initialize() = 0;
+    virtual void paint() = 0;
+
+protected:
+    CoNode*               m_pNode;
+    CoCamera*             m_pCamera;
+
+    CoVertexArrayObject*  m_pVAO;
+    CoVertexBufferObject* m_pVBO;
+    CoVertexBufferObject* m_pCBO;
+    CoDefaultShaderProgram* m_pShaderProgram;
+    EShaderProgramType    m_eShaderProgramType;
 };
 
-class GANDISENGINE CoQtRenderer : public QObject
+class CoDefaultNodeCore : public CoNodeCore
+{
+public:
+    CoDefaultNodeCore(CoNode* pNode, CoCamera *pCamera);
+    ~CoDefaultNodeCore();
+
+    void initialize() override;
+    void paint() override;
+};
+
+class CoSplineNodeCore : public CoNodeCore
+{
+public:
+    CoSplineNodeCore(CoNode* pNode, CoCamera *pCamera);
+    ~CoSplineNodeCore();
+
+    void initialize() override;
+    void paint() override;
+};
+
+class GANDISENGINE CoQtRenderer : public CoRenderer
 {
     Q_OBJECT
 public:
@@ -34,21 +70,15 @@ public:
 
 private:
     void initializeWidget();
-    void createShaderProgram();
 
 private:
     CoQScreen         *m_pQScreen;
     QGridLayout       *m_pLayout;
     QWidget           *m_pParent;
 
-    CoShaderProgram     *m_pShaderProgram;
-    CoCamera            *m_pCamera;
+    CoCamera               *m_pCamera;
 
-    std::map<CoNode*, SNodeObject*> m_mapNodeObject;
-
-    Guint m_nMatrixID;
-    Guint m_nVertexID;
-    Guint m_nColorID;
+    std::map<CoNode*, CoNodeCore*>                     m_mapNodeObject;
 
 public slots:
     void initializeGL();

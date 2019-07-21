@@ -69,6 +69,7 @@ PFNGLBINDBUFFERPROC                 pglBindBuffer = 0;           // VBO Bind Pro
 PFNGLBUFFERDATAPROC                 pglBufferData = 0;           // VBO Data Loading Procedure
 PFNGLBUFFERSUBDATAARBPROC           pglBufferSubDataARB = 0;        // VBO Sub Data Loading Procedure
 PFNGLDELETEBUFFERSARBPROC           pglDeleteBuffersARB = 0;        // VBO Deletion Procedure
+PFNGLDELETEBUFFERSPROC              pglDeleteBuffers = 0;        // VBO Deletion Procedure
 PFNGLGETBUFFERPARAMETERIVARBPROC    pglGetBufferParameterivARB = 0; // return various parameters of VBO
 PFNGLMAPBUFFERARBPROC               pglMapBufferARB = 0;            // map VBO procedure
 PFNGLUNMAPBUFFERARBPROC             pglUnmapBufferARB = 0;          // unmap VBO procedure
@@ -598,6 +599,7 @@ void CoGLExtension::getFunctionPointers()
             glBufferData                = (PFNGLBUFFERDATAPROC)wglGetProcAddress("glBufferData");
             glBufferSubDataARB          = (PFNGLBUFFERSUBDATAARBPROC)wglGetProcAddress("glBufferSubDataARB");
             glDeleteBuffersARB          = (PFNGLDELETEBUFFERSARBPROC)wglGetProcAddress("glDeleteBuffersARB");
+            glDeleteBuffers             = (PFNGLDELETEBUFFERSPROC)wglGetProcAddress("glDeleteBuffers");
             glGetBufferParameterivARB   = (PFNGLGETBUFFERPARAMETERIVARBPROC)wglGetProcAddress("glGetBufferParameterivARB");
             glMapBufferARB              = (PFNGLMAPBUFFERARBPROC)wglGetProcAddress("glMapBufferARB");
             glUnmapBufferARB            = (PFNGLUNMAPBUFFERARBPROC)wglGetProcAddress("glUnmapBufferARB");

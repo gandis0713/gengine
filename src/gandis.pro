@@ -42,7 +42,6 @@ SOURCES += \
     render/camera/cocamera.cpp \
     common/math/comatrix3x3.cpp \
     common/math/comatrix4x4.cpp \
-    render/shader/coshaderprogram.cpp \
     window/cowindow.cpp \
     window/cowin32window.cpp \
     window/coxwindow.cpp \
@@ -56,12 +55,15 @@ SOURCES += \
     common/core/coglextension.cpp \
     render/object/covertexbufferobject.cpp \
     render/object/covertexarrayobject.cpp \
-    render/object/coline.cpp \
-    render/object/cosylinder.cpp \
-    render/object/cosphere.cpp \
-    render/object/copolygon.cpp \
-    render/object/copoint.cpp \
-    render/conode.cpp
+    render/node/coline.cpp \
+    render/node/cosylinder.cpp \
+    render/node/cosphere.cpp \
+    render/node/copolygon.cpp \
+    render/node/copoint.cpp \
+    render/node/conode.cpp \
+    render/shader/codefaultshaderprogram.cpp \
+    render/shader/coshaderprogram.cpp \
+    render/shader/cosplineshaderprogram.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -81,7 +83,6 @@ HEADERS += \
     render/camera/cocamera.h \
     common/math/comatrix3x3.h \
     common/math/comatrix4x4.h \
-    render/shader/coshaderprogram.h \
     window/cowindow.h \
     window/cowin32window.h \
     window/coxwindow.h \
@@ -98,10 +99,15 @@ HEADERS += \
     common/core/coglextension.h \
     render/object/covertexbufferobject.h \
     render/object/covertexarrayobject.h \
-    render/object/coline.h \
-    render/object/cosylinder.h \
-    render/object/cosphere.h \
-    render/object/copolygon.h \
-    render/object/copoint.h \
-    render/conode.h
+    render/node/coline.h \
+    render/node/cosylinder.h \
+    render/node/cosphere.h \
+    render/node/copolygon.h \
+    render/node/copoint.h \
+    render/node/conode.h \
+    render/shader/codefaultshaderprogram.h \
+    render/shader/coshaderprogram.h \
+    render/shader/cosplineshaderprogram.h
 
+OTHER_FILES += \
+    libgandis.pri

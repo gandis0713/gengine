@@ -10,7 +10,7 @@ CoVertexBufferObject::CoVertexBufferObject()
 
 CoVertexBufferObject::~CoVertexBufferObject()
 {
-
+    release();
 }
 
 void CoVertexBufferObject::gen()
@@ -25,7 +25,7 @@ void CoVertexBufferObject::bind()
 
 void CoVertexBufferObject::release()
 {
-    // glUnmapBuffer(m_nID);
+    glDeleteBuffers(1, &m_nID);
 }
 
 void CoVertexBufferObject::setUsagePattern(EUsagePattern eUsagePattern)

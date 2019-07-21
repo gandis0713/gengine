@@ -8,4 +8,10 @@ enum EShaderType
     eGeometry         = 0x8DD9  //GL_GEOMETRY_SHADER
 };
 
+enum EShaderProgramType
+{
+    eDefault,
+    eSpline
+};
+
 #endif // CODEFAULTSHADER_H
