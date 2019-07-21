@@ -79,8 +79,6 @@ HEADERS += \
     common/util/noreader.h \
     common/core/dedatatype.h \
     render/shader/core/deshader.h \
-    render/shader/core/dedefaultvertexshader.h \
-    render/shader/core/dedefaultfragmentshader.h \
     window/screen/qt/coqscreen.h \
     common/util/delog.h \
     render/core/coopenglstate.h \
@@ -119,3 +117,6 @@ HEADERS += \
 
 OTHER_FILES += \
     libgandis.pri
+
+RESOURCES += \
+    shader.qrc

@@ -13,7 +13,7 @@ public:
     CoShaderProgram();
     ~CoShaderProgram();
 
-    void AddShaders(EShaderType eShaderType, Gstring strSource);
+    void AddShaders(EShaderType eShaderType, QString strSource);
     void bind();
     void link();
     virtual void setUniform() = 0;

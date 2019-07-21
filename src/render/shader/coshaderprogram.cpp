@@ -2,7 +2,7 @@
 #include "coshaderprogram.h"
 
 #include "delog.h"
-#include <QDebug>
+#include <QFile>
 
 #include <vector>
 
@@ -42,8 +42,21 @@ void CoShaderProgram::initialize()
     createProgram();
 }
 
-void CoShaderProgram::AddShaders(EShaderType eShaderType, Gstring strSource)
+void CoShaderProgram::AddShaders(EShaderType eShaderType, QString strFilePath)
 {
+    QFile file(strFilePath);
+    Gstring strSource;
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QByteArray byte = file.readAll();
+        strSource = byte.toStdString();
+    }
+    else
+    {
+        tlog("Failed to open shader source.");
+        return;
+    }
+
     auto ret = m_mapShaders.insert( { eShaderType , nullptr } );
     if (ret.second)
     {

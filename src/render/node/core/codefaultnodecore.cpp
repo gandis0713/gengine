@@ -1,9 +1,6 @@
 #include "codefaultnodecore.h"
 #include "codefaultshaderprogram.h"
 
-#include "dedefaultvertexshader.h"
-#include "dedefaultfragmentshader.h"
-
 CoDefaultNodeCore::CoDefaultNodeCore(CoNode* pNode, CoCamera *pCamera)
     : CoNodeCore(pNode, pCamera)
 {
@@ -22,8 +19,8 @@ void CoDefaultNodeCore::initialize()
     m_pCBO = new CoVertexBufferObject();
 
     m_pShaderProgram = new CoDefaultShaderProgram();
-    m_pShaderProgram->AddShaders(EShaderType::eFragment, strDefaultFragShader);
-    m_pShaderProgram->AddShaders(EShaderType::eVertex, strDefaultVertexShader);
+    m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/default.frag");
+    m_pShaderProgram->AddShaders(EShaderType::eVertex, ":resource/glsl/default.vert");
     m_pShaderProgram->link();
     m_pShaderProgram->setUniform();
     m_pShaderProgram->setAttribute();

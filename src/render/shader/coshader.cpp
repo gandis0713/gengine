@@ -1,9 +1,7 @@
 #include "coglextension.h"
 #include "coshader.h"
 
-#include "noreader.h"
 #include "delog.h"
-
 
 #include <vector>
 
@@ -25,16 +23,6 @@ void CoShader::setSource(const Gstring& strSource)
     }
 
     m_strSource = strSource;
-//    std::string strShaderPath(pPath);
-//    std::string strShaderSource;
-//    bool bState = NoReader::ReadText(pPath, strShaderSource);
-//    if(!bState)
-//    {
-//        tlog("The shader source code can't be opened.");
-//        return false;
-//    }
-
-//    return SetSource();
 }
 
 Gstring CoShader::getSource() const
