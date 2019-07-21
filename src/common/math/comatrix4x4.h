@@ -3,8 +3,9 @@
 
 #include "dedatatype.h"
 #include "covector3.h"
+#include "deengine.h"
 
-class CoMat4x4
+class GANDISENGINE CoMat4x4
 {
 public:
     CoMat4x4();

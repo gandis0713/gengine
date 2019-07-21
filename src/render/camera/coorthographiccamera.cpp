@@ -31,5 +31,5 @@ void CoOrthographicCamera::update()
 
     m_matCamera = matPerspective * matLookAt;
 
-    emit signalUpdated();
+    emit signalCameraUpdated();
 }

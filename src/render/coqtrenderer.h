@@ -1,18 +1,26 @@
 #ifndef GQTRENDERER_H
 #define GQTRENDERER_H
 
-#include "deengine.h"
-
 #include <map>
 
-#include "coshaderprogram.h"
+#include "deengine.h"
 #include "coqscreen.h"
 #include "dedatatype.h"
+#include "coshaderprogram.h"
+#include "covertexarrayobject.h"
+#include "covertexbufferobject.h"
 
 class CoQScreen;
 class QGridLayout;
 class CoCamera;
-class CoMat4x4;
+class CoNode;
+
+struct SNodeObject
+{
+    CoVertexArrayObject*  vao;
+    CoVertexBufferObject* vbo;
+    CoVertexBufferObject* cbo;
+};
 
 class GANDISENGINE CoQtRenderer : public QObject
 {
@@ -21,28 +29,26 @@ public:
     CoQtRenderer(QWidget *pParent);
     ~CoQtRenderer();
 
-    void setCamera(CoCamera *pCamera);
+    void setCamera(CoCamera* pCamera);
+    void addNode(CoNode* pNode);
 
 private:
     void initializeWidget();
-    bool createShaderProgram();
+    void createShaderProgram();
 
 private:
     CoQScreen         *m_pQScreen;
     QGridLayout       *m_pLayout;
     QWidget           *m_pParent;
 
-    CoShaderProgram   *m_pShaderProgram;
-    CoCamera *m_pCamera;
+    CoShaderProgram     *m_pShaderProgram;
+    CoCamera            *m_pCamera;
+
+    std::map<CoNode*, SNodeObject*> m_mapNodeObject;
 
     Guint m_nMatrixID;
     Guint m_nVertexID;
     Guint m_nColorID;
-    Guint m_nVerterBuffer;
-    Guint m_mColorbuffer;
-
-    CoMat4x4 m_mat4Model;
-
 
 public slots:
     void initializeGL();

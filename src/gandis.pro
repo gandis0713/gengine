@@ -61,7 +61,7 @@ SOURCES += \
     render/object/cosphere.cpp \
     render/object/copolygon.cpp \
     render/object/copoint.cpp \
-    render/object/coobject.cpp
+    render/conode.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -103,5 +103,5 @@ HEADERS += \
     render/object/cosphere.h \
     render/object/copolygon.h \
     render/object/copoint.h \
-    render/object/coobject.h
+    render/conode.h
 

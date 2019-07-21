@@ -1,52 +1,28 @@
 #include "coglextension.h"
 #include "coqtrenderer.h"
 
-#include "comatrix4x4.h"
-#include "coperspectivecamera.h"
 #include "nomath.h"
-#include "dedefaultfragmentshader.h"
+
 #include "dedefaultvertexshader.h"
+#include "dedefaultfragmentshader.h"
 
-#include "delog.h"
+#include "coperspectivecamera.h"
+#include "coorthographiccamera.h"
+#include "conode.h"
 
+#include <QDebug>
 #include <QGridLayout>
-
-static const GLfloat g_vertex_buffer_data[] = {
-    -1.0f,-1.0f, 0.0f,
-     1.0f,-1.0f, 0.0f,
-     0.0f, 1.0f, 0.0f,
-
-     1.0f,-1.0f, -2.0f,
-     3.0f,-1.0f, -2.0f,
-     2.0f, 1.0f, -2.0f,
-
-    -3.0f,-1.0f, -2.0f,
-    -1.0f,-1.0f, -2.0f,
-    -2.0f, 1.0f, -2.0f,
-};
-
-static const GLfloat g_color_buffer_data[] = {
-    1.000f,  1.000f,  1.000f,
-    1.000f,  1.000f,  1.000f,
-    1.000f,  1.000f,  1.000f,
-
-    0.000f,  0.000f,  1.000f,
-    0.000f,  0.000f,  1.000f,
-    0.000f,  0.000f,  1.000f,
-
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-    1.000f,  0.000f,  0.000f,
-};
 
 CoQtRenderer::CoQtRenderer(QWidget* pParent)
     : m_pParent(pParent),
       m_pLayout(NULL),
       m_pQScreen(NULL),
-      m_pShaderProgram(NULL),
       m_pCamera(NULL)
 {
     initializeWidget();
+
+    m_pCamera = new CoOrthographicCamera();
+    connect(m_pCamera, SIGNAL(signalCameraUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
 }
 
 CoQtRenderer::~CoQtRenderer()
@@ -69,6 +45,10 @@ void CoQtRenderer::initializeWidget()
     m_pLayout->addWidget(pWidget);
 }
 
+static const Gfloat av1[] = {1.0, 1.0, 0.0,   0.0, -1.0, 0.0};
+static const Gfloat ac1[] = {1.0, 0.0, 0.0,   1.0, 0.0, 0.0};
+
+#include <iostream>
 void CoQtRenderer::initializeGL()
 {
     CoGLExtension::getInstance();
@@ -80,17 +60,33 @@ void CoQtRenderer::initializeGL()
 
     createShaderProgram();
 
-    m_nMatrixID = m_pShaderProgram->getUniformLocation("perViewModel");
-    m_nVertexID = m_pShaderProgram->getAttribLocation("vertex");
-    m_nColorID = m_pShaderProgram->getAttribLocation("color");
+    std::map<CoNode*, SNodeObject*>::iterator iter;
+    for(iter = m_mapNodeObject.begin(); iter != m_mapNodeObject.end(); ++iter)
+    {
+        CoNode *pNode = iter->first;
+        SNodeObject *pNodeObject = iter->second;
 
-    glGenBuffers(1, &m_nVerterBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+        pNodeObject->vbo->gen();
+        pNodeObject->vbo->bind();
+        pNodeObject->vbo->setAllocate(&pNode->GetPoints()[0], pNode->GetSize() * 3 * sizeof(Gfloat));
 
-    glGenBuffers(1, &m_mColorbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+        pNodeObject->cbo->gen();
+        pNodeObject->cbo->bind();
+        pNodeObject->vbo->setAllocate(&pNode->GetColors()[0], pNode->GetSize() * 3 * sizeof(Gfloat));
+
+        pNodeObject->vao->gen();
+        pNodeObject->vao->bind();
+
+        pNodeObject->vbo->bind();
+        m_pShaderProgram->enableAttributeArray(m_nVertexID);
+        m_pShaderProgram->setAttributeBuffer(m_nVertexID, 3, 0);
+
+        pNodeObject->cbo->bind();
+        m_pShaderProgram->enableAttributeArray(m_nColorID);
+        m_pShaderProgram->setAttributeBuffer(m_nColorID, 3, 0);
+
+        pNodeObject->vao->release();
+    }
 }
 
 void CoQtRenderer::resizeGL(int nWidth, int nHeight)
@@ -106,42 +102,21 @@ void CoQtRenderer::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    m_pShaderProgram->bind();
+    std::map<CoNode*, SNodeObject*>::iterator iter;
+    for(iter = m_mapNodeObject.begin(); iter != m_mapNodeObject.end(); ++iter)
+    {
+        CoNode *pNode = iter->first;
+        SNodeObject *pNodeObject = iter->second;
 
-    CoMat4x4 mat = m_pCamera->getMatrix() * m_mat4Model;
+        m_pShaderProgram->bind();
+        m_pShaderProgram->setUniformMatrix4fv(m_nMatrixID, m_pCamera->getMatrix() * CoMat4x4());
 
-    m_pShaderProgram->setUniformMatrix4fv(m_nMatrixID, mat);
+        pNodeObject->vao->bind();
 
-    glBindBuffer(GL_ARRAY_BUFFER, m_nVerterBuffer);
-    glEnableVertexAttribArray(m_nVertexID);
-    glVertexAttribPointer
-            (
-                m_nVertexID,
-                3,
-                GL_FLOAT,
-                GL_FALSE,
-                0,
-                (void*)0
-                );
+//        glDrawArrays(GL_LINE_LOOP, 0, pNode->GetSize());
+        glDrawArrays(GL_LINE_STRIP, 0, pNode->GetSize());
+    }
 
-
-    glBindBuffer(GL_ARRAY_BUFFER, m_mColorbuffer);
-    glEnableVertexAttribArray(m_nColorID);
-    glVertexAttribPointer
-            (
-                m_nColorID,
-                3,
-                GL_FLOAT,
-                GL_FALSE,
-                0,
-                (void*)0
-                );
-
-
-    glDrawArrays(GL_TRIANGLES, 0, 9);
-
-    glDisableVertexAttribArray(m_nVertexID);
-    glDisableVertexAttribArray(m_nColorID);
 }
 
 void CoQtRenderer::slotCameraUpdated()
@@ -149,29 +124,38 @@ void CoQtRenderer::slotCameraUpdated()
     m_pQScreen->updateGL();
 }
 
-bool CoQtRenderer::createShaderProgram()
+void CoQtRenderer::createShaderProgram()
 {
-    if(m_pShaderProgram != NULL)
-    {
-        delete m_pShaderProgram;
-    }
-
     m_pShaderProgram = new CoShaderProgram();
     m_pShaderProgram->AddShaders(EShaderType::eFragment, strDefaultFragShader);
     m_pShaderProgram->AddShaders(EShaderType::eVertex, strDefaultVertexShader);
     m_pShaderProgram->link();
 
-    return true;
-
+    m_nMatrixID = m_pShaderProgram->getUniformLocation("perViewModel");
+    m_nVertexID = m_pShaderProgram->getAttribLocation("vertex");
+    m_nColorID = m_pShaderProgram->getAttribLocation("color");
 }
 
 void CoQtRenderer::setCamera(CoCamera *pCamera)
 {
     if(m_pCamera != NULL)
     {
-        disconnect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()));
+        disconnect(m_pCamera, SIGNAL(signalCameraUpdated()), this, SLOT(slotCameraUpdated()));
     }
 
     m_pCamera = pCamera;
-    connect(m_pCamera, SIGNAL(signalUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
+    connect(m_pCamera, SIGNAL(signalCameraUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
+}
+
+void CoQtRenderer::addNode(CoNode *pNode)
+{
+    auto ret = m_mapNodeObject.insert( { pNode , nullptr } );
+    if (ret.second)
+    {
+        SNodeObject *pNodeObject = new SNodeObject();
+        pNodeObject->vao = new CoVertexArrayObject();
+        pNodeObject->vbo = new CoVertexBufferObject();
+        pNodeObject->cbo = new CoVertexBufferObject();
+        ret.first->second = pNodeObject;
+    }
 }

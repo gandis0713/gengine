@@ -26,5 +26,5 @@ void CoPerspectiveCamera::update()
 
     m_matCamera = matPerspective * matLookAt;
 
-    emit signalUpdated();
+    emit signalCameraUpdated();
 }

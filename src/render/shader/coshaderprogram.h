@@ -16,6 +16,9 @@ public:
     void bind();
     void link();
 
+    void enableAttributeArray(Guint nID);
+    void setAttributeBuffer(Guint nID, Guint nSize, Guint nOffset);
+
     Guint getUniformLocation(Gstring strName);
     Guint getAttribLocation(Gstring strName);
     void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);

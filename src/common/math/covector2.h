@@ -2,8 +2,9 @@
 #define COVECTOR2_H
 
 #include "dedatatype.h"
+#include "deengine.h"
 
-class CoVec2
+class GANDISENGINE CoVec2
 {
 public:
     CoVec2() : x(0.f), y(0.f) {};

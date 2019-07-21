@@ -2,8 +2,9 @@
 #define COVECTOR3_H
 
 #include "dedatatype.h"
+#include "deengine.h"
 
-class CoVec3
+class GANDISENGINE CoVec3
 {
 public:
     CoVec3() : x(0.f), y(0.f), z(0.f) {};

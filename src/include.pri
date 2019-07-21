@@ -6,6 +6,7 @@ INCLUDEPATH += common \
 INCLUDEPATH += data
 INCLUDEPATH += render \
     render/core \
+    render/object \
     render/camera \
     render/shader \
     render/shader/core

@@ -2,8 +2,9 @@
 #define COMATRIX2X2_H
 
 #include "dedatatype.h"
+#include "deengine.h"
 
-class CoMat2x2
+class GANDISENGINE CoMat2x2
 {
 public:
     CoMat2x2();

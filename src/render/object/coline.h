@@ -1,11 +1,16 @@
 #ifndef COLINE_H
 #define COLINE_H
 
+#include "conode.h"
+#include "deengine.h"
 
-class CoLine
+class GANDISENGINE CoLine : public CoNode
 {
 public:
-    CoLine();
+    CoLine(CoVec3 vStart, CoVec3 vEnd);
+    ~CoLine();
+
+    void setPoint(CoVec3 vStart, CoVec3 vEnd);
 };
 
 #endif // COLINE_H

@@ -17,7 +17,7 @@ public:
 
     bool compile();
 
-protected:
+private:
     Guint                   m_nID;
     EShaderType             m_eType;
     Gstring                 m_strSource;

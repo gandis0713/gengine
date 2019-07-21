@@ -26,6 +26,10 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_render_core.files = render/core/*.h
     INSTALLS += include_render_core
 
+    include_render_object.path = $${G_INSTALL_INC_PATH}/render/object
+    include_render_object.files = render/object/*.h
+    INSTALLS += include_render_object
+
     include_render_camera.path = $${G_INSTALL_INC_PATH}/render/camera
     include_render_camera.files = render/camera/*.h
     INSTALLS += include_render_camera

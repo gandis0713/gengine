@@ -3,8 +3,9 @@
 
 #include "dedatatype.h"
 #include "covector3.h"
+#include "deengine.h"
 
-class CoVec4
+class GANDISENGINE CoVec4
 {
 public:
     CoVec4() : x(0.f), y(0.f), z(0.f), w(0.f) {};

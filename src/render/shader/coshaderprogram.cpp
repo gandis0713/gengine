@@ -97,6 +97,25 @@ void CoShaderProgram::release()
     }
 }
 
+
+void CoShaderProgram::enableAttributeArray(Guint nID)
+{
+    glEnableVertexAttribArray(nID);
+}
+
+void CoShaderProgram::setAttributeBuffer(Guint nID, Guint nSize, Guint nOffset)
+{
+    glVertexAttribPointer
+                (
+                nID,
+                nSize,
+                GL_FLOAT,
+                GL_FALSE,
+                0,
+                (void*)nOffset
+                );
+}
+
 bool CoShaderProgram::check()
 {
     GLint nResult = GL_FALSE;

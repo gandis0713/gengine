@@ -39,7 +39,7 @@ public:
 
     virtual void update() = 0;
 signals:
-    void signalUpdated();
+    void signalCameraUpdated();
 
 protected:
     CoMat4x4 m_matCamera;
