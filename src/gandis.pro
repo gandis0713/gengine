@@ -63,7 +63,10 @@ SOURCES += \
     render/node/conode.cpp \
     render/shader/codefaultshaderprogram.cpp \
     render/shader/coshaderprogram.cpp \
-    render/shader/cosplineshaderprogram.cpp
+    render/shader/cosplineshaderprogram.cpp \
+    render/node/core/conodecore.cpp \
+    render/node/core/codefaultnodecore.cpp \
+    render/node/core/cosplinenodecore.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -107,7 +110,10 @@ HEADERS += \
     render/node/conode.h \
     render/shader/codefaultshaderprogram.h \
     render/shader/coshaderprogram.h \
-    render/shader/cosplineshaderprogram.h
+    render/shader/cosplineshaderprogram.h \
+    render/node/core/conodecore.h \
+    render/node/core/codefaultnodecore.h \
+    render/node/core/cosplinenodecore.h
 
 OTHER_FILES += \
     libgandis.pri

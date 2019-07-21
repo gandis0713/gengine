@@ -10,6 +10,7 @@ INCLUDEPATH += $${G_INC_PATH}/ \
     $${G_INC_PATH}/render \
     $${G_INC_PATH}/render/core \
     $${G_INC_PATH}/render/node \
+    $${G_INC_PATH}/render/node/core \
     $${G_INC_PATH}/render/object \
     $${G_INC_PATH}/render/camera \
     $${G_INC_PATH}/render/shader \

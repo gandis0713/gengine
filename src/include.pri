@@ -7,6 +7,7 @@ INCLUDEPATH += data
 INCLUDEPATH += render \
     render/core \
     render/node \
+    render/node/core \
     render/object \
     render/camera \
     render/shader \

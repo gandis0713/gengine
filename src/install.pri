@@ -34,6 +34,10 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_render_node.files = render/node/*.h
     INSTALLS += include_render_node
 
+    include_render_node_core.path = $${G_INSTALL_INC_PATH}/render/node/core
+    include_render_node_core.files = render/node/core/*.h
+    INSTALLS += include_render_node_core
+
     include_render_camera.path = $${G_INSTALL_INC_PATH}/render/camera
     include_render_camera.files = render/camera/*.h
     INSTALLS += include_render_camera
@@ -64,3 +68,7 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     library.path = $${G_INSTALL_PATH}
     library.files = $${DESTDIR}
     INSTALLS += library
+
+HEADERS +=
+
+SOURCES +=
