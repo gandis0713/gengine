@@ -17,13 +17,13 @@ public:
     Gfloat distance(const CoVec2& vec);
     CoVec2& normalize();
 
-    CoVec2 operator-();
-    CoVec2 operator+();
+    CoVec2 operator-() const;
+    CoVec2 operator+() const;
 
-    CoVec2 operator-(const CoVec2& vec);
-    CoVec2 operator+(const CoVec2& vec);
-    CoVec2 operator*(const CoVec2& vec);
-    CoVec2 operator/(const CoVec2& vec);
+    CoVec2 operator-(const CoVec2& vec) const;
+    CoVec2 operator+(const CoVec2& vec) const;
+    CoVec2 operator*(const CoVec2& vec) const;
+    CoVec2 operator/(const CoVec2& vec) const;
 
     CoVec2& operator-=(const CoVec2& vec);
     CoVec2& operator+=(const CoVec2& vec);

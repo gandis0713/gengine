@@ -1,18 +1,19 @@
 #ifndef COCATMULLSPLINENODECORE_H
 #define COCATMULLSPLINENODECORE_H
 
-#include "conodecore.h"
+#include "colinenodecore.h"
 
-class CoCatmullSplineNodeCore : public CoNodeCore
+class CoCatmullSplineNodeCore : public CoLineNodeCore
 {
 public:
+    CoCatmullSplineNodeCore();
     CoCatmullSplineNodeCore(CoNode* pNode, CoCamera *pCamera);
     ~CoCatmullSplineNodeCore();
 
     void initialize() override;
     void paint() override;
-
-    CoVertexBufferObject * m_pVSO;
+protected:
+    Guint m_nAlpha;
 };
 
 

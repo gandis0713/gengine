@@ -2,6 +2,12 @@
 #include "coline.h"
 #include "colineshaderprogram.h"
 
+
+CoLineNodeCore::CoLineNodeCore()
+{
+
+}
+
 CoLineNodeCore::CoLineNodeCore(CoNode* pNode, CoCamera *pCamera)
     : CoNodeCore(pNode, pCamera)
 {

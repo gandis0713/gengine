@@ -39,32 +39,32 @@ CoVec2& CoVec2::normalize()
     return *this;
 }
 
-CoVec2 CoVec2::operator-()
+CoVec2 CoVec2::operator-() const
 {
     return CoVec2(-x, -y);
 }
 
-CoVec2 CoVec2::operator+()
+CoVec2 CoVec2::operator+() const
 {
     return CoVec2(+x, +y);
 }
 
-CoVec2 CoVec2::operator-(const CoVec2& vec)
+CoVec2 CoVec2::operator-(const CoVec2& vec) const
 {
     return CoVec2(x - vec.x, y - vec.y);
 }
 
-CoVec2 CoVec2::operator+(const CoVec2& vec)
+CoVec2 CoVec2::operator+(const CoVec2& vec) const
 {
     return CoVec2(x + vec.x, y + vec.y);
 }
 
-CoVec2 CoVec2::operator*(const CoVec2& vec)
+CoVec2 CoVec2::operator*(const CoVec2& vec) const
 {
     return CoVec2(x * vec.x, y * vec.y);
 }
 
-CoVec2 CoVec2::operator/(const CoVec2& vec)
+CoVec2 CoVec2::operator/(const CoVec2& vec) const
 {
     return CoVec2(x / vec.x, y / vec.y);
 }

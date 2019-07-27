@@ -46,32 +46,32 @@ CoVec3& CoVec3::normalize()
     return *this;
 }
 
-CoVec3 CoVec3::operator-()
+CoVec3 CoVec3::operator-() const
 {
     return CoVec3(-x, -y, -z);
 }
 
-CoVec3 CoVec3::operator+()
+CoVec3 CoVec3::operator+() const
 {
     return CoVec3(+x, +y, +z);
 }
 
-CoVec3 CoVec3::operator-(const CoVec3& vec)
+CoVec3 CoVec3::operator-(const CoVec3& vec) const
 {
     return CoVec3(x - vec.x, y - vec.y, z - vec.z);
 }
 
-CoVec3 CoVec3::operator+(const CoVec3& vec)
+CoVec3 CoVec3::operator+(const CoVec3& vec) const
 {
     return CoVec3(x + vec.x, y + vec.y, z + vec.z);
 }
 
-CoVec3 CoVec3::operator*(const CoVec3& vec)
+CoVec3 CoVec3::operator*(const CoVec3& vec) const
 {
     return CoVec3(x * vec.x, y * vec.y, z * vec.z);
 }
 
-CoVec3 CoVec3::operator/(const CoVec3& vec)
+CoVec3 CoVec3::operator/(const CoVec3& vec) const
 {
     return CoVec3(x / vec.x, y / vec.y, z / vec.z);
 }

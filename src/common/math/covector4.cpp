@@ -51,32 +51,32 @@ CoVec4& CoVec4::normalize()
     return *this;
 }
 
-CoVec4 CoVec4::operator-()
+CoVec4 CoVec4::operator-() const
 {
     return CoVec4(-x, -y, -z, -w);
 }
 
-CoVec4 CoVec4::operator+()
+CoVec4 CoVec4::operator+() const
 {
     return CoVec4(+x, +y, +z, +w);
 }
 
-CoVec4 CoVec4::operator-(const CoVec4& vec)
+CoVec4 CoVec4::operator-(const CoVec4& vec) const
 {
     return CoVec4(x - vec.x, y - vec.y, z - vec.z, w - vec.w);
 }
 
-CoVec4 CoVec4::operator+(const CoVec4& vec)
+CoVec4 CoVec4::operator+(const CoVec4& vec) const
 {
     return CoVec4(x + vec.x, y + vec.y, z + vec.z, w + vec.w);
 }
 
-CoVec4 CoVec4::operator*(const CoVec4& vec)
+CoVec4 CoVec4::operator*(const CoVec4& vec) const
 {
     return CoVec4(x * vec.x, y * vec.y, z * vec.z, w * vec.w);
 }
 
-CoVec4 CoVec4::operator/(const CoVec4& vec)
+CoVec4 CoVec4::operator/(const CoVec4& vec) const
 {
     return CoVec4(x / vec.x, y / vec.y, z / vec.z, w / vec.w);
 }

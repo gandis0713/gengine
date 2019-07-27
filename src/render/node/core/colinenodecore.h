@@ -6,6 +6,7 @@
 class CoLineNodeCore : public CoNodeCore
 {
 public:
+    CoLineNodeCore();
     CoLineNodeCore(CoNode* pNode, CoCamera *pCamera);
     ~CoLineNodeCore();
 

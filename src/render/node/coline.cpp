@@ -1,6 +1,7 @@
 #include "coline.h"
 
 CoLine::CoLine()
+    : m_fWidth(0.005f)
 {
 
 }

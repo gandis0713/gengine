@@ -10,6 +10,7 @@
 class CoNodeCore
 {
 public:
+    CoNodeCore();
     CoNodeCore(CoNode* pNode, CoCamera *pCamera);
     ~CoNodeCore();
 

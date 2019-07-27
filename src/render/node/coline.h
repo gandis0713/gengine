@@ -13,8 +13,8 @@ public:
     void draw() override;
 
     void setPoint(CoVec3 vStart, CoVec3 vEnd);
-    void setWidth(Gfloat fWidth);
 
+    void setWidth(Gfloat fWidth);
     Gfloat getWidth();
 
 protected:
