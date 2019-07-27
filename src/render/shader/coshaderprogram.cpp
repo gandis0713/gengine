@@ -32,6 +32,11 @@ void CoShaderProgram::setUniformMatrix4fv(Guint nID, CoMat4x4 mat4)
     glUniformMatrix4fv(nID, 1, GL_FALSE, &mat4[0]);
 }
 
+void CoShaderProgram::setUniform1f(Guint nID, Gfloat fValue)
+{
+    glUniform1f(nID, fValue);
+}
+
 void CoShaderProgram::bind()
 {
     glUseProgram(m_nProgramID);

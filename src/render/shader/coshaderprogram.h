@@ -19,7 +19,6 @@ public:
     void AddShaders(EShaderType eShaderType, QString strSource);
     void bind();
     void link();
-    virtual void getUniform() = 0;
 
     void enableAttributeArray(Guint nID);
     void setAttributeBuffer(Guint nID, Guint nSize, Guint nOffset);
@@ -27,8 +26,7 @@ public:
     Guint getUniformLocation(Gstring strName);
     Guint getAttribLocation(Gstring strName);
     void setUniformMatrix4fv(Guint nID, CoMat4x4 mat4);
-
-    Guint m_nMVPID;
+    void setUniform1f(Guint nID, Gfloat fValue);
 
 private:
     void initialize();

@@ -61,13 +61,13 @@ SOURCES += \
     render/node/copolygon.cpp \
     render/node/copoint.cpp \
     render/node/conode.cpp \
-    render/shader/codefaultshaderprogram.cpp \
     render/shader/coshaderprogram.cpp \
-    render/shader/cosplineshaderprogram.cpp \
     render/node/core/conodecore.cpp \
-    render/node/core/codefaultnodecore.cpp \
-    render/node/core/cosplinenodecore.cpp \
-    render/node/cospline.cpp
+    render/node/core/colinenodecore.cpp \
+    render/shader/colineshaderprogram.cpp \
+    render/shader/cocatmullsplineshaderprogram.cpp \
+    render/node/core/cocatmullsplinenodecore.cpp \
+    render/node/cocatmullspline.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -107,13 +107,13 @@ HEADERS += \
     render/node/copolygon.h \
     render/node/copoint.h \
     render/node/conode.h \
-    render/shader/codefaultshaderprogram.h \
     render/shader/coshaderprogram.h \
-    render/shader/cosplineshaderprogram.h \
     render/node/core/conodecore.h \
-    render/node/core/codefaultnodecore.h \
-    render/node/core/cosplinenodecore.h \
-    render/node/cospline.h
+    render/node/core/colinenodecore.h \
+    render/shader/colineshaderprogram.h \
+    render/shader/cocatmullsplineshaderprogram.h \
+    render/node/core/cocatmullsplinenodecore.h \
+    render/node/cocatmullspline.h
 
 OTHER_FILES += \
     libgandis.pri

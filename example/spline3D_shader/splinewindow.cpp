@@ -3,7 +3,7 @@
 
 #include "coqtrenderer.h"
 #include "coorthographiccamera.h"
-#include "cospline.h"
+#include "cocatmullspline.h"
 
 SplineWindow::SplineWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -23,7 +23,7 @@ SplineWindow::SplineWindow(QWidget *parent) :
     vecPoints.push_back(CoVec3( 2, 1.0, -2));
     vecPoints.push_back(CoVec3( 3, 3.0, 1));
 
-    CoSpline *pSpline = new CoSpline(vecPoints);
+    CoCatmullSpline *pSpline = new CoCatmullSpline(vecPoints);
 
     m_pRender->addNode(pSpline);
 }

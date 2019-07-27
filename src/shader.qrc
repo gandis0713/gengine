@@ -2,8 +2,14 @@
 	<qresource prefix="/">
 		<file>resource/glsl/default_vert.glsl</file>
 		<file>resource/glsl/default_frag.glsl</file>
-		<file>resource/glsl/spline_vert.glsl</file>
-		<file>resource/glsl/spline_geom.glsl</file>
-		<file>resource/glsl/spline_frag.glsl</file>		
+		<file>resource/glsl/hermite_spline_vert.glsl</file>
+		<file>resource/glsl/hermite_spline_geom.glsl</file>
+		<file>resource/glsl/hermite_spline_frag.glsl</file>
+		<file>resource/glsl/catmull_spline_vert.glsl</file>
+		<file>resource/glsl/catmull_spline_geom.glsl</file>
+		<file>resource/glsl/catmull_spline_frag.glsl</file>
+		<file>resource/glsl/line_vert.glsl</file>
+		<file>resource/glsl/line_geom.glsl</file>
+		<file>resource/glsl/line_frag.glsl</file>			
 	</qresource>
 </RCC>
