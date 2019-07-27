@@ -1,23 +1,23 @@
-#include "cocatmullsplinenodecore.h"
+#include "cocatmullsplinecore.h"
 #include "cocatmullsplineshaderprogram.h"
 #include "cocatmullspline.h"
 
-CoCatmullSplineNodeCore::CoCatmullSplineNodeCore()
+CoCatmullSplineCore::CoCatmullSplineCore()
 {
 
 }
 
-CoCatmullSplineNodeCore::CoCatmullSplineNodeCore(CoNode* pNode, CoCamera *pCamera)
-    : CoLineNodeCore(pNode, pCamera)
+CoCatmullSplineCore::CoCatmullSplineCore(CoNode* pNode, CoCamera *pCamera)
+    : CoLineCore(pNode, pCamera)
 {
 
 }
-CoCatmullSplineNodeCore::~CoCatmullSplineNodeCore()
+CoCatmullSplineCore::~CoCatmullSplineCore()
 {
 
 }
 
-void CoCatmullSplineNodeCore::initialize()
+void CoCatmullSplineCore::initialize()
 {
     m_pVAO = new CoVertexArrayObject();
     m_pVBO = new CoVertexBufferObject();
@@ -30,7 +30,7 @@ void CoCatmullSplineNodeCore::initialize()
     m_pShaderProgram->link();
 
     m_nMVPID = m_pShaderProgram->getUniformLocation("mvp");
-    m_nWidthID = m_pShaderProgram->getUniformLocation("width");
+    m_nRadiusID = m_pShaderProgram->getUniformLocation("radius");
     m_nAlpha = m_pShaderProgram->getUniformLocation("alpha");
 
     m_pVBO->gen();
@@ -56,16 +56,16 @@ void CoCatmullSplineNodeCore::initialize()
 
 }
 
-void CoCatmullSplineNodeCore::paint()
+void CoCatmullSplineCore::paint()
 {
     m_pShaderProgram->bind();
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getMatrix() * CoMat4x4());
 
-    CoCatmullSpline *pSpline = dynamic_cast<CoCatmullSpline*>(m_pNode);
-    m_pShaderProgram->setUniform1f(m_nWidthID, pSpline->getWidth());
+    CoCatmullSpline *pSpline = static_cast<CoCatmullSpline*>(m_pNode);
+    m_pShaderProgram->setUniform1f(m_nRadiusID, pSpline->getRadius());
     m_pShaderProgram->setUniform1f(m_nAlpha, pSpline->getAlpha());
 
     m_pVAO->bind();
 
-    m_pNode->draw();
+    glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, pSpline->getSize());
 }

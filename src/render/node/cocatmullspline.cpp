@@ -20,11 +20,6 @@ CoCatmullSpline::~CoCatmullSpline()
 
 }
 
-void CoCatmullSpline::draw()
-{
-    glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, getSize());
-}
-
 void CoCatmullSpline::setPoints(const std::vector<CoVec3> vecPoints)
 {
     m_vecPoints.clear();

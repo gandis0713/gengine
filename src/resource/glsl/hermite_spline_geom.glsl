@@ -7,7 +7,7 @@ in vec3 vertColor[];
 out vec3 fragColor;
 
 uniform mat4 mvp;
-uniform float width;
+uniform float radius;
 
 vec4 clip(vec3 position)
 {

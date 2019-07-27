@@ -4,7 +4,7 @@
 #include "coglextension.h"
 #include "deengine.h"
 #include "covector3.h"
-#include "deshader.h".h"
+#include "deshader.h"
 
 #include <vector>
 
@@ -13,8 +13,6 @@ class GANDISENGINE CoNode
 public:
     CoNode();
     ~CoNode();
-
-    virtual void draw() = 0;
 
     Guint getSize();
 

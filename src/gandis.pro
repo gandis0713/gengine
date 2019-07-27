@@ -63,11 +63,11 @@ SOURCES += \
     render/node/conode.cpp \
     render/shader/coshaderprogram.cpp \
     render/node/core/conodecore.cpp \
-    render/node/core/colinenodecore.cpp \
     render/shader/colineshaderprogram.cpp \
     render/shader/cocatmullsplineshaderprogram.cpp \
-    render/node/core/cocatmullsplinenodecore.cpp \
-    render/node/cocatmullspline.cpp
+    render/node/cocatmullspline.cpp \
+    render/node/core/cocatmullsplinecore.cpp \
+    render/node/core/colinecore.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -109,11 +109,11 @@ HEADERS += \
     render/node/conode.h \
     render/shader/coshaderprogram.h \
     render/node/core/conodecore.h \
-    render/node/core/colinenodecore.h \
     render/shader/colineshaderprogram.h \
     render/shader/cocatmullsplineshaderprogram.h \
-    render/node/core/cocatmullsplinenodecore.h \
-    render/node/cocatmullspline.h
+    render/node/cocatmullspline.h \
+    render/node/core/cocatmullsplinecore.h \
+    render/node/core/colinecore.h
 
 OTHER_FILES += \
     libgandis.pri

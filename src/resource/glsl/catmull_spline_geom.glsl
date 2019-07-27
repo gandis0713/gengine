@@ -7,7 +7,7 @@ in vec3 vertColor[];
 out vec3 fragColor;
 
 uniform mat4 mvp;
-uniform float width;
+uniform float radius;
 uniform float alpha;
 
 float t0;
@@ -62,9 +62,9 @@ void draw(vec3 pos1, vec3 pos2)
 
     vec3 dir = cross(vec3(0, 0, 1), normalize(v2-v1));
 
-    gl_Position = vec4(v1 - dir * width, 1.0);
+    gl_Position = vec4(v1 - dir * radius, 1.0);
     EmitVertex();
-    gl_Position = vec4(v1 + dir * width, 1.0);
+    gl_Position = vec4(v1 + dir * radius, 1.0);
     EmitVertex();
 }
 

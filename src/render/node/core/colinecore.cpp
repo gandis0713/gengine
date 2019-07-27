@@ -1,25 +1,25 @@
-#include "colinenodecore.h"
+#include "colinecore.h"
 #include "coline.h"
 #include "colineshaderprogram.h"
 
 
-CoLineNodeCore::CoLineNodeCore()
+CoLineCore::CoLineCore()
 {
 
 }
 
-CoLineNodeCore::CoLineNodeCore(CoNode* pNode, CoCamera *pCamera)
+CoLineCore::CoLineCore(CoNode* pNode, CoCamera *pCamera)
     : CoNodeCore(pNode, pCamera)
 {
 }
 
 
-CoLineNodeCore::~CoLineNodeCore()
+CoLineCore::~CoLineCore()
 {
 
 }
 
-void CoLineNodeCore::initialize()
+void CoLineCore::initialize()
 {
     m_pVAO = new CoVertexArrayObject();
     m_pVBO = new CoVertexBufferObject();
@@ -32,7 +32,7 @@ void CoLineNodeCore::initialize()
     m_pShaderProgram->link();
 
     m_nMVPID = m_pShaderProgram->getUniformLocation("mvp");
-    m_nWidthID = m_pShaderProgram->getUniformLocation("width");
+    m_nRadiusID = m_pShaderProgram->getUniformLocation("radius");
 
     m_pVBO->gen();
     m_pVBO->bind();
@@ -56,15 +56,15 @@ void CoLineNodeCore::initialize()
     m_pVAO->release();
 }
 
-void CoLineNodeCore::paint()
+void CoLineCore::paint()
 {
     m_pShaderProgram->bind();
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getMatrix() * CoMat4x4());
 
-    CoLine *pLine = dynamic_cast<CoLine*>(m_pNode);
-    m_pShaderProgram->setUniform1f(m_nWidthID, pLine->getWidth());
+    CoLine *pLine = static_cast<CoLine*>(m_pNode);
+    m_pShaderProgram->setUniform1f(m_nRadiusID, pLine->getRadius());
 
     m_pVAO->bind();
 
-    m_pNode->draw();
+    glDrawArrays(GL_LINE_STRIP, 0, pLine->getSize());
 }
