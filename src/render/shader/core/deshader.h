@@ -11,7 +11,8 @@ enum EShaderType
 enum EShaderProgramType
 {
     eDefault,
-    eSpline
+    eSpline,
+    eCircle
 };
 
 #endif // CODEFAULTSHADER_H

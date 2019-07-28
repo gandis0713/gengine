@@ -63,7 +63,7 @@ void CoCatmullSplineCore::paint()
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getMatrix() * CoMat4x4());
 
     CoCatmullSpline *pSpline = static_cast<CoCatmullSpline*>(m_pNode);
-    m_pShaderProgram->setUniform1f(m_nRadiusID, pSpline->getRadius());
+    m_pShaderProgram->setUniform1f(m_nRadiusID, pSpline->getWidth());
     m_pShaderProgram->setUniform1f(m_nAlpha, pSpline->getAlpha());
 
     m_pVAO->bind();

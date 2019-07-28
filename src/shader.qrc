@@ -10,6 +10,9 @@
 		<file>resource/glsl/catmull_spline_frag.glsl</file>
 		<file>resource/glsl/line_vert.glsl</file>
 		<file>resource/glsl/line_geom.glsl</file>
-		<file>resource/glsl/line_frag.glsl</file>			
+		<file>resource/glsl/line_frag.glsl</file>
+		<file>resource/glsl/circle_vert.glsl</file>
+		<file>resource/glsl/circle_geom.glsl</file>
+		<file>resource/glsl/circle_frag.glsl</file>			
 	</qresource>
 </RCC>

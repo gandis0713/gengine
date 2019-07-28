@@ -1,9 +1,9 @@
 #ifndef COCATMULLSPLINE_H
 #define COCATMULLSPLINE_H
 
-#include "coline.h"
+#include "coshape.h".h"
 
-class GANDISENGINE CoCatmullSpline : public CoLine
+class GANDISENGINE CoCatmullSpline : public CoShape
 {
 public:
     CoCatmullSpline();

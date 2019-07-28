@@ -16,9 +16,13 @@ public:
     std::vector<CoVec3> getPoints();
     std::vector<CoVec3> getColors();
 
+    void setWidth(Gfloat fWidth);
+    Gfloat getWidth();
+
 protected:
     std::vector<CoVec3> m_vecPoints;
     std::vector<CoVec3> m_vecColors;
+    Gfloat m_fWidth;
 };
 
 #endif // COSHAPE_H

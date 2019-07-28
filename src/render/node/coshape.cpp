@@ -1,6 +1,7 @@
 #include "coshape.h"
 
 CoShape::CoShape()
+    : m_fWidth(0.005f)
 {
 
 }
@@ -32,3 +33,15 @@ std::vector<CoVec3> CoShape::getColors()
 {
     return m_vecColors;
 }
+
+
+void CoShape::setWidth(Gfloat fWidth)
+{
+    m_fWidth = fWidth;
+}
+
+Gfloat CoShape::getWidth()
+{
+    return m_fWidth;
+}
+

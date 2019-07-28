@@ -11,12 +11,6 @@ public:
     ~CoLine();
 
     void setPoint(CoVec3 vStart, CoVec3 vEnd);
-
-    void setRadius(Gfloat fRadius);
-    Gfloat getRadius();
-
-protected:
-    Gfloat m_fRadius;
 };
 
 #endif // COLINE_H

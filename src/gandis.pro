@@ -70,7 +70,9 @@ SOURCES += \
     render/node/core/cocatmullsplinecore.cpp \
     render/node/core/colinecore.cpp \
     render/node/coshape.cpp \
-    render/node/core/coshapecore.cpp
+    render/node/core/coshapecore.cpp \
+    render/node/core/cocirclecore.cpp \
+    render/node/cocircle.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -118,7 +120,9 @@ HEADERS += \
     render/node/core/cocatmullsplinecore.h \
     render/node/core/colinecore.h \
     render/node/coshape.h \
-    render/node/core/coshapecore.h
+    render/node/core/coshapecore.h \
+    render/node/core/cocirclecore.h \
+    render/node/cocircle.h
 
 OTHER_FILES += \
     libgandis.pri

@@ -64,7 +64,7 @@ void CoLineCore::paint()
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getMatrix() * CoMat4x4());
 
     CoLine *pLine = static_cast<CoLine*>(m_pNode);
-    m_pShaderProgram->setUniform1f(m_nRadiusID, pLine->getRadius());
+    m_pShaderProgram->setUniform1f(m_nRadiusID, pLine->getWidth());
 
     m_pVAO->bind();
 
