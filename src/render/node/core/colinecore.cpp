@@ -9,7 +9,7 @@ CoLineCore::CoLineCore()
 }
 
 CoLineCore::CoLineCore(CoNode* pNode, CoCamera *pCamera)
-    : CoNodeCore(pNode, pCamera)
+    : CoShapeCore(pNode, pCamera)
 {
 }
 
@@ -34,13 +34,15 @@ void CoLineCore::initialize()
     m_nMVPID = m_pShaderProgram->getUniformLocation("mvp");
     m_nRadiusID = m_pShaderProgram->getUniformLocation("radius");
 
+    CoLine *pLine = static_cast<CoLine*>(m_pNode);
+
     m_pVBO->gen();
     m_pVBO->bind();
-    m_pVBO->allocate(&m_pNode->getPoints()[0], m_pNode->getSize() * 3 * sizeof(Gfloat));
+    m_pVBO->allocate(&pLine->getPoints()[0], pLine->getSize() * 3 * sizeof(Gfloat));
 
     m_pCBO->gen();
     m_pCBO->bind();
-    m_pCBO->allocate(&m_pNode->getColors()[0], m_pNode->getSize() * 3 * sizeof(Gfloat));
+    m_pCBO->allocate(&pLine->getColors()[0], pLine->getSize() * 3 * sizeof(Gfloat));
 
     m_pVAO->gen();
     m_pVAO->bind();

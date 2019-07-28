@@ -33,13 +33,14 @@ void CoCatmullSplineCore::initialize()
     m_nRadiusID = m_pShaderProgram->getUniformLocation("radius");
     m_nAlpha = m_pShaderProgram->getUniformLocation("alpha");
 
+    CoCatmullSpline *pSpline = static_cast<CoCatmullSpline*>(m_pNode);
     m_pVBO->gen();
     m_pVBO->bind();
-    m_pVBO->allocate(&m_pNode->getPoints()[0], m_pNode->getSize() * 3 * sizeof(Gfloat));
+    m_pVBO->allocate(&pSpline->getPoints()[0], pSpline->getSize() * 3 * sizeof(Gfloat));
 
     m_pCBO->gen();
     m_pCBO->bind();
-    m_pCBO->allocate(&m_pNode->getColors()[0], m_pNode->getSize() * 3 * sizeof(Gfloat));
+    m_pCBO->allocate(&pSpline->getColors()[0], pSpline->getSize() * 3 * sizeof(Gfloat));
 
     m_pVAO->gen();
     m_pVAO->bind();

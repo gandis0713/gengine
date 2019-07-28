@@ -1,9 +1,9 @@
 #ifndef COLINE_H
 #define COLINE_H
 
-#include "conode.h"
+#include "coshape.h".h"
 
-class GANDISENGINE CoLine : public CoNode
+class GANDISENGINE CoLine : public CoShape
 {
 public:
     CoLine();

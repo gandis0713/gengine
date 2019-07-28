@@ -1,9 +1,9 @@
 #ifndef COLINECORE_H
 #define COLINECORE_H
 
-#include "conodecore.h"
+#include "coshapecore.h".h"
 
-class CoLineCore : public CoNodeCore
+class CoLineCore : public CoShapeCore
 {
 public:
     CoLineCore();
