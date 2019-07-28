@@ -9,12 +9,7 @@ CoOrthographicCamera::CoOrthographicCamera()
     m_fBottom = -5.f;
     m_fTop = 5.f;
 
-    CoMat4x4 matPerspective = NoMath::orthographic(m_fLeft, m_fRight, m_fBottom, m_fTop, m_fNear, m_fFar);
-    CoMat4x4 matLookAt = NoMath::lookAt(m_vecPosition,
-                                        m_vecTarget,
-                                        m_vecUp);
-
-    m_matCamera = matPerspective * matLookAt;
+    setCamera();
 }
 
 CoOrthographicCamera::~CoOrthographicCamera()
@@ -24,12 +19,18 @@ CoOrthographicCamera::~CoOrthographicCamera()
 
 void CoOrthographicCamera::update()
 {
-    CoMat4x4 matPerspective = NoMath::orthographic(m_fLeft, m_fRight, m_fBottom, m_fTop, m_fNear, m_fFar);
-    CoMat4x4 matLookAt = NoMath::lookAt(m_vecPosition,
-                                        m_vecTarget,
-                                        m_vecUp);
-
-    m_matCamera = matPerspective * matLookAt;
+    setCamera();
 
     emit signalCameraUpdated();
 }
+
+void CoOrthographicCamera::setCamera()
+{
+    m_matProjection = NoMath::orthographic(m_fLeft, m_fRight, m_fBottom, m_fTop, m_fNear, m_fFar);
+    m_matView = NoMath::lookAt(m_vecPosition,
+                               m_vecTarget,
+                               m_vecUp);
+
+    m_matCamera = m_matProjection * m_matView;
+}
+

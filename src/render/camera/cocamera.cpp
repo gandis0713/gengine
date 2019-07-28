@@ -57,9 +57,18 @@ void CoCamera::setMatrix(const CoMat4x4& mat)
     m_matCamera = mat;
 }
 
-CoMat4x4 CoCamera::getMatrix()
+CoMat4x4 CoCamera::getCameraMat()
 {
     return m_matCamera;
+}
+
+CoMat4x4 CoCamera::getProjectionMat()
+{
+    return m_matProjection;
+}
+CoMat4x4 CoCamera::getViewMat()
+{
+    return m_matView;
 }
 
 void CoCamera::setLeftPosition(const Gfloat &value)

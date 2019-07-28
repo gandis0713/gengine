@@ -11,6 +11,7 @@ public:
     virtual ~CoOrthographicCamera();
 
     void update() override;
+    void setCamera() override;
 };
 
 #endif // COORTHOGRAPHICCAMERA_H

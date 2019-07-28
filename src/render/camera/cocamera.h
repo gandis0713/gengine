@@ -22,7 +22,9 @@ public:
     void setUp(const CoVec3 &vec);
     CoVec3 getUp();
     void setMatrix(const CoMat4x4& mat);
-    CoMat4x4 getMatrix();
+    CoMat4x4 getCameraMat();
+    CoMat4x4 getProjectionMat();
+    CoMat4x4 getViewMat();
 
     void setLeftPosition(const Gfloat &value);
     void setRightPosition(const Gfloat &value);
@@ -38,11 +40,14 @@ public:
                       const Gfloat &far);
 
     virtual void update() = 0;
+    virtual void setCamera() = 0;
 signals:
     void signalCameraUpdated();
 
 protected:
     CoMat4x4 m_matCamera;
+    CoMat4x4 m_matProjection;
+    CoMat4x4 m_matView;
 
     CoVec3 m_vecTarget;
     CoVec3 m_vecPosition;

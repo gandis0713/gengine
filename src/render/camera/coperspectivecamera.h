@@ -11,6 +11,7 @@ public:
     virtual ~CoPerspectiveCamera();
 
     void update() override;
+    void setCamera() override;
 };
 
 #endif // COPERSPECTIVECAMERA_H
