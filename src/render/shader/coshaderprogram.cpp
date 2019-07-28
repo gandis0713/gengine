@@ -117,12 +117,12 @@ void CoShaderProgram::release()
 }
 
 
-void CoShaderProgram::enableAttributeArray(Guint nID)
+void CoShaderProgram::enableAttributeVertexArray(Guint nID)
 {
     glEnableVertexAttribArray(nID);
 }
 
-void CoShaderProgram::setAttributeBuffer(Guint nID, Guint nSize, Guint nOffset)
+void CoShaderProgram::setVertexAttribPointer(Guint nID, Guint nSize, Guint nOffset)
 {
     glVertexAttribPointer
                 (

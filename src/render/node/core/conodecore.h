@@ -3,8 +3,6 @@
 
 #include "conode.h"
 #include "cocamera.h"
-#include "covertexarrayobject.h"
-#include "covertexbufferobject.h"
 #include "coshaderprogram.h"
 
 class CoNodeCore
@@ -25,10 +23,6 @@ protected:
 
     CoNode*               m_pNode;
     CoCamera*             m_pCamera;
-
-    CoVertexArrayObject*  m_pVAO;
-    CoVertexBufferObject* m_pVBO;
-    CoVertexBufferObject* m_pCBO;
     CoShaderProgram*      m_pShaderProgram;
     EShaderProgramType    m_eShaderProgramType;
 };

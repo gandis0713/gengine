@@ -2,6 +2,8 @@
 #define COSHAPECORE_H
 
 #include "conodecore.h"
+#include "covertexarrayobject.h"
+#include "covertexbufferobject.h"
 
 class CoShapeCore : public CoNodeCore
 {
