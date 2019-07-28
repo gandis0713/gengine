@@ -1,7 +1,7 @@
 #include "conode.h"
 
 CoNode::CoNode()
-    :m_eShaderProgramType(EShaderProgramType::eDefault)
+    :m_eShaderProgramType(EShaderProgramType::ePoint)
 {
 }
 

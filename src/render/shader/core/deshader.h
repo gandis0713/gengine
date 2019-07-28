@@ -10,9 +10,11 @@ enum EShaderType
 
 enum EShaderProgramType
 {
-    eDefault,
+    ePoint,
+    eLine,
     eSpline,
-    eCircle
+    eCircle,
+    eTexture,
 };
 
 #endif // CODEFAULTSHADER_H

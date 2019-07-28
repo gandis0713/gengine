@@ -3,7 +3,7 @@
 
 #include "conode.h"
 
-class CoShape : public CoNode
+class GANDISENGINE CoShape : public CoNode
 {
 public:
     CoShape();

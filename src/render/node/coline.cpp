@@ -2,13 +2,15 @@
 
 CoLine::CoLine()
 {
-
+    m_eShaderProgramType = EShaderProgramType::eLine;
 }
 
 CoLine::CoLine(CoVec3 vStart, CoVec3 vEnd)
 {
     setPoint(vStart, vEnd);
     setColor(CoVec3(1.0, 1.0, 1.0));
+
+    m_eShaderProgramType = EShaderProgramType::eLine;
 }
 
 CoLine::~CoLine()

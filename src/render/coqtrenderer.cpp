@@ -6,6 +6,8 @@
 #include "coperspectivecamera.h"
 #include "coorthographiccamera.h"
 #include "colinecore.h"
+#include "cotexturecore.h".h"
+#include "cocirclecore.h"
 #include "cocatmullsplinecore.h"
 
 #include <QGridLayout>
@@ -121,12 +123,18 @@ void CoQtRenderer::addNode(CoNode *pNode)
         CoNodeCore *pNodeObject = NULL;
         switch (pNode->getShaderProgramType())
         {
-        case EShaderProgramType::eDefault:
+        case EShaderProgramType::eLine:
         default:
             pNodeObject = new CoLineCore(pNode, m_pCamera);
             break;
         case EShaderProgramType::eSpline:
             pNodeObject = new CoCatmullSplineCore(pNode, m_pCamera);
+            break;
+        case EShaderProgramType::eCircle:
+            pNodeObject = new CoCircleCore(pNode, m_pCamera);
+            break;
+        case EShaderProgramType::eTexture:
+            pNodeObject = new CoTextureCore(pNode, m_pCamera);
             break;
         }
 

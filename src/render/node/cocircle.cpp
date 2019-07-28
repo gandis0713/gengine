@@ -2,7 +2,7 @@
 
 CoCircle::CoCircle()
 {
-
+    m_eShaderProgramType = EShaderProgramType::eCircle;
 }
 
 CoCircle::CoCircle(CoVec3 vPoint, Gfloat fRadius)

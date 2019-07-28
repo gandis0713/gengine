@@ -13,6 +13,8 @@
 		<file>resource/glsl/line_frag.glsl</file>
 		<file>resource/glsl/circle_vert.glsl</file>
 		<file>resource/glsl/circle_geom.glsl</file>
-		<file>resource/glsl/circle_frag.glsl</file>			
+		<file>resource/glsl/circle_frag.glsl</file>	
+		<file>resource/glsl/texture_vert.glsl</file>
+		<file>resource/glsl/texture_frag.glsl</file>		
 	</qresource>
 </RCC>

@@ -3,7 +3,7 @@
 CoCatmullSpline::CoCatmullSpline()
     : m_fAlpha(0.0f)
 {
-
+    m_eShaderProgramType = EShaderProgramType::eSpline;
 }
 
 CoCatmullSpline::CoCatmullSpline(const std::vector<CoVec3> vecPoints)

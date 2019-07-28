@@ -72,7 +72,10 @@ SOURCES += \
     render/node/coshape.cpp \
     render/node/core/coshapecore.cpp \
     render/node/core/cocirclecore.cpp \
-    render/node/cocircle.cpp
+    render/node/cocircle.cpp \
+    render/object/cotextureobject.cpp \
+    render/node/cotexture.cpp \
+    render/node/core/cotexturecore.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -122,7 +125,10 @@ HEADERS += \
     render/node/coshape.h \
     render/node/core/coshapecore.h \
     render/node/core/cocirclecore.h \
-    render/node/cocircle.h
+    render/node/cocircle.h \
+    render/object/cotextureobject.h \
+    render/node/cotexture.h \
+    render/node/core/cotexturecore.h
 
 OTHER_FILES += \
     libgandis.pri
