@@ -12,7 +12,7 @@ public:
 
     void setPoint(CoVec3 vStart, CoVec3 vEnd);
 
-    void setRadius(Gfloat fWidth);
+    void setRadius(Gfloat fRadius);
     Gfloat getRadius();
 
 protected:

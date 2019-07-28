@@ -1,4 +1,4 @@
-include($$(LIB_PATH)/gandis/libgandis.pri);
+include($${PWD}/../output/libgandis.pri);
 
 win32
 {
@@ -11,7 +11,7 @@ CONFIG += file_copies
 }
 
 COPIES += copylibrary
-copylibrary.files += $$files($$(LIB_PATH)/gandis/lib/*.dll)
+copylibrary.files += $$files($${PWD}/../output/lib/*.dll)
 copylibrary.path = $${DESTDIR}
 
 }

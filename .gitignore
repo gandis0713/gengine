@@ -25,6 +25,7 @@ Makefile
 Makefile*
 
 build/
+temp/
 output/
 release/
 debug/

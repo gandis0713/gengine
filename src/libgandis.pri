@@ -1,5 +1,5 @@
-G_LIB_PATH = $$(LIB_PATH)/gandis
-G_INC_PATH = $${G_LIB_PATH}/include
+G_LIB_PATH = $${PWD}/lib
+G_INC_PATH = $${PWD}/include
 
 INCLUDEPATH += $${G_INC_PATH}/ \
 ## common
@@ -20,4 +20,5 @@ INCLUDEPATH += $${G_INC_PATH}/ \
     $${G_INC_PATH}/window/screen \
     $${G_INC_PATH}/window/screen/qt \
 
-LIBS += -L$${G_LIB_PATH}/lib -lgandis
+LIBS += -L$${G_LIB_PATH} -lgandis
+

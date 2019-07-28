@@ -1,5 +1,5 @@
 
-G_INSTALL_PATH = $$(LIB_PATH)/gandis
+G_INSTALL_PATH = ../output
 G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
 
 ## pri
