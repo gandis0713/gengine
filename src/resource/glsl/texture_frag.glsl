@@ -1,12 +1,12 @@
 #version 430 core
 
-in vec2 UV;
+in vec3 outColor;
+in vec2 outTexCoord;
 
-out vec3 color;
-
-uniform sampler2D myTextureSampler;
+uniform sampler2D texture2D;
+uniform float textureScale;
 
 void main()
 {
-    color = texture( myTextureSampler, UV ).rgb;
+    gl_FragColor = texture(texture2D, outTexCoord);
 }
