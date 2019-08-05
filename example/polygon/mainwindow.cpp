@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "coqtrenderer.h"
-#include "coline.h"
+#include "copolygon.h"
 
 #define INT2FLOAT 200
 
@@ -71,8 +71,6 @@ void MainWindow::initialize()
     m_pCamera = m_pPersCamera;
     m_pRender->setCamera(m_pCamera);
 
-
-    // TODO : Need to be added polygon.
 }
 
 
