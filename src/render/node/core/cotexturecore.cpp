@@ -68,13 +68,13 @@ void CoTextureCore::initialize()
     m_pVAO->bind();
 
     m_pVBO->bind();
-    m_pVBO->allocate(&position, 18 * sizeof(Gfloat));
+    m_pVBO->allocate(&position, 12 * sizeof(Gfloat));
 
     m_pCBO->bind();
     m_pCBO->allocate(&color, 12 * sizeof(Gfloat));
 
     m_pTBO->bind();
-    m_pTBO->allocate(&texture_coords, 12 * sizeof(Gfloat));
+    m_pTBO->allocate(&texture_coords, 8 * sizeof(Gfloat));
 
     m_pIBO->setType(CoVertexBufferObject::EType::eIndexArray);
     m_pIBO->bind();
