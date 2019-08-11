@@ -16,10 +16,11 @@ out vec3 eyeDir_c;
 out vec3 lightDir_c;
 
 uniform vec3 lightPos_w;
+uniform vec3 cameraPosition;
 
 void main()
 {
-    vec3 lightPos_t = vec3(0, 0, 4000);
+    vec3 lightPos_t = cameraPosition;
     // Output position of the vertex, in clip space : MVP * position
     gl_Position =  mvp * vec4(vertex_m,1);
 

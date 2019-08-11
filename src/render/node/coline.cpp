@@ -8,7 +8,7 @@ CoLine::CoLine()
 CoLine::CoLine(CoVec3 vStart, CoVec3 vEnd)
 {
     setPoint(vStart, vEnd);
-    setColor(CoVec3(0.2, 0.2, 0.2));
+    setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_eShaderProgramType = EShaderProgramType::eLine;
 }

@@ -8,7 +8,7 @@ CoCircle::CoCircle()
 CoCircle::CoCircle(CoVec3 vPoint, Gfloat fRadius)
 {
     setPoint(vPoint);
-    setColor(CoVec3(0.2, 0.2, 0.2));
+    setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_eShaderProgramType = EShaderProgramType::eCircle;
 }

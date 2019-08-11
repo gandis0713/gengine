@@ -14,8 +14,8 @@
 #define NEAR_INIT -1000
 #define FAR 10000
 #define FAR_INIT 10000
-#define CAMERA_SIZE 1000
-#define TARGET_SIZE 1000
+#define CAMERA_SIZE 10000
+#define TARGET_SIZE 10000
 
 #define SIZE_RATIO 1.5
 #define CAMERA_RATIO 3
@@ -155,6 +155,7 @@ void MainWindow::initialize()
 
     pPolygon->setPoints(vecVertices);
     pPolygon->setNormals(vecVertexNormals);
+    pPolygon->setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_pRender->addNode(pPolygon);
 

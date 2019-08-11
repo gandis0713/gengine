@@ -15,6 +15,7 @@ public:
 protected:
     Guint m_nVID;
     Guint m_nMID;
+    Guint m_nCameraID;
 
     CoVertexBufferObject* m_pNBO;
 };
