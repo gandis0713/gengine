@@ -31,6 +31,14 @@ public slots:
     void SlotPersToggle(bool checked);
     void SlotOrthoToggle(bool checked);
 
+    void SlotCameraXChanged(int value);
+    void SlotCameraYChanged(int value);
+    void SlotCameraZChanged(int value);
+    void SlotTargetXChanged(int value);
+    void SlotTargetYChanged(int value);
+    void SlotTargetZChanged(int value);
+
+
 private:
     void initialize();
 
@@ -41,12 +49,12 @@ private:
     CoOrthographicCamera *m_pOrthoCamera;
     CoPerspectiveCamera *m_pPersCamera;
 
-    float leftvalue;
-    float rightvalue;
-    float bottomvalue;
-    float topvalue;
-    float nearvalue;
-    float farvalue;
+    Gfloat leftvalue;
+    Gfloat rightvalue;
+    Gfloat bottomvalue;
+    Gfloat topvalue;
+    Gfloat nearvalue;
+    Gfloat farvalue;
 };
 
 #endif // MAINWINDOW_H
