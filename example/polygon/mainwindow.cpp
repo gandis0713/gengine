@@ -3,8 +3,15 @@
 
 #include "coqtrenderer.h"
 #include "copolygon.h"
+#include "coobjreader.h"
+
+#include <QDebug>
+#include <QFileDialog>
 
 #define INT2FLOAT 200
+#define VIEW_SIZE 5000
+#define NEAR 100
+#define FAR 1000
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,36 +19,36 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->left->setRange(-5  * INT2FLOAT, 5 * INT2FLOAT);
-    ui->left->setValue(-0.5  * INT2FLOAT);
-    ui->lvalue->setText(QString::number(-0.5));
-    leftvalue = -0.5;
+    ui->left->setRange(-VIEW_SIZE  * INT2FLOAT, VIEW_SIZE * INT2FLOAT);
+    ui->left->setValue(-VIEW_SIZE  * INT2FLOAT);
+    ui->lvalue->setText(QString::number(-VIEW_SIZE));
+    leftvalue = -VIEW_SIZE;
 
-    ui->right->setRange(-5  * INT2FLOAT, 5 * INT2FLOAT);
-    ui->right->setValue(0.5  * INT2FLOAT);
-    ui->rvalue->setText(QString::number(0.5));
-    rightvalue = 0.5;
+    ui->right->setRange(-VIEW_SIZE  * INT2FLOAT, VIEW_SIZE * INT2FLOAT);
+    ui->right->setValue(VIEW_SIZE  * INT2FLOAT);
+    ui->rvalue->setText(QString::number(VIEW_SIZE));
+    rightvalue = VIEW_SIZE;
 
-    ui->bottom->setRange(-5  * INT2FLOAT, 5 * INT2FLOAT);
-    ui->bottom->setValue(-0.5  * INT2FLOAT);
-    ui->bvalue->setText(QString::number(-0.5));
-    ui->top->setValue(0.5  * INT2FLOAT);
-    bottomvalue = -0.5;
+    ui->bottom->setRange(-VIEW_SIZE  * INT2FLOAT, VIEW_SIZE * INT2FLOAT);
+    ui->bottom->setValue(-VIEW_SIZE  * INT2FLOAT);
+    ui->bvalue->setText(QString::number(-VIEW_SIZE));
+    ui->top->setValue(VIEW_SIZE  * INT2FLOAT);
+    bottomvalue = -VIEW_SIZE;
 
-    ui->top->setRange(-5  * INT2FLOAT, 5 * INT2FLOAT);
-    ui->top->setValue(0.5  * INT2FLOAT);
-    ui->tvalue->setText(QString::number(0.5));
-    topvalue = 0.5;
+    ui->top->setRange(-VIEW_SIZE  * INT2FLOAT, VIEW_SIZE * INT2FLOAT);
+    ui->top->setValue(VIEW_SIZE  * INT2FLOAT);
+    ui->tvalue->setText(QString::number(VIEW_SIZE));
+    topvalue = VIEW_SIZE;
 
-    ui->lnear->setRange(0, 10 * INT2FLOAT);
+    ui->lnear->setRange(-NEAR, NEAR * INT2FLOAT);
     ui->lnear->setValue(1 * INT2FLOAT);
     ui->nvalue->setText(QString::number(1 ));
     nearvalue = 1;
 
-    ui->lfar->setRange(0, 10 * INT2FLOAT);
-    ui->lfar->setValue(10 * INT2FLOAT);
-    ui->fvalue->setText(QString::number(10));
-    farvalue = 10;
+    ui->lfar->setRange(NEAR, FAR * INT2FLOAT);
+    ui->lfar->setValue(FAR * INT2FLOAT);
+    ui->fvalue->setText(QString::number(FAR));
+    farvalue = FAR;
 
     connect(ui->left, SIGNAL(sliderMoved(int)), this, SLOT(SlotLeftChanged(int)));
     connect(ui->right, SIGNAL(sliderMoved(int)), this, SLOT(SlotRightChanged(int)));
@@ -50,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lnear, SIGNAL(sliderMoved(int)), this, SLOT(SlotNearChanged(int)));
     connect(ui->lfar, SIGNAL(sliderMoved(int)), this, SLOT(SlotFarChanged(int)));
 
-    ui->pers->setChecked(true);
+    ui->ortho->setChecked(true);
     connect(ui->pers, SIGNAL(toggled(bool)), this, SLOT(SlotPersToggle(bool)));
     connect(ui->ortho, SIGNAL(toggled(bool)), this, SLOT(SlotOrthoToggle(bool)));
 
@@ -68,9 +75,75 @@ void MainWindow::initialize()
     m_pOrthoCamera = new CoOrthographicCamera();
     m_pPersCamera = new CoPerspectiveCamera();
 
-    m_pCamera = m_pPersCamera;
+    m_pCamera = m_pOrthoCamera;
     m_pRender->setCamera(m_pCamera);
 
+//    QString strOBJFilePath = QFileDialog::getOpenFileName(this,
+//                                         "Select OBJ file",
+//                                         ".",
+//                                         "");
+
+//    const Gchar *pPath = strOBJFilePath.toLocal8Bit().constData();
+
+    Gstring strPath = "C:/Users/gandis/Desktop/obj/trash.obj";
+//    Gstring strPath = "C:/Users/gandis/Desktop/obj/test1.obj";
+    const Gchar *pPath = strPath.c_str();
+
+    CoOBJReader *pOBJReader = new CoOBJReader();
+
+    std::vector<CoVec3> vecTempVertices;
+    std::vector<CoVec2> vecUVCoords;
+    std::vector<CoVec3> vecVertexNormals;
+    CoFaceIndex faceIndices;
+
+    pOBJReader->load(pPath,
+                     vecTempVertices,
+                     vecUVCoords,
+                     vecVertexNormals,
+                     faceIndices);
+
+    std::vector<Guint> vecVertexIndices;
+    faceIndices.getVertexIndices(vecVertexIndices);
+
+    std::vector<CoVec3> vecVertices;
+
+    Gbool bNormalEmpty = false;
+    if(vecVertexNormals.size() == 0)
+    {
+        bNormalEmpty = true;
+    }
+
+    for(Gint nIndex = 0; nIndex < vecVertexIndices.size(); nIndex += 3)
+    {
+        CoVec3 vPoint[3];
+        vPoint[0] = vecTempVertices[vecVertexIndices[nIndex] - 1];
+        vPoint[1] = vecTempVertices[vecVertexIndices[nIndex + 1] - 1];
+        vPoint[2] = vecTempVertices[vecVertexIndices[nIndex + 2] - 1];
+        vecVertices.push_back(vPoint[0]);
+        vecVertices.push_back(vPoint[1]);
+        vecVertices.push_back(vPoint[2]);
+
+        if(bNormalEmpty == true)
+        {
+            CoVec3 vP2P1 = vPoint[1] - vPoint[0];
+            CoVec3 vP3P1 = vPoint[2] - vPoint[0];
+//            CoVec3 vNormal = vP2P1.cross(vP3P1);
+            CoVec3 vNormal = vP3P1.cross(vP2P1);
+            vNormal.normalize();
+
+            vecVertexNormals.push_back(vNormal);
+            vecVertexNormals.push_back(vNormal);
+            vecVertexNormals.push_back(vNormal);
+        }
+    }
+
+    CoPolygon *pPolygon = new CoPolygon();
+
+    pPolygon->setPoints(vecVertices);
+    pPolygon->setNormals(vecVertexNormals);
+    pPolygon->setColor(CoVec3(1.0, 0.0, 0.0));
+
+    m_pRender->addNode(pPolygon);
 }
 
 
