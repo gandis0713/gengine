@@ -12,9 +12,6 @@ public:
 
     void initialize() override;
     void paint() override;
-
-protected:
-    Guint    m_nWidthID;
 };
 
 #endif // COLINECORE_H

@@ -19,6 +19,8 @@ protected:
     CoVertexArrayObject*  m_pVAO;
     CoVertexBufferObject* m_pVBO;
     CoVertexBufferObject* m_pCBO;
+
+    Guint    m_nWidthID;
 };
 
 #endif // COSHAPECORE_H

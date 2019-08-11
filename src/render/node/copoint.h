@@ -8,9 +8,12 @@ class CoPoint : public CoNode
 {
 public:
     CoPoint();
+    ~CoPoint();
+
+    void setPoint(CoVec3 vPoint);
 
 private:
-    CoVec3 vPoint;
+    CoVec3 m_vPoint;
 };
 
 #endif // COPOINT_H

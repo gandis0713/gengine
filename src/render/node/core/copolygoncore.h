@@ -12,6 +12,11 @@ public:
 
     void initialize() override;
     void paint() override;
+protected:
+    Guint m_nVID;
+    Guint m_nMID;
+
+    CoVertexBufferObject* m_pNBO;
 };
 
 #endif // COPOLYGONCORE_H
