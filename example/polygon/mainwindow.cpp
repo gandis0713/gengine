@@ -11,21 +11,20 @@
 #define INT2FLOAT 200
 #define VIEW_SIZE 5000
 #define NEAR 1000
-#define NEAR_INIT 1
+#define NEAR_INIT -1000
 #define FAR 10000
 #define FAR_INIT 10000
 #define CAMERA_SIZE 1000
 #define TARGET_SIZE 1000
+
+#define SIZE_RATIO 1.5
+#define CAMERA_RATIO 3
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    ui->ortho->setChecked(true);
-    connect(ui->pers, SIGNAL(toggled(bool)), this, SLOT(SlotPersToggle(bool)));
-    connect(ui->ortho, SIGNAL(toggled(bool)), this, SLOT(SlotOrthoToggle(bool)));
 
     ui->left->setRange(-VIEW_SIZE  * INT2FLOAT, VIEW_SIZE * INT2FLOAT);
     ui->right->setRange(-VIEW_SIZE  * INT2FLOAT, VIEW_SIZE * INT2FLOAT);
@@ -57,34 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     initialize();
 
-    ui->left->setValue(-VIEW_SIZE * INT2FLOAT);
-    SlotLeftChanged(-VIEW_SIZE * INT2FLOAT);
-
-    ui->right->setValue(VIEW_SIZE * INT2FLOAT);
-    SlotRightChanged(VIEW_SIZE * INT2FLOAT);
-
-    ui->bottom->setValue(-VIEW_SIZE * INT2FLOAT);
-    SlotBottomChanged(-VIEW_SIZE * INT2FLOAT);
-
-    ui->top->setValue(VIEW_SIZE * INT2FLOAT);
-    SlotTopChanged(VIEW_SIZE * INT2FLOAT);
-
-    ui->lnear->setValue(NEAR_INIT * INT2FLOAT);
-    SlotNearChanged(NEAR_INIT * INT2FLOAT);
-
-    ui->lfar->setValue(FAR_INIT * INT2FLOAT);
-    SlotFarChanged(FAR_INIT * INT2FLOAT);
-
     // camera
-
-    ui->SCameraX->setValue(0);
-    SlotCameraXChanged(0);
-
-    ui->SCameraY->setValue(0);
-    SlotCameraYChanged(0);
-
-    ui->SCameraZ->setValue(0);
-    SlotCameraZChanged(0);
 
     ui->STargetX->setValue(0);
     SlotTargetXChanged(0);
@@ -105,7 +77,6 @@ void MainWindow::initialize()
 {
     m_pRender = new CoQtRenderer(ui->widget);
     m_pOrthoCamera = new CoOrthographicCamera();
-    m_pPersCamera = new CoPerspectiveCamera();
 
     m_pCamera = m_pOrthoCamera;
     m_pRender->setCamera(m_pCamera);
@@ -121,22 +92,26 @@ void MainWindow::initialize()
 
     std::vector<CoVec3> vecTempVertices;
     std::vector<CoVec2> vecUVCoords;
-    std::vector<CoVec3> vecVertexNormals;
+    std::vector<CoVec3> vecTempVertexNormals;
     CoFaceIndex faceIndices;
 
     pOBJReader->load(pPath,
                      vecTempVertices,
                      vecUVCoords,
-                     vecVertexNormals,
+                     vecTempVertexNormals,
                      faceIndices);
 
     std::vector<Guint> vecVertexIndices;
-    faceIndices.getVertexIndices(vecVertexIndices);
+    faceIndices.getVertexIndices(vecVertexIndices);    
+
+    std::vector<Guint> vecVertexNormalIndices;
+    faceIndices.getVertexNormalIndices(vecVertexNormalIndices);
 
     std::vector<CoVec3> vecVertices;
+    std::vector<CoVec3> vecVertexNormals;
 
     Gbool bNormalEmpty = false;
-    if(vecVertexNormals.size() == 0)
+    if(vecTempVertexNormals.size() == 0)
     {
         bNormalEmpty = true;
     }
@@ -147,6 +122,7 @@ void MainWindow::initialize()
         vPoint[0] = vecTempVertices[vecVertexIndices[nIndex] - 1];
         vPoint[1] = vecTempVertices[vecVertexIndices[nIndex + 1] - 1];
         vPoint[2] = vecTempVertices[vecVertexIndices[nIndex + 2] - 1];
+
         vecVertices.push_back(vPoint[0]);
         vecVertices.push_back(vPoint[1]);
         vecVertices.push_back(vPoint[2]);
@@ -155,12 +131,23 @@ void MainWindow::initialize()
         {
             CoVec3 vP2P1 = vPoint[1] - vPoint[0];
             CoVec3 vP3P1 = vPoint[2] - vPoint[0];
-            CoVec3 vNormal = vP3P1.cross(vP2P1);
+            CoVec3 vNormal = vP2P1.cross(vP3P1);
             vNormal.normalize();
 
             vecVertexNormals.push_back(vNormal);
             vecVertexNormals.push_back(vNormal);
             vecVertexNormals.push_back(vNormal);
+        }
+        else
+        {
+            CoVec3 vNormal[3];
+            vNormal[0] = vecTempVertexNormals[vecVertexNormalIndices[nIndex] - 1];
+            vNormal[1] = vecTempVertexNormals[vecVertexNormalIndices[nIndex + 1] - 1];
+            vNormal[2] = vecTempVertexNormals[vecVertexNormalIndices[nIndex + 2] - 1];
+
+            vecVertexNormals.push_back(vNormal[0]);
+            vecVertexNormals.push_back(vNormal[1]);
+            vecVertexNormals.push_back(vNormal[2]);
         }
     }
 
@@ -168,9 +155,73 @@ void MainWindow::initialize()
 
     pPolygon->setPoints(vecVertices);
     pPolygon->setNormals(vecVertexNormals);
-    pPolygon->setColor(CoVec3(1.0, 0.0, 0.0));
 
     m_pRender->addNode(pPolygon);
+
+
+
+
+    CoVec3 vMin = CoVec3( 10000,  10000,  10000);
+    CoVec3 vMax = CoVec3(-10000, -10000, -10000);
+    for(Gint nIndex = 0; nIndex < vecVertices.size(); nIndex++)
+    {
+        CoVec3 vPoint = vecVertices[nIndex];
+
+        if(vMin[0] > vPoint[0])
+        {
+            vMin[0] = vPoint[0];
+        }
+        if(vMin[1] > vPoint[1])
+        {
+            vMin[1] = vPoint[1];
+        }
+        if(vMin[2] > vPoint[2])
+        {
+            vMin[2] = vPoint[2];
+        }
+
+        if(vMax[0] < vPoint[0])
+        {
+            vMax[0] = vPoint[0];
+        }
+        if(vMax[1] < vPoint[1])
+        {
+            vMax[1] = vPoint[1];
+        }
+        if(vMax[2] < vPoint[2])
+        {
+            vMax[2] = vPoint[2];
+        }
+    }
+
+    ui->left->setValue(vMin[0] * INT2FLOAT * SIZE_RATIO);
+    SlotLeftChanged(vMin[0] * INT2FLOAT * SIZE_RATIO);
+
+    ui->right->setValue(vMax[0] * INT2FLOAT * SIZE_RATIO);
+    SlotRightChanged(vMax[0] * INT2FLOAT * SIZE_RATIO);
+
+    ui->bottom->setValue(vMin[1] * INT2FLOAT * SIZE_RATIO);
+    SlotBottomChanged(vMin[1] * INT2FLOAT * SIZE_RATIO);
+
+    ui->top->setValue(vMax[1] * INT2FLOAT * SIZE_RATIO);
+    SlotTopChanged(vMax[1] * INT2FLOAT * SIZE_RATIO);
+
+    ui->lnear->setValue(NEAR_INIT * INT2FLOAT);
+    SlotNearChanged(NEAR_INIT * INT2FLOAT);
+
+    ui->lfar->setValue(FAR_INIT * INT2FLOAT);
+    SlotFarChanged(FAR_INIT * INT2FLOAT);
+
+
+
+    ui->SCameraX->setValue(0);
+    SlotCameraXChanged(0);
+
+    ui->SCameraY->setValue(0);
+    SlotCameraYChanged(0);
+
+    ui->SCameraZ->setValue(vMax[2] * CAMERA_RATIO);
+    SlotCameraZChanged(vMax[2] * CAMERA_RATIO);
 }
 
 
@@ -217,63 +268,6 @@ void MainWindow::SlotFarChanged(int value)
     m_pCamera->setFarPosition(farvalue);
     m_pCamera->update();
 }
-
-
-void MainWindow::SlotPersToggle(bool checked)
-{
-    if(checked)
-    {
-        m_pCamera = m_pPersCamera;
-        m_pRender->setCamera(m_pCamera);
-
-        ui->left->setValue(leftvalue * INT2FLOAT);
-        ui->right->setValue(rightvalue * INT2FLOAT);
-        ui->bottom->setValue(bottomvalue * INT2FLOAT);
-        ui->top->setValue(topvalue * INT2FLOAT);
-
-        ui->lvalue->setText(QString::number(leftvalue));
-        ui->rvalue->setText(QString::number(rightvalue));
-        ui->tvalue->setText(QString::number(bottomvalue));
-        ui->tvalue->setText(QString::number(topvalue));
-
-        m_pCamera->setClipSpace(leftvalue,
-                                    rightvalue,
-                                    bottomvalue,
-                                    topvalue,
-                                    nearvalue,
-                                    farvalue);
-        m_pCamera->update();
-    }
-}
-
-void MainWindow::SlotOrthoToggle(bool checked)
-{
-    if(checked)
-    {
-        m_pCamera = m_pOrthoCamera;
-        m_pRender->setCamera(m_pCamera);
-
-        ui->left->setValue(leftvalue * INT2FLOAT);
-        ui->right->setValue(rightvalue * INT2FLOAT);
-        ui->bottom->setValue(bottomvalue * INT2FLOAT);
-        ui->top->setValue(topvalue * INT2FLOAT);
-
-        ui->lvalue->setText(QString::number(leftvalue));
-        ui->rvalue->setText(QString::number(rightvalue));
-        ui->tvalue->setText(QString::number(bottomvalue));
-        ui->tvalue->setText(QString::number(topvalue));
-
-        m_pCamera->setClipSpace(leftvalue,
-                                    rightvalue,
-                                    bottomvalue,
-                                    topvalue,
-                                    nearvalue,
-                                    farvalue);
-
-        m_pCamera->update();
-    }
-}
-
 
 void MainWindow::SlotCameraXChanged(int value)
 {

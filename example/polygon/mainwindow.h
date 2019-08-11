@@ -28,9 +28,6 @@ public slots:
     void SlotNearChanged(int value);
     void SlotFarChanged(int value);
 
-    void SlotPersToggle(bool checked);
-    void SlotOrthoToggle(bool checked);
-
     void SlotCameraXChanged(int value);
     void SlotCameraYChanged(int value);
     void SlotCameraZChanged(int value);

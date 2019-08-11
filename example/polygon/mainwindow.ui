@@ -504,26 +504,10 @@
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_6">
-       <item>
-        <widget class="QRadioButton" name="pers">
-         <property name="text">
-          <string>Perspective</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="verticalLayout_6"/>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <widget class="QRadioButton" name="ortho">
-         <property name="text">
-          <string>Orthographic</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <layout class="QVBoxLayout" name="verticalLayout_5"/>
      </item>
     </layout>
    </widget>
