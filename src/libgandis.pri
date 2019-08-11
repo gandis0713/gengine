@@ -15,6 +15,8 @@ INCLUDEPATH += $${G_INC_PATH}/ \
     $${G_INC_PATH}/render/camera \
     $${G_INC_PATH}/render/shader \
     $${G_INC_PATH}/render/shader/core \
+## util
+    $${G_INC_PATH}/util \
 ## window
     $${G_INC_PATH}/window \
     $${G_INC_PATH}/window/screen \

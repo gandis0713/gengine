@@ -50,6 +50,11 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     include_render_shader_core.files = render/shader/core/*.h
     INSTALLS += include_render_shader_core
 
+    ## util
+    include_util.path = $${G_INSTALL_INC_PATH}/util
+    include_util.files = util/*.h
+    INSTALLS += include_util
+
     ## window
     include_window.path = $${G_INSTALL_INC_PATH}/window
     include_window.files = window/*.h
