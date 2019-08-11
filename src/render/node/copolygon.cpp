@@ -9,7 +9,7 @@ CoPolygon::CoPolygon()
 CoPolygon::CoPolygon(const std::vector<CoVec3> &vecPoints)
 {
     setPoints(vecPoints);
-    setColor(CoVec3(1.0, 1.0, 1.0));
+    setColor(CoVec3(0.2, 0.2, 0.2));
 
     m_eShaderProgramType = EShaderProgramType::ePolygon;
 }
@@ -23,6 +23,8 @@ void CoPolygon::setPoints(const std::vector<CoVec3> &vecPoints)
 {
     m_vecPoints.clear();
     m_vecPoints = vecPoints;
+
+    setColor(CoVec3(0.2, 0.2, 0.2));
 }
 
 void CoPolygon::setNormals(const std::vector<CoVec3> &vecNormals)

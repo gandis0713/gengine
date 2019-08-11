@@ -36,7 +36,7 @@ void main()
     lightDir_c = lightPos_c + eyeDir_c;
 
     // Normal of the the vertex, in camera space
-    vertexNormal_c = ( v * m * vec4(vertexNormal_m,0)).xyz; // Only correct if ModelMatrix does not scale the model ! Use its inverse transpose if not.
+    vertexNormal_c = ( v * m * vec4(vertexNormal_m, 0)).xyz; // Only correct if ModelMatrix does not scale the model ! Use its inverse transpose if not.
 
     vertColor = color;
 }

@@ -10,7 +10,6 @@ CoOBJReader::~CoOBJReader()
 
 }
 
-#include <QDebug>
 Gbool CoOBJReader::load(const Gchar * pPath,
                         std::vector<CoVec3> &vecVertices,
                         std::vector<CoVec2> &vecUVCoords,
@@ -33,7 +32,6 @@ Gbool CoOBJReader::load(const Gchar * pPath,
         if (res == EOF)
         {
             break; // EOF = End Of File. Quit the loop.
-            qDebug() << __FUNCTION__ << "count : " << count;
         }
 
         count++;
@@ -84,6 +82,29 @@ Gbool CoOBJReader::load(const Gchar * pPath,
                 faceIndices.addUICoordIndices(uvIndex[0]);
                 faceIndices.addUICoordIndices(uvIndex[1]);
                 faceIndices.addUICoordIndices(uvIndex[2]);
+            }
+            else  if(vecUVCoords.size() == 0)
+            {
+                Gint matches = fscanf(pFile,
+                                      "%d//%d %d//%d %d//%d\n",
+                                      &vertexIndex[0],
+                                      &normalIndex[0],
+                                      &vertexIndex[1],
+                                      &normalIndex[1],
+                                      &vertexIndex[2],
+                                      &normalIndex[2]);
+                if (matches != 6)
+                {
+                    fclose(pFile);
+                    return false;
+                }
+
+                faceIndices.addVertexIndices(vertexIndex[0]);
+                faceIndices.addVertexIndices(vertexIndex[1]);
+                faceIndices.addVertexIndices(vertexIndex[2]);
+                faceIndices.addVertexNormalIndices(normalIndex[0]);
+                faceIndices.addVertexNormalIndices(normalIndex[1]);
+                faceIndices.addVertexNormalIndices(normalIndex[2]);
             }
             else
             {

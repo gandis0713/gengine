@@ -10,7 +10,7 @@ CoCatmullSpline::CoCatmullSpline(const std::vector<CoVec3> vecPoints)
     : m_fAlpha(0.0f)
 {
     setPoints(vecPoints);
-    setColor(CoVec3(1.0, 1.0, 1.0));
+    setColor(CoVec3(0.2, 0.2, 0.2));
 
     m_eShaderProgramType = EShaderProgramType::eSpline;
 }

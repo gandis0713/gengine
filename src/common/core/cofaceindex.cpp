@@ -30,3 +30,8 @@ void CoFaceIndex::getVertexIndices(std::vector<Guint> &vecVertexIndices)
 {
     vecVertexIndices = m_vecVertexIndices;
 }
+
+void CoFaceIndex::getVertexNormalIndices(std::vector<Guint> &vecVertexNormalIndices)
+{
+    vecVertexNormalIndices = m_vecVertexNormalIndices;
+}
