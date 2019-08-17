@@ -24,8 +24,7 @@
 ##### - Circle (TODO)
 ##### - Sphere (TODO)
 
-### User Event
-##### - Mouse Event
-###### Rotation by orbit
+### Event
+##### - orbit rotation by mouse event
 
 
