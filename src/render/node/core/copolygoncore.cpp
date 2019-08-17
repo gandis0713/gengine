@@ -69,15 +69,16 @@ void CoPolygonCore::initialize()
 
 void CoPolygonCore::paint()
 {
+    CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
+
     m_pShaderProgram->bind();
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getCameraMat());
-    m_pShaderProgram->setUniformMatrix4fv(m_nMID, CoMat4x4());
+    m_pShaderProgram->setUniformMatrix4fv(m_nMID, pPolygon->getMatModel());
     m_pShaderProgram->setUniformMatrix4fv(m_nVID, m_pCamera->getViewMat());
     CoVec3 vCameraPosition = m_pCamera->getPosition();
     glUniform3f(m_nCameraID, vCameraPosition[0], vCameraPosition[1], vCameraPosition[2]);
 
     m_pVAO->bind();
 
-    CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
     glDrawArrays(GL_TRIANGLES, 0, pPolygon->getSize());
 }

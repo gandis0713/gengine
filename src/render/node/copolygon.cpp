@@ -33,6 +33,15 @@ void CoPolygon::setNormals(const std::vector<CoVec3> &vecNormals)
     m_vecVertexNormals = vecNormals;
 }
 
+void CoPolygon::setMatModel(CoMat4x4 matModel)
+{
+    m_matModel = matModel;
+}
+
+CoMat4x4 CoPolygon::getMatModel()
+{
+    return m_matModel;
+}
 
 std::vector<CoVec3> CoPolygon::getNormals()
 {
