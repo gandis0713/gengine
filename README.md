@@ -8,3 +8,24 @@
 
 ## Examples
 ### To use examples, gandis 3D engine must be built.
+
+## Functions
+
+### Ligthing
+##### Material Coloring
+
+### Camera
+##### Perspective
+##### Orthographic
+
+### Shape
+##### Line
+##### Spline
+##### Circle (TODO)
+##### Sphere (TODO)
+
+### User Event
+##### Mouse Event
+###### Rotation by orbit
+
+
