@@ -50,6 +50,7 @@ public slots:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+    void mouseWheelEvent(QWheelEvent* event);
 };
 
 #endif // COQTRENDERER_H

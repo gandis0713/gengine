@@ -40,4 +40,9 @@ void CoQScreen::mouseReleaseEvent(QMouseEvent *event)
     emit signalmouseReleaseEvent(event);
 }
 
+void CoQScreen::wheelEvent(QWheelEvent *event)
+{
+    emit signalMouseWheelEvent(event);
+}
+
 

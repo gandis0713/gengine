@@ -2,7 +2,9 @@
 #define COCAMERA_H
 
 #include "comatrix4x4.h"
+#include "covector4.h"
 #include "covector3.h"
+#include "covector2.h"
 #include "deengine.h"
 
 #include <QObject>
@@ -15,17 +17,26 @@ public:
     explicit CoCamera();
     virtual ~CoCamera();
 
+    // initialize
+    void setViewport(CoVec4 vViewport);
+
+    void setMatrix(const CoMat4x4& mat);
+    CoMat4x4 getCameraMat();
+
+    virtual void update() = 0;
+    virtual void setCamera() = 0;
+
+    // lookup
     void setTarget(const CoVec3 &vec);
     CoVec3 getTarget();
     void setPosition(const CoVec3 &vec);
     CoVec3 getPosition();
     void setUp(const CoVec3 &vec);
     CoVec3 getUp();
-    void setMatrix(const CoMat4x4& mat);
-    CoMat4x4 getCameraMat();
-    CoMat4x4 getProjectionMat();
+
     CoMat4x4 getViewMat();
 
+    // projection
     void setLeftPosition(const Gfloat &value);
     void setRightPosition(const Gfloat &value);
     void setBottomPosition(const Gfloat &value);
@@ -38,9 +49,14 @@ public:
                       const Gfloat &top,
                       const Gfloat &near,
                       const Gfloat &far);
+    CoMat4x4 getProjectionMat();
 
-    virtual void update() = 0;
-    virtual void setCamera() = 0;
+    // move, zoom, rotate
+    void orbit(CoVec2 vCurPos, CoVec2 vPrePos);
+    void move(CoVec2 vCurPos, CoVec2 vPrePos);
+    void zoom(Gfloat fRate);
+
+
 signals:
     void signalCameraUpdated();
 
@@ -59,6 +75,8 @@ protected:
     Gfloat m_fTop;
     Gfloat m_fNear;
     Gfloat m_fFar;
+
+    CoVec4 m_vViewport;
 
 
 };

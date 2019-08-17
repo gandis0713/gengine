@@ -46,6 +46,7 @@ void CoQtRenderer::initializeWidget()
     connect(m_pQScreen, SIGNAL(signalmousePressEvent(QMouseEvent*)), this, SLOT(mousePressEvent(QMouseEvent*)));
     connect(m_pQScreen, SIGNAL(signalmouseMoveEvent(QMouseEvent*)), this, SLOT(mouseMoveEvent(QMouseEvent*)));
     connect(m_pQScreen, SIGNAL(signalmouseReleaseEvent(QMouseEvent*)), this, SLOT(mouseReleaseEvent(QMouseEvent*)));
+    connect(m_pQScreen, SIGNAL(signalMouseWheelEvent(QWheelEvent*)), this, SLOT(mouseWheelEvent(QWheelEvent*)));
 
     QWidget *pWidget = dynamic_cast<QWidget*>(m_pQScreen);
     m_pLayout->addWidget(pWidget);
@@ -75,6 +76,8 @@ void CoQtRenderer::resizeGL(int nWidth, int nHeight)
     m_vScreenSize[1] = nHeight;
 
     glViewport(0, 0, m_vScreenSize[0], m_vScreenSize[1]);
+
+    m_pCamera->setViewport(CoVec4(0, 0, m_vScreenSize[0], m_vScreenSize[1]));
 }
 
 void CoQtRenderer::paintGL()
@@ -109,43 +112,8 @@ void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
     vPoint[0] = -(m_vScreenSize[0]/2  - event->localPos().x());
     vPoint[1] = (m_vScreenSize[1]/2 - event->localPos().y());
 
-    CoVec3 vDir;
-    vDir[0] = vPoint[0] - m_vLastPoint[0];
-    vDir[1] = vPoint[1] - m_vLastPoint[1];
-    vDir[2] = 0;
-
-    CoVec3 vScreenNormal(0, 0, 1);
-    CoVec3 vRotationNormal = vScreenNormal.cross(vDir);
-
-    Gfloat fDegreeX = vRotationNormal.dot(CoVec3(1, 0, 0));
-    Gfloat fDegreeY = vRotationNormal.dot(CoVec3(0, 1, 0));
-
-    CoVec3 vCameraPosition = m_pCamera->getPosition();
-    CoVec3 vCameraUpNormalized = m_pCamera->getUp().normalize();
-    CoVec3 vCameraTarget = m_pCamera->getTarget();
-
-    CoVec3 vCameraToTarget = (vCameraPosition - vCameraTarget);
-    CoVec3 vCameraToTargetNormalized = (vCameraPosition - vCameraTarget).normalize();
-    CoVec3 vCameraRightNormalized = (vCameraUpNormalized.cross(vCameraToTargetNormalized)).normalize();
-
-    CoMat4x4 matRotateYaw;
-    CoMat4x4 matRotatePitch;
-
-    matRotatePitch = matRotatePitch.rotate(-fDegreeX, vCameraRightNormalized);
-    vCameraToTarget = matRotatePitch * vCameraToTarget;
-    vCameraToTarget += vCameraTarget;
-
-    matRotateYaw = matRotateYaw.rotate(-fDegreeY, vCameraUpNormalized);
-    vCameraToTarget = matRotateYaw * vCameraToTarget;
-    vCameraToTarget += vCameraTarget;
-
-    vCameraToTargetNormalized = vCameraToTarget;
-    vCameraToTargetNormalized.normalize();
-    vCameraUpNormalized = (vCameraToTargetNormalized.cross(vCameraRightNormalized)).normalize();
-
-    m_pCamera->setPosition(vCameraToTarget);
-    m_pCamera->setUp(vCameraUpNormalized);
-    m_pCamera->setTarget(vCameraTarget);
+//    m_pCamera->orbit(vPoint, m_vLastPoint);
+    m_pCamera->move(vPoint, m_vLastPoint);
 
     m_pCamera->update();
 
@@ -156,6 +124,13 @@ void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
 void CoQtRenderer::mouseReleaseEvent(QMouseEvent* event)
 {
     update();
+}
+
+void CoQtRenderer::mouseWheelEvent(QWheelEvent* event)
+{
+    Gfloat fRate = event->angleDelta().y() / 120;
+    m_pCamera->zoom(fRate);
+    m_pCamera->update();
 }
 
 void CoQtRenderer::update()

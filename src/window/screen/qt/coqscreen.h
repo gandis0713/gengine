@@ -16,6 +16,7 @@ public:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 signals:
     void signalInitializeGL();
@@ -24,6 +25,7 @@ signals:
     void signalmousePressEvent(QMouseEvent *event);
     void signalmouseMoveEvent(QMouseEvent *event);
     void signalmouseReleaseEvent(QMouseEvent *event);
+    void signalMouseWheelEvent(QWheelEvent *event);
 
 public slots:
 };

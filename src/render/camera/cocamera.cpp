@@ -71,6 +71,90 @@ CoMat4x4 CoCamera::getViewMat()
     return m_matView;
 }
 
+void CoCamera::orbit(CoVec2 vCurPos, CoVec2 vPrePos)
+{
+    CoVec3 vDir;
+    vDir[0] = vCurPos[0] - vPrePos[0];
+    vDir[1] = vCurPos[1] - vPrePos[1];
+    vDir[2] = 0;
+
+    CoVec3 vScreenNormal(0, 0, 1);
+    CoVec3 vRotationNormal = vScreenNormal.cross(vDir);
+
+    Gfloat fDegreeX = vRotationNormal.dot(CoVec3(1, 0, 0));
+    Gfloat fDegreeY = vRotationNormal.dot(CoVec3(0, 1, 0));
+
+    CoVec3 vCameraPosition = getPosition();
+    CoVec3 vCameraUpNormalized = getUp().normalize();
+    CoVec3 vCameraTarget = getTarget();
+
+    CoVec3 vCameraToTarget = (vCameraPosition - vCameraTarget);
+    CoVec3 vCameraToTargetNormalized = (vCameraPosition - vCameraTarget).normalize();
+    CoVec3 vCameraRightNormalized = (vCameraUpNormalized.cross(vCameraToTargetNormalized)).normalize();
+
+    CoMat4x4 matRotateYaw;
+    CoMat4x4 matRotatePitch;
+
+    matRotatePitch = matRotatePitch.rotate(-fDegreeX, vCameraRightNormalized);
+    vCameraToTarget = matRotatePitch * vCameraToTarget;
+    vCameraToTarget += vCameraTarget;
+
+    matRotateYaw = matRotateYaw.rotate(-fDegreeY, vCameraUpNormalized);
+    vCameraToTarget = matRotateYaw * vCameraToTarget;
+    vCameraToTarget += vCameraTarget;
+
+    vCameraToTargetNormalized = vCameraToTarget;
+    vCameraToTargetNormalized.normalize();
+    vCameraUpNormalized = (vCameraToTargetNormalized.cross(vCameraRightNormalized)).normalize();
+
+    m_vecPosition = vCameraToTarget;
+    m_vecUp = vCameraUpNormalized;
+    m_vecTarget = vCameraTarget;
+}
+
+void CoCamera::move(CoVec2 vCurPos, CoVec2 vPrePos)
+{
+    CoVec3 vDir;
+    vDir[0] = vCurPos[0] - vPrePos[0];
+    vDir[1] = vCurPos[1] - vPrePos[1];
+
+    Gfloat fHorizontal = m_fRight - m_fLeft;
+    Gfloat fVertical = m_fTop - m_fBottom;
+
+    Gfloat fViewportHorizontal = m_vViewport[2] - m_vViewport[0];
+    Gfloat fViewportVertical = m_vViewport[3] - m_vViewport[1];
+
+    Gfloat fHorizontalRate = fHorizontal / fViewportHorizontal;
+    Gfloat fVerticalRate = fVertical / fViewportVertical;
+
+    m_fLeft -= vDir[0] * fHorizontalRate;
+    m_fRight -= vDir[0] * fHorizontalRate;
+    m_fTop -= vDir[1] * fVerticalRate;
+    m_fBottom -= vDir[1] * fVerticalRate;
+}
+
+void CoCamera::zoom(Gfloat fRate)
+{
+    Gfloat fHorizontal = m_fRight - m_fLeft;
+    Gfloat fVertical = m_fTop - m_fBottom;
+
+    Gfloat fViewportHorizontal = m_vViewport[2] - m_vViewport[0];
+    Gfloat fViewportVertical = m_vViewport[3] - m_vViewport[1];
+
+    Gfloat fHorizontalRate = fHorizontal / fViewportHorizontal;
+    Gfloat fVerticalRate = fVertical / fViewportVertical;
+
+    m_fLeft -= fRate * fHorizontalRate;
+    m_fRight += fRate * fHorizontalRate;
+    m_fTop += fRate * fVerticalRate;
+    m_fBottom -= fRate * fVerticalRate;
+}
+
+void CoCamera::setViewport(CoVec4 vViewport)
+{
+    m_vViewport = vViewport;
+}
+
 void CoCamera::setLeftPosition(const Gfloat &value)
 {
     m_fLeft = value;
