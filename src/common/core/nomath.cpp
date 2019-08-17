@@ -1,8 +1,6 @@
 #include "nomath.h"
 #include "demath.h"
 
-#include <QDebug>
-
 namespace NoMath
 {
 Gfloat determinant2x2(const Gfloat mat[4])

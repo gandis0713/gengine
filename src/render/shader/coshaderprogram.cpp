@@ -58,7 +58,7 @@ void CoShaderProgram::AddShaders(EShaderType eShaderType, QString strFilePath)
     }
     else
     {
-        tlog("Failed to open shader source.");
+        TextLog("Failed to open shader source.");
         return;
     }
 
@@ -77,7 +77,7 @@ void CoShaderProgram::createProgram()
     m_nProgramID = glCreateProgram();
     if(m_nProgramID <= 0)
     {
-        tlog("Invalid ID for program.");
+        TextLog("Invalid ID for program.");
     }
 }
 
@@ -95,7 +95,7 @@ void CoShaderProgram::link()
 
     if(m_nProgramID <= 0)
     {
-        tlog("Invalid Program ID.");
+        TextLog("Invalid Program ID.");
         return;
     }
 

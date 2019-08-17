@@ -14,7 +14,6 @@
 #include "delog.h"
 
 #include <QGridLayout>
-#include <QDebug>
 #include <QMouseEvent>
 
 CoQtRenderer::CoQtRenderer(QWidget* pParent)

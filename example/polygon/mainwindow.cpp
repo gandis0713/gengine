@@ -5,7 +5,6 @@
 #include "copolygon.h"
 #include "coobjreader.h"
 
-#include <QDebug>
 #include <QFileDialog>
 
 #define INT2FLOAT 200

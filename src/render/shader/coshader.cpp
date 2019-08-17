@@ -45,7 +45,7 @@ bool CoShader::compile()
     m_nID = glCreateShader(m_eType);
     if(m_nID <= 0)
     {
-        tlog("Failed to create shader.");
+        TextLog("Failed to create shader.");
         return false;
     }
 
@@ -64,8 +64,8 @@ bool CoShader::compile()
         std::vector<char> strErrMsg(nLogLength + 1);
         glGetShaderInfoLog(m_nID, nLogLength, NULL, &strErrMsg[0]);
 
-        tlog("The erroe message from shader : ");
-        tlog(&strErrMsg[0]);
+        TextLog("The erroe message from shader : ");
+        TextLog(&strErrMsg[0]);
 
         return false;
     }
