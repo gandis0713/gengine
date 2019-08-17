@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-06-23T13:40:26
+# Project created by QtCreator 2019-08-17T23:45:01
 #
 #-------------------------------------------------
 
@@ -8,8 +8,10 @@ QT       += opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = polygon
-TEMPLATE = app
+TARGET = samplewindow
+TEMPLATE = lib
+
+DEFINES += GANDIS_SAMPLE_WINDOW_LIBRARY
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
@@ -22,12 +24,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-DESTDIR = ./output
+DESTDIR = ../output/lib
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
 
 include(../library.pri);
+include(install.pri);
 
 SOURCES += \
-        main.cpp
+    samplewindow.cpp \
+
+HEADERS += \
+    samplewindow.h \
+    samplewindowglobal.h
+
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}
+
+FORMS += \
+    samplewindow.ui

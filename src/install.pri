@@ -1,5 +1,5 @@
 
-G_INSTALL_PATH = ../output
+G_INSTALL_PATH = ../output/gandis
 G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
 
 ## pri
@@ -73,7 +73,3 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
     library.path = $${G_INSTALL_PATH}
     library.files = $${DESTDIR}
     INSTALLS += library
-
-HEADERS +=
-
-SOURCES +=

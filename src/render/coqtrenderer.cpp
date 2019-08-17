@@ -7,7 +7,7 @@
 #include "coorthographiccamera.h"
 #include "colinecore.h"
 #include "cotexturecore.h"
-#include "copolygoncore.h".h"
+#include "copolygoncore.h"
 #include "cocirclecore.h"
 #include "cocatmullsplinecore.h"
 #include "demath.h"
