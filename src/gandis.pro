@@ -132,7 +132,8 @@ HEADERS += \
     render/node/core/cotexturecore.h \
     render/node/core/copolygoncore.h \
     common/core/cofaceindex.h \
-    render/node/coshape.h
+    render/node/coshape.h \
+    common/core/delog.h
 
 OTHER_FILES += \
     libgandis.pri

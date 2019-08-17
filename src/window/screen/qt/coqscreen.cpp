@@ -27,3 +27,17 @@ void CoQScreen::paintGL()
     emit signalPaintGL();
 }
 
+void CoQScreen::mousePressEvent(QMouseEvent *event)
+{
+    emit signalmousePressEvent(event);
+}
+void CoQScreen::mouseMoveEvent(QMouseEvent *event)
+{
+    emit signalmouseMoveEvent(event);
+}
+void CoQScreen::mouseReleaseEvent(QMouseEvent *event)
+{
+    emit signalmouseReleaseEvent(event);
+}
+
+

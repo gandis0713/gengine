@@ -10,6 +10,7 @@
 #include "conode.h"
 #include "conodecore.h"
 #include "cocamera.h"
+#include "covector2.h"
 
 class CoQScreen;
 class QGridLayout;
@@ -38,11 +39,16 @@ private:
 
     std::map<CoNode*, CoNodeCore*>   m_mapNodeObject;
 
+    CoVec2 vLastPoint;
+
 public slots:
     void initializeGL();
     void resizeGL(int nWidth, int nHeight);
     void paintGL();
     void slotCameraUpdated();
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
 };
 
 #endif // COQTRENDERER_H
