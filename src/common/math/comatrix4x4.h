@@ -25,13 +25,19 @@ public:
     CoMat4x4& transpose();
     CoMat4x4& invert();
     Gfloat determinant();
-    CoVec3 angle();
+    CoVec3 angle();    
+    CoMat4x4& rotate(Gfloat angle, const CoVec3& axis);
+    CoMat4x4& rotate(Gfloat angle, Gfloat x, Gfloat y, Gfloat z);
+    CoMat4x4& rotateX(Gfloat angle);
+    CoMat4x4& rotateY(Gfloat angle);
+    CoMat4x4& rotateZ(Gfloat angle);
 
     CoMat4x4 operator+(const CoMat4x4& mat);
     CoMat4x4 operator-(const CoMat4x4& mat);
     CoMat4x4& operator+=(const CoMat4x4& mat);
     CoMat4x4& operator-=(const CoMat4x4& mat);
     CoMat4x4 operator*(const CoMat4x4& mat);
+    CoVec3 operator*(const CoVec3& vec) const;
     CoMat4x4& operator*=(const CoMat4x4& mat);
 
     Gfloat operator[](Gint index) const;

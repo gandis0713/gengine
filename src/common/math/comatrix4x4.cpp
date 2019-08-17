@@ -132,7 +132,136 @@ Gfloat CoMat4x4::determinant()
 
 CoVec3 CoMat4x4::angle()
 {
-    return CoVec3(); // need implementation;
+//    Gfloat pitch, yaw, roll;         // 3 angles
+
+//    // find yaw (around y-axis) first
+//    // NOTE: asin() returns -90~+90, so correct the angle range -180~+180
+//    // using z value of forward vector
+//    yaw = RAD2DEG * asinf(m[8]);
+//    if(m[10] < 0)
+//    {
+//        if(yaw >= 0) yaw = 180.0f - yaw;
+//        else         yaw =-180.0f - yaw;
+//    }
+
+//    // find roll (around z-axis) and pitch (around x-axis)
+//    // if forward vector is (1,0,0) or (-1,0,0), then m[0]=m[4]=m[9]=m[10]=0
+//    if(m[0] > -EPSILON_F && m[0] < EPSILON_F)
+//    {
+//        roll  = 0;  //@@ assume roll=0
+//        pitch = RAD2DEG * atan2f(m[1], m[5]);
+//    }
+//    else
+//    {
+//        roll = RAD2DEG * atan2f(-m[4], m[0]);
+//        pitch = RAD2DEG * atan2f(-m[9], m[10]);
+//    }
+
+//    return CoVec3(pitch, yaw, roll);
+    return CoVec3();
+}
+
+CoMat4x4& CoMat4x4::rotate(Gfloat angle, const CoVec3& axis)
+{
+    return rotate(angle, axis[0], axis[1], axis[2]);
+}
+
+CoMat4x4& CoMat4x4::rotate(Gfloat angle, Gfloat x, Gfloat y, Gfloat z)
+{
+    Gfloat c = cosf(angle * DEG2RAD);    // cosine
+    Gfloat s = sinf(angle * DEG2RAD);    // sine
+    Gfloat c1 = 1.0f - c;                // 1 - c
+    Gfloat m0 = mat[0],  m4 = mat[4],  m8 = mat[8],  m12= mat[12],
+           m1 = mat[1],  m5 = mat[5],  m9 = mat[9],  m13= mat[13],
+           m2 = mat[2],  m6 = mat[6],  m10= mat[10], m14= mat[14];
+
+    Gfloat r0 = x * x * c1 + c;
+    Gfloat r1 = x * y * c1 + z * s;
+    Gfloat r2 = x * z * c1 - y * s;
+    Gfloat r4 = x * y * c1 - z * s;
+    Gfloat r5 = y * y * c1 + c;
+    Gfloat r6 = y * z * c1 + x * s;
+    Gfloat r8 = x * z * c1 + y * s;
+    Gfloat r9 = y * z * c1 - x * s;
+    Gfloat r10= z * z * c1 + c;
+
+    mat[0] = r0 * m0 + r4 * m1 + r8 * m2;
+    mat[1] = r1 * m0 + r5 * m1 + r9 * m2;
+    mat[2] = r2 * m0 + r6 * m1 + r10* m2;
+    mat[4] = r0 * m4 + r4 * m5 + r8 * m6;
+    mat[5] = r1 * m4 + r5 * m5 + r9 * m6;
+    mat[6] = r2 * m4 + r6 * m5 + r10* m6;
+    mat[8] = r0 * m8 + r4 * m9 + r8 * m10;
+    mat[9] = r1 * m8 + r5 * m9 + r9 * m10;
+    mat[10]= r2 * m8 + r6 * m9 + r10* m10;
+    mat[12]= r0 * m12+ r4 * m13+ r8 * m14;
+    mat[13]= r1 * m12+ r5 * m13+ r9 * m14;
+    mat[14]= r2 * m12+ r6 * m13+ r10* m14;
+
+    return *this;
+}
+
+CoMat4x4& CoMat4x4::rotateX(Gfloat angle)
+{
+    Gfloat c = cosf(angle * DEG2RAD);
+    Gfloat s = sinf(angle * DEG2RAD);
+    Gfloat m1 = mat[1],  m2 = mat[2],
+          m5 = mat[5],  m6 = mat[6],
+          m9 = mat[9],  m10= mat[10],
+          m13= mat[13], m14= mat[14];
+
+    mat[1] = m1 * c + m2 *-s;
+    mat[2] = m1 * s + m2 * c;
+    mat[5] = m5 * c + m6 *-s;
+    mat[6] = m5 * s + m6 * c;
+    mat[9] = m9 * c + m10*-s;
+    mat[10]= m9 * s + m10* c;
+    mat[13]= m13* c + m14*-s;
+    mat[14]= m13* s + m14* c;
+
+    return *this;
+}
+
+CoMat4x4& CoMat4x4::rotateY(Gfloat angle)
+{
+    Gfloat c = cosf(angle * DEG2RAD);
+    Gfloat s = sinf(angle * DEG2RAD);
+    Gfloat m0 = mat[0],  m2 = mat[2],
+          m4 = mat[4],  m6 = mat[6],
+          m8 = mat[8],  m10= mat[10],
+          m12= mat[12], m14= mat[14];
+
+    mat[0] = m0 * c + m2 * s;
+    mat[2] = m0 *-s + m2 * c;
+    mat[4] = m4 * c + m6 * s;
+    mat[6] = m4 *-s + m6 * c;
+    mat[8] = m8 * c + m10* s;
+    mat[10]= m8 *-s + m10* c;
+    mat[12]= m12* c + m14* s;
+    mat[14]= m12*-s + m14* c;
+
+    return *this;
+}
+
+CoMat4x4& CoMat4x4::rotateZ(Gfloat angle)
+{
+    Gfloat c = cosf(angle * DEG2RAD);
+    Gfloat s = sinf(angle * DEG2RAD);
+    Gfloat m0 = mat[0],  m1 = mat[1],
+          m4 = mat[4],  m5 = mat[5],
+          m8 = mat[8],  m9 = mat[9],
+          m12= mat[12], m13= mat[13];
+
+    mat[0] = m0 * c + m1 *-s;
+    mat[1] = m0 * s + m1 * c;
+    mat[4] = m4 * c + m5 *-s;
+    mat[5] = m4 * s + m5 * c;
+    mat[8] = m8 * c + m9 *-s;
+    mat[9] = m8 * s + m9 * c;
+    mat[12]= m12* c + m13*-s;
+    mat[13]= m12* s + m13* c;
+
+    return *this;
 }
 
 CoMat4x4 CoMat4x4::operator+(const CoMat4x4& mat)
@@ -144,6 +273,12 @@ CoMat4x4 CoMat4x4::operator+(const CoMat4x4& mat)
 }
 
 
+CoVec3 CoMat4x4::operator*(const CoVec3& vec) const
+{
+    return CoVec3(mat[0]*vec[0] + mat[4]*vec[1] + mat[8]*vec[2] + mat[12],
+                   mat[1]*vec[0] + mat[5]*vec[1] + mat[9]*vec[2] + mat[13],
+                   mat[2]*vec[0] + mat[6]*vec[1] + mat[10]*vec[2]+ mat[14]);
+}
 
 CoMat4x4 CoMat4x4::operator-(const CoMat4x4& mat)
 {
