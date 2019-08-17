@@ -8,11 +8,16 @@ class GANDISENGINE CoPolygon : public CoShape
 {
 public:
     CoPolygon();
-    CoPolygon(const std::vector<CoVec3> &vecPoints);
+    CoPolygon(const std::vector<CoVec3> &vecPoints,
+              const std::vector<CoVec3> &vecNormals,
+              const std::vector<CoVec2> &vecUICoords,
+              const CoFaceIndex &faceIndices);
     ~CoPolygon();
 
     void setPoints(const std::vector<CoVec3> &vecPoints);
     void setNormals(const std::vector<CoVec3> &vecNormals);
+    void setUICoords(const std::vector<CoVec2> &vecUICoords);
+    void setFaceIndex(const CoFaceIndex &faceIndices);
     std::vector<CoVec3> getNormals();
 
 private:

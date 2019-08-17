@@ -100,99 +100,18 @@ void MainWindow::initialize()
                      vecTempVertexNormals,
                      faceIndices);
 
-    std::vector<Guint> vecVertexIndices;
-    faceIndices.getVertexIndices(vecVertexIndices);    
+    CoPolygon *pPolygon = new CoPolygon(vecTempVertices,
+                                        vecTempVertexNormals,
+                                        vecUVCoords,
+                                        faceIndices);
 
-    std::vector<Guint> vecVertexNormalIndices;
-    faceIndices.getVertexNormalIndices(vecVertexNormalIndices);
-
-    std::vector<CoVec3> vecVertices;
-    std::vector<CoVec3> vecVertexNormals;
-
-    Gbool bNormalEmpty = false;
-    if(vecTempVertexNormals.size() == 0)
-    {
-        bNormalEmpty = true;
-    }
-
-    for(Gint nIndex = 0; nIndex < vecVertexIndices.size(); nIndex += 3)
-    {
-        CoVec3 vPoint[3];
-        vPoint[0] = vecTempVertices[vecVertexIndices[nIndex] - 1];
-        vPoint[1] = vecTempVertices[vecVertexIndices[nIndex + 1] - 1];
-        vPoint[2] = vecTempVertices[vecVertexIndices[nIndex + 2] - 1];
-
-        vecVertices.push_back(vPoint[0]);
-        vecVertices.push_back(vPoint[1]);
-        vecVertices.push_back(vPoint[2]);
-
-        if(bNormalEmpty == true)
-        {
-            CoVec3 vP2P1 = vPoint[1] - vPoint[0];
-            CoVec3 vP3P1 = vPoint[2] - vPoint[0];
-            CoVec3 vNormal = vP2P1.cross(vP3P1);
-            vNormal.normalize();
-
-            vecVertexNormals.push_back(vNormal);
-            vecVertexNormals.push_back(vNormal);
-            vecVertexNormals.push_back(vNormal);
-        }
-        else
-        {
-            CoVec3 vNormal[3];
-            vNormal[0] = vecTempVertexNormals[vecVertexNormalIndices[nIndex] - 1];
-            vNormal[1] = vecTempVertexNormals[vecVertexNormalIndices[nIndex + 1] - 1];
-            vNormal[2] = vecTempVertexNormals[vecVertexNormalIndices[nIndex + 2] - 1];
-
-            vecVertexNormals.push_back(vNormal[0]);
-            vecVertexNormals.push_back(vNormal[1]);
-            vecVertexNormals.push_back(vNormal[2]);
-        }
-    }
-
-    CoPolygon *pPolygon = new CoPolygon();
-
-    pPolygon->setPoints(vecVertices);
-    pPolygon->setNormals(vecVertexNormals);
     pPolygon->setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_pRender->addNode(pPolygon);
 
-
-
-
-    CoVec3 vMin = CoVec3( 10000,  10000,  10000);
-    CoVec3 vMax = CoVec3(-10000, -10000, -10000);
-    for(Gint nIndex = 0; nIndex < vecVertices.size(); nIndex++)
-    {
-        CoVec3 vPoint = vecVertices[nIndex];
-
-        if(vMin[0] > vPoint[0])
-        {
-            vMin[0] = vPoint[0];
-        }
-        if(vMin[1] > vPoint[1])
-        {
-            vMin[1] = vPoint[1];
-        }
-        if(vMin[2] > vPoint[2])
-        {
-            vMin[2] = vPoint[2];
-        }
-
-        if(vMax[0] < vPoint[0])
-        {
-            vMax[0] = vPoint[0];
-        }
-        if(vMax[1] < vPoint[1])
-        {
-            vMax[1] = vPoint[1];
-        }
-        if(vMax[2] < vPoint[2])
-        {
-            vMax[2] = vPoint[2];
-        }
-    }
+    CoVec3 vMin;
+    CoVec3 vMax;
+    pPolygon->getBound(vMin, vMax);
 
     ui->left->setValue(vMin[0] * INT2FLOAT * SIZE_RATIO);
     SlotLeftChanged(vMin[0] * INT2FLOAT * SIZE_RATIO);
