@@ -15,9 +15,9 @@
 #define FAR 10000
 #define FAR_INIT 10000
 #define CAMERA_SIZE 10000
-#define TARGET_SIZE 10000
+#define TARGET_SIZE 1000
 
-#define SIZE_RATIO 1.5
+#define SIZE_RATIO 3
 #define CAMERA_RATIO 3
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -61,8 +61,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->STargetX->setValue(0);
     SlotTargetXChanged(0);
 
-    ui->STargetY->setValue(0);
-    SlotTargetYChanged(0);
+    ui->STargetY->setValue(TARGET_SIZE);
+    SlotTargetYChanged(TARGET_SIZE);
 
     ui->STargetZ->setValue(0);
     SlotTargetZChanged(0);
@@ -299,28 +299,31 @@ void MainWindow::SlotCameraZChanged(int value)
 
 void MainWindow::SlotTargetXChanged(int value)
 {
-    ui->lTargetX->setText(QString::number(value));
-    CoVec3 vTarget = m_pCamera->getTarget();
-    vTarget[0] = value;
-    m_pCamera->setTarget(vTarget);
+    float fvalue = value / (float)TARGET_SIZE;
+    ui->lTargetX->setText(QString::number(fvalue));
+    CoVec3 vTarget = m_pCamera->getUp();
+    vTarget[0] = fvalue;
+    m_pCamera->setUp(vTarget);
     m_pCamera->update();
 }
 
 void MainWindow::SlotTargetYChanged(int value)
 {
-    ui->lTargetY->setText(QString::number(value));
-    CoVec3 vTarget = m_pCamera->getTarget();
-    vTarget[1] = value;
-    m_pCamera->setTarget(vTarget);
+    float fvalue = value / (float)TARGET_SIZE;
+    ui->lTargetY->setText(QString::number(fvalue));
+    CoVec3 vTarget = m_pCamera->getUp();
+    vTarget[1] = fvalue;
+    m_pCamera->setUp(vTarget);
     m_pCamera->update();
 }
 
 void MainWindow::SlotTargetZChanged(int value)
 {
-    ui->lTargetZ->setText(QString::number(value));
-    CoVec3 vTarget = m_pCamera->getTarget();
-    vTarget[2] = value;
-    m_pCamera->setTarget(vTarget);
+    float fvalue = value / (float)TARGET_SIZE;
+    ui->lTargetZ->setText(QString::number(fvalue));
+    CoVec3 vTarget = m_pCamera->getUp();
+    vTarget[2] = fvalue;
+    m_pCamera->setUp(vTarget);
     m_pCamera->update();
 }
 
