@@ -72,10 +72,10 @@ void CoQtRenderer::initializeGL()
 
 void CoQtRenderer::resizeGL(int nWidth, int nHeight)
 {
-    GLsizei width = nWidth;
-    GLsizei height = nHeight;
+    m_vScreenSize[0] = nWidth;
+    m_vScreenSize[1] = nHeight;
 
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, m_vScreenSize[0], m_vScreenSize[1]);
 }
 
 void CoQtRenderer::paintGL()
@@ -100,13 +100,27 @@ void CoQtRenderer::slotCameraUpdated()
 
 void CoQtRenderer::mousePressEvent(QMouseEvent* event)
 {
-    vLastPoint[0] = -(291 - event->localPos().x());
-    vLastPoint[1] = (271 - event->localPos().y());
-    Vec2Log(vLastPoint);
+    m_vLastPoint[0] = -(m_vScreenSize[0]/2  - event->localPos().x());
+    m_vLastPoint[1] = (m_vScreenSize[1]/2 - event->localPos().y());
 }
 
 void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
 {
+    CoVec2 vPoint;
+    vPoint[0] = -(m_vScreenSize[0]/2  - event->localPos().x());
+    vPoint[1] = (m_vScreenSize[1]/2 - event->localPos().y());
+
+    CoVec3 vDir;
+    vDir[0] = vPoint[0] - m_vLastPoint[0];
+    vDir[1] = vPoint[1] - m_vLastPoint[1];
+    vDir[2] = 0;
+
+    CoVec3 vScreenNormal(0, 0, 1);
+    CoVec3 vRotationNormal = vScreenNormal.cross(vDir);
+
+    Gfloat fDegreeX = vRotationNormal.dot(CoVec3(1, 0, 0));
+    Gfloat fDegreeY = vRotationNormal.dot(CoVec3(0, 1, 0));
+
     CoVec3 v_camera_position = m_pCamera->getPosition();
     CoVec3 v_camera_up_normalized = m_pCamera->getUp().normalize();
     CoVec3 v_camera_target = m_pCamera->getTarget();
@@ -118,11 +132,11 @@ void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
     CoMat4x4 mat_rotate_yaw;
     CoMat4x4 mat_rotate_pitch;
 
-    mat_rotate_pitch = mat_rotate_pitch.rotate(-1, v_camera_right_normalized);
+    mat_rotate_pitch = mat_rotate_pitch.rotate(-fDegreeX, v_camera_right_normalized);
     v_camera_to_target = mat_rotate_pitch * v_camera_to_target;
     v_camera_to_target += v_camera_target;
 
-    mat_rotate_yaw = mat_rotate_yaw.rotate(-1, v_camera_up_normalized);
+    mat_rotate_yaw = mat_rotate_yaw.rotate(-fDegreeY, v_camera_up_normalized);
     v_camera_to_target = mat_rotate_yaw * v_camera_to_target;
     v_camera_to_target += v_camera_target;
 
@@ -133,17 +147,11 @@ void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
     m_pCamera->setPosition(v_camera_to_target);
     m_pCamera->setUp(v_camera_up_normalized);
     m_pCamera->setTarget(v_camera_target);
-    Vec3Log(v_camera_to_target);
-    Vec3Log(v_camera_right_normalized);
-    Vec3Log(v_camera_up_normalized);
-    Vec3Log(v_camera_target);
 
     m_pCamera->update();
 
-//    vLastPoint[0] = vPoint[0];
-//    vLastPoint[1] = vPoint[1];
-
-    qDebug() << "\n";
+    m_vLastPoint[0] = vPoint[0];
+    m_vLastPoint[1] = vPoint[1];
 }
 
 void CoQtRenderer::mouseReleaseEvent(QMouseEvent* event)

@@ -39,7 +39,8 @@ private:
 
     std::map<CoNode*, CoNodeCore*>   m_mapNodeObject;
 
-    CoVec2 vLastPoint;
+    CoVec2 m_vLastPoint;
+    CoVec2 m_vScreenSize;
 
 public slots:
     void initializeGL();
