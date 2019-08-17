@@ -12,20 +12,20 @@
 ## Functions
 
 ### Ligthing
-##### Material Coloring
+##### - Material Coloring
 
 ### Camera
-##### Perspective
-##### Orthographic
+##### - Perspective
+##### - Orthographic
 
 ### Shape
-##### Line
-##### Spline
-##### Circle (TODO)
-##### Sphere (TODO)
+##### - Line
+##### - Spline
+##### - Circle (TODO)
+##### - Sphere (TODO)
 
 ### User Event
-##### Mouse Event
+##### - Mouse Event
 ###### Rotation by orbit
 
 
