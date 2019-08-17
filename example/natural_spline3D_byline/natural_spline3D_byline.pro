@@ -31,14 +31,9 @@ include(../library.pri);
 
 SOURCES += \
         main.cpp \
-        splinewindow.cpp \
     spline1d.cpp \
     spline3d.cpp
 
 HEADERS += \
-        splinewindow.h \
     spline1d.h \
     spline3d.h
-
-FORMS += \
-        splinewindow.ui

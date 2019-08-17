@@ -13,14 +13,10 @@ int main(int argc, char *argv[])
 
     CSampleWindow w;
 
-    CoQtRenderer *m_pRender;
-    CoCamera *m_pCamera;
-    CoOrthographicCamera *m_pOrthoCamera;
+    CoQtRenderer *m_pRender = new CoQtRenderer(w.getMainWidget());
+    CoOrthographicCamera *m_pOrthoCamera = new CoOrthographicCamera();
 
-    m_pRender = new CoQtRenderer(w.getMainWidget());
-    m_pOrthoCamera = new CoOrthographicCamera();
-
-    m_pCamera = m_pOrthoCamera;
+    CoCamera *m_pCamera = m_pOrthoCamera;
     m_pRender->setCamera(m_pCamera);
 
     QString strOBJFilePath = QFileDialog::getOpenFileName(&w,

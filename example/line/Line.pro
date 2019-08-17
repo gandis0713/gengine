@@ -30,11 +30,4 @@ UI_DIR = build
 include(../library.pri);
 
 SOURCES += \
-        main.cpp \
-        linewindow.cpp
-
-HEADERS += \
-        linewindow.h
-
-FORMS += \
-        linewindow.ui
+        main.cpp

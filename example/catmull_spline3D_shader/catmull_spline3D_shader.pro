@@ -30,11 +30,4 @@ UI_DIR = build
 include(../library.pri);
 
 SOURCES += \
-        main.cpp \
-        splinewindow.cpp
-
-HEADERS += \
-        splinewindow.h
-
-FORMS += \
-        splinewindow.ui
+        main.cpp
