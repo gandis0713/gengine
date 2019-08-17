@@ -7,7 +7,7 @@
 #include "coqscreen.h"
 #include "dedatatype.h"
 #include "corenderer.h"
-#include "conode.h"
+#include "coshape.h"
 #include "conodecore.h"
 #include "cocamera.h"
 #include "covector2.h"
@@ -20,12 +20,22 @@ class GANDISENGINE CoQtRenderer : public CoRenderer
 {
     Q_OBJECT
 public:
+    enum EEvent
+    {
+        eRotate,
+        eZoom,
+        ePan,
+    };
+
     CoQtRenderer(QWidget *pParent);
     ~CoQtRenderer();
 
     void setCamera(CoCamera* pCamera);
     void addNode(CoNode* pNode);
     void update();
+
+    void fit();
+    void setEvent(EEvent eEvent);
 
 private:
     void initializeWidget();
@@ -41,6 +51,8 @@ private:
 
     CoVec2 m_vLastPoint;
     CoVec2 m_vScreenSize;
+
+    EEvent m_eEvent;
 
 public slots:
     void initializeGL();

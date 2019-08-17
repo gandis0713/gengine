@@ -9,7 +9,7 @@ CoCamera::CoCamera()
     , m_fBottom(-0.5f)
     , m_fTop(0.5f)
     , m_fNear(1.0f)
-    , m_fFar(10.0f)
+    , m_fFar(1000.0f)
 {
 }
 

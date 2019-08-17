@@ -112,8 +112,19 @@ void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
     vPoint[0] = -(m_vScreenSize[0]/2  - event->localPos().x());
     vPoint[1] = (m_vScreenSize[1]/2 - event->localPos().y());
 
-//    m_pCamera->orbit(vPoint, m_vLastPoint);
-    m_pCamera->move(vPoint, m_vLastPoint);
+
+    if(m_eEvent == ePan)
+    {
+        m_pCamera->move(vPoint, m_vLastPoint);
+    }
+    else if(m_eEvent == eZoom)
+    {
+        m_pCamera->zoom(vPoint[1] - m_vLastPoint[1]);
+    }
+    else
+    {
+        m_pCamera->orbit(vPoint, m_vLastPoint);
+    }
 
     m_pCamera->update();
 
@@ -136,6 +147,66 @@ void CoQtRenderer::mouseWheelEvent(QWheelEvent* event)
 void CoQtRenderer::update()
 {
     m_pQScreen->updateGL();
+}
+
+void CoQtRenderer::fit()
+{
+    CoVec3 vMin(1000000, 1000000, 1000000);
+    CoVec3 vMax(-1000000, -1000000, -1000000);
+
+    std::map<CoNode*, CoNodeCore*>::iterator iter;
+    for(iter = m_mapNodeObject.begin(); iter != m_mapNodeObject.end(); ++iter)
+    {
+        CoVec3 vTempMin;
+        CoVec3 vTempMax;
+        CoShape *pShape = static_cast<CoShape*>(iter->first);
+        pShape->getBound(vTempMin, vTempMax);
+
+        if(vMin[0] > vTempMin[0])
+        {
+            vMin[0] = vTempMin[0];
+        }
+        if(vMin[1] > vTempMin[1])
+        {
+            vMin[1] = vTempMin[1];
+        }
+        if(vMin[2] > vTempMin[2])
+        {
+            vMin[2] = vTempMin[2];
+        }
+
+        if(vMax[0] < vTempMax[0])
+        {
+            vMax[0] = vTempMax[0];
+        }
+        if(vMax[1] < vTempMax[1])
+        {
+            vMax[1] = vTempMax[1];
+        }
+        if(vMax[2] < vTempMax[2])
+        {
+            vMax[2] = vTempMax[2];
+        }
+    }
+
+    CoVec3 vHalfSize = (vMax - vMin)/CoVec3(2,2,2);
+    CoVec3 vCenter = vMin + vHalfSize;
+
+    m_pCamera->setLeftPosition(vCenter[0] - vHalfSize[0] * 1.5);
+    m_pCamera->setRightPosition(vCenter[0] + vHalfSize[0] * 1.5);
+    m_pCamera->setTopPosition(vCenter[1] + vHalfSize[1] * 1.5);
+    m_pCamera->setBottomPosition(vCenter[1] - vHalfSize[1] * 1.5);
+
+    CoVec3 vPosition = m_pCamera->getPosition();
+    vPosition[2] = vMax[2] * 3;
+    m_pCamera->setPosition(vPosition);
+
+    m_pCamera->update();
+}
+
+void CoQtRenderer::setEvent(EEvent eEvent)
+{
+    m_eEvent = eEvent;
 }
 
 void CoQtRenderer::setCamera(CoCamera *pCamera)
