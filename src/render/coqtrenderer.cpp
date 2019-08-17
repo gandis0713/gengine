@@ -120,32 +120,32 @@ void CoQtRenderer::mouseMoveEvent(QMouseEvent* event)
     Gfloat fDegreeX = vRotationNormal.dot(CoVec3(1, 0, 0));
     Gfloat fDegreeY = vRotationNormal.dot(CoVec3(0, 1, 0));
 
-    CoVec3 v_camera_position = m_pCamera->getPosition();
-    CoVec3 v_camera_up_normalized = m_pCamera->getUp().normalize();
-    CoVec3 v_camera_target = m_pCamera->getTarget();
+    CoVec3 vCameraPosition = m_pCamera->getPosition();
+    CoVec3 vCameraUpNormalized = m_pCamera->getUp().normalize();
+    CoVec3 vCameraTarget = m_pCamera->getTarget();
 
-    CoVec3 v_camera_to_target = (v_camera_position - v_camera_target);
-    CoVec3 v_camera_to_target_normalized = (v_camera_position - v_camera_target).normalize();
-    CoVec3 v_camera_right_normalized = (v_camera_up_normalized.cross(v_camera_to_target_normalized)).normalize();
+    CoVec3 vCameraToTarget = (vCameraPosition - vCameraTarget);
+    CoVec3 vCameraToTargetNormalized = (vCameraPosition - vCameraTarget).normalize();
+    CoVec3 vCameraRightNormalized = (vCameraUpNormalized.cross(vCameraToTargetNormalized)).normalize();
 
-    CoMat4x4 mat_rotate_yaw;
-    CoMat4x4 mat_rotate_pitch;
+    CoMat4x4 matRotateYaw;
+    CoMat4x4 matRotatePitch;
 
-    mat_rotate_pitch = mat_rotate_pitch.rotate(-fDegreeX, v_camera_right_normalized);
-    v_camera_to_target = mat_rotate_pitch * v_camera_to_target;
-    v_camera_to_target += v_camera_target;
+    matRotatePitch = matRotatePitch.rotate(-fDegreeX, vCameraRightNormalized);
+    vCameraToTarget = matRotatePitch * vCameraToTarget;
+    vCameraToTarget += vCameraTarget;
 
-    mat_rotate_yaw = mat_rotate_yaw.rotate(-fDegreeY, v_camera_up_normalized);
-    v_camera_to_target = mat_rotate_yaw * v_camera_to_target;
-    v_camera_to_target += v_camera_target;
+    matRotateYaw = matRotateYaw.rotate(-fDegreeY, vCameraUpNormalized);
+    vCameraToTarget = matRotateYaw * vCameraToTarget;
+    vCameraToTarget += vCameraTarget;
 
-    v_camera_to_target_normalized = v_camera_to_target;
-    v_camera_to_target_normalized.normalize();
-    v_camera_up_normalized = (v_camera_to_target_normalized.cross(v_camera_right_normalized)).normalize();
+    vCameraToTargetNormalized = vCameraToTarget;
+    vCameraToTargetNormalized.normalize();
+    vCameraUpNormalized = (vCameraToTargetNormalized.cross(vCameraRightNormalized)).normalize();
 
-    m_pCamera->setPosition(v_camera_to_target);
-    m_pCamera->setUp(v_camera_up_normalized);
-    m_pCamera->setTarget(v_camera_target);
+    m_pCamera->setPosition(vCameraToTarget);
+    m_pCamera->setUp(vCameraUpNormalized);
+    m_pCamera->setTarget(vCameraTarget);
 
     m_pCamera->update();
 
