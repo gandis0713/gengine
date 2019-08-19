@@ -10,7 +10,7 @@ CoTextureCore::CoTextureCore()
 CoTextureCore::CoTextureCore(CoNode* pNode,
                              CoCamera *pCamera,
                              CoLight *pLight)
-    : CoNodeCore(pNode, pCamera, pLight)
+    : CoShapeCore(pNode, pCamera, pLight)
 {
 }
 
@@ -22,71 +22,69 @@ CoTextureCore::~CoTextureCore()
 
 void CoTextureCore::initialize()
 {
-    m_pVAO = new CoVertexArrayObject();
-    m_pVBO = new CoVertexBufferObject();
-    m_pCBO = new CoVertexBufferObject();
-    m_pTBO = new CoVertexBufferObject();
-    m_pIBO = new CoVertexBufferObject();
 
+    createObject();
+    createShaderProgram();
+    setUniformLocation();
+    bindObject();
+
+
+}
+
+void CoTextureCore::paint()
+{
+
+    m_pShaderProgram->bind();
+    m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getCameraMat() * CoMat4x4());
+
+    m_pVertexArrayObject->bind();
+
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+}
+
+
+
+void CoTextureCore::createObject()
+{
+    CoShapeCore::createObject();
+
+    m_pTextureBufferObject = new CoVertexBufferObject();
+    m_pIndexBufferObject = new CoVertexBufferObject();
+}
+
+void CoTextureCore::createShaderProgram()
+{
     m_pShaderProgram = new CoShaderProgram();
     m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/texture_frag.glsl");
     m_pShaderProgram->AddShaders(EShaderType::eVertex, ":resource/glsl/texture_vert.glsl");
     m_pShaderProgram->link();
+}
 
-    m_nMVPID = m_pShaderProgram->getUniformLocation("mvp");
+void CoTextureCore::bindObject()
+{
+    CoTexture *pTexture = static_cast<CoTexture*>(m_pNode);
 
-    Gfloat position[] = {
-         1.0f,  1.0f, 0.0f, // top right
-         1.0f, -1.0f, 0.0f, // bottom right
-        -1.0f, -1.0f, 0.0f, // bottom left
-        -1.0f,  1.0f, 0.0f, // top left
-    };
+    m_pVertexBufferObject->gen();
+    m_pTextureBufferObject->gen();
+    m_pIndexBufferObject->gen();
 
-    Gfloat color[] = {
-         1.0f, 0.0f, 0.0f, // top right
-         0.0f, 1.0f, 0.0f, // bottom right
-         0.0f, 0.0f, 1.0f, // bottom left
-         1.0f, 1.0f, 0.0f, // top left
-    };
+    m_pVertexArrayObject->gen();
+    m_pVertexArrayObject->bind();
 
-    Gfloat texture_coords[] = {
-         1.0f, 1.0f - 1.0f, // top right
-         1.0f, 1.0f - 0.0f, // bottom right
-         0.0f, 1.0f - 0.0f, // bottom left
-         0.0f, 1.0f - 1.0f, // top left
-    };
+    m_pVertexBufferObject->bind();
+    m_pVertexBufferObject->allocate(&pTexture->getPoints()[0], pTexture->getSize() * 3 * sizeof(Gfloat));
 
-    Guint indices[] = {
-        0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
-    };
+    m_pTextureBufferObject->bind();
+    m_pTextureBufferObject->allocate(&pTexture->getTextureCoords()[0], pTexture->getTextureCoords().size() * 2 * sizeof(Gfloat));
 
-    m_pVBO->gen();
-    m_pCBO->gen();
-    m_pTBO->gen();
-    m_pIBO->gen();
-
-    m_pVAO->gen();
-    m_pVAO->bind();
-
-    m_pVBO->bind();
-    m_pVBO->allocate(&position, 12 * sizeof(Gfloat));
-
-    m_pCBO->bind();
-    m_pCBO->allocate(&color, 12 * sizeof(Gfloat));
-
-    m_pTBO->bind();
-    m_pTBO->allocate(&texture_coords, 8 * sizeof(Gfloat));
-
-    m_pIBO->setType(CoVertexBufferObject::EType::eIndexArray);
-    m_pIBO->bind();
-    m_pIBO->allocate(&indices, 6 * sizeof(Guint));
+    m_pIndexBufferObject->setType(CoVertexBufferObject::EType::eIndexArray);
+    m_pIndexBufferObject->bind();
+    m_pIndexBufferObject->allocate(&pTexture->getVertexIndices()[0], pTexture->getVertexIndices().size() * sizeof(Guint));
 
     glGenTextures(1, &m_nTextureID);
 
     glBindTexture(GL_TEXTURE_2D, m_nTextureID);
 
-    CoTexture *pTexture = static_cast<CoTexture*>(m_pNode);
 
     glTexImage2D(GL_TEXTURE_2D,
                  0,
@@ -105,27 +103,18 @@ void CoTextureCore::initialize()
 
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    m_pVBO->bind();
+    m_pVertexBufferObject->bind();
     m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);
     m_pShaderProgram->setVertexAttribPointer(VERTEX_IN_LAYOUT, 3, 0);
 
-    m_pCBO->bind();
-    m_pShaderProgram->enableAttributeVertexArray(COLOR_IN_LAYOUT);
-    m_pShaderProgram->setVertexAttribPointer(COLOR_IN_LAYOUT, 3, 0);
+    m_pTextureBufferObject->bind();
+    m_pShaderProgram->enableAttributeVertexArray(TEXTURE_IN_LAYOUT);
+    m_pShaderProgram->setVertexAttribPointer(TEXTURE_IN_LAYOUT, 2, 0);
 
-    m_pTBO->bind();
-    m_pShaderProgram->enableAttributeVertexArray(2);
-    m_pShaderProgram->setVertexAttribPointer(2, 2, 0);
-
-    m_pVAO->release();
+    m_pVertexArrayObject->release();
 }
 
-void CoTextureCore::paint()
-{    
-    m_pShaderProgram->bind();
-    m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getCameraMat() * CoMat4x4());
-
-    m_pVAO->bind();
-
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+void CoTextureCore::setUniformLocation()
+{
+    CoShapeCore::setUniformLocation();
 }

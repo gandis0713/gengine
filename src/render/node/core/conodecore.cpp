@@ -30,3 +30,4 @@ void CoNodeCore::setLight(CoLight *pLight)
 {
     m_pLight = pLight;
 }
+

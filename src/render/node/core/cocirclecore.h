@@ -14,6 +14,14 @@ public:
 
     void initialize() override;
     void paint() override;
+
+protected:
+
+    void createObject() override;
+    void createShaderProgram() override;
+    void bindObject() override;
+    void setUniformLocation() override;
+
 };
 
 #endif // COCIRCLECORE_H

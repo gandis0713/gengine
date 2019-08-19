@@ -18,11 +18,16 @@ public:
     void paint() override {}
 
 protected:
+
+    void createObject() override;
+    void createShaderProgram() override;
+    void bindObject() override;
+    void setUniformLocation() override;
+
+
+protected:
     CoVertexArrayObject*  m_pVertexArrayObject;
     CoVertexBufferObject* m_pVertexBufferObject;
-    CoVertexBufferObject* m_pCBO;
-
-    Guint    m_nWidthID;
 };
 
 #endif // COSHAPECORE_H

@@ -19,8 +19,31 @@ CoCircleCore::~CoCircleCore()
 
 void CoCircleCore::initialize()
 {
+
 }
 
 void CoCircleCore::paint()
 {
+
+}
+
+
+void CoCircleCore::createObject()
+{
+
+}
+
+void CoCircleCore::createShaderProgram()
+{
+
+}
+
+void CoCircleCore::bindObject()
+{
+
+}
+
+void CoCircleCore::setUniformLocation()
+{
+
 }

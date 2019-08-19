@@ -12,8 +12,15 @@ public:
                         CoLight *pLight);
     ~CoCatmullSplineCore();
 
+protected:
     void initialize() override;
-    void paint() override;
+    void paint() override;    
+
+    void createObject() override;
+    void createShaderProgram() override;
+    void bindObject() override;
+    void setUniformLocation() override;
+
 protected:
     Guint m_nAlpha;
 };

@@ -1,7 +1,7 @@
 #version 430 core
 
 layout(location = 0) in vec3 vertex_m;
-layout(location = 2) in vec3 vertexNormal_m;
+layout(location = 1) in vec3 vertexNormal_m;
 
 uniform mat4 mvp;
 uniform mat4 v;

@@ -1,8 +1,7 @@
 #include "coshape.h"
 
 CoShape::CoShape()
-    : m_fWidth(0.005f)
-    , m_vDiffuseColor(CoVec3(0.5, 0.5, 0.5))
+    : m_vDiffuseColor(CoVec3(0.5, 0.5, 0.5))
     , m_vAmbientColor(CoVec3(0.1, 0.1, 0.1))
     , m_vSpecularColor(CoVec3(0.1, 0.1, 0.1))
 {
@@ -51,16 +50,6 @@ void CoShape::setSpecularColor(CoVec3 vColor)
 CoVec3 CoShape::getSpecularColor()
 {
     return m_vSpecularColor;
-}
-
-void CoShape::setWidth(Gfloat fWidth)
-{
-    m_fWidth = fWidth;
-}
-
-Gfloat CoShape::getWidth()
-{
-    return m_fWidth;
 }
 
 void CoShape::setMatModel(CoMat4x4 matModel)

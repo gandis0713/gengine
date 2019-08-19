@@ -1,11 +1,11 @@
 #ifndef COTEXTURECORE_H
 #define COTEXTURECORE_H
 
-#include "conodecore.h"
+#include "coshapecore.h"
 #include "covertexarrayobject.h"
 #include "covertexbufferobject.h"
 
-class CoTextureCore : public CoNodeCore
+class CoTextureCore : public CoShapeCore
 {
 public:
     CoTextureCore();
@@ -18,11 +18,15 @@ public:
     void paint() override;
 
 protected:
-    CoVertexArrayObject*  m_pVAO;
-    CoVertexBufferObject* m_pVBO;
-    CoVertexBufferObject* m_pCBO;
-    CoVertexBufferObject* m_pTBO;
-    CoVertexBufferObject* m_pIBO;
+
+    void createObject() override;
+    void createShaderProgram() override;
+    void bindObject() override;
+    void setUniformLocation() override;
+
+protected:
+    CoVertexBufferObject* m_pTextureBufferObject;
+    CoVertexBufferObject* m_pIndexBufferObject;
 
 private:
     Guint m_nTextureID;

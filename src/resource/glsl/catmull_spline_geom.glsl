@@ -3,7 +3,6 @@
 layout (lines_adjacency) in;
 layout (triangle_strip, max_vertices = 42) out;
 
-in vec3 vertColor[];
 out vec3 fragColor;
 
 uniform mat4 mvp;
@@ -70,8 +69,6 @@ void draw(vec3 pos1, vec3 pos2)
 
 void main()
 {
-    fragColor = vertColor[0];
-
     p0 = gl_in[0].gl_Position.xyz;
     p1 = gl_in[1].gl_Position.xyz;
     p2 = gl_in[2].gl_Position.xyz;

@@ -21,9 +21,6 @@ public:
     void setSpecularColor(CoVec3 vColor);
     CoVec3 getSpecularColor();
 
-    void setWidth(Gfloat fWidth);
-    Gfloat getWidth();
-
     void setMatModel(CoMat4x4 matModel);
     CoMat4x4 getMatModel();
 
@@ -36,8 +33,6 @@ protected:
     CoVec3              m_vSpecularColor;
 
     CoMat4x4            m_matModel;
-
-    Gfloat m_fWidth;
 };
 
 #endif // COSHAPE_H

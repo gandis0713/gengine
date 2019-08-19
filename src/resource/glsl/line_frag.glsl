@@ -1,8 +1,8 @@
 #version 430 core
 
-in vec3 fragColor;
+uniform vec3 diffuseColor;
 
 void main()
 {
-    gl_FragColor = vec4(fragColor, 1);
+    gl_FragColor = vec4(diffuseColor, 1);
 }

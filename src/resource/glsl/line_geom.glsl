@@ -3,10 +3,7 @@
 layout (lines) in;
 layout (triangle_strip, max_vertices = 4) out;
 
-in vec3 vertColor[];
 in float vertWidth[];
-
-out vec3 fragColor;
 
 uniform mat4 mvp;
 uniform float width;
@@ -26,13 +23,11 @@ void main()
 
     vec3 dir = cross(vec3(0, 0, 1), normalize(v2-v1));
 
-    fragColor = vertColor[0];
     gl_Position = vec4(v1 - dir * width, 1.0);
     EmitVertex();
     gl_Position = vec4(v1 + dir * width, 1.0);
     EmitVertex();
 
-    fragColor = vertColor[1];
     gl_Position = vec4(v2 - dir * width, 1.0);
     EmitVertex();
     gl_Position = vec4(v2 + dir * width, 1.0);

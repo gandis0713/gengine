@@ -15,14 +15,28 @@ public:
                CoLight *pLight);
     ~CoNodeCore();
 
-    virtual void initialize() = 0;
-    virtual void paint() = 0;
-
     void setCamera(CoCamera *pCamera);    
     void setLight(CoLight *pLight);
 
+    virtual void initialize() = 0;
+    virtual void paint() = 0;
+protected:
+
+    virtual void createObject() = 0;
+    virtual void createShaderProgram() = 0;
+    virtual void bindObject() = 0;
+    virtual void setUniformLocation() = 0;
+
 protected:
     Guint                 m_nMVPID;
+    Guint                 m_nVID;
+    Guint                 m_nMID;
+    Guint                 m_nLightPosID;
+    Guint                 m_nLightColorID;
+    Guint                 m_nLightPowerID;
+    Guint                 m_nDiffuseColorID;
+    Guint                 m_nAmbientColorID;
+    Guint                 m_nSpecularColorID;
 
     CoNode*               m_pNode;
     CoCamera*             m_pCamera;

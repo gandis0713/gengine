@@ -21,50 +21,12 @@ CoPolygonCore::~CoPolygonCore()
 
 void CoPolygonCore::initialize()
 {
-    m_pVertexArrayObject = new CoVertexArrayObject();
-    m_pVertexBufferObject = new CoVertexBufferObject();
-    m_pVertexNornalBufferObject = new CoVertexBufferObject();
 
-    m_pShaderProgram = new CoShaderProgram();
-    m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/polygon_frag.glsl");
-//    m_pShaderProgram->AddShaders(EShaderType::eGeometry, ":resource/glsl/polygon_geom.glsl");
-    m_pShaderProgram->AddShaders(EShaderType::eVertex, ":resource/glsl/polygon_vert.glsl");
-    m_pShaderProgram->link();
+    createObject();
+    createShaderProgram();
+    setUniformLocation();
+    bindObject();
 
-    m_nMVPID = m_pShaderProgram->getUniformLocation("mvp");
-    m_nMID = m_pShaderProgram->getUniformLocation("m");
-    m_nVID = m_pShaderProgram->getUniformLocation("v");
-
-    m_nLightPosID = m_pShaderProgram->getUniformLocation("lightPosition");
-    m_nLightColorID = m_pShaderProgram->getUniformLocation("lightColor");
-    m_nLightPowerID = m_pShaderProgram->getUniformLocation("lightPower");
-
-    m_nDiffuseColorID = m_pShaderProgram->getUniformLocation("diffuseColor");
-    m_nAmbientColorID = m_pShaderProgram->getUniformLocation("ambientColor");
-    m_nSpecularColorID = m_pShaderProgram->getUniformLocation("specularColor");
-
-    CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
-
-    m_pVertexBufferObject->gen();
-    m_pVertexBufferObject->bind();
-    m_pVertexBufferObject->allocate(&pPolygon->getPoints()[0], pPolygon->getSize() * 3 * sizeof(Gfloat));
-
-    m_pVertexNornalBufferObject->gen();
-    m_pVertexNornalBufferObject->bind();
-    m_pVertexNornalBufferObject->allocate(&pPolygon->getNormals()[0], pPolygon->getSize() * 3 * sizeof(Gfloat));
-
-    m_pVertexArrayObject->gen();
-    m_pVertexArrayObject->bind();
-
-    m_pVertexBufferObject->bind();
-    m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);
-    m_pShaderProgram->setVertexAttribPointer(VERTEX_IN_LAYOUT, 3, 0);
-
-    m_pVertexNornalBufferObject->bind();
-    m_pShaderProgram->enableAttributeVertexArray(2);
-    m_pShaderProgram->setVertexAttribPointer(2, 3, 0);
-
-    m_pVertexArrayObject->release();
 }
 
 void CoPolygonCore::paint()
@@ -100,4 +62,54 @@ void CoPolygonCore::paint()
     m_pVertexArrayObject->bind();
 
     glDrawArrays(GL_TRIANGLES, 0, pPolygon->getSize());
+}
+
+
+
+void CoPolygonCore::createObject()
+{
+    CoShapeCore::createObject();
+
+    m_pVertexNormalBufferObject = new CoVertexBufferObject();
+}
+
+void CoPolygonCore::createShaderProgram()
+{
+    m_pShaderProgram = new CoShaderProgram();
+    m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/polygon_frag.glsl");
+//    m_pShaderProgram->AddShaders(EShaderType::eGeometry, ":resource/glsl/polygon_geom.glsl");
+    m_pShaderProgram->AddShaders(EShaderType::eVertex, ":resource/glsl/polygon_vert.glsl");
+    m_pShaderProgram->link();
+}
+
+void CoPolygonCore::bindObject()
+{
+
+    CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
+
+    m_pVertexBufferObject->gen();
+    m_pVertexBufferObject->bind();
+    m_pVertexBufferObject->allocate(&pPolygon->getPoints()[0], pPolygon->getSize() * 3 * sizeof(Gfloat));
+
+    m_pVertexNormalBufferObject->gen();
+    m_pVertexNormalBufferObject->bind();
+    m_pVertexNormalBufferObject->allocate(&pPolygon->getNormals()[0], pPolygon->getSize() * 3 * sizeof(Gfloat));
+
+    m_pVertexArrayObject->gen();
+    m_pVertexArrayObject->bind();
+
+    m_pVertexBufferObject->bind();
+    m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);
+    m_pShaderProgram->setVertexAttribPointer(VERTEX_IN_LAYOUT, 3, 0);
+
+    m_pVertexNormalBufferObject->bind();
+    m_pShaderProgram->enableAttributeVertexArray(VERTEXNORMAL_IN_LAYOUT);
+    m_pShaderProgram->setVertexAttribPointer(VERTEXNORMAL_IN_LAYOUT, 3, 0);
+
+    m_pVertexArrayObject->release();
+}
+
+void CoPolygonCore::setUniformLocation()
+{
+    CoShapeCore::setUniformLocation();
 }

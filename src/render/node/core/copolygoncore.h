@@ -14,17 +14,16 @@ public:
 
     void initialize() override;
     void paint() override;
-protected:
-    Guint m_nVID;
-    Guint m_nMID;
-    Guint m_nLightPosID;
-    Guint m_nLightColorID;
-    Guint m_nLightPowerID;
-    Guint m_nDiffuseColorID;
-    Guint m_nAmbientColorID;
-    Guint m_nSpecularColorID;
 
-    CoVertexBufferObject* m_pVertexNornalBufferObject;
+protected:
+
+    void createObject() override;
+    void createShaderProgram() override;
+    void bindObject() override;
+    void setUniformLocation() override;
+
+protected:
+    CoVertexBufferObject* m_pVertexNormalBufferObject;
 };
 
 #endif // COPOLYGONCORE_H

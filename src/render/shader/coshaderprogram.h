@@ -7,7 +7,8 @@
 #include <map>
 
 #define VERTEX_IN_LAYOUT          0
-#define COLOR_IN_LAYOUT           1
+#define VERTEXNORMAL_IN_LAYOUT    1
+#define TEXTURE_IN_LAYOUT         2
 
 class CoShaderProgram
 {
