@@ -2,6 +2,9 @@
 
 CoShape::CoShape()
     : m_fWidth(0.005f)
+    , m_vDiffuseColor(CoVec3(0.5, 0.5, 0.5))
+    , m_vAmbientColor(CoVec3(0.1, 0.1, 0.1))
+    , m_vSpecularColor(CoVec3(0.1, 0.1, 0.1))
 {
 
 }
@@ -15,25 +18,40 @@ Guint CoShape::getSize()
     return m_vecPoints.size();
 }
 
-void CoShape::setColor(CoVec3 vColor)
-{
-    m_vecColors.clear();
-    for(Gint i = 0; i < m_vecPoints.size(); i++)
-    {
-        m_vecColors.push_back(vColor);
-    }
-}
-
 std::vector<CoVec3> CoShape::getPoints()
 {
     return m_vecPoints;
 }
 
-std::vector<CoVec3> CoShape::getColors()
+void CoShape::setColor(CoVec3 vColor)
 {
-    return m_vecColors;
+    m_vDiffuseColor = vColor;
 }
 
+CoVec3 CoShape::getColor()
+{
+    return m_vDiffuseColor;
+}
+
+void CoShape::setAmbientColor(CoVec3 vColor)
+{
+    m_vAmbientColor = vColor;
+}
+
+CoVec3 CoShape::getAmbientColor()
+{
+    return m_vAmbientColor;
+}
+
+void CoShape::setSpecularColor(CoVec3 vColor)
+{
+    m_vSpecularColor = vColor;
+}
+
+CoVec3 CoShape::getSpecularColor()
+{
+    return m_vSpecularColor;
+}
 
 void CoShape::setWidth(Gfloat fWidth)
 {

@@ -20,8 +20,11 @@ protected:
     Guint m_nLightPosID;
     Guint m_nLightColorID;
     Guint m_nLightPowerID;
+    Guint m_nDiffuseColorID;
+    Guint m_nAmbientColorID;
+    Guint m_nSpecularColorID;
 
-    CoVertexBufferObject* m_pNBO;
+    CoVertexBufferObject* m_pVertexNornalBufferObject;
 };
 
 #endif // COPOLYGONCORE_H

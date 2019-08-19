@@ -12,10 +12,14 @@ public:
 
     Guint getSize();
 
-    void setColor(CoVec3 vColor);
-
     std::vector<CoVec3> getPoints();
-    std::vector<CoVec3> getColors();
+
+    void setColor(CoVec3 vColor);
+    CoVec3 getColor();
+    void setAmbientColor(CoVec3 vColor);
+    CoVec3 getAmbientColor();
+    void setSpecularColor(CoVec3 vColor);
+    CoVec3 getSpecularColor();
 
     void setWidth(Gfloat fWidth);
     Gfloat getWidth();
@@ -27,7 +31,9 @@ public:
 
 protected:
     std::vector<CoVec3> m_vecPoints;
-    std::vector<CoVec3> m_vecColors;
+    CoVec3              m_vDiffuseColor;
+    CoVec3              m_vAmbientColor;
+    CoVec3              m_vSpecularColor;
 
     CoMat4x4            m_matModel;
 

@@ -18,8 +18,8 @@ public:
     void paint() override {}
 
 protected:
-    CoVertexArrayObject*  m_pVAO;
-    CoVertexBufferObject* m_pVBO;
+    CoVertexArrayObject*  m_pVertexArrayObject;
+    CoVertexBufferObject* m_pVertexBufferObject;
     CoVertexBufferObject* m_pCBO;
 
     Guint    m_nWidthID;

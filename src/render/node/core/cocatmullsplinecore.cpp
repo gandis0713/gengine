@@ -21,8 +21,8 @@ CoCatmullSplineCore::~CoCatmullSplineCore()
 
 void CoCatmullSplineCore::initialize()
 {
-    m_pVAO = new CoVertexArrayObject();
-    m_pVBO = new CoVertexBufferObject();
+    m_pVertexArrayObject = new CoVertexArrayObject();
+    m_pVertexBufferObject = new CoVertexBufferObject();
     m_pCBO = new CoVertexBufferObject();
 
     m_pShaderProgram = new CoCatmullSplineShaderProgram();
@@ -36,18 +36,18 @@ void CoCatmullSplineCore::initialize()
     m_nAlpha = m_pShaderProgram->getUniformLocation("alpha");
 
     CoCatmullSpline *pSpline = static_cast<CoCatmullSpline*>(m_pNode);
-    m_pVBO->gen();
-    m_pVBO->bind();
-    m_pVBO->allocate(&pSpline->getPoints()[0], pSpline->getSize() * 3 * sizeof(Gfloat));
+    m_pVertexBufferObject->gen();
+    m_pVertexBufferObject->bind();
+    m_pVertexBufferObject->allocate(&pSpline->getPoints()[0], pSpline->getSize() * 3 * sizeof(Gfloat));
 
     m_pCBO->gen();
     m_pCBO->bind();
-    m_pCBO->allocate(&pSpline->getColors()[0], pSpline->getSize() * 3 * sizeof(Gfloat));
+    m_pCBO->allocate(&pSpline->getColor()[0], pSpline->getSize() * 3 * sizeof(Gfloat));
 
-    m_pVAO->gen();
-    m_pVAO->bind();
+    m_pVertexArrayObject->gen();
+    m_pVertexArrayObject->bind();
 
-    m_pVBO->bind();
+    m_pVertexBufferObject->bind();
     m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);
     m_pShaderProgram->setVertexAttribPointer(VERTEX_IN_LAYOUT, 3, 0);
 
@@ -55,7 +55,7 @@ void CoCatmullSplineCore::initialize()
     m_pShaderProgram->enableAttributeVertexArray(COLOR_IN_LAYOUT);
     m_pShaderProgram->setVertexAttribPointer(COLOR_IN_LAYOUT, 3, 0);
 
-    m_pVAO->release();
+    m_pVertexArrayObject->release();
 
 }
 
@@ -68,7 +68,7 @@ void CoCatmullSplineCore::paint()
     m_pShaderProgram->setUniform1f(m_nWidthID, pSpline->getWidth());
     m_pShaderProgram->setUniform1f(m_nAlpha, pSpline->getAlpha());
 
-    m_pVAO->bind();
+    m_pVertexArrayObject->bind();
 
     glDrawArrays(GL_LINE_STRIP_ADJACENCY, 0, pSpline->getSize());
 }

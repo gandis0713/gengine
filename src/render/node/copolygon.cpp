@@ -15,7 +15,6 @@ CoPolygon::CoPolygon(const std::vector<CoVec3> &vecPoints,
     setPoints(vecPoints);
     setNormals(vecNormals);
     setUICoords(vecUICoords);
-    setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_eShaderProgramType = EShaderProgramType::ePolygon;
 }
@@ -43,8 +42,6 @@ void CoPolygon::setPoints(const std::vector<CoVec3> &vecPoints)
         m_vecPoints.push_back(vPoint[1]);
         m_vecPoints.push_back(vPoint[2]);
     }
-
-    setColor(CoVec3(0.5, 0.5, 0.5));
 }
 
 void CoPolygon::setNormals(const std::vector<CoVec3> &vecNormals)

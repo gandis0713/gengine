@@ -1,6 +1,5 @@
 #version 430 core
 
-in vec3 vertColor;
 in vec3 vertex_w;
 in vec3 vertexNormal_c;
 in vec3 eyeDir_c;
@@ -19,9 +18,7 @@ uniform vec3 specularColor;
 void main()
 {
     // Material properties
-    vec3 diffuseColor_t = vertColor;
-    vec3 ambientColor_t = vec3(0.1,0.1,0.1) * diffuseColor_t;
-    vec3 specularColor_t = vec3(0.3,0.3,0.3);
+    vec3 ambient_diffuse_Color = ambientColor * diffuseColor;
 
     // Distance to the light
     float distance = length( lightPosition - vertex_w );
@@ -50,9 +47,9 @@ void main()
 
     color =
             // Ambient : simulates indirect lighting
-            ambientColor_t +
+            ambient_diffuse_Color +
             // Diffuse : "color" of the object
-            diffuseColor_t * lightColor * lightPower * cosTheta / (distance*distance) +
+            diffuseColor * lightColor * lightPower * cosTheta / (distance*distance) +
             // Specular : reflective highlight, like a mirror
-            specularColor_t * lightColor * lightPower * pow(cosAlpha,5) / (distance*distance);
+            specularColor * lightColor * lightPower * pow(cosAlpha,5) / (distance*distance);
 }

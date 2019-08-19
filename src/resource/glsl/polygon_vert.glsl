@@ -1,10 +1,7 @@
 #version 430 core
 
 layout(location = 0) in vec3 vertex_m;
-layout(location = 1) in vec3 color;
 layout(location = 2) in vec3 vertexNormal_m;
-
-out vec3 vertColor;
 
 uniform mat4 mvp;
 uniform mat4 v;
@@ -37,5 +34,4 @@ void main()
     // Normal of the the vertex, in camera space
     vertexNormal_c = ( v * m * vec4(vertexNormal_m, 0)).xyz; // Only correct if ModelMatrix does not scale the model ! Use its inverse transpose if not.
 
-    vertColor = color;
 }
