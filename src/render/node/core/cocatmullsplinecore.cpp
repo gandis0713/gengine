@@ -7,8 +7,10 @@ CoCatmullSplineCore::CoCatmullSplineCore()
 
 }
 
-CoCatmullSplineCore::CoCatmullSplineCore(CoNode* pNode, CoCamera *pCamera)
-    : CoLineCore(pNode, pCamera)
+CoCatmullSplineCore::CoCatmullSplineCore(CoNode* pNode,
+                                         CoCamera *pCamera,
+                                         CoLight *pLight)
+    : CoLineCore(pNode, pCamera, pLight)
 {
 
 }

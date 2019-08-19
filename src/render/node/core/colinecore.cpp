@@ -8,8 +8,10 @@ CoLineCore::CoLineCore()
 
 }
 
-CoLineCore::CoLineCore(CoNode* pNode, CoCamera *pCamera)
-    : CoShapeCore(pNode, pCamera)
+CoLineCore::CoLineCore(CoNode* pNode,
+                       CoCamera *pCamera,
+                       CoLight *pLight)
+    : CoShapeCore(pNode, pCamera, pLight)
 {
 }
 

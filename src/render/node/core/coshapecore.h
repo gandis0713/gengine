@@ -9,7 +9,9 @@ class CoShapeCore : public CoNodeCore
 {
 public:
     CoShapeCore();
-    CoShapeCore(CoNode* pNode, CoCamera *pCamera);
+    CoShapeCore(CoNode* pNode,
+                CoCamera *pCamera,
+                CoLight *pLight);
     ~CoShapeCore();
 
     void initialize() override {}

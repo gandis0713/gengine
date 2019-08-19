@@ -10,6 +10,7 @@ INCLUDEPATH += render \
     render/node/core \
     render/object \
     render/camera \
+    render/light \
     render/shader \
     render/shader/core
 

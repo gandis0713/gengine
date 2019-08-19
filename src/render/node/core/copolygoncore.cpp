@@ -6,8 +6,10 @@ CoPolygonCore::CoPolygonCore()
 
 }
 
-CoPolygonCore::CoPolygonCore(CoNode* pNode, CoCamera *pCamera)
-    : CoShapeCore(pNode, pCamera)
+CoPolygonCore::CoPolygonCore(CoNode* pNode,
+                             CoCamera *pCamera,
+                             CoLight *pLight)
+    : CoShapeCore(pNode, pCamera, pLight)
 {
 }
 
@@ -33,7 +35,9 @@ void CoPolygonCore::initialize()
     m_nMVPID = m_pShaderProgram->getUniformLocation("mvp");
     m_nMID = m_pShaderProgram->getUniformLocation("m");
     m_nVID = m_pShaderProgram->getUniformLocation("v");
-    m_nCameraID = m_pShaderProgram->getUniformLocation("cameraPosition");
+    m_nLightPosID = m_pShaderProgram->getUniformLocation("lightPosition");
+    m_nLightColorID = m_pShaderProgram->getUniformLocation("lightColor");
+    m_nLightPowerID = m_pShaderProgram->getUniformLocation("lightPower");
 
     CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
 
@@ -75,8 +79,19 @@ void CoPolygonCore::paint()
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getCameraMat());
     m_pShaderProgram->setUniformMatrix4fv(m_nMID, pPolygon->getMatModel());
     m_pShaderProgram->setUniformMatrix4fv(m_nVID, m_pCamera->getViewMat());
-    CoVec3 vCameraPosition = m_pCamera->getPosition();
-    glUniform3f(m_nCameraID, vCameraPosition[0], vCameraPosition[1], vCameraPosition[2]);
+
+    Gfloat fCameraLength = m_pCamera->getPosition().length();
+    Gfloat fLightLength = m_pLight->getPosition().length();
+
+    Gfloat fRate = fLightLength / fCameraLength;
+
+    CoVec3 vLightPosition = m_pCamera->getPosition() * fRate;
+    CoVec3 vLightColor = m_pLight->getColor();
+    Gfloat fLightPower = m_pLight->getPower();
+
+    glUniform3f(m_nLightPosID, vLightPosition[0], vLightPosition[1], vLightPosition[2]);
+    glUniform3f(m_nLightColorID, vLightColor[0], vLightColor[1], vLightColor[2]);
+    glUniform1f(m_nLightPowerID, fLightPower);
 
     m_pVAO->bind();
 

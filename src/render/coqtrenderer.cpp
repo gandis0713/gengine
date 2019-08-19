@@ -26,6 +26,8 @@ CoQtRenderer::CoQtRenderer(QWidget* pParent)
 
     m_pCamera = new CoOrthographicCamera();
     connect(m_pCamera, SIGNAL(signalCameraUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
+
+    m_pLight = new CoLight();
 }
 
 CoQtRenderer::~CoQtRenderer()
@@ -162,30 +164,12 @@ void CoQtRenderer::fit()
         CoShape *pShape = static_cast<CoShape*>(iter->first);
         pShape->getBound(vTempMin, vTempMax);
 
-        if(vMin[0] > vTempMin[0])
+        for(Gint nIndex = 0; nIndex < 3; nIndex++)
         {
-            vMin[0] = vTempMin[0];
-        }
-        if(vMin[1] > vTempMin[1])
-        {
-            vMin[1] = vTempMin[1];
-        }
-        if(vMin[2] > vTempMin[2])
-        {
-            vMin[2] = vTempMin[2];
-        }
-
-        if(vMax[0] < vTempMax[0])
-        {
-            vMax[0] = vTempMax[0];
-        }
-        if(vMax[1] < vTempMax[1])
-        {
-            vMax[1] = vTempMax[1];
-        }
-        if(vMax[2] < vTempMax[2])
-        {
-            vMax[2] = vTempMax[2];
+            if(vMin[nIndex] > vTempMin[nIndex])
+                vMin[nIndex] = vTempMin[nIndex];
+            if(vMax[nIndex] < vTempMax[nIndex])
+                vMax[nIndex] = vTempMax[nIndex];
         }
     }
 
@@ -237,6 +221,24 @@ void CoQtRenderer::setCamera(CoCamera *pCamera)
     connect(m_pCamera, SIGNAL(signalCameraUpdated()), this, SLOT(slotCameraUpdated()), Qt::UniqueConnection);
 }
 
+void CoQtRenderer::setLight(CoLight *pLight)
+{
+    if(m_pLight != NULL)
+    {
+        delete(m_pLight);
+    }
+
+    m_pLight = pLight;
+
+    std::map<CoNode*, CoNodeCore*>::iterator iter;
+    for(iter = m_mapNodeObject.begin(); iter != m_mapNodeObject.end(); ++iter)
+    {
+        CoNodeCore *pNodeObject = iter->second;
+
+        pNodeObject->setLight(m_pLight);
+    }
+}
+
 void CoQtRenderer::addNode(CoNode *pNode)
 {
     auto ret = m_mapNodeObject.insert( { pNode , nullptr } );
@@ -247,19 +249,19 @@ void CoQtRenderer::addNode(CoNode *pNode)
         {
         case EShaderProgramType::eLine:
         default:
-            pNodeObject = new CoLineCore(pNode, m_pCamera);
+            pNodeObject = new CoLineCore(pNode, m_pCamera, m_pLight);
             break;
         case EShaderProgramType::eSpline:
-            pNodeObject = new CoCatmullSplineCore(pNode, m_pCamera);
+            pNodeObject = new CoCatmullSplineCore(pNode, m_pCamera, m_pLight);
             break;
         case EShaderProgramType::eCircle:
-            pNodeObject = new CoCircleCore(pNode, m_pCamera);
+            pNodeObject = new CoCircleCore(pNode, m_pCamera, m_pLight);
             break;
         case EShaderProgramType::ePolygon:
-            pNodeObject = new CoPolygonCore(pNode, m_pCamera);
+            pNodeObject = new CoPolygonCore(pNode, m_pCamera, m_pLight);
             break;
         case EShaderProgramType::eTexture:
-            pNodeObject = new CoTextureCore(pNode, m_pCamera);
+            pNodeObject = new CoTextureCore(pNode, m_pCamera, m_pLight);
             break;
         }
 

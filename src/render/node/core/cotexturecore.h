@@ -9,7 +9,9 @@ class CoTextureCore : public CoNodeCore
 {
 public:
     CoTextureCore();
-    CoTextureCore(CoNode* pNode, CoCamera *pCamera);
+    CoTextureCore(CoNode* pNode,
+                  CoCamera *pCamera,
+                  CoLight *pLight);
     ~CoTextureCore();
 
     void initialize() override;

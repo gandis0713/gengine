@@ -7,7 +7,9 @@ class CoPolygonCore : public CoShapeCore
 {
 public:
     CoPolygonCore();
-    CoPolygonCore(CoNode* pNode, CoCamera *pCamera);
+    CoPolygonCore(CoNode* pNode,
+                  CoCamera *pCamera,
+                  CoLight *pLight);
     ~CoPolygonCore();
 
     void initialize() override;
@@ -15,7 +17,9 @@ public:
 protected:
     Guint m_nVID;
     Guint m_nMID;
-    Guint m_nCameraID;
+    Guint m_nLightPosID;
+    Guint m_nLightColorID;
+    Guint m_nLightPowerID;
 
     CoVertexBufferObject* m_pNBO;
 };

@@ -76,6 +76,26 @@ CoVec3 CoVec3::operator/(const CoVec3& vec) const
     return CoVec3(x / vec.x, y / vec.y, z / vec.z);
 }
 
+CoVec3 CoVec3::operator-(const Gfloat& fValue) const
+{
+    return CoVec3(x - fValue, y - fValue, z - fValue);
+}
+
+CoVec3 CoVec3::operator+(const Gfloat& fValue) const
+{
+    return CoVec3(x + fValue, y + fValue, z + fValue);
+}
+
+CoVec3 CoVec3::operator*(const Gfloat& fValue) const
+{
+    return CoVec3(x * fValue, y * fValue, z * fValue);
+}
+
+CoVec3 CoVec3::operator/(const Gfloat& fValue) const
+{
+    return CoVec3(x / fValue, y / fValue, z / fValue);
+}
+
 CoVec3& CoVec3::operator-=(const CoVec3& vec)
 {
     x -= vec.x;

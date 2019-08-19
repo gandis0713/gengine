@@ -8,13 +8,13 @@ in vec3 lightDir_c;
 
 out vec3 color;
 
-uniform vec3 lightPos_w;
+uniform vec3 lightPosition;
 uniform vec3 lightColor;
 uniform float lightPower;
+
 uniform vec3 diffuseColor;
 uniform vec3 ambientColor;
 uniform vec3 specularColor;
-uniform vec3 cameraPosition;
 
 void main()
 {
@@ -23,13 +23,8 @@ void main()
     vec3 ambientColor_t = vec3(0.1,0.1,0.1) * diffuseColor_t;
     vec3 specularColor_t = vec3(0.3,0.3,0.3);
 
-    vec3 lightPos_t = cameraPosition;
     // Distance to the light
-    float distance = length( lightPos_t - vertex_w );
-    // Light emission properties
-    // You probably want to put them as uniforms
-    vec3 lightColor_t = vec3(1,1,1);
-    float lightPower_t = 500.0f * distance;
+    float distance = length( lightPosition - vertex_w );
 
     // Normal of the computed fragment, in camera space
     vec3 n = normalize( vertexNormal_c );
@@ -57,7 +52,7 @@ void main()
             // Ambient : simulates indirect lighting
             ambientColor_t +
             // Diffuse : "color" of the object
-            diffuseColor_t * lightColor_t * lightPower_t * cosTheta / (distance*distance) +
+            diffuseColor_t * lightColor * lightPower * cosTheta / (distance*distance) +
             // Specular : reflective highlight, like a mirror
-            specularColor_t * lightColor_t * lightPower_t * pow(cosAlpha,5) / (distance*distance);
+            specularColor_t * lightColor * lightPower * pow(cosAlpha,5) / (distance*distance);
 }

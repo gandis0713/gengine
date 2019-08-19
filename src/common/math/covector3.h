@@ -25,6 +25,10 @@ public:
     CoVec3 operator+(const CoVec3& vec) const;
     CoVec3 operator*(const CoVec3& vec) const;
     CoVec3 operator/(const CoVec3& vec) const;
+    CoVec3 operator-(const Gfloat& vec) const;
+    CoVec3 operator+(const Gfloat& vec) const;
+    CoVec3 operator*(const Gfloat& vec) const;
+    CoVec3 operator/(const Gfloat& vec) const;
 
     CoVec3& operator-=(const CoVec3& vec);
     CoVec3& operator+=(const CoVec3& vec);

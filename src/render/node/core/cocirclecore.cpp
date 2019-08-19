@@ -5,8 +5,10 @@ CoCircleCore::CoCircleCore()
 
 }
 
-CoCircleCore::CoCircleCore(CoNode* pNode, CoCamera *pCamera)
-    : CoLineCore(pNode, pCamera)
+CoCircleCore::CoCircleCore(CoNode* pNode,
+                           CoCamera *pCamera,
+                           CoLight *pLight)
+    : CoLineCore(pNode, pCamera, pLight)
 {
 
 }

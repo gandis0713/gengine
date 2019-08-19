@@ -15,12 +15,10 @@ out vec3 vertexNormal_c;
 out vec3 eyeDir_c;
 out vec3 lightDir_c;
 
-uniform vec3 lightPos_w;
-uniform vec3 cameraPosition;
+uniform vec3 lightPosition;
 
 void main()
 {
-    vec3 lightPos_t = cameraPosition;
     // Output position of the vertex, in clip space : MVP * position
     gl_Position =  mvp * vec4(vertex_m,1);
 
@@ -33,7 +31,7 @@ void main()
     eyeDir_c = vec3(0,0,0) - vertex_c;
 
     // Vector that goes from the vertex to the light, in camera space. M is ommited because it's identity.
-    vec3 lightPos_c = ( v * vec4(lightPos_t, 1)).xyz;
+    vec3 lightPos_c = ( v * vec4(lightPosition, 1)).xyz;
     lightDir_c = lightPos_c + eyeDir_c;
 
     // Normal of the the vertex, in camera space

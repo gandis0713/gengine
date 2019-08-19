@@ -7,7 +7,9 @@ class CoLineCore : public CoShapeCore
 {
 public:
     CoLineCore();
-    CoLineCore(CoNode* pNode, CoCamera *pCamera);
+    CoLineCore(CoNode* pNode,
+               CoCamera *pCamera,
+               CoLight *pLight);
     ~CoLineCore();
 
     void initialize() override;

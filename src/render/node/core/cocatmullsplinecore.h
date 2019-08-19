@@ -7,7 +7,9 @@ class CoCatmullSplineCore : public CoLineCore
 {
 public:
     CoCatmullSplineCore();
-    CoCatmullSplineCore(CoNode* pNode, CoCamera *pCamera);
+    CoCatmullSplineCore(CoNode* pNode,
+                        CoCamera *pCamera,
+                        CoLight *pLight);
     ~CoCatmullSplineCore();
 
     void initialize() override;

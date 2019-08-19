@@ -11,10 +11,12 @@
 #include "conodecore.h"
 #include "cocamera.h"
 #include "covector2.h"
+#include "colight.h"
 
 class CoQScreen;
 class QGridLayout;
 class CoCamera;
+
 
 class GANDISENGINE CoQtRenderer : public CoRenderer
 {
@@ -31,6 +33,7 @@ public:
     ~CoQtRenderer();
 
     void setCamera(CoCamera* pCamera);
+    void setLight(CoLight *pLight);
     void addNode(CoNode* pNode);
     void update();
 
@@ -46,6 +49,7 @@ private:
     QWidget           *m_pParent;
 
     CoCamera          *m_pCamera;
+    CoLight           *m_pLight;
 
     std::map<CoNode*, CoNodeCore*>   m_mapNodeObject;
 

@@ -7,8 +7,10 @@ CoTextureCore::CoTextureCore()
 
 }
 
-CoTextureCore::CoTextureCore(CoNode* pNode, CoCamera *pCamera)
-    : CoNodeCore(pNode, pCamera)
+CoTextureCore::CoTextureCore(CoNode* pNode,
+                             CoCamera *pCamera,
+                             CoLight *pLight)
+    : CoNodeCore(pNode, pCamera, pLight)
 {
 }
 
