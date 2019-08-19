@@ -79,7 +79,7 @@ void CoCamera::orbit(CoVec2 vCurPos, CoVec2 vPrePos)
     vDir[2] = 0;
 
     CoVec3 vScreenNormal(0, 0, 1);
-    CoVec3 vRotationNormal = vScreenNormal.cross(vDir);
+    CoVec3 vRotationNormal = vDir.cross(vScreenNormal);
 
     Gfloat fDegreeX = vRotationNormal.dot(CoVec3(1, 0, 0));
     Gfloat fDegreeY = vRotationNormal.dot(CoVec3(0, 1, 0));
@@ -95,11 +95,11 @@ void CoCamera::orbit(CoVec2 vCurPos, CoVec2 vPrePos)
     CoMat4x4 matRotateYaw;
     CoMat4x4 matRotatePitch;
 
-    matRotatePitch = matRotatePitch.rotate(-fDegreeX, vCameraRightNormalized);
+    matRotatePitch = matRotatePitch.rotate(fDegreeX, vCameraRightNormalized);
     vCameraToTarget = matRotatePitch * vCameraToTarget;
     vCameraToTarget += vCameraTarget;
 
-    matRotateYaw = matRotateYaw.rotate(-fDegreeY, vCameraUpNormalized);
+    matRotateYaw = matRotateYaw.rotate(fDegreeY, vCameraUpNormalized);
     vCameraToTarget = matRotateYaw * vCameraToTarget;
     vCameraToTarget += vCameraTarget;
 
