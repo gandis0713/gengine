@@ -1,16 +1,16 @@
-#ifndef COIMAGE_H
-#define COIMAGE_H
+#ifndef COTEXTURE_H
+#define COTEXTURE_H
 
 #include "coshape.h"
 #include "covector2.h"
 
 class QImage;
 
-class GANDISENGINE CoImage : public CoShape
+class GANDISENGINE CoTexture : public CoShape
 {
 public:
-    CoImage();
-    ~CoImage();
+    CoTexture();
+    ~CoTexture();
 
     void load(const Gchar *pPath);
     void setData(const Guchar* pData);
@@ -27,4 +27,4 @@ protected:
     std::vector<Guint> m_vecVertexIndices;
 };
 
-#endif // COIMAGE_H
+#endif // COTEXTURE_H

@@ -2,7 +2,7 @@
 
 CoTexturedPolygon::CoTexturedPolygon()
 {    
-    m_eShaderProgramType = EShaderProgramType::ePolygon;
+    m_eShaderProgramType = EShaderProgramType::eTexturedPolygon;
 
 }
 
@@ -16,7 +16,7 @@ CoTexturedPolygon::CoTexturedPolygon(const std::vector<CoVec3> &vecPoints,
     setNormals(vecNormals);
     setTextureCoords(vecTextureCoords);
 
-    m_eShaderProgramType = EShaderProgramType::ePolygon;
+    m_eShaderProgramType = EShaderProgramType::eTexturedPolygon;
 }
 
 CoTexturedPolygon::~CoTexturedPolygon()

@@ -6,7 +6,7 @@
 #include "coperspectivecamera.h"
 #include "coorthographiccamera.h"
 #include "colinecore.h"
-#include "coimagecore.h"
+#include "cotexturecore.h"
 #include "copolygoncore.h"
 #include "cotexturedpolygoncore.h"
 #include "cocirclecore.h"
@@ -264,8 +264,8 @@ void CoQtRenderer::addNode(CoNode *pNode)
         case EShaderProgramType::eTexturedPolygon:
             pNodeObject = new CoTexturedPolygonCore(pNode, m_pCamera, m_pLight);
             break;
-        case EShaderProgramType::eImage:
-            pNodeObject = new CoImageCore(pNode, m_pCamera, m_pLight);
+        case EShaderProgramType::eTexture:
+            pNodeObject = new CoTextureCore(pNode, m_pCamera, m_pLight);
             break;
         }
 

@@ -1,18 +1,18 @@
-#ifndef COIMAGECORE_H
-#define COIMAGECORE_H
+#ifndef COTEXTURECORE_H
+#define COTEXTURECORE_H
 
 #include "coshapecore.h"
 #include "covertexarrayobject.h"
 #include "covertexbufferobject.h"
 
-class CoImageCore : public CoShapeCore
+class CoTextureCore : public CoShapeCore
 {
 public:
-    CoImageCore();
-    CoImageCore(CoNode* pNode,
+    CoTextureCore();
+    CoTextureCore(CoNode* pNode,
                   CoCamera *pCamera,
                   CoLight *pLight);
-    ~CoImageCore();
+    ~CoTextureCore();
 
     void initialize() override;
     void paint() override;
@@ -32,4 +32,4 @@ private:
     Guint m_nTextureID;
 };
 
-#endif // COIMAGECORE_H
+#endif // COTEXTURECORE_H

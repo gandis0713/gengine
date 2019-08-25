@@ -1,13 +1,13 @@
 #include "coglextension.h"
-#include "coimagecore.h"
-#include "coimage.h"
+#include "cotexturecore.h"
+#include "cotexture.h"
 
-CoImageCore::CoImageCore()
+CoTextureCore::CoTextureCore()
 {
 
 }
 
-CoImageCore::CoImageCore(CoNode* pNode,
+CoTextureCore::CoTextureCore(CoNode* pNode,
                              CoCamera *pCamera,
                              CoLight *pLight)
     : CoShapeCore(pNode, pCamera, pLight)
@@ -15,12 +15,12 @@ CoImageCore::CoImageCore(CoNode* pNode,
 }
 
 
-CoImageCore::~CoImageCore()
+CoTextureCore::~CoTextureCore()
 {
 
 }
 
-void CoImageCore::initialize()
+void CoTextureCore::initialize()
 {
 
     createObject();
@@ -31,7 +31,7 @@ void CoImageCore::initialize()
 
 }
 
-void CoImageCore::paint()
+void CoTextureCore::paint()
 {
 
     m_pShaderProgram->bind();
@@ -44,7 +44,7 @@ void CoImageCore::paint()
 
 
 
-void CoImageCore::createObject()
+void CoTextureCore::createObject()
 {
     CoShapeCore::createObject();
 
@@ -52,7 +52,7 @@ void CoImageCore::createObject()
     m_pIndexBufferObject = new CoVertexBufferObject();
 }
 
-void CoImageCore::createShaderProgram()
+void CoTextureCore::createShaderProgram()
 {
     m_pShaderProgram = new CoShaderProgram();
     m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/texture_frag.glsl");
@@ -60,9 +60,9 @@ void CoImageCore::createShaderProgram()
     m_pShaderProgram->link();
 }
 
-void CoImageCore::bindObject()
+void CoTextureCore::bindObject()
 {
-    CoImage *pTexture = static_cast<CoImage*>(m_pNode);
+    CoTexture *pTexture = static_cast<CoTexture*>(m_pNode);
 
     m_pVertexBufferObject->gen();
     m_pTextureBufferObject->gen();
@@ -114,7 +114,7 @@ void CoImageCore::bindObject()
     m_pVertexArrayObject->release();
 }
 
-void CoImageCore::setUniformLocation()
+void CoTextureCore::setUniformLocation()
 {
     CoShapeCore::setUniformLocation();
 }
