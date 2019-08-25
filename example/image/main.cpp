@@ -3,7 +3,7 @@
 #include "samplewindow.h"
 #include "coqtrenderer.h"
 #include "coorthographiccamera.h"
-#include "cotexture.h"
+#include "coimage.h"
 
 #include <QFileDialog>
 
@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
 
     m_pRender->setCamera(m_pCamera);
 
-    CoTexture *pTexture = new CoTexture;
-    pTexture->load(strFileName.toLocal8Bit().constData());
-    m_pRender->addNode(pTexture);
+    CoImage *pImage = new CoImage;
+    pImage->load(strFileName.toLocal8Bit().constData());
+    m_pRender->addNode(pImage);
 
 
 
