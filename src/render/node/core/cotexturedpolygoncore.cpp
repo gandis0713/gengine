@@ -1,12 +1,12 @@
-#include "copolygoncore.h"
-#include "copolygon.h"
+#include "cotexturedpolygoncore.h"
+#include "cotexturedpolygon.h"
 
-CoPolygonCore::CoPolygonCore()
+CoTexturedPolygonCore::CoTexturedPolygonCore()
 {
 
 }
 
-CoPolygonCore::CoPolygonCore(CoNode* pNode,
+CoTexturedPolygonCore::CoTexturedPolygonCore(CoNode* pNode,
                              CoCamera *pCamera,
                              CoLight *pLight)
     : CoShapeCore(pNode, pCamera, pLight)
@@ -14,12 +14,12 @@ CoPolygonCore::CoPolygonCore(CoNode* pNode,
 }
 
 
-CoPolygonCore::~CoPolygonCore()
+CoTexturedPolygonCore::~CoTexturedPolygonCore()
 {
 
 }
 
-void CoPolygonCore::initialize()
+void CoTexturedPolygonCore::initialize()
 {
 
     createObject();
@@ -29,9 +29,9 @@ void CoPolygonCore::initialize()
 
 }
 
-void CoPolygonCore::paint()
+void CoTexturedPolygonCore::paint()
 {
-    CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
+    CoTexturedPolygon *pPolygon = static_cast<CoTexturedPolygon*>(m_pNode);
 
     m_pShaderProgram->bind();
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getCameraMat());
@@ -68,7 +68,7 @@ void CoPolygonCore::paint()
 
 
 
-void CoPolygonCore::createObject()
+void CoTexturedPolygonCore::createObject()
 {
     CoShapeCore::createObject();
 
@@ -77,7 +77,7 @@ void CoPolygonCore::createObject()
     m_pIndexBufferObject = new CoVertexBufferObject();
 }
 
-void CoPolygonCore::createShaderProgram()
+void CoTexturedPolygonCore::createShaderProgram()
 {
     m_pShaderProgram = new CoShaderProgram();
     m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/polygon_frag.glsl");
@@ -86,10 +86,10 @@ void CoPolygonCore::createShaderProgram()
     m_pShaderProgram->link();
 }
 
-void CoPolygonCore::bindObject()
+void CoTexturedPolygonCore::bindObject()
 {
 
-    CoPolygon *pPolygon = static_cast<CoPolygon*>(m_pNode);
+    CoTexturedPolygon *pPolygon = static_cast<CoTexturedPolygon*>(m_pNode);
 
     m_pVertexBufferObject->gen();
     m_pVertexBufferObject->bind();
@@ -148,7 +148,7 @@ void CoPolygonCore::bindObject()
     m_pVertexArrayObject->release();
 }
 
-void CoPolygonCore::setUniformLocation()
+void CoTexturedPolygonCore::setUniformLocation()
 {
     CoShapeCore::setUniformLocation();
 }

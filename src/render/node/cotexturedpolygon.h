@@ -1,18 +1,18 @@
-#ifndef COPOLYGON_H
-#define COPOLYGON_H
+#ifndef COTEXTUREDPOLYGON_H
+#define COTEXTUREDPOLYGON_H
 
 #include "coshape.h"
 #include "cofaceindex.h"
 
-class GANDISENGINE CoPolygon : public CoShape
+class GANDISENGINE CoTexturedPolygon : public CoShape
 {
 public:
-    CoPolygon();
-    CoPolygon(const std::vector<CoVec3> &vecPoints,
+    CoTexturedPolygon();
+    CoTexturedPolygon(const std::vector<CoVec3> &vecPoints,
               const std::vector<CoVec3> &vecNormals,
               const std::vector<CoVec2> &vecTextureCoords,
               const CoFaceIndex &faceIndices);
-    ~CoPolygon();
+    ~CoTexturedPolygon();
 
     void setPoints(const std::vector<CoVec3> &vecPoints);
     void setNormals(const std::vector<CoVec3> &vecNormals);
@@ -30,4 +30,4 @@ private:
     CoFaceIndex         m_faceIndices;
 };
 
-#endif // COPOLYGON_H
+#endif // COTEXTUREDPOLYGON_H

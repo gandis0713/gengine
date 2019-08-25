@@ -1,16 +1,16 @@
-#ifndef COPOLYGONCORE_H
-#define COPOLYGONCORE_H
+#ifndef COTEXTUREDPOLYGONCORE_H
+#define COTEXTUREDPOLYGONCORE_H
 
 #include "coshapecore.h"
 
-class CoPolygonCore : public CoShapeCore
+class CoTexturedPolygonCore : public CoShapeCore
 {
 public:
-    CoPolygonCore();
-    CoPolygonCore(CoNode* pNode,
+    CoTexturedPolygonCore();
+    CoTexturedPolygonCore(CoNode* pNode,
                   CoCamera *pCamera,
                   CoLight *pLight);
-    ~CoPolygonCore();
+    ~CoTexturedPolygonCore();
 
     void initialize() override;
     void paint() override;
@@ -30,4 +30,4 @@ private:
     Guint m_nTextureID;
 };
 
-#endif // COPOLYGONCORE_H
+#endif // COTEXTUREDPOLYGONCORE_H

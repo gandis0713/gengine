@@ -1,12 +1,12 @@
-#include "copolygon.h"
+#include "CoTexturedPolygon.h"
 
-CoPolygon::CoPolygon()
+CoTexturedPolygon::CoTexturedPolygon()
 {    
     m_eShaderProgramType = EShaderProgramType::ePolygon;
 
 }
 
-CoPolygon::CoPolygon(const std::vector<CoVec3> &vecPoints,
+CoTexturedPolygon::CoTexturedPolygon(const std::vector<CoVec3> &vecPoints,
                      const std::vector<CoVec3> &vecNormals,
                      const std::vector<CoVec2> &vecTextureCoords,
                      const CoFaceIndex &faceIndices)
@@ -19,12 +19,12 @@ CoPolygon::CoPolygon(const std::vector<CoVec3> &vecPoints,
     m_eShaderProgramType = EShaderProgramType::ePolygon;
 }
 
-CoPolygon::~CoPolygon()
+CoTexturedPolygon::~CoTexturedPolygon()
 {
     // do nothing.
 }
 
-void CoPolygon::setPoints(const std::vector<CoVec3> &vecPoints)
+void CoTexturedPolygon::setPoints(const std::vector<CoVec3> &vecPoints)
 {
     m_vecPoints.clear();
 
@@ -44,7 +44,7 @@ void CoPolygon::setPoints(const std::vector<CoVec3> &vecPoints)
     }
 }
 
-void CoPolygon::setNormals(const std::vector<CoVec3> &vecNormals)
+void CoTexturedPolygon::setNormals(const std::vector<CoVec3> &vecNormals)
 {
     m_vecVertexNormals.clear();
 
@@ -90,33 +90,33 @@ void CoPolygon::setNormals(const std::vector<CoVec3> &vecNormals)
     }
 }
 
-void CoPolygon::setTextureCoords(const std::vector<CoVec2> &vecTextureCoords)
+void CoTexturedPolygon::setTextureCoords(const std::vector<CoVec2> &vecTextureCoords)
 {
     m_vecTextureCoords.clear();
     m_vecTextureCoords = vecTextureCoords;
 }
 
-void CoPolygon::setFaceIndex(const CoFaceIndex &faceIndices)
+void CoTexturedPolygon::setFaceIndex(const CoFaceIndex &faceIndices)
 {
     m_faceIndices = faceIndices;
 }
 
-std::vector<CoVec3> CoPolygon::getPoints()
+std::vector<CoVec3> CoTexturedPolygon::getPoints()
 {
     return m_vecPoints;
 }
 
-std::vector<CoVec3> CoPolygon::getNormals()
+std::vector<CoVec3> CoTexturedPolygon::getNormals()
 {
     return m_vecVertexNormals;
 }
 
-std::vector<CoVec2> CoPolygon::getTextureCoords()
+std::vector<CoVec2> CoTexturedPolygon::getTextureCoords()
 {
     return m_vecTextureCoords;
 }
 
-CoFaceIndex CoPolygon::getFaceIndex()
+CoFaceIndex CoTexturedPolygon::getFaceIndex()
 {
     return m_faceIndices;
 }
