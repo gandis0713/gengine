@@ -8,13 +8,11 @@ CoPolygon::CoPolygon()
 
 CoPolygon::CoPolygon(const std::vector<CoVec3> &vecPoints,
                      const std::vector<CoVec3> &vecNormals,
-                     const std::vector<CoVec2> &vecUICoords,
                      const CoFaceIndex &faceIndices)
 {
     setFaceIndex(faceIndices);
     setPoints(vecPoints);
     setNormals(vecNormals);
-    setUICoords(vecUICoords);
 
     m_eShaderProgramType = EShaderProgramType::ePolygon;
 }
@@ -88,12 +86,6 @@ void CoPolygon::setNormals(const std::vector<CoVec3> &vecNormals)
             m_vecVertexNormals.push_back(vNormal[2]);
         }
     }
-}
-
-void CoPolygon::setUICoords(const std::vector<CoVec2> &vecUICoords)
-{
-    m_vecUICoords.clear();
-    m_vecUICoords = vecUICoords;
 }
 
 void CoPolygon::setFaceIndex(const CoFaceIndex &faceIndices)

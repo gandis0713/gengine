@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
     CoPolygon *pPolygon = new CoPolygon(vecTempVertices,
                                         vecTempVertexNormals,
-                                        vecUVCoords,
+                                        // vecUVCoords,  // not use
                                         faceIndices);
 
     pPolygon->setColor(CoVec3(0.5, 0.5, 0.5));

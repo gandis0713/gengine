@@ -8,6 +8,7 @@
 #include "colinecore.h"
 #include "coimagecore.h"
 #include "copolygoncore.h"
+#include "cotexturedpolygoncore.h"
 #include "cocirclecore.h"
 #include "cocatmullsplinecore.h"
 #include "demath.h"
@@ -260,7 +261,10 @@ void CoQtRenderer::addNode(CoNode *pNode)
         case EShaderProgramType::ePolygon:
             pNodeObject = new CoPolygonCore(pNode, m_pCamera, m_pLight);
             break;
-        case EShaderProgramType::eTexture:
+        case EShaderProgramType::eTexturedPolygon:
+            pNodeObject = new CoTexturedPolygonCore(pNode, m_pCamera, m_pLight);
+            break;
+        case EShaderProgramType::eImage:
             pNodeObject = new CoImageCore(pNode, m_pCamera, m_pLight);
             break;
         }

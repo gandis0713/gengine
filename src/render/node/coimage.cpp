@@ -5,7 +5,7 @@
 CoImage::CoImage()
     : m_pImage(NULL)
 {
-    m_eShaderProgramType = EShaderProgramType::eTexture;
+    m_eShaderProgramType = EShaderProgramType::eImage;
 
     m_vecPoints.push_back(CoVec3( 1.0f,   1.0f, 0.0f));
     m_vecPoints.push_back(CoVec3( 1.0f,  -1.0f, 0.0f));

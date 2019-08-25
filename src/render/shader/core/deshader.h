@@ -15,7 +15,8 @@ enum EShaderProgramType
     eSpline,
     eCircle,
     ePolygon,
-    eTexture,
+    eTexturedPolygon,
+    eImage,
 };
 
 #endif // CODEFAULTSHADER_H
