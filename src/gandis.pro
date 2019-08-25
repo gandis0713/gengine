@@ -73,12 +73,12 @@ SOURCES += \
     render/node/core/cocirclecore.cpp \
     render/node/cocircle.cpp \
     render/object/cotextureobject.cpp \
-    render/node/cotexture.cpp \
-    render/node/core/cotexturecore.cpp \
     render/node/core/copolygoncore.cpp \
     common/core/cofaceindex.cpp \
     render/node/coshape.cpp \
-    render/light/colight.cpp
+    render/light/colight.cpp \
+    render/node/core/coimagecore.cpp \
+    render/node/coimage.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -129,13 +129,13 @@ HEADERS += \
     render/node/core/cocirclecore.h \
     render/node/cocircle.h \
     render/object/cotextureobject.h \
-    render/node/cotexture.h \
-    render/node/core/cotexturecore.h \
     render/node/core/copolygoncore.h \
     common/core/cofaceindex.h \
     render/node/coshape.h \
     common/core/delog.h \
-    render/light/colight.h
+    render/light/colight.h \
+    render/node/coimage.h \
+    render/node/core/coimagecore.h
 
 OTHER_FILES += \
     libgandis.pri

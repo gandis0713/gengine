@@ -1,8 +1,8 @@
-#include "cotexture.h"
+#include "coimage.h"
 
 #include <QImage>
 
-CoTexture::CoTexture()
+CoImage::CoImage()
     : m_pImage(NULL)
 {
     m_eShaderProgramType = EShaderProgramType::eTexture;
@@ -26,39 +26,39 @@ CoTexture::CoTexture()
     m_vecVertexIndices.push_back(3);
 }
 
-CoTexture::~CoTexture()
+CoImage::~CoImage()
 {
     delete m_pImage;
 }
 
-void CoTexture::load(const Gchar *pPath)
+void CoImage::load(const Gchar *pPath)
 {
     m_pImage = new QImage();
     m_pImage->load(pPath);
 }
 
-Guchar* CoTexture::getData()
+Guchar* CoImage::getData()
 {
     return m_pImage->bits();
 }
 
-Gint CoTexture::getWidth()
+Gint CoImage::getWidth()
 {
     return m_pImage->width();
 }
 
-Gint CoTexture::getHeight()
+Gint CoImage::getHeight()
 {
     return m_pImage->height();
 }
 
-std::vector<CoVec2> CoTexture::getTextureCoords()
+std::vector<CoVec2> CoImage::getTextureCoords()
 {
     return m_vecTextureCoord;
 }
 
 
-std::vector<Guint> CoTexture::getVertexIndices()
+std::vector<Guint> CoImage::getVertexIndices()
 {
     return m_vecVertexIndices;
 }
