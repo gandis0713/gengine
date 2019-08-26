@@ -20,6 +20,7 @@ public:
 
     void getVertexIndices(std::vector<Guint> &vecVertexIndices);
     void getVertexNormalIndices(std::vector<Guint> &vecVertexNormalIndices);
+    void getUVCoordIndices(std::vector<Guint> &vecUVCoordIndices);
 
 private:
     std::vector<Guint> m_vecVertexIndices;

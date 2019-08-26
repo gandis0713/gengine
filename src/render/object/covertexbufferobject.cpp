@@ -42,3 +42,8 @@ void CoVertexBufferObject::allocate(const void *pData, Guint nSize)
 {
     glBufferData(m_eType, nSize, pData, m_eUsagePattern);
 }
+
+Guint CoVertexBufferObject::getID()
+{
+    return m_nID;
+}

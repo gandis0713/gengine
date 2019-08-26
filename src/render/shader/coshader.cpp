@@ -64,8 +64,7 @@ bool CoShader::compile()
         std::vector<char> strErrMsg(nLogLength + 1);
         glGetShaderInfoLog(m_nID, nLogLength, NULL, &strErrMsg[0]);
 
-        TextLog("The erroe message from shader : ");
-        TextLog(&strErrMsg[0]);
+        ValueTextLog("The erroe message from shader : ", &strErrMsg[0]);
 
         return false;
     }

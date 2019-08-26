@@ -5,6 +5,7 @@
 #include "coqtrenderer.h"
 #include "cotexturedpolygon.h"
 #include "coobjreader.h"
+#include "cotexturereader.h"
 #include <QFileDialog>
 
 int main(int argc, char *argv[])
@@ -19,12 +20,13 @@ int main(int argc, char *argv[])
     CoCamera *m_pCamera = m_pOrthoCamera;
     m_pRender->setCamera(m_pCamera);
 
-    QString strOBJFilePath = QFileDialog::getOpenFileName(&w,
-                                         "Select OBJ file",
-                                         ".",
-                                         "");
+//    QString strOBJFilePath = QFileDialog::getOpenFileName(&w,
+//                                         "Select OBJ file",
+//                                         ".",
+//                                         "");
 
-    const Gchar *pPath = strOBJFilePath.toLocal8Bit().constData();
+//    const Gchar *pOBJPath = strOBJFilePath.toLocal8Bit().constData();
+    const Gchar *pOBJPath = "C:/Users/gandis/Desktop/polygon/spaceship/obj/spaceship.obj";
 
     CoOBJReader *pOBJReader = new CoOBJReader();
 
@@ -33,21 +35,34 @@ int main(int argc, char *argv[])
     std::vector<CoVec3> vecTempVertexNormals;
     CoFaceIndex faceIndices;
 
-    pOBJReader->load(pPath,
+    pOBJReader->load(pOBJPath,
                      vecTempVertices,
                      vecUVCoords,
                      vecTempVertexNormals,
                      faceIndices);
 
+//    QString strTextureFilePath = QFileDialog::getOpenFileName(&w,
+//                                         "Select Texture Image file",
+//                                         ".",
+//                                         "");
+
+//    const Gchar *pTexturePath = strTextureFilePath.toLocal8Bit().constData();
+    const Gchar *pTexturePath = "C:/Users/gandis/Desktop/polygon/spaceship/textures/Intergalactic Spaceship Ao_Blender.jpg";
+
+    CoTextureReader *pReader = new CoTextureReader();
+    pReader->load(pTexturePath);
+
     CoTexturedPolygon *pPolygon = new CoTexturedPolygon(vecTempVertices,
                                                         vecTempVertexNormals,
                                                         vecUVCoords,
-                                                        faceIndices);
+                                                        faceIndices,
+                                                        pReader->getData(),
+                                                        pReader->getWidth(),
+                                                        pReader->getHeight());
 
     pPolygon->setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_pRender->addNode(pPolygon);
-
 
     w.setQtRenderer(m_pRender);
     w.show();

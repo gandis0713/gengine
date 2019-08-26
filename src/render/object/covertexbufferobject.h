@@ -39,6 +39,7 @@ public:
     void setUsagePattern(EUsagePattern eUsagePattern);
     void setType(EType eType);
     void allocate(const void *pData, Guint nSize);
+    Guint getID();
 
 private:
     Guint m_nID;

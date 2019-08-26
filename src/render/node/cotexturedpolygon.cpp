@@ -7,14 +7,20 @@ CoTexturedPolygon::CoTexturedPolygon()
 }
 
 CoTexturedPolygon::CoTexturedPolygon(const std::vector<CoVec3> &vecPoints,
-                     const std::vector<CoVec3> &vecNormals,
-                     const std::vector<CoVec2> &vecTextureCoords,
-                     const CoFaceIndex &faceIndices)
+                                     const std::vector<CoVec3> &vecNormals,
+                                     const std::vector<CoVec2> &vecTextureCoords,
+                                     const CoFaceIndex &faceIndices,
+                                     Guchar* pTextureData,
+                                     Gint nTextureWidth,
+                                     Gint nTextureHeight)
 {
     setFaceIndex(faceIndices);
     setPoints(vecPoints);
     setNormals(vecNormals);
     setTextureCoords(vecTextureCoords);
+    setTextureData(pTextureData);
+    setTextureWidth(nTextureWidth);
+    setTextureHeight(nTextureHeight);
 
     m_eShaderProgramType = EShaderProgramType::eTexturedPolygon;
 }
@@ -92,8 +98,15 @@ void CoTexturedPolygon::setNormals(const std::vector<CoVec3> &vecNormals)
 
 void CoTexturedPolygon::setTextureCoords(const std::vector<CoVec2> &vecTextureCoords)
 {
-    m_vecTextureCoords.clear();
-    m_vecTextureCoords = vecTextureCoords;
+    m_vecTextureCoords.clear();    
+
+    std::vector<Guint> vecUVCoordIndices;
+    m_faceIndices.getUVCoordIndices(vecUVCoordIndices);
+
+    for(Gint nIndex = 0; nIndex < vecUVCoordIndices.size(); nIndex++)
+    {
+        m_vecTextureCoords.push_back(vecTextureCoords[vecUVCoordIndices[nIndex] - 1]);
+    }
 }
 
 void CoTexturedPolygon::setFaceIndex(const CoFaceIndex &faceIndices)
@@ -101,9 +114,19 @@ void CoTexturedPolygon::setFaceIndex(const CoFaceIndex &faceIndices)
     m_faceIndices = faceIndices;
 }
 
-std::vector<CoVec3> CoTexturedPolygon::getPoints()
+void CoTexturedPolygon::setTextureData(Guchar* pTextureData)
 {
-    return m_vecPoints;
+    m_pTextureData = pTextureData;
+}
+
+void CoTexturedPolygon::setTextureWidth(Gint nTextureWidth)
+{
+    m_nTextureWidth = nTextureWidth;
+}
+
+void CoTexturedPolygon::setTextureHeight(Gint nTextureHeight)
+{
+    m_nTextureHeight = nTextureHeight;
 }
 
 std::vector<CoVec3> CoTexturedPolygon::getNormals()
@@ -119,4 +142,19 @@ std::vector<CoVec2> CoTexturedPolygon::getTextureCoords()
 CoFaceIndex CoTexturedPolygon::getFaceIndex()
 {
     return m_faceIndices;
+}
+
+Guchar* CoTexturedPolygon::getTextureData()
+{
+    return m_pTextureData;
+}
+
+Gint CoTexturedPolygon::getTextureWidth()
+{
+    return m_nTextureWidth;
+}
+
+Gint CoTexturedPolygon::getTextureHeight()
+{
+    return m_nTextureHeight;
 }
