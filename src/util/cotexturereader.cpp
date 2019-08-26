@@ -18,8 +18,17 @@ void CoTextureReader::load(const Gchar *pPath)
     m_pImage->load(pPath);
 }
 
-
 Guchar* CoTextureReader::getData()
 {
     return m_pImage->bits();
+}
+
+Gint CoTextureReader::getWidth()
+{
+    return m_pImage->width();
+}
+
+Gint CoTextureReader::getHeight()
+{
+    return m_pImage->height();
 }

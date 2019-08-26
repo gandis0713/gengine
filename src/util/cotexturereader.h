@@ -2,10 +2,11 @@
 #define COTEXTUREREADER_H
 
 #include "dedatatype.h"
+#include "deengine.h"
 
 class QImage;
 
-class CoTextureReader
+class GANDISENGINE CoTextureReader
 {
 public:
     explicit CoTextureReader();
@@ -13,6 +14,8 @@ public:
 
     void load(const Gchar *pPath);
     Guchar* getData();
+    Gint getWidth();
+    Gint getHeight();
 
 private:
 
