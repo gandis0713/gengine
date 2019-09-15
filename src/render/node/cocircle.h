@@ -1,17 +1,24 @@
 #ifndef COCIRCLE_H
 #define COCIRCLE_H
 
-#include "coshape.h".h"
+#include "coshape.h"
 
-class CoCircle : public CoShape
+class GANDISENGINE CoCircle : public CoShape
 {
 public:
     CoCircle();
-    CoCircle(CoVec3 vPoint, Gfloat fRadius);
+    CoCircle(CoVec3 vPosition, Gfloat fRadius);
     ~CoCircle();
 
-    void setPoint(CoVec3 vPoint);
-    void setRadius(CoVec3 vPoint);
+    void setCenter(CoVec3 vPosition);
+    void setRadius(Gfloat fRadius);
+
+protected:
+    void createCircle();
+
+private:
+    CoVec3 m_vCenter;
+    Gfloat m_fRadius;
 };
 
 #endif // COCIRCLE_H
