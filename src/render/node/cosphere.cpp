@@ -51,6 +51,16 @@ void CoSphere::createSphere()
     {
         Gfloat fStackTheta = i * nStackRatio;
 
+        // the condition as below that to avoid zero normal vector is need to be confirmed.
+        if(i == 0)
+        {
+            fStackTheta = 0.01 * nStackRatio;
+        }
+        else if(i == nStack - 1)
+        {
+            fStackTheta = (nStack - 0.01) * nStackRatio;
+        }
+
         for(Gint j = 0; j < nSector; j++)
         {
             Gfloat fSectorTheta = j * nSectorRatio;
@@ -81,6 +91,45 @@ void CoSphere::createSphere()
             vecVertexIndices.push_back(i * nSector + j + 1); // stack 0 + sector 1
             vecVertexIndices.push_back((i + 1) * nSector + j); // stack 1 + sector 0
             vecVertexIndices.push_back((i + 1) * nSector + j + 1); // stack 1 + sector 1
+        }
+    }
+
+    // step 3 : triangle normal
+
+    vector<CoVec3> vecVertexNormal;
+    for(Gint i = 0; i < nStack - 1; i++)
+    {
+        for(Gint j = 0; j < nSector; j++)
+        {
+            // triangle 1 normal
+            CoVec3 vPos1 = vecVertices[i * nSector + j];
+            CoVec3 vPos2 = vecVertices[(i + 1) * nSector + j];
+            CoVec3 vPos3 = vecVertices[i * nSector + j + 1];
+
+            CoVec3 vNor32 = vPos3 - vPos2;
+            CoVec3 vNor12 = vPos1 - vPos2;
+
+            CoVec3 vNormal = vNor32.cross(vNor12);
+            vNormal.normalize();  // It need to be confirmed.
+
+            vecVertexNormal.push_back(vNormal);
+            vecVertexNormal.push_back(vNormal);
+            vecVertexNormal.push_back(vNormal);
+
+            // triangle 2 normal
+            vPos1 = vecVertices[i * nSector + j + 1];
+            vPos2 = vecVertices[(i + 1) * nSector + j];
+            vPos3 = vecVertices[(i + 1) * nSector + j + 1];
+
+            vNor32 = vPos3 - vPos2;
+            vNor12 = vPos1 - vPos2;
+
+            vNormal = vNor32.cross(vNor12);
+            vNormal.normalize(); // It need to be confirmed.
+
+            vecVertexNormal.push_back(vNormal);
+            vecVertexNormal.push_back(vNormal);
+            vecVertexNormal.push_back(vNormal);
         }
     }
 }
