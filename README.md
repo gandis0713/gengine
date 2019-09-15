@@ -23,5 +23,5 @@
 
 
 ## Examples
-### To use examples, gandis 3D engine must be built on QT and OpenGL environment.
+##### To use examples, gandis 3D engine must be built on QT and OpenGL environment.
 
