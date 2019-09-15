@@ -2,7 +2,7 @@
 ##### It is based on OpenGL and Qt.                                                                              
 
 ## Environment
-#### The version
+#### Framework and library
 ##### - OpenGL : over 2.1
 ##### - Qt : 5.10.1
 
