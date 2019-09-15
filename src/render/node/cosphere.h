@@ -8,6 +8,7 @@ class GANDISENGINE CoSphere : public CoShape
 {
 public:
     CoSphere();
+    CoSphere(CoVec3 vCenter, Gfloat fRadius);
     virtual ~CoSphere();
 
     void setCenter(CoVec3 vPosition);

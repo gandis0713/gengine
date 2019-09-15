@@ -1,7 +1,6 @@
 #include "cocirclecore.h"
 #include "cocircle.h"
 #include "coshaderprogram.h"
-#include <QDebug>
 
 CoCircleCore::CoCircleCore()
 {
