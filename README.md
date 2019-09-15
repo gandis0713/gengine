@@ -3,7 +3,7 @@
 
 ## Environment
 ### The version
-#### - OpenGL : over 2.0
+#### - OpenGL : over 2.1
 #### - Qt : 5.10.1
 
 ## Examples
@@ -12,19 +12,16 @@
 ## Functions
 
 ### Ligthing
-##### - Material Coloring
+##### - Lighting is applied to mesh by phong lighting model to express light effect. FLAT and GOURAUD can be used.
 
 ### Camera
-##### - Perspective
-##### - Orthographic
+##### - There are two type of camera as Perspective and orthographic.
 
 ### Shape
-##### - Line
-##### - Spline
-##### - Circle (TODO)
-##### - Sphere (TODO)
+##### - Some shapes as line, spline, circle, sphere are supported.
 
 ### Event
-##### - orbit rotation by mouse event
+##### - Some events as rotation, panning, zomming by mouse is supported in view. The rotation event is by orbit camera. 
+
 
 
