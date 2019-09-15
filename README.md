@@ -1,7 +1,6 @@
 # gandis 3D engine
 ### It is based on OpenGL and Qt.                                                                              
 
-
 ## Environment
 ### The version
 #### - OpenGL : over 2.1
@@ -10,16 +9,16 @@
 
 ## Supperted Functions
 
-### Ligthing
+#### Ligthing
 ##### - Lighting is applied to mesh by phong lighting model to express light effect. FLAT and GOURAUD can be used.
 
-### Camera
+#### Camera
 ##### - There are two type of camera as Perspective and orthographic.
 
-### Shape
+#### Shape
 ##### - Some shapes as line, spline, circle, sphere are supported.
 
-### Event
+#### Event
 ##### - Some events as rotation, panning, zomming by mouse is supported in view. The rotation event is by orbit camera. 
 
 
