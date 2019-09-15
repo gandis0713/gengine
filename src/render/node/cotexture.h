@@ -10,7 +10,7 @@ public:
     CoTexture(Guchar* pData,
               Gint nWidth,
               Gint nHeight);
-    ~CoTexture();
+    virtual ~CoTexture();
 
     void setData(Guchar* pData);
     Guchar* getData();

@@ -8,7 +8,7 @@ class GANDISENGINE CoCatmullSpline : public CoLine
 public:
     CoCatmullSpline();
     CoCatmullSpline(const std::vector<CoVec3> vecPoints);
-    ~CoCatmullSpline();
+    virtual ~CoCatmullSpline();
 
     void setPoints(const std::vector<CoVec3> vecPoints);
 

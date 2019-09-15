@@ -8,7 +8,7 @@ class GANDISENGINE CoShape : public CoNode
 {
 public:
     CoShape();
-    ~CoShape();
+    virtual ~CoShape();
 
     Guint getSize();
 

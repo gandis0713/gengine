@@ -11,7 +11,7 @@ public:
     CoPolygon(const std::vector<CoVec3> &vecPoints,
               const std::vector<CoVec3> &vecNormals,
               const CoFaceIndex &faceIndices);
-    ~CoPolygon();
+    virtual ~CoPolygon();
 
     void setPoints(const std::vector<CoVec3> &vecPoints);
     void setNormals(const std::vector<CoVec3> &vecNormals);

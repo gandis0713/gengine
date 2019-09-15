@@ -8,7 +8,7 @@ class CoPoint : public CoNode
 {
 public:
     CoPoint();
-    ~CoPoint();
+    virtual ~CoPoint();
 
     void setPoint(CoVec3 vPoint);
 

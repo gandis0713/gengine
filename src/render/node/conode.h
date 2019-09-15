@@ -12,7 +12,7 @@ class GANDISENGINE CoNode
 {
 public:
     CoNode();
-    ~CoNode();
+    virtual ~CoNode();
     EShaderProgramType getShaderProgramType();
 
 protected:

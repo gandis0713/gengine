@@ -8,7 +8,7 @@ class GANDISENGINE CoCircle : public CoShape
 public:
     CoCircle();
     CoCircle(CoVec3 vPosition, Gfloat fRadius);
-    ~CoCircle();
+    virtual ~CoCircle();
 
     void setCenter(CoVec3 vPosition);
     void setRadius(Gfloat fRadius);

@@ -33,11 +33,11 @@ void CoCircle::createCircle()
     CoVec3 startNormal = startPosition - m_vCenter;
 
     Gint nRatio = 10;
-    Gint nCount = 36;
+    Gint n2PI_degree = 360;
+    Gint nCount = n2PI_degree / nRatio;
 
     for(Gint i = 0; i < nCount; i++)
     {
-
         Gfloat fDegree = nRatio * i;
 
         CoVec3 vPosition(startNormal.length() * cos(DEG2RAD * fDegree),

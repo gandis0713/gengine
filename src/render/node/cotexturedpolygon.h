@@ -15,7 +15,7 @@ public:
                       Guchar* pTextureData,
                       Gint nTextureWidth,
                       Gint nTextureHeight);
-    ~CoTexturedPolygon();
+    virtual ~CoTexturedPolygon();
 
     void setPoints(const std::vector<CoVec3> &vecPoints);
     void setNormals(const std::vector<CoVec3> &vecNormals);
