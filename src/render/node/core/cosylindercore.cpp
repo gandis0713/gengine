@@ -101,9 +101,9 @@ void CoSylinderCore::bindObject()
     m_pVertexNormalBufferObject->bind();
     m_pVertexNormalBufferObject->allocate(&pSylinder->getNormals()[0], pSylinder->getSize() * 3 * sizeof(Gfloat));
 
-    m_pIndexBufferObject->setType(CoVertexBufferObject::EType::eIndexArray);
-    m_pIndexBufferObject->bind();
-    m_pIndexBufferObject->allocate(&pSylinder->getVertexIndice()[0], pSylinder->getVertexIndice().size() * sizeof(Guint));
+//    m_pIndexBufferObject->setType(CoVertexBufferObject::EType::eIndexArray);
+//    m_pIndexBufferObject->bind();
+//    m_pIndexBufferObject->allocate(&pSylinder->getVertexIndice()[0], pSylinder->getVertexIndice().size() * sizeof(Guint));
 
     m_pVertexBufferObject->bind();
     m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);

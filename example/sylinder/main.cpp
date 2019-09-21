@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     m_pRender->setCamera(m_pCamera);
 
-    CoSylinder *pSylinder = new CoSylinder();
+    CoSylinder *pSylinder = new CoSylinder(CoVec3(0,0,0), 10, 30);
 
     m_pRender->addNode(pSylinder);
 

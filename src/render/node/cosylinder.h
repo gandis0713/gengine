@@ -9,7 +9,9 @@ class GANDISENGINE CoSylinder : public CoShape
 {
 public:
     CoSylinder();
-    CoSylinder(CoVec3 vCenter, Gfloat fRadius);
+    CoSylinder(CoVec3 vCenter,
+               Gfloat fRadius,
+               Gfloat fLength);
     virtual ~CoSylinder();
 
     void setCenter(CoVec3 vPosition);
