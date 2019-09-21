@@ -47,7 +47,7 @@ Gbool CoOBJReader::load(const Gchar * pPath,
         {
             CoVec2 uv;
             fscanf(pFile, "%f %f\n", &uv[0], &uv[1] );
-            uv[1] = -uv[1]; // Invert V coordinate since we will only use DDS texture, which are inverted. Remove if you want to use TGA or BMP loaders.
+            uv[1] = 1 - uv[1]; // Invert V coordinate since we will only use DDS texture, which are inverted. Remove if you want to use TGA or BMP loaders.
             vecUVCoords.push_back(uv);
         }
         else if ( strcmp( lineHeader, "vn" ) == 0 )

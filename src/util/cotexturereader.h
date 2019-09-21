@@ -12,7 +12,7 @@ public:
     explicit CoTextureReader();
     ~CoTextureReader();
 
-    void load(const Gchar *pPath);
+    Gbool load(const Gchar *pPath);
     Guchar* getData();
     Gint getWidth();
     Gint getHeight();

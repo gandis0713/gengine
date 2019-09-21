@@ -20,13 +20,12 @@ int main(int argc, char *argv[])
     CoCamera *m_pCamera = m_pOrthoCamera;
     m_pRender->setCamera(m_pCamera);
 
-//    QString strOBJFilePath = QFileDialog::getOpenFileName(&w,
-//                                         "Select OBJ file",
-//                                         ".",
-//                                         "");
+    QString strOBJFilePath = QFileDialog::getOpenFileName(&w,
+                                         "Select OBJ file",
+                                         ".",
+                                         "");
 
-//    const Gchar *pOBJPath = strOBJFilePath.toLocal8Bit().constData();
-    const Gchar *pOBJPath = "C:/Users/gandis/Desktop/polygon/spaceship/obj/spaceship.obj";
+    const Gchar *pOBJPath = strOBJFilePath.toLocal8Bit().constData();
 
     CoOBJReader *pOBJReader = new CoOBJReader();
 
@@ -41,13 +40,12 @@ int main(int argc, char *argv[])
                      vecTempVertexNormals,
                      faceIndices);
 
-//    QString strTextureFilePath = QFileDialog::getOpenFileName(&w,
-//                                         "Select Texture Image file",
-//                                         ".",
-//                                         "");
+    QString strTextureFilePath = QFileDialog::getOpenFileName(&w,
+                                         "Select Texture Image file",
+                                         ".",
+                                         "");
 
-//    const Gchar *pTexturePath = strTextureFilePath.toLocal8Bit().constData();
-    const Gchar *pTexturePath = "C:/Users/gandis/Desktop/polygon/spaceship/textures/Intergalactic Spaceship Ao_Blender.jpg";
+    const Gchar *pTexturePath = strTextureFilePath.toLocal8Bit().constData();
 
     CoTextureReader *pReader = new CoTextureReader();
     pReader->load(pTexturePath);

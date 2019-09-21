@@ -3,8 +3,9 @@
 #include <QImage>
 
 CoTextureReader::CoTextureReader()
+    : m_pImage(new QImage())
 {
-
+    // do nothing.
 }
 
 CoTextureReader::~CoTextureReader()
@@ -12,10 +13,9 @@ CoTextureReader::~CoTextureReader()
     delete m_pImage;
 }
 
-void CoTextureReader::load(const Gchar *pPath)
+Gbool CoTextureReader::load(const Gchar *pPath)
 {
-    m_pImage = new QImage();
-    m_pImage->load(pPath);
+    return m_pImage->load(pPath);
 }
 
 Guchar* CoTextureReader::getData()
