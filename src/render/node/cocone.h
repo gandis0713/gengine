@@ -22,8 +22,8 @@ public:
     std::vector<Gint> getVertexIndice();
 
 protected:
-    void createSylinder();
-    void createIndexedSylinder();
+    void createCone();
+    void createIndexedCone();
 
 private:
     CoVec3 m_vCenter;
