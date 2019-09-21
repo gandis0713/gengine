@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     for(Gint i = 0; i < vecSpline.size() - 1; i++)
     {
         CoLine *pLine = new CoLine(vecSpline[i], vecSpline[i+1]);
+        pLine->setColor(CoVec3(1.0, 0.0, 0.0));
         m_pRender->addNode(pLine);
     }
 
