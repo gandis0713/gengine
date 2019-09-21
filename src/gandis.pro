@@ -60,7 +60,6 @@ SOURCES += \
     render/node/cosylinder.cpp \
     render/node/cosphere.cpp \
     render/node/copolygon.cpp \
-    render/node/copoint.cpp \
     render/node/conode.cpp \
     render/shader/coshaderprogram.cpp \
     render/node/core/conodecore.cpp \
@@ -82,7 +81,9 @@ SOURCES += \
     render/node/cotexture.cpp \
     render/node/core/cotexturecore.cpp \
     render/node/core/cospherecore.cpp \
-    render/node/core/cosylindercore.cpp
+    render/node/core/cosylindercore.cpp \
+    render/node/cocone.cpp \
+    render/node/core/coconecore.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -120,7 +121,6 @@ HEADERS += \
     render/node/cosylinder.h \
     render/node/cosphere.h \
     render/node/copolygon.h \
-    render/node/copoint.h \
     render/node/conode.h \
     render/shader/coshaderprogram.h \
     render/node/core/conodecore.h \
@@ -143,7 +143,9 @@ HEADERS += \
     render/node/core/cotexturecore.h \
     render/node/cotexture.h \
     render/node/core/cospherecore.h \
-    render/node/core/cosylindercore.h
+    render/node/core/cosylindercore.h \
+    render/node/cocone.h \
+    render/node/core/coconecore.h
 
 OTHER_FILES += \
     libgandis.pri

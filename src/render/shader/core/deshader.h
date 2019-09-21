@@ -13,6 +13,7 @@ enum EShaderProgramType
     ePoint,
     eLine,
     eSpline,
+    eCone,
     eCircle,
     eSphere,
     eSylinder,
