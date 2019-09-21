@@ -15,6 +15,7 @@ enum EShaderProgramType
     eSpline,
     eCircle,
     eSphere,
+    eSylinder,
     ePolygon,
     eTexture,
     eTexturedPolygon,

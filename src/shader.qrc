@@ -20,6 +20,9 @@
 		<file>resource/glsl/sphere_vert.glsl</file>
 		<file>resource/glsl/sphere_geom.glsl</file>
 		<file>resource/glsl/sphere_frag.glsl</file>
+		<file>resource/glsl/sylinder_vert.glsl</file>
+		<file>resource/glsl/sylinder_geom.glsl</file>
+		<file>resource/glsl/sylinder_frag.glsl</file>
 		<file>resource/glsl/texture_polygon_vert.glsl</file>
 		<file>resource/glsl/texture_polygon_geom.glsl</file>
 		<file>resource/glsl/texture_polygon_frag.glsl</file>	
