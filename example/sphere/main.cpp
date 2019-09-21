@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     m_pRender->setCamera(m_pCamera);
 
     CoSphere *pSphere = new CoSphere();
-    pSphere->setColor(CoVec3(1.0, 0.0, 0.0));
+    pSphere->setColor(CoVec3(0.5, 0.5, 0.5));
 
     m_pRender->addNode(pSphere);
 

@@ -36,8 +36,8 @@ void CoSphere::createSphere()
     // step 1 : create vertice
 
     Gint n2PIDegree = 360;
-    Gint nStackRatio = 10;
-    Gint nSectorRatio = 10;
+    Gint nStackRatio = 3;
+    Gint nSectorRatio = 3;
     Gint nStack = n2PIDegree / 2 / nStackRatio;
     Gint nSector = n2PIDegree / nSectorRatio;
 
@@ -45,7 +45,7 @@ void CoSphere::createSphere()
     CoVec3 startNormal = startPosition - m_vCenter;
 
     vector<CoVec3> vecVertices;
-    for(Gint i = 0; i < nStack; i++)
+    for(Gint i = 0; i <= nStack; i++)
     {
         Gfloat fStackTheta = i * nStackRatio;
 
@@ -54,7 +54,7 @@ void CoSphere::createSphere()
         {
             fStackTheta = 0.01 * nStackRatio;
         }
-        else if(i == nStack - 1)
+        else if(i == nStack)
         {
             fStackTheta = (nStack - 0.01) * nStackRatio;
         }
@@ -73,7 +73,7 @@ void CoSphere::createSphere()
         }
     }
 
-    for(Gint i = 0; i < nStack - 1; i++)
+    for(Gint i = 0; i < nStack; i++)
     {
         for(Gint j = 0; j < nSector; j++)
         {
@@ -91,7 +91,7 @@ void CoSphere::createSphere()
 
     // step 2 : triangle normal
 
-    for(Gint i = 0; i < nStack - 1; i++)
+    for(Gint i = 0; i < nStack; i++)
     {
         for(Gint j = 0; j < nSector; j++)
         {

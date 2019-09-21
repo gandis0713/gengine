@@ -3,7 +3,7 @@
 CoLight::CoLight()
     : m_fPower(1000000000000.f)
     , m_vColor(CoVec3(1, 1, 1))
-    , m_vPosition(10000, 10000, 1000000)
+    , m_vPosition(10000, 10000, 800000)
 {
 
 }

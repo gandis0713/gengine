@@ -155,8 +155,11 @@ void CoQtRenderer::update()
 
 void CoQtRenderer::fit()
 {
-    CoVec3 vMin(1000000, 1000000, 1000000);
-    CoVec3 vMax(-1000000, -1000000, -1000000);
+
+    Gfloat fMaxValue = (std::numeric_limits<Gfloat>::max)();
+
+    CoVec3 vMin(fMaxValue, fMaxValue, fMaxValue);
+    CoVec3 vMax(-fMaxValue, -fMaxValue, -fMaxValue);
 
     std::map<CoNode*, CoNodeCore*>::iterator iter;
     for(iter = m_mapNodeObject.begin(); iter != m_mapNodeObject.end(); ++iter)
