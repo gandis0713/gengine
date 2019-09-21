@@ -16,6 +16,7 @@ public:
     void setRadius(Gfloat fRadius);
 
     std::vector<CoVec3> getNormals();
+    std::vector<Gint> getVertexIndice();
 
 protected:
     void createSphere();

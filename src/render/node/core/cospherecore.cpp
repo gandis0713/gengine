@@ -62,6 +62,8 @@ void CoSphereCore::paint()
     m_pVertexArrayObject->bind();
 
     glDrawArrays(GL_TRIANGLES, 0, pSphere->getSize());
+
+//    glDrawElements(GL_TRIANGLES, pSphere->getVertexIndice().size(), GL_UNSIGNED_INT, 0);
 }
 
 
@@ -71,6 +73,7 @@ void CoSphereCore::createObject()
     CoShapeCore::createObject();
 
     m_pVertexNormalBufferObject = new CoVertexBufferObject();
+    m_pIndexBufferObject = new CoVertexBufferObject();
 }
 
 void CoSphereCore::createShaderProgram()
@@ -88,15 +91,21 @@ void CoSphereCore::bindObject()
     CoSphere *pSphere = static_cast<CoSphere*>(m_pNode);
 
     m_pVertexBufferObject->gen();
-    m_pVertexBufferObject->bind();
-    m_pVertexBufferObject->allocate(&pSphere->getPoints()[0], pSphere->getSize() * 3 * sizeof(Gfloat));
-
     m_pVertexNormalBufferObject->gen();
-    m_pVertexNormalBufferObject->bind();
-    m_pVertexNormalBufferObject->allocate(&pSphere->getNormals()[0], pSphere->getSize() * 3 * sizeof(Gfloat));
+    m_pIndexBufferObject->gen();
 
     m_pVertexArrayObject->gen();
     m_pVertexArrayObject->bind();
+
+    m_pVertexBufferObject->bind();
+    m_pVertexBufferObject->allocate(&pSphere->getPoints()[0], pSphere->getSize() * 3 * sizeof(Gfloat));
+
+    m_pVertexNormalBufferObject->bind();
+    m_pVertexNormalBufferObject->allocate(&pSphere->getNormals()[0], pSphere->getSize() * 3 * sizeof(Gfloat));
+
+    m_pIndexBufferObject->setType(CoVertexBufferObject::EType::eIndexArray);
+    m_pIndexBufferObject->bind();
+    m_pIndexBufferObject->allocate(&pSphere->getVertexIndice()[0], pSphere->getVertexIndice().size() * sizeof(Guint));
 
     m_pVertexBufferObject->bind();
     m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);

@@ -24,6 +24,7 @@ protected:
 
 protected:
     CoVertexBufferObject* m_pVertexNormalBufferObject;
+    CoVertexBufferObject* m_pIndexBufferObject;
 };
 
 #endif // COSPHERECORE_H

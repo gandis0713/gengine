@@ -9,6 +9,7 @@ CoSphere::CoSphere()
     m_eShaderProgramType = EShaderProgramType::eSphere;
 
     createSphere();
+//    createIndexedSphere();
 }
 
 CoSphere::CoSphere(CoVec3 vCenter, Gfloat fRadius)
@@ -18,6 +19,7 @@ CoSphere::CoSphere(CoVec3 vCenter, Gfloat fRadius)
     m_eShaderProgramType = EShaderProgramType::eSphere;
 
     createSphere();
+//    createIndexedSphere();
 }
 
 CoSphere::~CoSphere()
@@ -136,18 +138,18 @@ void CoSphere::createSphere()
  */
 void CoSphere::createIndexedSphere()
 {
-    // step 1 : create vertice
+    // step 1 : creating vertice
 
     Gint n2PIDegree = 360;
-    Gint nStackRatio = 10;
-    Gint nSectorRatio = 10;
+    Gint nStackRatio = 5;
+    Gint nSectorRatio = 5;
     Gint nStack = n2PIDegree / 2 / nStackRatio;
     Gint nSector = n2PIDegree / nSectorRatio;
 
     CoVec3 startPosition(m_vCenter[0], m_vCenter[1] + m_fRadius, m_vCenter[2]);
     CoVec3 startNormal = startPosition - m_vCenter;
 
-    for(Gint i = 0; i < nStack; i++)
+    for(Gint i = 0; i <= nStack; i++)
     {
         Gfloat fStackTheta = i * nStackRatio;
 
@@ -156,7 +158,7 @@ void CoSphere::createIndexedSphere()
         {
             fStackTheta = 0.01 * nStackRatio;
         }
-        else if(i == nStack - 1)
+        else if(i == nStack)
         {
             fStackTheta = (nStack - 0.01) * nStackRatio;
         }
@@ -175,9 +177,9 @@ void CoSphere::createIndexedSphere()
         }
     }
 
-    // step 2 : create indices for triangle.
+    // step 2 : creating vertice index
 
-    for(Gint i = 0; i < nStack - 1; i++)
+    for(Gint i = 0; i < nStack; i++)
     {
         for(Gint j = 0; j < nSector; j++)
         {
@@ -193,42 +195,13 @@ void CoSphere::createIndexedSphere()
         }
     }
 
-    // step 3 : triangle normal
+    // step 2 : creating vertex normal
 
-    for(Gint i = 0; i < nStack - 1; i++)
+    for(Gint i = 0; i < m_vecPoints.size(); i++)
     {
-        for(Gint j = 0; j < nSector; j++)
-        {
-            // triangle 1 normal
-            CoVec3 vPos1 = m_vecPoints[i * nSector + j];
-            CoVec3 vPos2 = m_vecPoints[(i + 1) * nSector + j];
-            CoVec3 vPos3 = m_vecPoints[i * nSector + j + 1];
-
-            CoVec3 vNor32 = vPos3 - vPos2;
-            CoVec3 vNor12 = vPos1 - vPos2;
-
-            CoVec3 vNormal = vNor32.cross(vNor12);
-            vNormal.normalize();  // It need to be confirmed.
-
-            m_vecVertexNormal.push_back(vNormal);
-            m_vecVertexNormal.push_back(vNormal);
-            m_vecVertexNormal.push_back(vNormal);
-
-            // triangle 2 normal
-            vPos1 = m_vecPoints[i * nSector + j + 1];
-            vPos2 = m_vecPoints[(i + 1) * nSector + j];
-            vPos3 = m_vecPoints[(i + 1) * nSector + j + 1];
-
-            vNor32 = vPos3 - vPos2;
-            vNor12 = vPos1 - vPos2;
-
-            vNormal = vNor32.cross(vNor12);
-            vNormal.normalize(); // It need to be confirmed.
-
-            m_vecVertexNormal.push_back(vNormal);
-            m_vecVertexNormal.push_back(vNormal);
-            m_vecVertexNormal.push_back(vNormal);
-        }
+        CoVec3 vNormal = m_vecPoints[i];
+        vNormal.normalize();
+        m_vecVertexNormal.push_back(vNormal);
     }
 }
 
@@ -245,4 +218,9 @@ void CoSphere::setRadius(Gfloat fRadius)
 std::vector<CoVec3> CoSphere::getNormals()
 {
     return m_vecVertexNormal;
+}
+
+std::vector<Gint> CoSphere::getVertexIndice()
+{
+    return m_vecVertexIndices;
 }
