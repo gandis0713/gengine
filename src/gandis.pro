@@ -57,7 +57,6 @@ SOURCES += \
     render/object/covertexbufferobject.cpp \
     render/object/covertexarrayobject.cpp \
     render/node/coline.cpp \
-    render/node/cosylinder.cpp \
     render/node/cosphere.cpp \
     render/node/copolygon.cpp \
     render/node/conode.cpp \
@@ -81,9 +80,10 @@ SOURCES += \
     render/node/cotexture.cpp \
     render/node/core/cotexturecore.cpp \
     render/node/core/cospherecore.cpp \
-    render/node/core/cosylindercore.cpp \
     render/node/cocone.cpp \
-    render/node/core/coconecore.cpp
+    render/node/core/coconecore.cpp \
+    render/node/cocylinder.cpp \
+    render/node/core/cocylindercore.cpp
 
 HEADERS += \
     render/coqtrenderer.h \
@@ -118,7 +118,6 @@ HEADERS += \
     render/object/covertexbufferobject.h \
     render/object/covertexarrayobject.h \
     render/node/coline.h \
-    render/node/cosylinder.h \
     render/node/cosphere.h \
     render/node/copolygon.h \
     render/node/conode.h \
@@ -143,9 +142,10 @@ HEADERS += \
     render/node/core/cotexturecore.h \
     render/node/cotexture.h \
     render/node/core/cospherecore.h \
-    render/node/core/cosylindercore.h \
     render/node/cocone.h \
-    render/node/core/coconecore.h
+    render/node/core/coconecore.h \
+    render/node/core/cocylindercore.h \
+    render/node/cocylinder.h
 
 OTHER_FILES += \
     libgandis.pri

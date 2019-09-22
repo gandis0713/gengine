@@ -1,16 +1,16 @@
-#ifndef COSYLINDERCORE_H
-#define COSYLINDERCORE_H
+#ifndef COCYLINDERCORE_H
+#define COCYLINDERCORE_H
 
 #include "coshapecore.h"
 
-class CoSylinderCore : public CoShapeCore
+class CoCylinderCore : public CoShapeCore
 {
 public:
-    CoSylinderCore();
-    CoSylinderCore(CoNode* pNode,
+    CoCylinderCore();
+    CoCylinderCore(CoNode* pNode,
                    CoCamera *pCamera,
                    CoLight *pLight);
-    ~CoSylinderCore();
+    ~CoCylinderCore();
 
     void initialize() override;
     void paint() override;
@@ -27,4 +27,4 @@ protected:
     CoVertexBufferObject* m_pIndexBufferObject;
 };
 
-#endif // COSYLINDERCORE_H
+#endif // COCYLINDERCORE_H

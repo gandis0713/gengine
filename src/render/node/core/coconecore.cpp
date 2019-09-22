@@ -103,7 +103,7 @@ void CoConeCore::bindObject()
 
 //    m_pIndexBufferObject->setType(CoVertexBufferObject::EType::eIndexArray);
 //    m_pIndexBufferObject->bind();
-//    m_pIndexBufferObject->allocate(&pSylinder->getVertexIndice()[0], pSylinder->getVertexIndice().size() * sizeof(Guint));
+//    m_pIndexBufferObject->allocate(&pCone->getVertexIndice()[0], pCone->getVertexIndice().size() * sizeof(Guint));
 
     m_pVertexBufferObject->bind();
     m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);

@@ -1,7 +1,7 @@
 #include "samplewindow.h"
 #include "coqtrenderer.h"
 #include "coorthographiccamera.h"
-#include "cosylinder.h"
+#include "cocylinder.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
 
     m_pRender->setCamera(m_pCamera);
 
-    CoSylinder *pSylinder = new CoSylinder(CoVec3(0,0,0), 10, 30);
+    CoCylinder *pCylinder = new CoCylinder(CoVec3(0,0,0), 10, 30);
 
-    m_pRender->addNode(pSylinder);
+    m_pRender->addNode(pCylinder);
 
     w.setQtRenderer(m_pRender);
     w.show();

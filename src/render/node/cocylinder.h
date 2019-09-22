@@ -1,18 +1,18 @@
-#ifndef COSYLINDER_H
-#define COSYLINDER_H
+#ifndef COCYLINDER_H
+#define COCYLINDER_H
 
 #include "coshape.h"
 
 using namespace std;
 
-class GANDISENGINE CoSylinder : public CoShape
+class GANDISENGINE CoCylinder : public CoShape
 {
 public:
-    CoSylinder();
-    CoSylinder(CoVec3 vCenter,
+    CoCylinder();
+    CoCylinder(CoVec3 vCenter,
                Gfloat fRadius,
                Gfloat fLength);
-    virtual ~CoSylinder();
+    virtual ~CoCylinder();
 
     void setCenter(CoVec3 vPosition);
     void setRadius(Gfloat fRadius);
@@ -22,8 +22,8 @@ public:
     std::vector<Gint> getVertexIndice();
 
 protected:
-    void createSylinder();
-    void createIndexedSylinder();
+    void createCylinder();
+    void createIndexedCylinder();
 
 private:
     CoVec3 m_vCenter;
@@ -35,4 +35,4 @@ private:
 
 };
 
-#endif // COSYLINDER_H
+#endif // COCYLINDER_H

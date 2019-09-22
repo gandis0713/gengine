@@ -9,7 +9,7 @@
 #include "cotexturecore.h"
 #include "copolygoncore.h"
 #include "cospherecore.h"
-#include "cosylindercore.h"
+#include "cocylindercore.h"
 #include "coconecore.h"
 #include "cotexturedpolygoncore.h"
 #include "cocirclecore.h"
@@ -267,8 +267,8 @@ void CoQtRenderer::addNode(CoNode *pNode)
         case EShaderProgramType::eSphere:
             pNodeObject = new CoSphereCore(pNode, m_pCamera, m_pLight);
             break;
-        case EShaderProgramType::eSylinder:
-            pNodeObject = new CoSylinderCore(pNode, m_pCamera, m_pLight);
+        case EShaderProgramType::eCylinder:
+            pNodeObject = new CoCylinderCore(pNode, m_pCamera, m_pLight);
             break;            
         case EShaderProgramType::eCone:
             pNodeObject = new CoConeCore(pNode, m_pCamera, m_pLight);

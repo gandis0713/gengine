@@ -1,12 +1,12 @@
-#include "cosylindercore.h"
-#include "cosylinder.h"
+#include "cocylindercore.h"
+#include "cocylinder.h"
 
-CoSylinderCore::CoSylinderCore()
+CoCylinderCore::CoCylinderCore()
 {
 
 }
 
-CoSylinderCore::CoSylinderCore(CoNode* pNode,
+CoCylinderCore::CoCylinderCore(CoNode* pNode,
                                CoCamera *pCamera,
                                CoLight *pLight)
     : CoShapeCore(pNode, pCamera, pLight)
@@ -14,12 +14,12 @@ CoSylinderCore::CoSylinderCore(CoNode* pNode,
 }
 
 
-CoSylinderCore::~CoSylinderCore()
+CoCylinderCore::~CoCylinderCore()
 {
 
 }
 
-void CoSylinderCore::initialize()
+void CoCylinderCore::initialize()
 {
 
     createObject();
@@ -29,13 +29,13 @@ void CoSylinderCore::initialize()
 
 }
 
-void CoSylinderCore::paint()
+void CoCylinderCore::paint()
 {
-    CoSylinder *pSylinder = static_cast<CoSylinder*>(m_pNode);
+    CoCylinder *pCylinder = static_cast<CoCylinder*>(m_pNode);
 
     m_pShaderProgram->bind();
     m_pShaderProgram->setUniformMatrix4fv(m_nMVPID, m_pCamera->getCameraMat());
-    m_pShaderProgram->setUniformMatrix4fv(m_nMID, pSylinder->getMatModel());
+    m_pShaderProgram->setUniformMatrix4fv(m_nMID, pCylinder->getMatModel());
     m_pShaderProgram->setUniformMatrix4fv(m_nVID, m_pCamera->getViewMat());
 
     Gfloat fCameraLength = m_pCamera->getPosition().length();
@@ -51,9 +51,9 @@ void CoSylinderCore::paint()
     glUniform3f(m_nLightColorID, vLightColor[0], vLightColor[1], vLightColor[2]);
     glUniform1f(m_nLightPowerID, fLightPower);
 
-    CoVec3 vDiffuseColor = pSylinder->getColor();
-    CoVec3 vAmbientColor = pSylinder->getAmbientColor();
-    CoVec3 vSpecularColor = pSylinder->getSpecularColor();
+    CoVec3 vDiffuseColor = pCylinder->getColor();
+    CoVec3 vAmbientColor = pCylinder->getAmbientColor();
+    CoVec3 vSpecularColor = pCylinder->getSpecularColor();
 
     glUniform3f(m_nDiffuseColorID, vDiffuseColor[0], vDiffuseColor[1], vDiffuseColor[2]);
     glUniform3f(m_nAmbientColorID, vAmbientColor[0], vAmbientColor[1], vAmbientColor[2]);
@@ -61,12 +61,12 @@ void CoSylinderCore::paint()
 
     m_pVertexArrayObject->bind();
 
-    glDrawArrays(GL_TRIANGLES, 0, pSylinder->getSize());
+    glDrawArrays(GL_TRIANGLES, 0, pCylinder->getSize());
 }
 
 
 
-void CoSylinderCore::createObject()
+void CoCylinderCore::createObject()
 {
     CoShapeCore::createObject();
 
@@ -74,19 +74,19 @@ void CoSylinderCore::createObject()
     m_pIndexBufferObject = new CoVertexBufferObject();
 }
 
-void CoSylinderCore::createShaderProgram()
+void CoCylinderCore::createShaderProgram()
 {
     m_pShaderProgram = new CoShaderProgram();
-    m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/sylinder_frag.glsl");
-//    m_pShaderProgram->AddShaders(EShaderType::eGeometry, ":resource/glsl/sylinder_geom.glsl");
-    m_pShaderProgram->AddShaders(EShaderType::eVertex, ":resource/glsl/sylinder_vert.glsl");
+    m_pShaderProgram->AddShaders(EShaderType::eFragment, ":resource/glsl/cylinder_frag.glsl");
+//    m_pShaderProgram->AddShaders(EShaderType::eGeometry, ":resource/glsl/cylinder_geom.glsl");
+    m_pShaderProgram->AddShaders(EShaderType::eVertex, ":resource/glsl/cylinder_vert.glsl");
     m_pShaderProgram->link();
 }
 
-void CoSylinderCore::bindObject()
+void CoCylinderCore::bindObject()
 {
 
-    CoSylinder *pSylinder = static_cast<CoSylinder*>(m_pNode);
+    CoCylinder *pCylinder = static_cast<CoCylinder*>(m_pNode);
 
     m_pVertexBufferObject->gen();
     m_pVertexNormalBufferObject->gen();
@@ -96,14 +96,14 @@ void CoSylinderCore::bindObject()
     m_pVertexArrayObject->bind();
 
     m_pVertexBufferObject->bind();
-    m_pVertexBufferObject->allocate(&pSylinder->getPoints()[0], pSylinder->getSize() * 3 * sizeof(Gfloat));
+    m_pVertexBufferObject->allocate(&pCylinder->getPoints()[0], pCylinder->getSize() * 3 * sizeof(Gfloat));
 
     m_pVertexNormalBufferObject->bind();
-    m_pVertexNormalBufferObject->allocate(&pSylinder->getNormals()[0], pSylinder->getSize() * 3 * sizeof(Gfloat));
+    m_pVertexNormalBufferObject->allocate(&pCylinder->getNormals()[0], pCylinder->getSize() * 3 * sizeof(Gfloat));
 
 //    m_pIndexBufferObject->setType(CoVertexBufferObject::EType::eIndexArray);
 //    m_pIndexBufferObject->bind();
-//    m_pIndexBufferObject->allocate(&pSylinder->getVertexIndice()[0], pSylinder->getVertexIndice().size() * sizeof(Guint));
+//    m_pIndexBufferObject->allocate(&pCylinder->getVertexIndice()[0], pCylinder->getVertexIndice().size() * sizeof(Guint));
 
     m_pVertexBufferObject->bind();
     m_pShaderProgram->enableAttributeVertexArray(VERTEX_IN_LAYOUT);
@@ -116,7 +116,7 @@ void CoSylinderCore::bindObject()
     m_pVertexArrayObject->release();
 }
 
-void CoSylinderCore::setUniformLocation()
+void CoCylinderCore::setUniformLocation()
 {
     CoShapeCore::setUniformLocation();
 }

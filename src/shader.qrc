@@ -20,9 +20,9 @@
 		<file>resource/glsl/sphere_vert.glsl</file>
 		<file>resource/glsl/sphere_geom.glsl</file>
 		<file>resource/glsl/sphere_frag.glsl</file>
-		<file>resource/glsl/sylinder_vert.glsl</file>
-		<file>resource/glsl/sylinder_geom.glsl</file>
-		<file>resource/glsl/sylinder_frag.glsl</file>
+		<file>resource/glsl/cylinder_vert.glsl</file>
+		<file>resource/glsl/cylinder_geom.glsl</file>
+		<file>resource/glsl/cylinder_frag.glsl</file>
 		<file>resource/glsl/cone_vert.glsl</file>
 		<file>resource/glsl/cone_geom.glsl</file>
 		<file>resource/glsl/cone_frag.glsl</file>
@@ -30,6 +30,7 @@
 		<file>resource/glsl/texture_polygon_geom.glsl</file>
 		<file>resource/glsl/texture_polygon_frag.glsl</file>	
 		<file>resource/glsl/texture_vert.glsl</file>
-		<file>resource/glsl/texture_frag.glsl</file>		
+		<file>resource/glsl/texture_frag.glsl</file>
+		<file>resource/glsl/structs.glsl</file>		
 	</qresource>
 </RCC>
