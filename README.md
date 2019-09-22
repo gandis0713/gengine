@@ -1,4 +1,4 @@
-# gandis 3D engine
+# Gandis 3D Engine
 ##### It is based on OpenGL and Qt.                                                                              
 
 ## Environment
@@ -16,9 +16,9 @@
 ##### - There are two type of camera as Perspective and orthographic.
 
 #### Shape
-##### - Some shapes as line, spline, circle, sphere are supported.
+##### - Some shapes as line, spline, circle, sphere, cylinder, cone are supported.
 
-#### Event
+#### Interaction
 ##### - Some events as rotation, panning, zomming by mouse is supported in view. The rotation event is by orbit camera. 
 
 
