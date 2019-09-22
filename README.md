@@ -23,5 +23,8 @@
 
 
 ## Examples
-##### To use examples, gandis 3D engine must be built on QT and OpenGL environment.
+##### To use examples, gandis 3D engine must be built on QT and OpenGL environment. Each example shows on 'SampleWindow' like as below.
+#### SampleWindow
+![SampleWindow](./image/sample.png)
+
 
