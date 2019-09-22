@@ -186,13 +186,13 @@ void CoQtRenderer::fit()
     if(fMax < vMax[2] - vMin[2])
         fMax = vMax[2] - vMin[2];
 
-    CoVec3 vHalfSize = (vMax - vMin)/CoVec3(2,2,2);
-    CoVec3 vCenter = vMin + vHalfSize;
+    Gfloat fHalfSize = fMax / 2;
+    CoVec3 vCenter = (vMax + vMin)/CoVec3(2,2,2);
 
-    m_pCamera->setLeftPosition(vCenter[0] - vHalfSize[0] * 1.5);
-    m_pCamera->setRightPosition(vCenter[0] + vHalfSize[0] * 1.5);
-    m_pCamera->setTopPosition(vCenter[1] + vHalfSize[1] * 1.5);
-    m_pCamera->setBottomPosition(vCenter[1] - vHalfSize[1] * 1.5);
+    m_pCamera->setLeftPosition(vCenter[0] - fHalfSize * 1.5);
+    m_pCamera->setRightPosition(vCenter[0] + fHalfSize * 1.5);
+    m_pCamera->setTopPosition(vCenter[1] + fHalfSize * 1.5);
+    m_pCamera->setBottomPosition(vCenter[1] - fHalfSize * 1.5);
 
     CoVec3 vPosition = m_pCamera->getPosition();
     vPosition[2] = fMax * 1.5;
