@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     m_pRender->setCamera(m_pCamera);
 
-    CoCone *pCone = new CoCone(CoVec3(0,0,0), 10, 30);
+    CoCone *pCone = new CoCone(CoVec3(0,0,0), 10, 20);
 
     m_pRender->addNode(pCone);
 

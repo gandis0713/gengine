@@ -5,7 +5,7 @@
 CoCone::CoCone()
     : m_vCenter(0, 0, 0)
     , m_fRadius(10)
-    , m_fLength(30)
+    , m_fLength(20)
 {
     m_eShaderProgramType = EShaderProgramType::eCone;
 
@@ -41,7 +41,7 @@ void CoCone::createCone()
 {
     // step 1 : creating bottom circle
 
-    Gint nDividedDegree = 10;
+    Gint nDividedDegree = 2;
     Gint nCount = 360 / nDividedDegree;
     CoVec3 vNormal(0, m_fRadius, 0);
 
@@ -84,15 +84,19 @@ void CoCone::createCone()
         m_vecPoints.push_back(vPosition2);
         m_vecPoints.push_back(vPosition3);
 
-        CoVec3 vVertexNormal1(0, 0, 1);
+        CoVec3 vNormal21 = vPosition2 - vPosition1;
+        CoVec3 vNormal13 = vPosition1 - vPosition3;
+
+        CoVec3 vVertexNormal1 = vNormal13.cross(vNormal21);
+        vVertexNormal1.normalize();
         CoVec3 vVertexNormal2 = vPosition2;
         vVertexNormal2.normalize();
         CoVec3 vVertexNormal3 = vPosition3;
         vVertexNormal3.normalize();
 
         m_vecVertexNormal.push_back(vVertexNormal1);
-        m_vecVertexNormal.push_back(vVertexNormal2);
-        m_vecVertexNormal.push_back(vVertexNormal3);
+        m_vecVertexNormal.push_back(vVertexNormal1);
+        m_vecVertexNormal.push_back(vVertexNormal1);
     }
 }
 
