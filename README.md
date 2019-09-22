@@ -18,7 +18,7 @@
 #### Shape
 ##### - Some shapes as line, spline, circle, sphere are supported.
 
-#### Event
+#### Interaction
 ##### - Some events as rotation, panning, zomming by mouse is supported in view. The rotation event is by orbit camera. 
 
 
