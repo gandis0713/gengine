@@ -7,7 +7,7 @@
 ##### - Qt : 5.10.1
 
 
-## Supperted Functions
+## Supported Functions
 
 #### Ligthing
 ##### - Lighting is applied to mesh by phong lighting model to express light effect. FLAT and GOURAUD can be used.
