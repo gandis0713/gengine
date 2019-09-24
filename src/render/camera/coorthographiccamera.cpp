@@ -27,9 +27,9 @@ void CoOrthographicCamera::update()
 void CoOrthographicCamera::setCamera()
 {
     m_matProjection = NoMath::orthographic(m_fLeft, m_fRight, m_fBottom, m_fTop, m_fNear, m_fFar);
-    m_matView = NoMath::lookAt(m_vecPosition,
-                               m_vecTarget,
-                               m_vecUp);
+    m_matView = lookAt(m_vecPosition,
+                       m_vecTarget,
+                       m_vecUp);
 
     m_matCamera = m_matProjection * m_matView;
 }

@@ -61,6 +61,9 @@ signals:
     void signalCameraUpdated();
 
 protected:
+    CoMat4x4 lookAt(CoVec3 position, CoVec3 target, CoVec3 up);
+
+protected:
     CoMat4x4 m_matCamera;
     CoMat4x4 m_matProjection;
     CoMat4x4 m_matView;

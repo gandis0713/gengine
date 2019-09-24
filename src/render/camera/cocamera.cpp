@@ -197,3 +197,54 @@ void CoCamera::setClipSpace(const Gfloat &left,
     m_fNear = near;
     m_fFar = far;
 }
+
+/**
+ * @brief
+ * Matrix Indexing
+ * [  0   1   2   3 ]
+ * [  4   5   6   7 ]
+ * [  8   9  10  11 ]
+ * [ 12  13  14  15 ]
+ *
+ * Look at matrix by MT * MR
+ * [      1       0       0   0 ]   [ xAxis.x  yAxis.x  zAxis.x 0 ]
+ * [      0       1       0   0 ] * [ xAxis.y  yAxis.y  zAxis.y 0 ]
+ * [      0       0       1   0 ]   [ xAxis.z  yAxis.z  zAxis.z 0 ]
+ * [ -Eye.x  -Eye.y  -Eye.z   1 ]   [       0        0        0 1 ]
+ */
+CoMat4x4 CoCamera::lookAt(CoVec3 position, CoVec3 target, CoVec3 up)
+{
+    up.normalize();
+
+    CoVec3 forward = position - target;
+    forward.normalize();
+
+    CoVec3 left = up.cross(forward);
+    left.normalize();
+
+    up = forward.cross(left);
+    up.normalize();
+
+    CoMat4x4 matView;
+    matView[0] = left[0];
+    matView[4] = left[1];
+    matView[8] = left[2];
+    matView[12] = -position.dot(left);
+
+    matView[1] = up[0];
+    matView[5] = up[1];
+    matView[9] = up[2];
+    matView[13] = -position.dot(up);
+
+    matView[2] = forward[0];
+    matView[6] = forward[1];
+    matView[10] = forward[2];
+    matView[14] = -position.dot(forward);
+
+    matView[3] = 0.f;
+    matView[7] = 0.f;
+    matView[11] = 0.f;
+    matView[15] = 1.f;
+
+    return matView;
+}
