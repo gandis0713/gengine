@@ -1,4 +1,5 @@
 #include "comatrix4x4.h"
+#include "comatrix3x3.h"
 
 #include "demath.h"
 #include "nomath.h"
@@ -73,29 +74,29 @@ CoMat4x4& CoMat4x4::transpose()
     return *this;
 }
 
-CoMat4x4& CoMat4x4::invert()
+CoMat4x4& CoMat4x4::inverse()
 {
     Gfloat tmpMat[16];
 
-    tmpMat[0] = NoMath::determinant3x3(mat[5],mat[6],mat[7], mat[9],mat[10],mat[11], mat[13],mat[14],mat[15]);
-    tmpMat[1] = NoMath::determinant3x3(mat[4],mat[6],mat[7], mat[8],mat[10],mat[11], mat[12],mat[14],mat[15]);
-    tmpMat[2] = NoMath::determinant3x3(mat[4],mat[5],mat[7], mat[8],mat[9], mat[11], mat[12],mat[13],mat[15]);
-    tmpMat[3] = NoMath::determinant3x3(mat[4],mat[5],mat[6], mat[8],mat[9], mat[10], mat[12],mat[13],mat[14]);
+    tmpMat[0] = CoMat3x3::determinant(mat[5],mat[6],mat[7], mat[9],mat[10],mat[11], mat[13],mat[14],mat[15]);
+    tmpMat[1] = CoMat3x3::determinant(mat[4],mat[6],mat[7], mat[8],mat[10],mat[11], mat[12],mat[14],mat[15]);
+    tmpMat[2] = CoMat3x3::determinant(mat[4],mat[5],mat[7], mat[8],mat[9], mat[11], mat[12],mat[13],mat[15]);
+    tmpMat[3] = CoMat3x3::determinant(mat[4],mat[5],mat[6], mat[8],mat[9], mat[10], mat[12],mat[13],mat[14]);
 
-    tmpMat[4] = NoMath::determinant3x3(mat[1],mat[2],mat[3], mat[9],mat[10],mat[11], mat[13],mat[14],mat[15]);
-    tmpMat[5] = NoMath::determinant3x3(mat[0],mat[2],mat[3], mat[8],mat[10],mat[11], mat[12],mat[14],mat[15]);
-    tmpMat[6] = NoMath::determinant3x3(mat[0],mat[1],mat[3], mat[8],mat[9], mat[11], mat[12],mat[13],mat[15]);
-    tmpMat[7] = NoMath::determinant3x3(mat[0],mat[1],mat[2], mat[8],mat[9], mat[10], mat[12],mat[13],mat[14]);
+    tmpMat[4] = CoMat3x3::determinant(mat[1],mat[2],mat[3], mat[9],mat[10],mat[11], mat[13],mat[14],mat[15]);
+    tmpMat[5] = CoMat3x3::determinant(mat[0],mat[2],mat[3], mat[8],mat[10],mat[11], mat[12],mat[14],mat[15]);
+    tmpMat[6] = CoMat3x3::determinant(mat[0],mat[1],mat[3], mat[8],mat[9], mat[11], mat[12],mat[13],mat[15]);
+    tmpMat[7] = CoMat3x3::determinant(mat[0],mat[1],mat[2], mat[8],mat[9], mat[10], mat[12],mat[13],mat[14]);
 
-    tmpMat[8] = NoMath::determinant3x3(mat[1],mat[2],mat[3], mat[5],mat[6], mat[7],  mat[13],mat[14],mat[15]);
-    tmpMat[9] = NoMath::determinant3x3(mat[0],mat[2],mat[3], mat[4],mat[6], mat[7],  mat[12],mat[14],mat[15]);
-    tmpMat[10] = NoMath::determinant3x3(mat[0],mat[1],mat[3], mat[4],mat[5], mat[7],  mat[12],mat[13],mat[15]);
-    tmpMat[11] = NoMath::determinant3x3(mat[0],mat[1],mat[2], mat[4],mat[5], mat[6],  mat[12],mat[13],mat[14]);
+    tmpMat[8] = CoMat3x3::determinant(mat[1],mat[2],mat[3], mat[5],mat[6], mat[7],  mat[13],mat[14],mat[15]);
+    tmpMat[9] = CoMat3x3::determinant(mat[0],mat[2],mat[3], mat[4],mat[6], mat[7],  mat[12],mat[14],mat[15]);
+    tmpMat[10] = CoMat3x3::determinant(mat[0],mat[1],mat[3], mat[4],mat[5], mat[7],  mat[12],mat[13],mat[15]);
+    tmpMat[11] = CoMat3x3::determinant(mat[0],mat[1],mat[2], mat[4],mat[5], mat[6],  mat[12],mat[13],mat[14]);
 
-    tmpMat[12] = NoMath::determinant3x3(mat[1],mat[2],mat[3], mat[5],mat[6], mat[7],  mat[9], mat[10],mat[11]);
-    tmpMat[13] = NoMath::determinant3x3(mat[0],mat[2],mat[3], mat[4],mat[6], mat[7],  mat[8], mat[10],mat[11]);
-    tmpMat[14] = NoMath::determinant3x3(mat[0],mat[1],mat[3], mat[4],mat[5], mat[7],  mat[8], mat[9], mat[11]);
-    tmpMat[15] = NoMath::determinant3x3(mat[0],mat[1],mat[2], mat[4],mat[5], mat[6],  mat[8], mat[9], mat[10]);
+    tmpMat[12] = CoMat3x3::determinant(mat[1],mat[2],mat[3], mat[5],mat[6], mat[7],  mat[9], mat[10],mat[11]);
+    tmpMat[13] = CoMat3x3::determinant(mat[0],mat[2],mat[3], mat[4],mat[6], mat[7],  mat[8], mat[10],mat[11]);
+    tmpMat[14] = CoMat3x3::determinant(mat[0],mat[1],mat[3], mat[4],mat[5], mat[7],  mat[8], mat[9], mat[11]);
+    tmpMat[15] = CoMat3x3::determinant(mat[0],mat[1],mat[2], mat[4],mat[5], mat[6],  mat[8], mat[9], mat[10]);
 
     Gfloat invertDeterminant = 1.0f / determinant();
 
@@ -124,10 +125,10 @@ CoMat4x4& CoMat4x4::invert()
 
 Gfloat CoMat4x4::determinant()
 {
-    return mat[0] * NoMath::determinant3x3(mat[5],mat[6],mat[7], mat[9],mat[10],mat[11], mat[13],mat[14],mat[15]) -
-           mat[1] * NoMath::determinant3x3(mat[4],mat[6],mat[7], mat[8],mat[10],mat[11], mat[12],mat[14],mat[15]) +
-           mat[2] * NoMath::determinant3x3(mat[4],mat[5],mat[7], mat[8],mat[9], mat[11], mat[12],mat[13],mat[15]) -
-           mat[3] * NoMath::determinant3x3(mat[4],mat[5],mat[6], mat[8],mat[9], mat[10], mat[12],mat[13],mat[14]);
+    return mat[0] * CoMat3x3::determinant(mat[5],mat[6],mat[7], mat[9],mat[10],mat[11], mat[13],mat[14],mat[15]) -
+           mat[1] * CoMat3x3::determinant(mat[4],mat[6],mat[7], mat[8],mat[10],mat[11], mat[12],mat[14],mat[15]) +
+           mat[2] * CoMat3x3::determinant(mat[4],mat[5],mat[7], mat[8],mat[9], mat[11], mat[12],mat[13],mat[15]) -
+           mat[3] * CoMat3x3::determinant(mat[4],mat[5],mat[6], mat[8],mat[9], mat[10], mat[12],mat[13],mat[14]);
 }
 
 CoVec3 CoMat4x4::angle()

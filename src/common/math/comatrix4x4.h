@@ -23,7 +23,7 @@ public:
              Gfloat m12, Gfloat m13, Gfloat m14, Gfloat m15);
     CoMat4x4 getTranspose();
     CoMat4x4& transpose();
-    CoMat4x4& invert();
+    CoMat4x4& inverse();
     Gfloat determinant();
     CoVec3 angle();    
     CoMat4x4& rotate(Gfloat angle, const CoVec3& axis);

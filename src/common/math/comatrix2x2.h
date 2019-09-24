@@ -14,9 +14,13 @@ public:
     void set(const Gfloat mat[4]);
     CoMat2x2 getTranspose();
     CoMat2x2& transpose();
-    CoMat2x2& invert();
+    CoMat2x2& inverse();
     Gfloat determinant();
     Gfloat angle();
+
+    static Gfloat determinant(const Gfloat mat[4]);
+    static Gfloat determinant(const Gfloat& mat0, const Gfloat& mat1,
+                              const Gfloat& mat2, const Gfloat& mat3);
 
 private:
     Gfloat mat[4];
