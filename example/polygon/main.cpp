@@ -1,11 +1,9 @@
 #include <QApplication>
 
 #include "samplewindow.h"
-#include "coorthographiccamera.h"
 #include "coqtrenderer.h"
 #include "copolygon.h"
 #include "coobjreader.h"
-#include <QFileDialog>
 
 int main(int argc, char *argv[])
 {
@@ -14,15 +12,8 @@ int main(int argc, char *argv[])
     CSampleWindow w;
 
     CoQtRenderer *m_pRender = new CoQtRenderer(w.getMainWidget());
-    CoOrthographicCamera *m_pOrthoCamera = new CoOrthographicCamera();
 
-    CoCamera *m_pCamera = m_pOrthoCamera;
-    m_pRender->setCamera(m_pCamera);
-
-    QString strOBJFilePath = QFileDialog::getOpenFileName(&w,
-                                         "Select OBJ file",
-                                         ".",
-                                         "");
+    QString strOBJFilePath = "../sample/spaceship.obj";
 
     const Gchar *pPath = strOBJFilePath.toLocal8Bit().constData();
 
