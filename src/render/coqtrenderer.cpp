@@ -189,18 +189,36 @@ void CoQtRenderer::fit()
     Gfloat fHalfSize = fMax / 2;
     CoVec3 vCenter = (vMax + vMin)/CoVec3(2,2,2);
 
-    m_pCamera->setLeftPosition(vCenter[0] - fHalfSize * 1.5);
-    m_pCamera->setRightPosition(vCenter[0] + fHalfSize * 1.5);
-    m_pCamera->setTopPosition(vCenter[1] + fHalfSize * 1.5);
-    m_pCamera->setBottomPosition(vCenter[1] - fHalfSize * 1.5);
+    CoOrthographicCamera *pOrtho = dynamic_cast<CoOrthographicCamera*>(m_pCamera);
+    if(pOrtho != NULL)
+    {
+        pOrtho->setLeftPosition(vCenter[0] - fHalfSize * 1.5);
+        pOrtho->setRightPosition(vCenter[0] + fHalfSize * 1.5);
+        pOrtho->setTopPosition(vCenter[1] + fHalfSize * 1.5);
+        pOrtho->setBottomPosition(vCenter[1] - fHalfSize * 1.5);
 
-    CoVec3 vPosition = m_pCamera->getPosition();
-    vPosition[2] = fMax * 1.5;
-    m_pCamera->setPosition(vPosition);
-    m_pCamera->setNearPosition(0.f);
-    m_pCamera->setFarPosition(fMax * 3);
+        CoVec3 vPosition = m_pCamera->getPosition();
+        vPosition[2] = fMax;
+        pOrtho->setPosition(vPosition);
 
-    m_pCamera->update();
+        pOrtho->setFarPosition(fMax * 2);
+
+        pOrtho->update();
+    }
+
+    CoPerspectiveCamera *pPers = dynamic_cast<CoPerspectiveCamera*>(m_pCamera);
+    if(pPers != NULL)
+    {
+        CoVec3 vPosition = m_pCamera->getPosition();
+        vPosition[2] = fMax;
+        pPers->setPosition(vPosition);
+
+        pPers->setFarPosition(fMax * 2);
+
+        pPers->update();
+    }
+
+
 }
 
 void CoQtRenderer::setEvent(EEvent eEvent)

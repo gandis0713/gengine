@@ -4,10 +4,17 @@
 
 CoOrthographicCamera::CoOrthographicCamera()
 {
-    m_fLeft = -5.f;
-    m_fRight = 5.f;
-    m_fBottom = -5.f;
-    m_fTop = 5.f;
+    m_fLeft = -100.f;
+    m_fRight = 100.f;
+    m_fBottom = -100.f;
+    m_fTop = 100.f;
+
+    m_vecTarget = CoVec3(0.f, 0.f, 0.f);
+    m_vecPosition = CoVec3(0.f, 0.f, 100.f);
+    m_vecUp = CoVec3(0.f, 1.f, 0.f);
+
+    m_fNear = 0.f;
+    m_fFar = 1000.0f;
 
     setCamera();
 }

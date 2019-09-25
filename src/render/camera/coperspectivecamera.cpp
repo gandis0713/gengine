@@ -4,6 +4,18 @@
 
 CoPerspectiveCamera::CoPerspectiveCamera()
 {    
+    m_fLeft = -0.1f;
+    m_fRight = 0.1f;
+    m_fBottom = -0.1f;
+    m_fTop = 0.1f;
+
+    m_vecTarget = CoVec3(0.f, 0.f, 0.f);
+    m_vecPosition = CoVec3(0.f, 0.f, 1000.f);
+    m_vecUp = CoVec3(0.f, 1.f, 0.f);
+
+    m_fNear = 0.1f;
+    m_fFar = 1000.0f;
+
     setCamera();
 }
 

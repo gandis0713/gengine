@@ -2,14 +2,14 @@
 
 CoCamera::CoCamera()
     : m_vecTarget(0.f, 0.f, 0.f)
-    , m_vecPosition(0.f, 0.f, 5.f)
+    , m_vecPosition(0.f, 0.f, 1000.f)
     , m_vecUp(0.f, 1.f, 0.f)
     , m_fLeft(-0.5f)
     , m_fRight(0.5f)
     , m_fBottom(-0.5f)
     , m_fTop(0.5f)
-    , m_fNear(1.0f)
-    , m_fFar(1000.0f)
+    , m_fNear(0.1f)
+    , m_fFar(10000.0f)
 {
 }
 
