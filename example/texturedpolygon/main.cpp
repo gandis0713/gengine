@@ -1,12 +1,10 @@
 #include <QApplication>
 
 #include "samplewindow.h"
-#include "coorthographiccamera.h"
 #include "coqtrenderer.h"
 #include "cotexturedpolygon.h"
 #include "coobjreader.h"
 #include "cotexturereader.h"
-#include <QFileDialog>
 
 int main(int argc, char *argv[])
 {
@@ -15,15 +13,8 @@ int main(int argc, char *argv[])
     CSampleWindow w;
 
     CoQtRenderer *m_pRender = new CoQtRenderer(w.getMainWidget());
-    CoOrthographicCamera *m_pOrthoCamera = new CoOrthographicCamera();
 
-    CoCamera *m_pCamera = m_pOrthoCamera;
-    m_pRender->setCamera(m_pCamera);
-
-    QString strOBJFilePath = QFileDialog::getOpenFileName(&w,
-                                         "Select OBJ file",
-                                         ".",
-                                         "");
+    QString strOBJFilePath = "../sample/spaceship.obj";
 
     const Gchar *pOBJPath = strOBJFilePath.toLocal8Bit().constData();
 
@@ -40,10 +31,7 @@ int main(int argc, char *argv[])
                      vecTempVertexNormals,
                      faceIndices);
 
-    QString strTextureFilePath = QFileDialog::getOpenFileName(&w,
-                                         "Select Texture Image file",
-                                         ".",
-                                         "");
+    QString strTextureFilePath = "../sample/spaceship.png";
 
     const Gchar *pTexturePath = strTextureFilePath.toLocal8Bit().constData();
 
