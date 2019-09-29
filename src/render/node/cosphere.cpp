@@ -8,6 +8,7 @@ CoSphere::CoSphere()
 {
     m_eShaderProgramType = EShaderProgramType::eSphere;
 
+//    createSphereFlat();
     createSphere();
 //    createIndexedSphere();
 }
@@ -18,6 +19,7 @@ CoSphere::CoSphere(CoVec3 vCenter, Gfloat fRadius)
 {
     m_eShaderProgramType = EShaderProgramType::eSphere;
 
+//    createSphereFlat();
     createSphere();
 //    createIndexedSphere();
 }
@@ -34,6 +36,93 @@ CoSphere::~CoSphere()
  *        x-aixs is right.
  */
 void CoSphere::createSphere()
+{
+    // step 1 : create vertice
+
+    Gint n2PIDegree = 360;
+    Gint nStackRatio = 10;
+    Gint nSectorRatio = 10;
+    Gint nStack = n2PIDegree / 2 / nStackRatio;
+    Gint nSector = n2PIDegree / nSectorRatio;
+
+    CoVec3 startPosition(m_vCenter[0], m_vCenter[1] + m_fRadius, m_vCenter[2]);
+    CoVec3 startNormal = startPosition - m_vCenter;
+
+    vector<CoVec3> vecVertices;
+    vector<CoVec3> vecVertexNormals;
+    for(Gint i = 0; i <= nStack; i++)
+    {
+        Gfloat fStackTheta = i * nStackRatio;
+
+        // the condition as below that to avoid zero normal vector is need to be confirmed.
+        if(i == 0)
+        {
+            fStackTheta = 0.01 * nStackRatio;
+        }
+        else if(i == nStack)
+        {
+            fStackTheta = (nStack - 0.01) * nStackRatio;
+        }
+
+        for(Gint j = 0; j < nSector; j++)
+        {
+            Gfloat fSectorTheta = j * nSectorRatio;
+
+            Gfloat x = startNormal.length() * sin(fStackTheta * DEG2RAD) * sin(fSectorTheta * DEG2RAD);
+            Gfloat y = startNormal.length() * cos(fStackTheta * DEG2RAD);
+            Gfloat z = startNormal.length() * sin(fStackTheta * DEG2RAD) * cos(fSectorTheta * DEG2RAD);
+
+            CoVec3 vPos(x, y, z);
+
+            vecVertices.push_back(vPos);
+            vecVertexNormals.push_back(vPos.normalize());
+        }
+    }
+
+    for(Gint i = 0; i < nStack; i++)
+    {
+        for(Gint j = 0; j < nSector; j++)
+        {
+            // triangle 1
+            m_vecPoints.push_back(vecVertices[i * nSector + j]); // stack 0 + sector 0
+            m_vecPoints.push_back(vecVertices[(i + 1) * nSector + j]); // stack 1 + sector 0
+            m_vecPoints.push_back(vecVertices[i * nSector + j + 1]); // stack 0 + sector 1
+
+            // triangle 2
+            m_vecPoints.push_back(vecVertices[i * nSector + j + 1]); // stack 0 + sector 1
+            m_vecPoints.push_back(vecVertices[(i + 1) * nSector + j]); // stack 1 + sector 0
+            m_vecPoints.push_back(vecVertices[(i + 1) * nSector + j + 1]); // stack 1 + sector 1
+        }
+    }
+
+    // step 2 : triangle normal
+
+    for(Gint i = 0; i < nStack; i++)
+    {
+        for(Gint j = 0; j < nSector; j++)
+        {
+            // triangle 1 normal
+            CoVec3 vNormal1 = vecVertexNormals[i * nSector + j];
+            CoVec3 vNormal2 = vecVertexNormals[(i + 1) * nSector + j];
+            CoVec3 vNormal3 = vecVertexNormals[i * nSector + j + 1];
+
+            m_vecVertexNormal.push_back(vNormal1);
+            m_vecVertexNormal.push_back(vNormal2);
+            m_vecVertexNormal.push_back(vNormal3);
+
+            // triangle 2 normal
+            vNormal1 = vecVertexNormals[i * nSector + j + 1];
+            vNormal2 = vecVertexNormals[(i + 1) * nSector + j];
+            vNormal3 = vecVertexNormals[(i + 1) * nSector + j + 1];
+
+            m_vecVertexNormal.push_back(vNormal1);
+            m_vecVertexNormal.push_back(vNormal2);
+            m_vecVertexNormal.push_back(vNormal3);
+        }
+    }
+}
+
+void CoSphere::createSphereFlat()
 {
     // step 1 : create vertice
 

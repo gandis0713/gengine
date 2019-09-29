@@ -20,6 +20,7 @@ public:
 
 protected:
     void createSphere();
+    void createSphereFlat();
     void createIndexedSphere();
 
 private:
