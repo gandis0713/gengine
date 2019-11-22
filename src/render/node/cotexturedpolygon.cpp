@@ -1,4 +1,4 @@
-#include "CoTexturedPolygon.h"
+#include "cotexturedpolygon.h"
 
 CoTexturedPolygon::CoTexturedPolygon()
 {    

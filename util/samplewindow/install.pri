@@ -13,6 +13,11 @@ SAMPLE_WINDOW_INSTALL_INC_PATH = $${SAMPLE_WINDOW_INSTALL_PATH}/include
     INSTALLS += s_include
 
 ## lib
-    s_library.path = $${SAMPLE_WINDOW_INSTALL_PATH}
+SAMPLE_WINDOW_LIB_PATH = $${SAMPLE_WINDOW_INSTALL_PATH}
+unix
+{
+    SAMPLE_WINDOW_LIB_PATH = /usr/local/lib/samplewindow
+}
+    s_library.path = $${SAMPLE_WINDOW_LIB_PATH}
     s_library.files = $${DESTDIR}
     INSTALLS += s_library

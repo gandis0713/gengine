@@ -1,5 +1,6 @@
-include($${PWD}/../output/gandis/libgandis.pri);
+
 include($${PWD}/../output/util/libsamplewindow.pri);
+include($${PWD}/../output/gandis/libgandis.pri);
 
 win32
 {

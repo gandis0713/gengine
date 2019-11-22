@@ -1,5 +1,7 @@
 #include "coobjreader.h"
 
+#include <string.h>
+
 CoOBJReader::CoOBJReader()
 {
 
