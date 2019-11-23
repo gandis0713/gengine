@@ -1,4 +1,4 @@
-#version 430 core
+#version 140
 
 layout (location = 0) in vec3 vertex;
 

@@ -77,7 +77,8 @@ G_INSTALL_INC_PATH = $${G_INSTALL_PATH}/include
 G_GANDIS_LIBRARY_PATH = $${G_INSTALL_PATH}
 unix
 {
-    G_GANDIS_LIBRARY_PATH = /usr/local/lib/gandis
+#    G_GANDIS_LIBRARY_PATH = /usr/local/lib/gandis
+    G_GANDIS_LIBRARY_PATH = /home/$$(USER)
 }
     library.path = $${G_GANDIS_LIBRARY_PATH}
     library.files = $${DESTDIR}

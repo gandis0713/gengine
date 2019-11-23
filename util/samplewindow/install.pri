@@ -16,7 +16,8 @@ SAMPLE_WINDOW_INSTALL_INC_PATH = $${SAMPLE_WINDOW_INSTALL_PATH}/include
 SAMPLE_WINDOW_LIB_PATH = $${SAMPLE_WINDOW_INSTALL_PATH}
 unix
 {
-    SAMPLE_WINDOW_LIB_PATH = /usr/local/lib/samplewindow
+#    SAMPLE_WINDOW_LIB_PATH = /usr/local/lib/samplewindow
+    SAMPLE_WINDOW_LIB_PATH = /home/$$(USER)
 }
     s_library.path = $${SAMPLE_WINDOW_LIB_PATH}
     s_library.files = $${DESTDIR}

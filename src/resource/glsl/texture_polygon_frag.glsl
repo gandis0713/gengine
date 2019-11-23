@@ -1,4 +1,4 @@
-#version 430 core
+#version 120
 
 in vec2 vertex_UV;
 in vec3 vertex_w;

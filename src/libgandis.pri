@@ -1,7 +1,7 @@
 G_LIB_PATH = $${PWD}/lib
 unix
 {
-    G_LIB_PATH = /usr/local/lib/gandis/lib
+    G_LIB_PATH = /home/$$(USER)/lib
 }
 G_INC_PATH = $${PWD}/include
 

@@ -1,7 +1,8 @@
 SAMPLE_WINDOW_LIB_PATH = $${PWD}/lib
 unix
 {
-    SAMPLE_WINDOW_LIB_PATH = /usr/local/lib/samplewindow/lib
+#    SAMPLE_WINDOW_LIB_PATH = /usr/local/lib/samplewindow/lib
+    SAMPLE_WINDOW_LIB_PATH = /home/$$(USER)/lib
 }
 SAMPLE_WINDOW_INC_PATH = $${PWD}/include
 
