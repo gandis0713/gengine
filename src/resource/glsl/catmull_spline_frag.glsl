@@ -1,4 +1,4 @@
-#version 120
+#version 130
 
 uniform vec3 diffuseColor;
 

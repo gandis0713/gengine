@@ -1,4 +1,4 @@
-#version 120
+#version 130
 
 in vec3 fragColor;
 

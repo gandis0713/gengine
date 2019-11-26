@@ -1,4 +1,4 @@
-#version 140
+#version 130
 
 layout (lines) in;
 layout (line_strip, max_vertices = 200) out;
