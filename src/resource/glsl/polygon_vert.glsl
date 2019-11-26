@@ -1,4 +1,4 @@
-#version 130
+#version 330 core
 
 layout(location = 0) in vec3 vertex_m;
 layout(location = 1) in vec3 vertexNormal_m;

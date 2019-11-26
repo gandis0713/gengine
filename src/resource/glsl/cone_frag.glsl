@@ -1,4 +1,4 @@
-#version 130
+#version 330 core
 
 in vec3 vertex_w;
 in vec3 vertexNormal_c;
