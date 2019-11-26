@@ -60,6 +60,10 @@ void CoQtRenderer::initializeWidget()
 
 void CoQtRenderer::initializeGL()
 {
+    ValueTextLog(version,(char *)(glGetString(GL_VERSION)));
+    ValueTextLog(renderer, (char *)(glGetString(GL_RENDERER)));
+    ValueTextLog(glsl version, (char *)(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+
     CoGLExtension::getInstance();
 
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
