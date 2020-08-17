@@ -1,5 +1,5 @@
-# Opengl 3D Engine
-##### It is based on OpenGL and Qt.                                                                              
+# Opengl 3D
+##### It is engine based on OpenGL and Qt to develop 3D Graphics on desktop.                                                                              
 
 ## Environment
 #### Framework and library
