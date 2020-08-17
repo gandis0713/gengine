@@ -1,4 +1,4 @@
-# Gandis 3D Engine
+# Opengl 3D Engine
 ##### It is based on OpenGL and Qt.                                                                              
 
 ## Environment
