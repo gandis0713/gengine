@@ -1,4 +1,4 @@
-# OpenGL Engine
+# GEngine
 ##### It is engine based on OpenGL and Qt to develop 3D Graphics on desktop.                                                                              
 
 ## Environment
