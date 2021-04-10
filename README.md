@@ -11,7 +11,7 @@ Requirements
 - Qt : 5.10.1
 
 
-Concept
+Example
 =======
 To use examples, gandis 3D engine must be built on QT and OpenGL environment. Each example shows on 'SampleWindow' like as below.
 #### SampleWindow
